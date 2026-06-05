@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Studi S1 Informatika - UPH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════ -->
+  <header class="header">
+    <nav class="navbar">
+
+      <!-- LOGO — replace the img src with your actual logo file -->
+      <a class="navbar__logo" href="#">
+        <img src="images/logo_FAIDAS_BW.png" alt="UPH FAIDAS Informatika Logo" />
+      </a>
+
+      <!-- Hamburger button (mobile only) -->
+      <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- NAV + CTA pushed right -->
+      <div class="navbar__right" id="navbarRight">
+
+        <ul class="navbar__nav">
+
+          <!-- ── Tentang ── -->
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-tentang">
+              Tentang <span class="chevron"></span>
+            </a>
+            <div class="dropdown" id="dropdown-tentang">
+              <!-- ADD / REMOVE items here freely -->
+              <a class="dropdown__item" href="tentang-informatika.html">Tentang Informatika UPH</a>
+              <a class="dropdown__item" href="kata-sambutan.html">Kata Sambutan Kaprodi</a>
+              <a class="dropdown__item" href="sejarah-informatika.html">Sejarah Informatika UPH</a>
+              <a class="dropdown__item" href="struktur-organisasi.html">Struktur Organisasi</a>
+            </div>
+          </li>
+
+          <!-- ── Akademik ── -->
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-akademik">
+              Akademik <span class="chevron"></span>
+            </a>
+            <div class="dropdown" id="dropdown-akademik">
+              <!-- ADD / REMOVE items here freely -->
+              <a class="dropdown__item" href="kurikulum.html">Kurikulum</a>
+              <a class="dropdown__item" href="pengajar.html">Pengajar</a>
+            </div>
+          </li>
+
+          <!-- ── Riset & Inovasi ── -->
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-riset">
+              Riset &amp; Inovasi <span class="chevron"></span>
+            </a>
+            <div class="dropdown" id="dropdown-riset">
+              <!-- ADD / REMOVE items here freely -->
+              <a class="dropdown__item" href="penelitian-pkm.html">Penelitian &amp; PKM</a>
+              <a class="dropdown__item" href="publikasi.html">Publikasi</a>
+            </div>
+          </li>
+
+          <!-- ── Mahasiswa ── -->
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-mahasiswa">
+              Mahasiswa <span class="chevron"></span>
+            </a>
+            <div class="dropdown" id="dropdown-mahasiswa">
+              <!-- ADD / REMOVE items here freely -->
+              <a class="dropdown__item" href="himpunan.html">Himpunan</a>
+              <a class="dropdown__item" href="informasi-lomba.html">Informasi Lomba</a>
+            </div>
+          </li>
+
+          <!-- ── Berita & Agenda ── -->
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-berita">
+              Berita &amp; Agenda <span class="chevron"></span>
+            </a>
+            <div class="dropdown" id="dropdown-berita">
+              <!-- ADD / REMOVE items here freely -->
+              <a class="dropdown__item" href="berita.html">Berita</a>
+              <a class="dropdown__item" href="pengumuman.html">Pengumuman</a>
+              <a class="dropdown__item" href="event.html">Event</a>
+            </div>
+          </li>
+
+        </ul>
+
+        <!-- CTA -->
+        <a class="navbar__cta" href="#">Daftar<br>Sekarang</a>
+
+      </div> <!-- /.navbar__right -->
+
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       HERO PLACEHOLDER
+       (Remove this section when you build your actual hero)
+  ══════════════════════════════════════ -->
+  <section class="hero-placeholder">
+    <div class="hero-placeholder__inner">
+      <!-- HERO LOGO — replace src with your logo file, e.g. images/logo_IF.png -->
+      <img
+        src="images/logo_IF.png"
+        alt="Logo IF"
+        class="hero-placeholder__logo"
+      />
+      <h2 style="font-family:'Inter',sans-serif;font-size:100px;font-weight:700;">Lorem Ipsum</h2>
+      <p>Lorem ipsum dolor sit amet</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       STATS BAR
+  ══════════════════════════════════════ -->
+  <section class="stats-bar">
+    <div class="stats-bar__item">
+      <span class="stats-bar__number">2000+</span>
+      <span class="stats-bar__label">mahasiswa<br>mendaftar</span>
+    </div>
+    <div class="stats-bar__item">
+      <span class="stats-bar__number">50+</span>
+      <span class="stats-bar__label">dosen<br>mengajar</span>
+    </div>
+    <div class="stats-bar__item">
+      <span class="stats-bar__number">2000+</span>
+      <span class="stats-bar__label">lulusan<br>per tahun</span>
+    </div>
+    <div class="stats-bar__item">
+      <span class="stats-bar__number">200+</span>
+      <span class="stats-bar__label">kerjasama<br>industri</span>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       ACCREDITATION BANNER
+  ══════════════════════════════════════ -->
+  <section class="accreditation">
+    <p class="accreditation__title">TERAKREDITASI UNGGUL</p>
+    <p class="accreditation__sub">LAMINFOKOM</p>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       MENGAPA INFORMATIKA SECTION
+  ══════════════════════════════════════ -->
+  <section class="mengapa">
+    <h2 class="mengapa__heading">Mengapa Informatika <span class="mengapa__question">?</span></h2>
+
+    <!-- Row 1: image left, text right -->
+    <div class="mengapa__row">
+      <div class="mengapa__image-wrap mengapa__image-wrap--medium">
+        <img src="images/mengapa.png" alt="Foto 1" />
+      </div>
+      <div class="mengapa__text">
+        <h3 class="mengapa__subtitle">Lorem ipsum<br>dolore sit amet</h3>
+        <p class="mengapa__body">Lorem ipsum dolore sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="mengapa__body">Lorem ipsum dolore sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+    </div>
+
+    <!-- Row 2: image left, text right (orange subtitle) -->
+    <div class="mengapa__row">
+      <div class="mengapa__text">
+        <h3 class="mengapa__subtitle mengapa__subtitle--orange">Lorem ipsum<br>dolore sit amet</h3>
+        <p class="mengapa__body">Lorem ipsum dolore sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="mengapa__body">Lorem ipsum dolore sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+      <div class="mengapa__image-wrap mengapa__image-wrap--medium">
+        <img src="images/mengapa.png" alt="Foto 2" />
+      </div>
+    </div>
+
+    <!-- Row 3: image left, text right -->
+    <div class="mengapa__row">
+      <div class="mengapa__image-wrap mengapa__image-wrap--medium">
+        <img src="images/mengapa.png" alt="Foto 3" />
+      </div>
+      <div class="mengapa__text">
+        <h3 class="mengapa__subtitle">Lorem ipsum<br>dolore sit amet</h3>
+        <p class="mengapa__body">Lorem ipsum dolore sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="mengapa__body">Lorem ipsum dolore sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PEMINATAN SECTION
+  ══════════════════════════════════════ -->
+  <section class="peminatan">
+    <h2 class="peminatan__heading">Peminatan</h2>
+    <div class="peminatan__grid">
+
+      <!-- Card 1 — ADD href to link to the correct page -->
+      <div class="peminatan__card peminatan__card--high">
+        <div class="peminatan__card-image">
+          <img src="images/peminatan_1.jpg" alt="Peminatan 1" />
+        </div>
+        <div class="peminatan__card-body">
+          <h3 class="peminatan__card-title">Nama Peminatan 1</h3>
+          <p class="peminatan__card-text">Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.</p>
+          <a class="peminatan__card-btn" href="#">BACA SELENGKAPNYA <span>&rarr;</span></a>
+        </div>
+      </div>
+
+      <!-- Card 2 — ADD href to link to the correct page -->
+      <div class="peminatan__card peminatan__card--low">
+        <div class="peminatan__card-image">
+          <img src="images/peminatan_2.jpg" alt="Peminatan 2" />
+        </div>
+        <div class="peminatan__card-body">
+          <h3 class="peminatan__card-title">Nama Peminatan 2</h3>
+          <p class="peminatan__card-text">Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.</p>
+          <a class="peminatan__card-btn" href="#">BACA SELENGKAPNYA <span>&rarr;</span></a>
+        </div>
+      </div>
+
+      <!-- Card 3 — ADD href to link to the correct page -->
+      <div class="peminatan__card peminatan__card--high">
+        <div class="peminatan__card-image">
+          <img src="images/peminatan_3.jpg" alt="Peminatan 3" />
+        </div>
+        <div class="peminatan__card-body">
+          <h3 class="peminatan__card-title">Nama Peminatan 3</h3>
+          <p class="peminatan__card-text">Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.</p>
+          <a class="peminatan__card-btn" href="#">BACA SELENGKAPNYA <span>&rarr;</span></a>
+        </div>
+      </div>
+
+      <!-- Card 4 — ADD href to link to the correct page -->
+      <div class="peminatan__card peminatan__card--low">
+        <div class="peminatan__card-image">
+          <img src="images/peminatan_4.jpg" alt="Peminatan 4" />
+        </div>
+        <div class="peminatan__card-body">
+          <h3 class="peminatan__card-title">Nama Peminatan 4</h3>
+          <p class="peminatan__card-text">Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.</p>
+          <a class="peminatan__card-btn" href="#">BACA SELENGKAPNYA <span>&rarr;</span></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PENGAJAR SECTION
+  ══════════════════════════════════════ -->
+  <section class="pengajar">
+
+    <!-- Left: title + button -->
+    <div class="pengajar__left">
+      <h2 class="pengajar__title">PENGAJAR di<br>Program Studi<br>Informatika</h2>
+      <a class="pengajar__btn" href="pengajar.html">BACA SELENGKAPNYA <span>&rarr;</span></a>
+    </div>
+
+    <!-- Right: carousel -->
+    <div class="pengajar__carousel-wrapper">
+      <div class="pengajar__carousel" id="pengajarCarousel">
+
+        <!-- CARD 1 — replace src with actual photo -->
+        <div class="pengajar__card">
+          <div class="pengajar__card-image">
+            <img src="images/dosen_1.jpg" alt="Nama Dosen 1" />
+          </div>
+          <p class="pengajar__card-name">Nama Dosen 1</p>
+          <p class="pengajar__card-jabatan">Jabatan</p>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="pengajar__card">
+          <div class="pengajar__card-image">
+            <img src="images/dosen_2.jpg" alt="Nama Dosen 2" />
+          </div>
+          <p class="pengajar__card-name">Nama Dosen 2</p>
+          <p class="pengajar__card-jabatan">Jabatan</p>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="pengajar__card">
+          <div class="pengajar__card-image">
+            <img src="images/dosen_3.jpg" alt="Nama Dosen 3" />
+          </div>
+          <p class="pengajar__card-name">Nama Dosen 3</p>
+          <p class="pengajar__card-jabatan">Jabatan</p>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="pengajar__card">
+          <div class="pengajar__card-image">
+            <img src="images/dosen_4.jpg" alt="Nama Dosen 4" />
+          </div>
+          <p class="pengajar__card-name">Nama Dosen 4</p>
+          <p class="pengajar__card-jabatan">Jabatan</p>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="pengajar__card">
+          <div class="pengajar__card-image">
+            <img src="images/dosen_5.jpg" alt="Nama Dosen 5" />
+          </div>
+          <p class="pengajar__card-name">Nama Dosen 5</p>
+          <p class="pengajar__card-jabatan">Jabatan</p>
+        </div>
+
+      </div><!-- /.pengajar__carousel -->
+    </div><!-- /.pengajar__carousel-wrapper -->
+
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="footer">
+
+    <!-- Top grid: brand + 4 nav columns -->
+    <div class="footer__main">
+
+      <!-- Brand -->
+      <div class="footer__brand">
+        <p class="footer__brand-title">Program Studi</p>
+        <p class="footer__brand-name">Informatika</p>
+
+        <!--
+          LOGO PLACEHOLDER
+          To add the logo, replace this entire div with:
+          <img src="path/to/your/logo.png" alt="IF Logo" style="width:170px;" />
+        -->
+        <!--<div class="footer__logo-placeholder">
+          Logo<br>IF Badge<br>Here
+        </div>
+        -->
+        <img src="images/logo_IF.png" alt="IF Logo" style="width:170px;" />
+      </div>
+
+      <!-- Akademik -->
+      <div>
+        <p class="footer__col-title">Akademik</p>
+        <ul class="footer__links">
+          <!-- ADD / REMOVE items here freely -->
+          <li><a href="kurikulum.html">Kurikulum</a></li>
+          <li><a href="pengajar.html">Pengajar</a></li>
+        </ul>
+      </div>
+
+      <!-- Riset & Inovasi -->
+      <div>
+        <p class="footer__col-title">Riset &amp; Inovasi</p>
+        <ul class="footer__links">
+          <!-- ADD / REMOVE items here freely -->
+          <li><a href="penelitian-pkm.html">Penelitian &amp; PKM</a></li>
+          <li><a href="publikasi.html">Publikasi</a></li>
+        </ul>
+      </div>
+
+      <!-- Mahasiswa -->
+      <div>
+        <p class="footer__col-title">Mahasiswa</p>
+        <ul class="footer__links">
+          <!-- ADD / REMOVE items here freely -->
+          <li><a href="himpunan.html">Himpunan</a></li>
+          <li><a href="informasi-lomba.html">Informasi Lomba</a></li>
+        </ul>
+      </div>
+
+      <!-- Berita & Agenda -->
+      <div>
+        <p class="footer__col-title">Berita &amp; Agenda</p>
+        <ul class="footer__links">
+          <!-- ADD / REMOVE items here freely -->
+          <li><a href="berita.html">Berita</a></li>
+          <li><a href="pengumuman.html">Pengumuman</a></li>
+          <li><a href="event.html">Event</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom info: spacer + contact + address -->
+    <div class="footer__bottom-info">
+
+      <!-- Empty spacer column (aligns with brand column above, hidden on mobile) -->
+      <div class="footer__spacer"></div>
+
+      <!-- Contact -->
+      <div class="footer__contact-group">
+        <p>WhatsApp : +62 8xx xxxx xxxx</p>
+        <p>E-mail : informatika@uph.edu</p>
+        <p>Instagram : @informatics.uph</p>
+      </div>
+
+      <!-- Address -->
+      <div>
+        <p class="footer__address-title">Alamat</p>
+        <p class="footer__address-text">
+          Menara Matahari Lt.16, FAIDAS Office<br>
+          Jl. M. H. Thamrin Boulevard 1100<br>
+          Lippo Village Tangerang 15811<br>
+          Indonesia
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer__copyright">
+      &copy; Copyright 2026 Program Studi S1 Informatika Universitas Pelita Harapan. All Rights Reserved
+    </div>
+
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navRight  = document.getElementById('navbarRight');
+
+    // Toggle mobile menu open/close
+    hamburger.addEventListener('click', () => {
+      const isOpen = navRight.classList.toggle('is-open');
+      hamburger.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Mobile: tap nav link to toggle its dropdown (no hover on touch)
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', e => {
+        if (window.innerWidth > 768) return; // desktop uses CSS hover
+        e.preventDefault();
+        const targetId = link.getAttribute('data-dropdown');
+        const dropdown = document.getElementById(targetId);
+        const parentLi = link.closest('li');
+        const isActive = parentLi.classList.contains('mobile-open');
+
+        // Close all open dropdowns
+        document.querySelectorAll('.navbar__nav li').forEach(li => {
+          li.classList.remove('mobile-open');
+        });
+
+        // Open this one if it wasn't already open
+        if (!isActive) parentLi.classList.add('mobile-open');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.navbar')) {
+        navRight.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', false);
+        document.querySelectorAll('.navbar__nav li').forEach(li => li.classList.remove('mobile-open'));
+      }
+    });
+  </script>
+
+  <script>
+    // ── Pengajar Drag-to-scroll Carousel ──
+    const carousel = document.getElementById('pengajarCarousel');
+    const wrapper  = carousel.parentElement;
+    const cards    = carousel.querySelectorAll('.pengajar__card');
+
+    function setCardWidths() {
+      const visible = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 3;
+      const cardWidth = wrapper.offsetWidth / visible;
+      cards.forEach(c => { c.style.minWidth = cardWidth + 'px'; });
+    }
+
+    let isDragging = false, startX = 0, scrollStart = 0;
+
+    wrapper.addEventListener('mousedown', e => {
+      isDragging  = true;
+      startX      = e.pageX;
+      scrollStart = wrapper.scrollLeft;
+      wrapper.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      wrapper.scrollLeft = scrollStart - (e.pageX - startX);
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      wrapper.style.cursor = 'grab';
+    });
+
+    let touchStartX = 0, touchScrollStart = 0;
+
+    wrapper.addEventListener('touchstart', e => {
+      touchStartX      = e.touches[0].pageX;
+      touchScrollStart = wrapper.scrollLeft;
+    }, { passive: true });
+
+    wrapper.addEventListener('touchmove', e => {
+      wrapper.scrollLeft = touchScrollStart - (e.touches[0].pageX - touchStartX);
+    }, { passive: true });
+
+    window.addEventListener('resize', setCardWidths);
+    setCardWidths();
+    wrapper.style.cursor = 'grab';
+  </script>
+</body>
+</html>

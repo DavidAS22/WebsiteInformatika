@@ -218,6 +218,18 @@ body {
   color: var(--white);
   font-family: var(--font-main);
   padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Hero logo — sits centered above the heading */
+.hero-placeholder__logo {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  margin-bottom: 8px;
 }
 
 .hero-placeholder__inner p {
@@ -299,72 +311,466 @@ body {
 ═══════════════════════════════════════ */
 .mengapa {
   background: #ffffff;
-  padding: 72px 80px;
+  padding: 72px 72px 80px;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 0;
 }
 
 .mengapa__heading {
   font-family: var(--font-main);
   font-weight: 800;
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: var(--navy);
   text-align: left;
+  margin-bottom: 48px;
 }
 
 .mengapa__question {
   color: var(--orange);
 }
 
+/* ── Each row is a 2-col grid ── */
 .mengapa__row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  align-items: center;
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 48px;
 }
 
-.mengapa__row--reverse {
-  direction: rtl;
+.mengapa__row:last-child {
+  margin-bottom: 0;
 }
 
-.mengapa__row--reverse > * {
-  direction: ltr;
-}
 
-.mengapa__image {
+
+/* ── Image containers ── */
+/* Images fill their column and maintain their aspect ratio.
+   Swap the src to any image — it will always fill this box. */
+.mengapa__image-wrap {
   width: 100%;
-  aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 12px;
+  flex-shrink: 0;
 }
 
-.mengapa__image img {
+.mengapa__image-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 12px;
+}
+
+/* Tall variant (rows 1 & 3) — portrait feel */
+.mengapa__image-wrap--tall {
+  aspect-ratio: 3 / 4;
+}
+
+/* Medium variant (row 2) — landscape feel */
+.mengapa__image-wrap--medium {
+  aspect-ratio: 4 / 3;
+  align-self: center;
+}
+
+/* ── Text block ── */
+.mengapa__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 8px;
 }
 
 .mengapa__subtitle {
   font-family: var(--font-main);
   font-weight: 800;
   font-size: 1.6rem;
-  color: var(--orange);
+  color: var(--navy);
   line-height: 1.2;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.mengapa__subtitle--orange {
+  color: var(--orange);
 }
 
 .mengapa__body {
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: #333333;
+  font-size: 0.92rem;
+  color: #444444;
   line-height: 1.75;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .mengapa__body:last-child {
   margin-bottom: 0;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .mengapa {
+    padding: 56px 40px 64px;
+  }
+  .mengapa__row {
+    gap: 32px;
+  }
+  .mengapa__subtitle {
+    font-size: 1.3rem;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .mengapa {
+    padding: 40px 24px 48px;
+  }
+  .mengapa__heading {
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+  }
+  .mengapa__row,
+  .mengapa__row--reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .mengapa__image-wrap--tall,
+  .mengapa__image-wrap--medium {
+    aspect-ratio: 4 / 3;
+  }
+  .mengapa__subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+/* ═══════════════════════════════════════
+   PEMINATAN
+═══════════════════════════════════════ */
+.peminatan {
+  background: linear-gradient(to bottom, var(--orange) 0%, var(--navy) 100%);
+  padding: 56px 48px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.peminatan__heading {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--white);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* 4-column grid for the cards */
+.peminatan__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  align-items: start;
+}
+
+/* ── Card stagger ── */
+.peminatan__card--high {
+  margin-top: 0;
+}
+.peminatan__card--low {
+  margin-top: 60px;
+}
+
+/* ── Card: just a column container, no bg, no overflow ── */
+.peminatan__card {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+
+/* ── Image box: fully independent, rounded top corners ── */
+.peminatan__card-image {
+  width: 100%;
+  height: 360px;
+  border-radius: 14px 14px 14px 14px;
+  overflow: hidden;
+  background: #c0c8dd;
+  flex-shrink: 0;
+}
+
+.peminatan__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ── Body box: fully independent, rounded bottom corners ── */
+.peminatan__card-body {
+  background: transparent;
+  border-radius: 0 0 14px 14px;
+  padding: 16px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.peminatan__card-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1rem;
+  color: white;
+  line-height: 1.3;
+}
+
+.peminatan__card-text {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: white;
+  line-height: 1.65;
+  flex: 1;
+}
+
+/* ── BACA SELENGKAPNYA button ── */
+.peminatan__card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  border: 1.5px solid white;
+  border-radius: 999px;
+  padding: 7px 14px;
+  align-self: flex-start;
+  transition: background 0.2s, color 0.2s;
+  margin-top: auto;
+}
+
+.peminatan__card-btn:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .peminatan {
+    padding: 48px 32px 64px;
+  }
+  .peminatan__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .peminatan__card--low {
+    margin-top: 40px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .peminatan {
+    padding: 40px 20px 56px;
+  }
+  .peminatan__heading {
+    font-size: 1.5rem;
+    margin-bottom: 28px;
+  }
+  .peminatan__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .peminatan__card--low {
+    margin-top: 32px;
+  }
+  .peminatan__card-image {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .peminatan__grid {
+    grid-template-columns: 1fr;
+  }
+  .peminatan__card--low {
+    margin-top: 0;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   PENGAJAR
+═══════════════════════════════════════ */
+.pengajar {
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 64px 0 64px 60px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Full-height gradient on the left side of the section */
+.pengajar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 520px;
+  height: 100%;
+  background: linear-gradient(to right, var(--navy) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ── Left panel ── */
+.pengajar__left {
+  flex-shrink: 0;
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-right: 40px;
+  position: relative;
+  z-index: 4;
+}
+
+.pengajar__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--orange);
+  line-height: 1.25;
+}
+
+.pengajar__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  text-decoration: none;
+  border: 1.5px solid var(--white);
+  border-radius: 999px;
+  padding: 8px 16px;
+  align-self: flex-start;
+  transition: background 0.2s, color 0.2s;
+}
+
+.pengajar__btn:hover {
+  background: var(--white);
+  color: var(--navy);
+}
+
+/* ── Carousel wrapper ── */
+.pengajar__carousel-wrapper {
+  flex: 1;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  position: relative;
+}
+
+.pengajar__carousel-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.pengajar__carousel {
+  display: flex;
+  align-items: flex-start;
+  width: max-content;
+}
+
+/* ── Individual card ── */
+.pengajar__card {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+}
+
+.pengajar__card-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #2e3f7a;
+}
+
+.pengajar__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.pengajar__card-name {
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--white);
+  text-align: center;
+  font-style: italic;
+}
+
+.pengajar__card-jabatan {
+  font-family: var(--font-main);
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  font-style: italic;
+  margin-top: -6px;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .pengajar {
+    padding: 56px 0 56px 40px;
+  }
+  .pengajar__left {
+    width: 220px;
+  }
+  .pengajar__title {
+    font-size: 1.3rem;
+  }
+  .pengajar::before {
+    width: 340px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .pengajar {
+    flex-direction: column;
+    padding: 40px 24px;
+    gap: 32px;
+  }
+  .pengajar__left {
+    width: 100%;
+    padding-right: 0;
+  }
+  .pengajar__carousel-wrapper {
+    width: 100%;
+  }
+  .pengajar::before {
+    display: none;
+  }
 }
 
 /* ═══════════════════════════════════════
@@ -780,3 +1186,49 @@ body {
     font-size: 1.4rem;
   }
 }
+
+/* ═══════════════════════════════════════
+   INNER PAGES
+═══════════════════════════════════════ */
+.page-main {
+  min-height: 60vh;
+  background: #ffffff;
+}
+
+.page-hero {
+  background: linear-gradient(to bottom, transparent, #1D245E 100%),
+              url("images/background_homepage.png") center/cover no-repeat;
+  min-height: 260px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 60px 48px;
+}
+
+.page-hero__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2.4rem;
+  color: var(--white);
+}
+
+.page-content {
+  padding: 56px 60px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.75;
+}
+
+@media (max-width: 768px) {
+  .page-hero {
+    min-height: 180px;
+    padding: 0 24px 32px;
+  }
+  .page-hero__title {
+    font-size: 1.6rem;
+  }
+  .page-content {
+    padding: 36px 24px;
+  }
+}
+
