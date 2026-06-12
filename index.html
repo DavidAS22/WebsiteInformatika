@@ -320,6 +320,207 @@
   </section>
 
   <!-- ══════════════════════════════════════
+       BERITA SECTION
+  ══════════════════════════════════════ -->
+  <section class="berita">
+
+    <!-- Header row -->
+    <div class="berita__header">
+      <h2 class="berita__heading">BERITA</h2>
+      <a class="berita__btn" href="berita.html">BACA BERITA LAINNYA &rarr;</a>
+    </div>
+
+    <!-- Grid: featured left + 3 small right -->
+    <div class="berita__grid" id="beritaGrid">
+
+      <!--
+      ═══════════════════════════════════════════════════
+      CMS INTEGRATION POINT
+      ═══════════════════════════════════════════════════
+      To load berita from an API, remove the static HTML
+      below and use the JS block at the bottom of this file.
+
+      Expected API response shape (array of objects):
+      [
+        {
+          "judul":    "Judul berita...",
+          "isi":      "Ringkasan isi berita...",
+          "kategori": ["Kategori 1", "Kategori 2"],
+          "foto":     "images/berita_1.jpg",
+          "url":      "berita-detail.html"
+        },
+        ...
+      ]
+
+      Steps to connect:
+      1. Set BERITA_API_URL to your endpoint
+      2. Uncomment the fetch lines in the berita script below
+      3. Comment out or remove the static HTML cards below
+      ═══════════════════════════════════════════════════
+      -->
+
+      <!-- FEATURED ARTICLE (large, left column) -->
+      <article class="berita__featured">
+        <div class="berita__featured-image">
+          <img src="images/berita_1.jpg" alt="Berita 1" />
+        </div>
+        <div class="berita__featured-body">
+          <div class="berita__tags">
+            <span class="berita__tag">Kategori</span>
+          </div>
+          <h3 class="berita__featured-title">Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai</h3>
+          <a class="berita__arrow-btn" href="#">&rarr;</a>
+        </div>
+      </article>
+
+      <!-- SMALL ARTICLES (right column, stacked) -->
+      <div class="berita__list">
+
+        <!-- Small article 1 -->
+        <article class="berita__item">
+          <div class="berita__item-image">
+            <img src="images/berita_2.jpg" alt="Berita 2" />
+          </div>
+          <div class="berita__item-body">
+            <h4 class="berita__item-title">Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai</h4>
+            <div class="berita__tags">
+              <span class="berita__tag">Kategori</span>
+            </div>
+            <a class="berita__arrow-btn" href="#">&rarr;</a>
+          </div>
+        </article>
+
+        <hr class="berita__divider" />
+
+        <!-- Small article 2 -->
+        <article class="berita__item">
+          <div class="berita__item-image">
+            <img src="images/berita_3.jpg" alt="Berita 3" />
+          </div>
+          <div class="berita__item-body">
+            <h4 class="berita__item-title">Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai</h4>
+            <div class="berita__tags">
+              <span class="berita__tag">Kategori</span>
+              <span class="berita__tag">Kategori</span>
+            </div>
+            <a class="berita__arrow-btn" href="#">&rarr;</a>
+          </div>
+        </article>
+
+        <hr class="berita__divider" />
+
+        <!-- Small article 3 -->
+        <article class="berita__item">
+          <div class="berita__item-image">
+            <img src="images/berita_4.jpg" alt="Berita 4" />
+          </div>
+          <div class="berita__item-body">
+            <h4 class="berita__item-title">Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai</h4>
+            <div class="berita__tags">
+              <span class="berita__tag">Kategori</span>
+            </div>
+            <a class="berita__arrow-btn" href="#">&rarr;</a>
+          </div>
+        </article>
+
+      </div><!-- /.berita__list -->
+
+    </div><!-- /.berita__grid -->
+
+  </section>
+
+  <!-- ══════════════════════════════════════
+       APA KATA ALUMNI SECTION
+  ══════════════════════════════════════ -->
+  <section class="alumni">
+    <h2 class="alumni__heading">APA KATA ALUMNI?</h2>
+
+    <div class="alumni__carousel-wrapper">
+      <div class="alumni__carousel" id="alumniCarousel">
+
+        <!-- CARD 1 — update with real data -->
+        <div class="alumni__card">
+          <div class="alumni__card-image">
+            <img src="images/alumni_1.jpg" alt="Alumni 1" />
+          </div>
+          <div class="alumni__card-content">
+            <p class="alumni__quote">&ldquo;Lorem ipsum dolore sit amet, consetctur asdipiscing elit, sset do eiusmod temper incididunt ut labore et dolore magna aliqua&rdquo;</p>
+            <p class="alumni__name">(nama)</p>
+            <p class="alumni__jabatan">(jabatan kerja)</p>
+            <p class="alumni__angkatan">(angkatan)</p>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="alumni__card">
+          <div class="alumni__card-image">
+            <img src="images/alumni_2.jpg" alt="Alumni 2" />
+          </div>
+          <div class="alumni__card-content">
+            <p class="alumni__quote">&ldquo;Lorem ipsum dolore sit amet, consetctur asdipiscing elit, sset do eiusmod temper incididunt ut labore et dolore magna aliqua&rdquo;</p>
+            <p class="alumni__name">(nama)</p>
+            <p class="alumni__jabatan">(jabatan kerja)</p>
+            <p class="alumni__angkatan">(angkatan)</p>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="alumni__card">
+          <div class="alumni__card-image">
+            <img src="images/alumni_3.jpg" alt="Alumni 3" />
+          </div>
+          <div class="alumni__card-content">
+            <p class="alumni__quote">&ldquo;Lorem ipsum dolore sit amet, consetctur asdipiscing elit, sset do eiusmod temper incididunt ut labore et dolore magna aliqua&rdquo;</p>
+            <p class="alumni__name">(nama)</p>
+            <p class="alumni__jabatan">(jabatan kerja)</p>
+            <p class="alumni__angkatan">(angkatan)</p>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="alumni__card">
+          <div class="alumni__card-image">
+            <img src="images/alumni_4.jpg" alt="Alumni 4" />
+          </div>
+          <div class="alumni__card-content">
+            <p class="alumni__quote">&ldquo;Lorem ipsum dolore sit amet, consetctur asdipiscing elit, sset do eiusmod temper incididunt ut labore et dolore magna aliqua&rdquo;</p>
+            <p class="alumni__name">(nama)</p>
+            <p class="alumni__jabatan">(jabatan kerja)</p>
+            <p class="alumni__angkatan">(angkatan)</p>
+          </div>
+        </div>
+
+      </div><!-- /.alumni__carousel -->
+    </div><!-- /.alumni__carousel-wrapper -->
+
+  </section>
+
+  <!-- ══════════════════════════════════════
+       CEK INSTAGRAM SECTION
+  ══════════════════════════════════════ -->
+  <section class="instagram">
+
+    <!-- Text -->
+    <div class="instagram__left">
+      <h2 class="instagram__heading">CEK<br>INSTAGRAM<br>KAMI</h2>
+      <a class="instagram__btn" href="https://instagram.com/informatics.uph" target="_blank">
+        @informatics.uph <span>&rarr;</span>
+      </a>
+    </div>
+
+  </section>
+
+  <!-- ══════════════════════════════════════
+       LEBIH LANJUT TENTANG KAMI SECTION
+  ══════════════════════════════════════ -->
+  <section class="lebihlanjut">
+    <div class="lebihlanjut__inner">
+      <h2 class="lebihlanjut__heading">LEBIH LANJUT<br>TENTANG KAMI!</h2>
+      <a class="lebihlanjut__btn" href="tentang-informatika.html">BACA SELENGKAPNYA <span>&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
        FOOTER
   ══════════════════════════════════════ -->
   <footer class="footer">
@@ -509,6 +710,145 @@
     window.addEventListener('resize', setCardWidths);
     setCardWidths();
     wrapper.style.cursor = 'grab';
+  </script>
+
+  <script>
+    // ══════════════════════════════════════════════════
+    // BERITA CMS INTEGRATION
+    // ══════════════════════════════════════════════════
+    // To connect to a real API:
+    // 1. Set BERITA_API_URL to your endpoint
+    // 2. Uncomment the fetch block below
+    // 3. Remove or comment out the static HTML cards in the berita section above
+    // ══════════════════════════════════════════════════
+
+    const BERITA_API_URL = 'https://your-api-url.vercel.app/api/berita';
+
+    // Placeholder data — matches the static HTML above
+    const BERITA_PLACEHOLDER = [
+      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori'], foto: 'images/berita_1.jpg', url: '#' },
+      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori'], foto: 'images/berita_2.jpg', url: '#' },
+      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori', 'Kategori'], foto: 'images/berita_3.jpg', url: '#' },
+      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori'], foto: 'images/berita_4.jpg', url: '#' },
+    ];
+
+    function renderBerita(data) {
+      const grid = document.getElementById('beritaGrid');
+      if (!grid) return;
+
+      // Extract only the fields we need
+      // Update field names below to match your API response
+      const articles = data.map(item => ({
+        judul:    item.judul,     // <- update e.g. item.title
+        kategori: item.kategori,  // <- update e.g. item.categories (array)
+        foto:     item.foto,      // <- update e.g. item.image_url
+        url:      item.url,       // <- update e.g. item.slug or item.link
+      }));
+
+      const [featured, ...rest] = articles;
+      const small = rest.slice(0, 3); // show max 3 small articles
+
+      grid.innerHTML = `
+        <article class=berita__featured>
+          <div class=berita__featured-image>
+            <img src=${featured.foto} alt=${featured.judul} />
+          </div>
+          <div class=berita__featured-body>
+            <div class=berita__tags>
+              ${featured.kategori.map(k => `<span class=berita__tag>${k}</span>`).join('')}
+            </div>
+            <h3 class=berita__featured-title>${featured.judul}</h3>
+            <a class=berita__arrow-btn href=${featured.url}>&rarr;</a>
+          </div>
+        </article>
+        <div class=berita__list>
+          ${small.map((item, i) => `
+            ${i > 0 ? '<hr class=berita__divider />' : ''}
+            <article class=berita__item>
+              <div class=berita__item-image>
+                <img src=${item.foto} alt=${item.judul} />
+              </div>
+              <div class=berita__item-body>
+                <h4 class=berita__item-title>${item.judul}</h4>
+                <div class=berita__tags>
+                  ${item.kategori.map(k => `<span class=berita__tag>${k}</span>`).join('')}
+                </div>
+                <a class=berita__arrow-btn href=${item.url}>&rarr;</a>
+              </div>
+            </article>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    async function loadBerita() {
+      try {
+        // ── Uncomment below and remove renderBerita(BERITA_PLACEHOLDER) when API is ready ──
+        // const response = await fetch(BERITA_API_URL);
+        // const data = await response.json();
+        // renderBerita(data);
+
+        // ── Using placeholder data for now ──
+        // Comment this out when connecting real API
+        renderBerita(BERITA_PLACEHOLDER);
+
+      } catch (err) {
+        console.error('Failed to load berita:', err);
+        renderBerita(BERITA_PLACEHOLDER); // fallback on error
+      }
+    }
+
+    // Static HTML is shown by default — only call loadBerita()
+    // once you are ready to switch to dynamic rendering
+    // loadBerita();
+  </script>
+  <script>
+    // ── Alumni Drag-to-scroll Carousel ──
+    const alumniCarousel = document.getElementById('alumniCarousel');
+    const alumniWrapper  = alumniCarousel.parentElement;
+    const alumniCards    = alumniCarousel.querySelectorAll('.alumni__card');
+
+    function setAlumniCardWidths() {
+      // Cards have a fixed width on desktop; on mobile fill the wrapper
+      if (window.innerWidth <= 600) {
+        alumniCards.forEach(c => { c.style.width = (alumniWrapper.offsetWidth - 24) + 'px'; });
+      }
+    }
+
+    let alumniDragging = false, alumniStartX = 0, alumniScrollStart = 0;
+
+    alumniWrapper.addEventListener('mousedown', e => {
+      alumniDragging    = true;
+      alumniStartX      = e.pageX;
+      alumniScrollStart = alumniWrapper.scrollLeft;
+      alumniWrapper.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', e => {
+      if (!alumniDragging) return;
+      alumniWrapper.scrollLeft = alumniScrollStart - (e.pageX - alumniStartX);
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (!alumniDragging) return;
+      alumniDragging = false;
+      alumniWrapper.style.cursor = 'grab';
+    });
+
+    let alumniTouchX = 0, alumniTouchScroll = 0;
+    alumniWrapper.addEventListener('touchstart', e => {
+      alumniTouchX      = e.touches[0].pageX;
+      alumniTouchScroll = alumniWrapper.scrollLeft;
+    }, { passive: true });
+
+    alumniWrapper.addEventListener('touchmove', e => {
+      alumniWrapper.scrollLeft = alumniTouchScroll - (e.touches[0].pageX - alumniTouchX);
+    }, { passive: true });
+
+    window.addEventListener('resize', setAlumniCardWidths);
+    setAlumniCardWidths();
+    alumniWrapper.style.cursor = 'grab';
   </script>
 </body>
 </html>

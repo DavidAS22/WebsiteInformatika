@@ -55,7 +55,7 @@ body {
 }
 
 .navbar__logo img {
-  height: 70px;
+  height: 50px;
   width: auto;
   object-fit: contain;
   mix-blend-mode: screen;
@@ -773,6 +773,544 @@ body {
   }
 }
 
+
+/* ═══════════════════════════════════════
+   BERITA
+═══════════════════════════════════════ */
+.berita {
+  background: #ffffff;
+  padding: 24px 60px;
+}
+
+/* ── Header row ── */
+.berita__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.berita__heading {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: var(--navy);
+}
+
+.berita__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--navy);
+  background: linear-gradient(to right, var(--navy), var(--orange)) text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: var(--navy);
+  background-clip: text;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: 10px 10px 10px 22px;
+  background-image: linear-gradient(white, white),
+                    linear-gradient(to right, var(--navy), var(--orange));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  transition: background 0.2s, color 0.2s, -webkit-text-fill-color 0.2s;
+}
+
+.berita__btn:hover {
+  background-image: linear-gradient(to right, var(--navy), var(--orange)),
+                    linear-gradient(to right, var(--navy), var(--orange));
+  -webkit-text-fill-color: var(--white);
+}
+
+/* ── Main grid ── */
+.berita__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ── Featured article (left) ── */
+.berita__featured-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #d0d5e8;
+  margin-bottom: 16px;
+}
+
+.berita__featured-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.berita__featured-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.berita__featured-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--navy);
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+/* ── Tags ── */
+.berita__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.berita__tag {
+  background: linear-gradient(to right, var(--navy) 0%, var(--orange) 100%);
+  color: var(--white);
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── Arrow button ── */
+.berita__arrow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--navy);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+  align-self: flex-start;
+  flex-shrink: 0;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(to right, var(--navy), var(--orange)) border-box;
+  border: 1.5px solid transparent;
+}
+
+.berita__arrow-btn:hover {
+  background: linear-gradient(to right, var(--navy), var(--orange)) padding-box,
+              linear-gradient(to right, var(--navy), var(--orange)) border-box;
+  color: var(--white);
+}
+
+/* ── Small articles list (right) ── */
+.berita__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.berita__item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 20px 0;
+}
+
+.berita__item-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #d0d5e8;
+  flex-shrink: 0;
+}
+
+.berita__item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.berita__item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.berita__item-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: var(--navy);
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.berita__divider {
+  border: none;
+  border-top: 1px solid #e0e3ee;
+  margin: 0;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .berita {
+    padding: 48px 32px;
+  }
+  .berita__item {
+    grid-template-columns: 140px 1fr;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .berita {
+    padding: 40px 24px;
+  }
+  .berita__heading {
+    font-size: 1.6rem;
+  }
+  .berita__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .berita__item {
+    grid-template-columns: 120px 1fr;
+    gap: 12px;
+  }
+  .berita__featured-title {
+    font-size: 1rem;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   APA KATA ALUMNI
+═══════════════════════════════════════ */
+.alumni {
+  background: var(--navy);
+  padding: 64px 60px;
+}
+
+.alumni__heading {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2.8rem;
+  color: var(--white);
+  margin-bottom: 40px;
+}
+
+/* ── Carousel wrapper ── */
+.alumni__carousel-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+
+.alumni__carousel-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.alumni__carousel {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+}
+
+/* ── Card ── */
+.alumni__card {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(to bottom, transparent 0%, var(--orange) 100%);
+  min-height: 260px;
+  width: 480px;
+  position: relative;
+}
+
+/* ── Photo ── */
+.alumni__card-image {
+  width: 180px;
+  flex-shrink: 0;
+  padding: 16px 8px 16px 16px;
+  display: flex;
+  align-items: stretch;
+}
+
+.alumni__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  border-radius: 12px;
+}
+
+/* ── Text content ── */
+.alumni__card-content {
+  padding: 28px 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.alumni__quote {
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--white);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.alumni__name {
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 0.82rem;
+  color: var(--white);
+  font-style: italic;
+}
+
+.alumni__jabatan {
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 0.82rem;
+  color: var(--white);
+  font-style: italic;
+  margin-top: -4px;
+}
+
+.alumni__angkatan {
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.8);
+  font-style: italic;
+  text-align: right;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .alumni {
+    padding: 48px 32px;
+  }
+  .alumni__heading {
+    font-size: 2.2rem;
+  }
+  .alumni__card {
+    grid-template-columns: 150px 1fr;
+  }
+  .alumni__card-image {
+    width: 150px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .alumni {
+    padding: 40px 24px;
+  }
+  .alumni__heading {
+    font-size: 1.8rem;
+  }
+  .alumni__card {
+    grid-template-columns: 120px 1fr;
+    min-height: 200px;
+  }
+  .alumni__card-image {
+    width: 120px;
+  }
+  .alumni__quote {
+    font-size: 0.8rem;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   CEK INSTAGRAM
+═══════════════════════════════════════ */
+.instagram {
+  background: linear-gradient(to bottom, transparent 75%, var(--orange) 100%),
+              url('images/handphone.png') center 0% /100% no-repeat;
+  min-height: 700px;
+  align-items: center;
+  justify-content: left;
+  display: flex;
+}
+
+/* ── Left panel ── */
+.instagram__left {
+  position: relative;
+  z-index: 1;
+  padding: 64px 40px 64px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.instagram__heading {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 3.2rem;
+  color: var(--navy);
+  line-height: 1.0;
+}
+
+.instagram__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--navy);
+  text-decoration: none;
+  border: 1.5px solid var(--navy);
+  border-radius: 999px;
+  padding: 9px 18px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.instagram__btn:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+/* ── Right panel ── */
+.instagram__right {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+  align-self: stretch;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .instagram__heading {
+    font-size: 2.4rem;
+  }
+  .instagram__left {
+    padding: 48px 32px 48px 40px;
+  }
+  .instagram__phone-img {
+    width: 100%;
+  }
+
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .instagram {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .instagram__left {
+    padding: 48px 24px 24px;
+  }
+  .instagram__heading {
+    font-size: 2rem;
+  }
+  .instagram__right {
+    padding: 0 24px 48px;
+  }
+  .instagram__phone-img {
+    width: 100%;
+  }
+
+}
+
+/* ═══════════════════════════════════════
+   LEBIH LANJUT TENTANG KAMI
+═══════════════════════════════════════ */
+.lebihlanjut {
+  background: linear-gradient(to bottom, var(--orange) 0%, var(--navy) 100%);
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lebihlanjut__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  text-align: center;
+  padding: 80px 40px;
+}
+
+.lebihlanjut__heading {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 3.6rem;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+.lebihlanjut__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  text-decoration: none;
+  border: 1.5px solid var(--white);
+  border-radius: 999px;
+  padding: 9px 20px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.lebihlanjut__btn:hover {
+  background: var(--white);
+  color: var(--navy);
+}
+
+@media (max-width: 768px) {
+  .lebihlanjut {
+    min-height: 400px;
+  }
+  .lebihlanjut__heading {
+    font-size: 2.4rem;
+  }
+  .lebihlanjut__inner {
+    padding: 60px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lebihlanjut__heading {
+    font-size: 2rem;
+  }
+}
+
 /* ═══════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════ */
@@ -1231,4 +1769,3 @@ body {
     padding: 36px 24px;
   }
 }
-
