@@ -35,7 +35,7 @@
 /* ── Two-column body: [photo col] + [text col] ── */
 .sambutan-section__body {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 350px 1fr;
   gap: 40px;
   align-items: start;
 }
@@ -49,8 +49,8 @@
 }
 
 .sambutan-section__photo {
-  width: 160px;
-  height: 160px;
+  width: 360px;
+  height: 360px;
   border-radius: 12px;
   overflow: hidden;
   background: #c8d0e0;
