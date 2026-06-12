@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Info Pengajar - S1 Informatika UPH</title>
+  <title>Nama Lengkap, Ph.D - Pengajar Informatika UPH</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="info-pengajar.css" />
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════
-       HEADER
-  ══════════════════════════════════════ -->
   <header class="header">
     <nav class="navbar">
 
@@ -42,7 +39,7 @@
             </div>
           </li>
 
-          <li>
+          <li class="active">
             <a href="#" class="nav-link" data-dropdown="dropdown-akademik">
               Akademik <span class="chevron"></span>
             </a>
@@ -88,150 +85,182 @@
         <a class="navbar__cta" href="#">Daftar<br>Sekarang</a>
 
       </div>
+
     </nav>
   </header>
 
-  <!-- ══════════════════════════════════════
-       INFO PENGAJAR SECTION
-  ══════════════════════════════════════ -->
-  <main>
+  <main class="page-main">
 
-    <!-- ── Hero: full-bleed, no max-width ── -->
-    <div class="info-pengajar__hero">
-      <div class="info-pengajar__hero-inner">
+    <!-- ── Hero banner ── -->
+    <div class="pengajar-hero">
 
-        <div class="info-pengajar__photo-wrap">
-          <img
-            id="ipPhoto"
-            src="images/pengajar.png"
-            alt="Foto Pengajar"
-            class="info-pengajar__photo"
-          />
-        </div>
-
-        <div class="info-pengajar__identity">
-          <h1 class="info-pengajar__name" id="ipName">Memuat data...</h1>
-          <p class="info-pengajar__jabatan" id="ipJabatan">—</p>
-          <hr class="info-pengajar__divider" />
-          <ul class="info-pengajar__contact">
-            <li>
-              <span class="info-pengajar__icon">&#9993;</span>
-              <span id="ipEmail">—</span>
-            </li>
-            <li>
-              <span class="info-pengajar__icon">&#9679;</span>
-              <span id="ipAlamat">—</span>
-            </li>
-          </ul>
-        </div>
-
+      <!-- Photo -->
+      <div class="pengajar-hero__photo">
+        <!-- Replace src with actual lecturer photo -->
+        <img src="images/foto_pengajar.jpg" alt="Foto Pengajar" />
       </div>
+
+      <!-- Info -->
+      <div class="pengajar-hero__info">
+        <h1 class="pengajar-hero__name">Nama Lengkap, Ph.D</h1>
+        <p class="pengajar-hero__jabatan">jabatan</p>
+        <hr class="pengajar-hero__divider" />
+        <div class="pengajar-hero__contacts">
+          <!-- Email -->
+          <div class="pengajar-hero__contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5A2.25 2.25 0 0119.5 19.5h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0l-9.75 6.75L2.25 6.75" />
+            </svg>
+            loremipsumdolore
+          </div>
+          <!-- Address / Office -->
+          <div class="pengajar-hero__contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            </svg>
+            Lorem ipsum dolore sit amat
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- ── Tabs + Content: centered ── -->
-    <section class="info-pengajar">
+    <!-- ── Tab bar ── -->
+    <div class="pengajar-tabs">
+      <ul class="pengajar-tabs__list" role="tablist">
+        <li class="pengajar-tabs__item">
+          <button class="pengajar-tabs__btn is-active" role="tab" data-panel="panel-profil">Profil</button>
+        </li>
+        <li class="pengajar-tabs__item">
+          <button class="pengajar-tabs__btn" role="tab" data-panel="panel-matkul">Mata Kuliah</button>
+        </li>
+        <li class="pengajar-tabs__item">
+          <button class="pengajar-tabs__btn" role="tab" data-panel="panel-hibah">Hibah &amp; Proyek</button>
+        </li>
+        <li class="pengajar-tabs__item">
+          <button class="pengajar-tabs__btn" role="tab" data-panel="panel-penelitian">Penelitian/PKM</button>
+        </li>
+        <li class="pengajar-tabs__item">
+          <button class="pengajar-tabs__btn" role="tab" data-panel="panel-pengabdian">Pengabdian</button>
+        </li>
+        <li class="pengajar-tabs__item">
+          <button class="pengajar-tabs__btn" role="tab" data-panel="panel-hki">HKI/Paten</button>
+        </li>
+        <li class="pengajar-tabs__item">
+          <button class="pengajar-tabs__btn" role="tab" data-panel="panel-publikasi">Publikasi</button>
+        </li>
+      </ul>
+    </div>
 
-      <!-- Tab Nav -->
-      <nav class="info-pengajar__tabs" id="ipTabs">
-        <button class="ip-tab ip-tab--active" data-tab="profil">Profil</button>
-        <button class="ip-tab" data-tab="mata-kuliah">Mata Kuliah</button>
-        <button class="ip-tab" data-tab="hibah">Hibah &amp; Proyek</button>
-        <button class="ip-tab" data-tab="penelitian">Penelitian/PKM</button>
-        <button class="ip-tab" data-tab="pengabdian">Pengabdian</button>
-        <button class="ip-tab" data-tab="hki">HKI/Paten</button>
-        <button class="ip-tab" data-tab="publikasi">Publikasi</button>
-      </nav>
+    <!-- ── Tab content ── -->
+    <div class="pengajar-content">
 
-      <!-- Tab Content -->
-      <div class="info-pengajar__content">
-
-        <!-- PROFIL -->
-        <div class="ip-panel ip-panel--active" id="tab-profil">
-
-          <div class="ip-section">
-            <h2 class="ip-section__title">BIOGRAFI</h2>
-            <p class="ip-section__body">
-              Lorem ipsum dolore sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolore sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolore sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolore sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-
-          <div class="ip-section">
-            <h2 class="ip-section__title">BIDANG KEAHLIAN</h2>
-            <p class="ip-section__body">Lorem ipsum dolore sit amet</p>
-          </div>
-
-          <div class="ip-section">
-            <h2 class="ip-section__title">RIWAYAT PENDIDIKAN</h2>
-            <ul class="ip-section__list">
-              <li>Jenjang Pendidikan (Sarjana/Magister/Doktor), Fakultas/Jurusan, Universitas, Negara, Tahun yyyy-yyyy</li>
-              <li>Jenjang Pendidikan (Sarjana/Magister/Doktor), Fakultas/Jurusan, Universitas, Negara, Tahun yyyy-yyyy</li>
-            </ul>
-          </div>
-
-          <div class="ip-section">
-            <h2 class="ip-section__title">KELOMPOK RISET</h2>
-            <p class="ip-section__body">Lorem ipsum dolore sit amet</p>
-          </div>
-
+      <!-- Profil -->
+      <div class="pengajar-panel is-active" id="panel-profil" role="tabpanel">
+        <h2 class="pengajar-panel__heading">Profil</h2>
+        <div class="pengajar-panel__text">
+          <p>Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.
+             Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.</p>
+          <p>Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.
+             Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.</p>
         </div>
-
-        <!-- MATA KULIAH -->
-        <div class="ip-panel" id="tab-mata-kuliah">
-          <div class="ip-section">
-            <h2 class="ip-section__title">MATA KULIAH YANG DIAMPU</h2>
-            <p class="ip-section__body">Konten mata kuliah akan ditampilkan di sini.</p>
-          </div>
-        </div>
-
-        <!-- HIBAH & PROYEK -->
-        <div class="ip-panel" id="tab-hibah">
-          <div class="ip-section">
-            <h2 class="ip-section__title">HIBAH &amp; PROYEK</h2>
-            <p class="ip-section__body">Konten hibah dan proyek akan ditampilkan di sini.</p>
-          </div>
-        </div>
-
-        <!-- PENELITIAN/PKM -->
-        <div class="ip-panel" id="tab-penelitian">
-          <div class="ip-section">
-            <h2 class="ip-section__title">PENELITIAN / PKM</h2>
-            <div id="penelitianContent">
-              <!-- Populated by fetchPenelitian() -->
-            </div>
-          </div>
-        </div>
-
-        <!-- PENGABDIAN -->
-        <div class="ip-panel" id="tab-pengabdian">
-          <div class="ip-section">
-            <h2 class="ip-section__title">PENGABDIAN</h2>
-            <p class="ip-section__body">Konten pengabdian akan ditampilkan di sini.</p>
-          </div>
-        </div>
-
-        <!-- HKI/PATEN -->
-        <div class="ip-panel" id="tab-hki">
-          <div class="ip-section">
-            <h2 class="ip-section__title">HKI / PATEN</h2>
-            <p class="ip-section__body">Konten HKI dan paten akan ditampilkan di sini.</p>
-          </div>
-        </div>
-
-        <!-- PUBLIKASI -->
-        <div class="ip-panel" id="tab-publikasi">
-          <div class="ip-section">
-            <h2 class="ip-section__title">PUBLIKASI</h2>
-            <p class="ip-section__body">Konten publikasi akan ditampilkan di sini.</p>
-          </div>
-        </div>
-
       </div>
-    </section>
+
+      <!-- Mata Kuliah -->
+      <div class="pengajar-panel" id="panel-matkul" role="tabpanel">
+        <h2 class="pengajar-panel__heading">Mata Kuliah</h2>
+        <ul class="pengajar-panel__list">
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+        </ul>
+      </div>
+
+      <!-- Hibah & Proyek -->
+      <div class="pengajar-panel" id="panel-hibah" role="tabpanel">
+        <div class="pengajar-panel__subsection">
+          <h2 class="pengajar-panel__heading">Hibah Penelitian</h2>
+          <ul class="pengajar-panel__list">
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+          </ul>
+        </div>
+        <div class="pengajar-panel__subsection">
+          <h2 class="pengajar-panel__heading">Proyek</h2>
+          <ul class="pengajar-panel__list">
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+            <li>Lorem ipsum dolore sit amet</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Penelitian/PKM -->
+      <div class="pengajar-panel" id="panel-penelitian" role="tabpanel">
+        <h2 class="pengajar-panel__heading">Penelitian / PKM</h2>
+        <ul class="pengajar-panel__list">
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+        </ul>
+      </div>
+
+      <!-- Pengabdian -->
+      <div class="pengajar-panel" id="panel-pengabdian" role="tabpanel">
+        <h2 class="pengajar-panel__heading">Pengabdian Masyarakat</h2>
+        <ul class="pengajar-panel__list">
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+        </ul>
+      </div>
+
+      <!-- HKI/Paten -->
+      <div class="pengajar-panel" id="panel-hki" role="tabpanel">
+        <h2 class="pengajar-panel__heading">HKI / Paten</h2>
+        <ul class="pengajar-panel__list">
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+        </ul>
+      </div>
+
+      <!-- Publikasi -->
+      <div class="pengajar-panel" id="panel-publikasi" role="tabpanel">
+        <h2 class="pengajar-panel__heading">Publikasi</h2>
+        <ul class="pengajar-panel__list">
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+          <li>Lorem ipsum dolore sit amet</li>
+        </ul>
+      </div>
+
+    </div><!-- /.pengajar-content -->
+
   </main>
 
-  <!-- ══════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════ -->
   <footer class="footer">
 
     <div class="footer__main">
@@ -301,8 +330,8 @@
 
   </footer>
 
-  <!-- Navbar JS (same as index) -->
   <script>
+    /* ── Navbar ── */
     const hamburger = document.getElementById('hamburgerBtn');
     const navRight  = document.getElementById('navbarRight');
 
@@ -317,7 +346,6 @@
         if (window.innerWidth > 768) return;
         e.preventDefault();
         const targetId = link.getAttribute('data-dropdown');
-        const dropdown = document.getElementById(targetId);
         const parentLi = link.closest('li');
         const isActive = parentLi.classList.contains('mobile-open');
         document.querySelectorAll('.navbar__nav li').forEach(li => li.classList.remove('mobile-open'));
@@ -333,159 +361,22 @@
         document.querySelectorAll('.navbar__nav li').forEach(li => li.classList.remove('mobile-open'));
       }
     });
-  </script>
 
-  <!-- Tab JS -->
-  <script>
-    const tabs    = document.querySelectorAll('.ip-tab');
-    const panels  = document.querySelectorAll('.ip-panel');
+    /* ── Tabs ── */
+    const tabBtns = document.querySelectorAll('.pengajar-tabs__btn');
+    const panels  = document.querySelectorAll('.pengajar-panel');
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('ip-tab--active'));
-        panels.forEach(p => p.classList.remove('ip-panel--active'));
-        tab.classList.add('ip-tab--active');
-        document.getElementById('tab-' + tab.dataset.tab).classList.add('ip-panel--active');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Deactivate all
+        tabBtns.forEach(b => b.classList.remove('is-active'));
+        panels.forEach(p => p.classList.remove('is-active'));
+
+        // Activate clicked
+        btn.classList.add('is-active');
+        const targetId = btn.getAttribute('data-panel');
+        document.getElementById(targetId).classList.add('is-active');
       });
-    });
-  </script>
-
-  <!-- CMS: Hero (pengajar profile data) -->
-  <script>
-    // ════════════════════════════════════════════════
-    // HERO — CMS Integration
-    // ════════════════════════════════════════════════
-    // Reads ?id=<slug> from URL, fetches from:
-    //   CMS_BASE_URL/pengajar/<slug>
-    //
-    // Expected response shape:
-    // {
-    //   "slug"    : "budi-santoso",
-    //   "nama"    : "Dr. Budi Santoso, M.Kom.",
-    //   "jabatan" : "Lektor Kepala",
-    //   "email"   : "budi.santoso@uph.edu",
-    //   "alamat"  : "Gedung B Lt. 3, Kampus UPH",  // optional
-    //   "foto"    : "images/budi.jpg"               // optional
-    // }
-    // ════════════════════════════════════════════════
-    const CMS_BASE_URL = 'https://YOUR-CMS-DOMAIN/api';
-
-    const HERO_PLACEHOLDER = {
-      nama    : 'Nama Lengkap, Ph.D',
-      jabatan : 'Jabatan',
-      email   : 'email@uph.edu',
-      alamat  : 'Universitas Pelita Harapan',
-      foto    : 'images/pengajar.png',
-    };
-
-    function populateHero(data) {
-      document.getElementById('ipName').textContent   = data.nama    || '—';
-      document.getElementById('ipJabatan').textContent = data.jabatan || '—';
-      document.getElementById('ipEmail').textContent  = data.email   || '—';
-      document.getElementById('ipAlamat').textContent = data.alamat  || '—';
-      if (data.foto) {
-        const img = document.getElementById('ipPhoto');
-        img.src = data.foto;
-        img.alt = data.nama;
-      }
-      document.title = (data.nama || 'Pengajar') + ' - S1 Informatika UPH';
-    }
-
-    async function fetchHero() {
-      const slug = new URLSearchParams(window.location.search).get('id');
-      if (!slug) { populateHero(HERO_PLACEHOLDER); return; }
-      try {
-        const res  = await fetch(`${CMS_BASE_URL}/pengajar/${slug}`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        populateHero(data);
-      } catch (err) {
-        console.warn('Hero CMS fetch failed, using fallback.', err);
-        populateHero(HERO_PLACEHOLDER);
-      }
-    }
-
-    fetchHero();
-  </script>
-
-  <!-- CMS: Penelitian/PKM Tab -->
-  <script>
-    // ════════════════════════════════════════════════
-    // PENELITIAN/PKM — CMS Integration
-    // ════════════════════════════════════════════════
-    // Read the lecturer ID from the URL: ?id=<slug>
-    // REPLACE the base URL with your actual CMS endpoint.
-    // Expected response shape:
-    // [
-    //   {
-    //     "judul"  : "Judul penelitian atau PKM",
-    //     "tahun"  : "2023",
-    //     "peran"  : "Ketua",           // optional
-    //     "sumber" : "DIKTI",           // optional — funding source
-    //     "url"    : "https://..."      // optional — link to paper/report
-    //   },
-    //   ...
-    // ]
-    // ════════════════════════════════════════════════
-    const CMS_BASE_URL = 'https://YOUR-CMS-DOMAIN/api';
-
-    const pengajarId = new URLSearchParams(window.location.search).get('id') || 'unknown';
-
-    const penelitianEl = document.getElementById('penelitianContent');
-
-    function renderPenelitianSkeleton() {
-      penelitianEl.innerHTML = `
-        <ul class="ip-section__list ip-skeleton-list">
-          ${[1,2,3].map(() => `
-            <li style="list-style:none;padding-left:0;">
-              <div style="height:13px;width:80%;background:#e0e0e0;border-radius:4px;margin-bottom:6px;"></div>
-              <div style="height:11px;width:40%;background:#e8e8e8;border-radius:4px;"></div>
-            </li>`).join('')}
-        </ul>`;
-    }
-
-    function renderPenelitianData(items) {
-      if (!items.length) {
-        penelitianEl.innerHTML = '<p class="ip-section__body" style="color:#888;">Belum ada data penelitian/PKM.</p>';
-        return;
-      }
-      penelitianEl.innerHTML = `
-        <ul class="ip-section__list">
-          ${items.map(item => {
-            const meta = [item.tahun, item.peran, item.sumber].filter(Boolean).join(' · ');
-            const inner = item.url
-              ? `<a href="${item.url}" target="_blank" rel="noopener" style="color:var(--navy);font-weight:600;">${item.judul}</a>`
-              : `<strong>${item.judul}</strong>`;
-            return `<li>${inner}${meta ? `<br><span style="font-size:0.82rem;color:#666;">${meta}</span>` : ''}</li>`;
-          }).join('')}
-        </ul>`;
-    }
-
-    async function fetchPenelitian() {
-      renderPenelitianSkeleton();
-      try {
-        const res  = await fetch(`${CMS_BASE_URL}/pengajar/${pengajarId}/penelitian`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        renderPenelitianData(data);
-      } catch (err) {
-        console.warn('Penelitian CMS fetch failed, using fallback data.', err);
-        // ── Fallback placeholder data (remove when CMS is live) ──
-        renderPenelitianData([
-          { judul: 'Judul Penelitian Pertama', tahun: '2024', peran: 'Ketua', sumber: 'Internal UPH' },
-          { judul: 'Judul PKM Kedua', tahun: '2023', peran: 'Anggota', sumber: 'DIKTI' },
-        ]);
-      }
-    }
-
-    // Fetch when the tab is first opened (lazy — saves a request if user never opens it)
-    const penelitianTab = document.querySelector('[data-tab="penelitian"]');
-    let penelitianLoaded = false;
-    penelitianTab.addEventListener('click', () => {
-      if (!penelitianLoaded) {
-        penelitianLoaded = true;
-        fetchPenelitian();
-      }
     });
   </script>
 

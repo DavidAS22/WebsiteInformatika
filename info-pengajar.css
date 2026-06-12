@@ -1,251 +1,320 @@
-/* ═══════════════════════════════════════════════════════
-   INFO-PENGAJAR.CSS
-   Requires style.css (base variables + navbar + footer).
-═══════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   info-pengajar.css
+   Styles for the individual lecturer profile page.
+   Load AFTER style.css so --navy, --orange, --white, etc.
+   are already declared.
+═══════════════════════════════════════════════════════════ */
 
-main {
-  background: #f0f2f5;
+/* ── Page wrapper ── */
+.page-main {
   min-height: 60vh;
+  background: #f0f2f5;
 }
 
-/* ════════════════════════════════════
-   HERO — full-bleed
-════════════════════════════════════ */
-.info-pengajar__hero {
-  background: linear-gradient(135deg, #1a2a5e 0%, #3b3580 55%, #6b4fa0 100%);
-  width: 100%;
-}
-
-.info-pengajar__hero-inner {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 40px 100px 36px;
+/* ═══════════════════════════════════════
+   HERO BANNER — gradient with profile info
+═══════════════════════════════════════ */
+.pengajar-hero {
+  background: linear-gradient(135deg, #1a2a5e 0%, #2d3a8c 50%, #4a3fa0 100%);
+  padding: 48px 60px 52px;
   display: flex;
-  align-items: flex-end;
-  gap: 36px;
+  align-items: center;
+  gap: 40px;
 }
 
 /* Photo */
-.info-pengajar__photo-wrap {
-  flex-shrink: 0;
-  width: 150px;
-  height: 185px;
-  border-radius: 10px;
+.pengajar-hero__photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 14px;
   overflow: hidden;
-  background: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+  background: #3a4a7a;
 }
 
-.info-pengajar__photo {
+.pengajar-hero__photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: top center;
   display: block;
 }
 
-/* Identity */
-.info-pengajar__identity {
-  color: #fff;
-  flex: 1;
-  padding-bottom: 4px;
-}
-
-.info-pengajar__name {
-  font-family: var(--font-main);
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.info-pengajar__jabatan {
-  font-size: 0.95rem;
-  font-style: italic;
-  opacity: 0.85;
-  margin-bottom: 16px;
-}
-
-.info-pengajar__divider {
-  border: none;
-  border-top: 1px solid rgba(255,255,255,0.35);
-  margin-bottom: 16px;
-}
-
-.info-pengajar__contact {
-  list-style: none;
+/* Info block */
+.pengajar-hero__info {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
 }
 
-.info-pengajar__contact li {
+.pengajar-hero__name {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.pengajar-hero__jabatan {
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #b0bcd8;
+  margin: 0 0 10px;
+}
+
+/* Divider line */
+.pengajar-hero__divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  margin: 4px 0 12px;
+}
+
+/* Contact rows (email, address) */
+.pengajar-hero__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pengajar-hero__contact-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 0.92rem;
-  font-weight: 500;
+  gap: 10px;
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  color: #ffffff;
 }
 
-.info-pengajar__icon {
-  font-size: 1rem;
-  opacity: 0.9;
-  width: 22px;
-  text-align: center;
+.pengajar-hero__contact-item svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+/* ═══════════════════════════════════════
+   TAB BAR
+═══════════════════════════════════════ */
+.pengajar-tabs {
+  background: #ffffff;
+  border-bottom: 1px solid #e0e4ef;
+  position: sticky;
+  top: 80px; /* below the navbar */
+  z-index: 10;
+}
+
+.pengajar-tabs__list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0 60px;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pengajar-tabs__list::-webkit-scrollbar {
+  display: none;
+}
+
+.pengajar-tabs__item {
   flex-shrink: 0;
 }
 
-/* ════════════════════════════════════
-   TABS + CONTENT — full width, no max-width
-════════════════════════════════════ */
-.info-pengajar {
-  width: 100%;
-  padding: 0;
-}
-
-/* ════════════════════════════════════
-   TAB NAV — full width, buttons spread evenly
-════════════════════════════════════ */
-.info-pengajar__tabs {
-  background: #fff;
-  display: flex;
-  width: 100%;
-  border-bottom: 2px solid #e5e7eb;
-  overflow-x: auto;
-  overflow-y: visible;
-  scrollbar-width: none;
-  padding: 0 100px;
-}
-
-.info-pengajar__tabs::-webkit-scrollbar { display: none; }
-
-.ip-tab {
-  flex: 1;                   /* spread evenly across full width */
-  background: none;
-  border: none;
-  padding: 18px 12px;
+.pengajar-tabs__btn {
+  display: block;
+  padding: 18px 24px 16px;
   font-family: var(--font-main);
   font-size: 0.88rem;
   font-weight: 500;
-  color: #555;
-  cursor: pointer;
+  color: #555555;
+  background: none;
+  border: none;
   border-bottom: 3px solid transparent;
-  margin-bottom: -2px;
-  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
   white-space: nowrap;
-  text-align: center;
+  transition: color 0.2s, border-color 0.2s;
+  text-decoration: none;
 }
 
-.ip-tab:hover { color: var(--navy); }
+.pengajar-tabs__btn:hover {
+  color: var(--navy);
+}
 
-.ip-tab--active {
+.pengajar-tabs__btn.is-active {
   color: var(--navy);
   font-weight: 700;
-  border-bottom-color: transparent;
-  position: relative;
+  border-bottom-color: var(--orange);
 }
 
-.ip-tab--active::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(to right, var(--navy), var(--orange));
-  border-radius: 4px 4px 0 0;
-  z-index: 1;
+/* ═══════════════════════════════════════
+   TAB CONTENT PANELS
+═══════════════════════════════════════ */
+.pengajar-content {
+  background: #ffffff;
+  padding: 40px 60px 64px;
 }
 
-/* ════════════════════════════════════
-   TAB CONTENT — full width white
-════════════════════════════════════ */
-.info-pengajar__content {
-  background: #fff;
-  width: 100%;
-  padding: 40px 100px;
-  min-height: 300px;
+/* Individual tab panels — hidden by default */
+.pengajar-panel {
+  display: none;
 }
 
-/* ════════════════════════════════════
-   PANELS
-════════════════════════════════════ */
-.ip-panel { display: none; }
-.ip-panel--active { display: block; }
-
-/* ════════════════════════════════════
-   CONTENT SECTIONS
-════════════════════════════════════ */
-.ip-section {
-  margin-bottom: 32px;
-  max-width: 960px;
+.pengajar-panel.is-active {
+  display: block;
 }
 
-.ip-section__title {
+/* ── Section heading inside a panel ── */
+.pengajar-panel__heading {
   font-family: var(--font-main);
-  font-size: 0.95rem;
   font-weight: 800;
+  font-size: 1rem;
   color: var(--navy);
-  letter-spacing: 0.03em;
-  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 20px;
 }
 
-.ip-section__body {
-  font-size: 0.9rem;
-  line-height: 1.75;
-  color: #333;
-}
-
-.ip-section__list {
+/* ── Bullet list with orange dots ── */
+.pengajar-panel__list {
   list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.ip-section__list li {
+.pengajar-panel__list li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--font-main);
   font-size: 0.9rem;
-  line-height: 1.65;
-  color: #333;
-  padding-left: 22px;
-  position: relative;
+  color: #333333;
+  line-height: 1.6;
 }
 
-.ip-section__list li::before {
-  content: '◆';
-  position: absolute;
-  left: 0;
-  color: var(--orange);
-  font-size: 0.6rem;
-  top: 5px;
+/* Orange bullet dot */
+.pengajar-panel__list li::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+  margin-top: 6px;
 }
 
-/* ════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════ */
-@media (max-width: 900px) {
-  .info-pengajar__hero-inner {
-    padding: 28px 28px 28px;
+/* ── Profil tab: plain paragraph text ── */
+.pengajar-panel__text {
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  color: #333333;
+  line-height: 1.85;
+  max-width: 800px;
+}
+
+.pengajar-panel__text p + p {
+  margin-top: 16px;
+}
+
+/* ── Multiple subsections in one panel ── */
+.pengajar-panel__subsection {
+  margin-bottom: 40px;
+}
+
+.pengajar-panel__subsection:last-child {
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════
+   TABLET  (≤ 1024px)
+═══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .pengajar-hero {
+    padding: 40px 40px 44px;
+    gap: 32px;
   }
-  .info-pengajar__content {
-    padding: 28px 28px;
+
+  .pengajar-hero__name {
+    font-size: 1.5rem;
+  }
+
+  .pengajar-tabs__list {
+    padding: 0 40px;
+  }
+
+  .pengajar-content {
+    padding: 36px 40px 56px;
   }
 }
 
-@media (max-width: 640px) {
-  .info-pengajar__hero-inner {
+/* ═══════════════════════════════════════
+   MOBILE  (≤ 768px)
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .pengajar-hero {
+    padding: 32px 24px 36px;
+    gap: 24px;
+  }
+
+  .pengajar-hero__photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+  }
+
+  .pengajar-hero__name {
+    font-size: 1.25rem;
+  }
+
+  .pengajar-hero__jabatan {
+    font-size: 0.82rem;
+  }
+
+  .pengajar-hero__contact-item {
+    font-size: 0.82rem;
+  }
+
+  .pengajar-tabs__list {
+    padding: 0 16px;
+  }
+
+  .pengajar-tabs__btn {
+    padding: 14px 16px 12px;
+    font-size: 0.82rem;
+  }
+
+  .pengajar-content {
+    padding: 28px 24px 48px;
+  }
+
+  .pengajar-panel__heading {
+    font-size: 0.9rem;
+  }
+
+  .pengajar-panel__list li {
+    font-size: 0.85rem;
+  }
+}
+
+/* ═══════════════════════════════════════
+   SMALL MOBILE  (≤ 480px)
+═══════════════════════════════════════ */
+@media (max-width: 480px) {
+  .pengajar-hero {
     flex-direction: column;
     align-items: flex-start;
-    padding: 24px 20px 20px;
-    gap: 16px;
+    padding: 28px 16px 32px;
+    gap: 20px;
   }
-  .info-pengajar__photo-wrap {
-    width: 110px;
-    height: 140px;
-  }
-  .info-pengajar__name { font-size: 1.4rem; }
-  .info-pengajar__content { padding: 24px 20px; }
-  .ip-tab {
-    flex: 0 0 auto;
-    padding: 14px 14px;
-    font-size: 0.82rem;
+
+  .pengajar-content {
+    padding: 24px 16px 40px;
   }
 }
