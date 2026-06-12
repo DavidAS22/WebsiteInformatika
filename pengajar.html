@@ -154,98 +154,9 @@
       -->
 
       <!-- Card grid -->
+      <!-- Card grid — populated by CMS -->
       <div class="staf__grid" id="stafGrid">
-
-        <!-- CARD 1 -->
-        <div class="staf__card">
-          <div class="staf__card-photo">
-            <img src="images/dosen_1.jpg" alt="Dosen 1" />
-          </div>
-          <div class="staf__card-info">
-            <p class="staf__card-name">Test</p>
-            <p class="staf__card-email">alamat email</p>
-            <div class="staf__card-stats">
-              <p>Publikasi : 0</p>
-              <p>HKI/Paten : 0</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 2 -->
-        <div class="staf__card">
-          <div class="staf__card-photo">
-            <img src="images/dosen_2.jpg" alt="Dosen 2" />
-          </div>
-          <div class="staf__card-info">
-            <p class="staf__card-name">Nama Lengkap</p>
-            <p class="staf__card-email">alamat email</p>
-            <div class="staf__card-stats">
-              <p>Publikasi : 0</p>
-              <p>HKI/Paten : 0</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 3 -->
-        <div class="staf__card">
-          <div class="staf__card-photo">
-            <img src="images/dosen_3.jpg" alt="Dosen 3" />
-          </div>
-          <div class="staf__card-info">
-            <p class="staf__card-name">Nama Lengkap</p>
-            <p class="staf__card-email">alamat email</p>
-            <div class="staf__card-stats">
-              <p>Publikasi : 0</p>
-              <p>HKI/Paten : 0</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 4 -->
-        <div class="staf__card">
-          <div class="staf__card-photo">
-            <img src="images/dosen_4.jpg" alt="Dosen 4" />
-          </div>
-          <div class="staf__card-info">
-            <p class="staf__card-name">Nama Lengkap</p>
-            <p class="staf__card-email">alamat email</p>
-            <div class="staf__card-stats">
-              <p>Publikasi : 0</p>
-              <p>HKI/Paten : 0</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 5 -->
-        <div class="staf__card">
-          <div class="staf__card-photo">
-            <img src="images/dosen_5.jpg" alt="Dosen 5" />
-          </div>
-          <div class="staf__card-info">
-            <p class="staf__card-name">Nama Lengkap</p>
-            <p class="staf__card-email">alamat email</p>
-            <div class="staf__card-stats">
-              <p>Publikasi : 0</p>
-              <p>HKI/Paten : 0</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 6 -->
-        <div class="staf__card">
-          <div class="staf__card-photo">
-            <img src="images/dosen_6.jpg" alt="Dosen 6" />
-          </div>
-          <div class="staf__card-info">
-            <p class="staf__card-name">Nama Lengkap</p>
-            <p class="staf__card-email">alamat email</p>
-            <div class="staf__card-stats">
-              <p>Publikasi : 0</p>
-              <p>HKI/Paten : 0</p>
-            </div>
-          </div>
-        </div>
-
+        <!-- Cards injected by loadStaf() -->
       </div><!-- /#stafGrid -->
     </section>
   </main>
@@ -396,67 +307,86 @@
     // ══════════════════════════════════════
     // STAF PENDIDIK — CMS INTEGRATION
     // ══════════════════════════════════════
-    const STAF_API_URL = 'https://your-api-url.vercel.app/api/pengajar';
+    // ════════════════════════════════════════════════
+    // STAF PENDIDIK — CMS Integration
+    // ════════════════════════════════════════════════
+    // REPLACE this URL with your actual CMS endpoint.
+    // Expected response shape:
+    // [
+    //   {
+    //     "slug"      : "budi-santoso",       // used for info-pengajar.html?id=<slug>
+    //     "nama"      : "Dr. Budi Santoso",
+    //     "jabatan"   : "Lektor Kepala",
+    //     "email"     : "budi@uph.edu",
+    //     "foto"      : "images/budi.jpg",    // optional, fallback used if missing
+    //     "publikasi" : 5,
+    //     "hki_paten" : 2
+    //   },
+    //   ...
+    // ]
+    // ════════════════════════════════════════════════
+    const STAF_API_URL = 'https://YOUR-CMS-DOMAIN/api/pengajar';
 
-    // Placeholder data matching static cards above
     const STAF_PLACEHOLDER = [
-      { nama: 'Test', email: 'alamat email', foto: 'images/dosen_1.jpg', publikasi: 0, hki_paten: 0 },
-      { nama: 'Nama Lengkap', email: 'alamat email', foto: 'images/dosen_2.jpg', publikasi: 0, hki_paten: 0 },
-      { nama: 'Nama Lengkap', email: 'alamat email', foto: 'images/dosen_3.jpg', publikasi: 0, hki_paten: 0 },
-      { nama: 'Nama Lengkap', email: 'alamat email', foto: 'images/dosen_4.jpg', publikasi: 0, hki_paten: 0 },
-      { nama: 'Nama Lengkap', email: 'alamat email', foto: 'images/dosen_5.jpg', publikasi: 0, hki_paten: 0 },
-      { nama: 'Nama Lengkap', email: 'alamat email', foto: 'images/dosen_6.jpg', publikasi: 0, hki_paten: 0 },
+      { slug: 'dosen-1', nama: 'Nama Lengkap', jabatan: 'Jabatan', email: 'alamat@uph.edu', foto: 'images/dosen_1.jpg', publikasi: 0, hki_paten: 0 },
+      { slug: 'dosen-2', nama: 'Nama Lengkap', jabatan: 'Jabatan', email: 'alamat@uph.edu', foto: 'images/dosen_2.jpg', publikasi: 0, hki_paten: 0 },
+      { slug: 'dosen-3', nama: 'Nama Lengkap', jabatan: 'Jabatan', email: 'alamat@uph.edu', foto: 'images/dosen_3.jpg', publikasi: 0, hki_paten: 0 },
+      { slug: 'dosen-4', nama: 'Nama Lengkap', jabatan: 'Jabatan', email: 'alamat@uph.edu', foto: 'images/dosen_4.jpg', publikasi: 0, hki_paten: 0 },
+      { slug: 'dosen-5', nama: 'Nama Lengkap', jabatan: 'Jabatan', email: 'alamat@uph.edu', foto: 'images/dosen_5.jpg', publikasi: 0, hki_paten: 0 },
+      { slug: 'dosen-6', nama: 'Nama Lengkap', jabatan: 'Jabatan', email: 'alamat@uph.edu', foto: 'images/dosen_6.jpg', publikasi: 0, hki_paten: 0 },
     ];
+
+    function renderSkeleton(count = 6) {
+      const grid = document.getElementById('stafGrid');
+      grid.innerHTML = Array.from({ length: count }).map(() => `
+        <div class="staf__card staf__card--skeleton" style="pointer-events:none;">
+          <div class="staf__card-photo" style="background:rgba(255,255,255,0.1);"></div>
+          <div class="staf__card-info" style="gap:8px;">
+            <div style="height:13px;width:70%;background:rgba(255,255,255,0.2);border-radius:4px;"></div>
+            <div style="height:11px;width:50%;background:rgba(255,255,255,0.15);border-radius:4px;"></div>
+            <div style="height:10px;width:40%;background:rgba(255,255,255,0.1);border-radius:4px;margin-top:auto;"></div>
+            <div style="height:10px;width:40%;background:rgba(255,255,255,0.1);border-radius:4px;"></div>
+          </div>
+        </div>`).join('');
+    }
 
     function renderStaf(data) {
       const grid = document.getElementById('stafGrid');
-      // Extract only the 4 fields we need
-      // Update field names to match your API response
-      const staf = data.map(item => ({
-        nama:      item.nama,       // <- update e.g. item.full_name
-        email:     item.email,      // <- update e.g. item.email_address
-        foto:      item.foto,       // <- update e.g. item.photo_url
-        publikasi: item.publikasi,  // <- update e.g. item.publication_count
-        hki_paten: item.hki_paten,  // <- update e.g. item.patent_count
-      }));
-
-      grid.innerHTML = staf.map(s => `
-        <div class="staf__card">
-          <div class="staf__card-photo">
-            <img src="${s.foto}" alt="${s.nama}" />
-          </div>
-          <div class="staf__card-info">
-            <p class="staf__card-name">${s.nama}</p>
-            <p class="staf__card-email">${s.email}</p>
-            <div class="staf__card-stats">
-              <p>Publikasi : ${s.publikasi}</p>
-              <p>HKI/Paten : ${s.hki_paten}</p>
+      grid.innerHTML = data.map(item => {
+        const foto  = item.foto || 'images/pengajar.png';
+        const slug  = item.slug || '';
+        const href  = slug ? `info-pengajar.html?id=${slug}` : 'info-pengajar.html';
+        return `
+          <a class="staf__card" href="${href}" style="text-decoration:none;">
+            <div class="staf__card-photo">
+              <img src="${foto}" alt="${item.nama}" onerror="this.src='images/pengajar.png'" />
             </div>
-          </div>
-        </div>
-      `).join('');
+            <div class="staf__card-info">
+              <p class="staf__card-name">${item.nama}</p>
+              <p class="staf__card-email">${item.email || ''}</p>
+              <div class="staf__card-stats">
+                <p>Publikasi : ${item.publikasi ?? 0}</p>
+                <p>HKI/Paten : ${item.hki_paten ?? 0}</p>
+              </div>
+            </div>
+          </a>`;
+      }).join('');
     }
 
     async function loadStaf() {
+      renderSkeleton();
       try {
-        // ── Uncomment when API is ready ──
-        // const res = await fetch(STAF_API_URL);
-        // const data = await res.json();
-        // renderStaf(data);
-
-        // ── Static placeholder (remove when using API) ──
-        // renderStaf(STAF_PLACEHOLDER);
-
+        const res  = await fetch(STAF_API_URL);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        renderStaf(data);
       } catch (err) {
-        console.error('Failed to load staf:', err);
+        console.warn('Staf CMS fetch failed, using fallback data.', err);
         renderStaf(STAF_PLACEHOLDER);
       }
     }
 
-    // Call loadStaf() when you are ready to switch to dynamic data
-    // loadStaf();
-
-    // ── Search filter (works on both static and dynamic cards) ──
+    // ── Search filter ──
     function filterStaf() {
       const query = document.getElementById('stafSearch').value.toLowerCase();
       document.querySelectorAll('.staf__card').forEach(card => {
@@ -464,6 +394,8 @@
         card.style.display = name.includes(query) ? '' : 'none';
       });
     }
+
+    loadStaf();
   </script>
 </body>
 </html>
