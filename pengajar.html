@@ -6,6 +6,7 @@
   <title>Pengajar - Program Studi S1 Informatika UPH</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="pengajar.css" />
 </head>
 <body>
 
@@ -110,9 +111,143 @@
     <div class="page-hero">
       <h1 class="page-hero__title">Pengajar</h1>
     </div>
-    <div class="page-content">
-      <p>Konten untuk halaman <strong>Pengajar</strong> akan ditambahkan di sini.</p>
-    </div>
+
+    <!-- ══════════════════════════════════════
+         STAF PENDIDIK SECTION
+    ══════════════════════════════════════ -->
+    <section class="staf">
+      <h2 class="staf__heading">Staf Pendidik</h2>
+
+      <!-- Search bar -->
+      <div class="staf__search-wrap">
+        <input
+          class="staf__search"
+          type="text"
+          id="stafSearch"
+          placeholder="Ketik nama dosen"
+          oninput="filterStaf()"
+        />
+        <span class="staf__search-icon">&#128269;</span>
+      </div>
+
+      <!--
+      ═══════════════════════════════════════════════════
+      CMS INTEGRATION POINT
+      ═══════════════════════════════════════════════════
+      To load from API:
+      1. Set STAF_API_URL below to your endpoint
+      2. Uncomment the fetch block in the <script> below
+      3. Comment out or remove the static cards in #stafGrid
+
+      Expected API response (array):
+      [
+        {
+          "nama":      "Dr. John Doe",
+          "email":     "john@uph.edu",
+          "foto":      "images/dosen_1.jpg",
+          "publikasi": 5,
+          "hki_paten": 2
+        },
+        ...
+      ]
+      ═══════════════════════════════════════════════════
+      -->
+
+      <!-- Card grid -->
+      <div class="staf__grid" id="stafGrid">
+
+        <!-- CARD 1 -->
+        <div class="staf__card">
+          <div class="staf__card-photo">
+            <img src="images/dosen_1.jpg" alt="Dosen 1" />
+          </div>
+          <div class="staf__card-info">
+            <p class="staf__card-name">Test</p>
+            <p class="staf__card-email">alamat email</p>
+            <div class="staf__card-stats">
+              <p>Publikasi : 0</p>
+              <p>HKI/Paten : 0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="staf__card">
+          <div class="staf__card-photo">
+            <img src="images/dosen_2.jpg" alt="Dosen 2" />
+          </div>
+          <div class="staf__card-info">
+            <p class="staf__card-name">Nama Lengkap</p>
+            <p class="staf__card-email">alamat email</p>
+            <div class="staf__card-stats">
+              <p>Publikasi : 0</p>
+              <p>HKI/Paten : 0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="staf__card">
+          <div class="staf__card-photo">
+            <img src="images/dosen_3.jpg" alt="Dosen 3" />
+          </div>
+          <div class="staf__card-info">
+            <p class="staf__card-name">Nama Lengkap</p>
+            <p class="staf__card-email">alamat email</p>
+            <div class="staf__card-stats">
+              <p>Publikasi : 0</p>
+              <p>HKI/Paten : 0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="staf__card">
+          <div class="staf__card-photo">
+            <img src="images/dosen_4.jpg" alt="Dosen 4" />
+          </div>
+          <div class="staf__card-info">
+            <p class="staf__card-name">Nama Lengkap</p>
+            <p class="staf__card-email">alamat email</p>
+            <div class="staf__card-stats">
+              <p>Publikasi : 0</p>
+              <p>HKI/Paten : 0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="staf__card">
+          <div class="staf__card-photo">
+            <img src="images/dosen_5.jpg" alt="Dosen 5" />
+          </div>
+          <div class="staf__card-info">
+            <p class="staf__card-name">Nama Lengkap</p>
+            <p class="staf__card-email">alamat email</p>
+            <div class="staf__card-stats">
+              <p>Publikasi : 0</p>
+              <p>HKI/Paten : 0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="staf__card">
+          <div class="staf__card-photo">
+            <img src="images/dosen_6.jpg" alt="Dosen 6" />
+          </div>
+          <div class="staf__card-info">
+            <p class="staf__card-name">Nama Lengkap</p>
+            <p class="staf__card-email">alamat email</p>
+            <div class="staf__card-stats">
+              <p>Publikasi : 0</p>
+              <p>HKI/Paten : 0</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /#stafGrid -->
+    </section>
   </main>
 
   <footer class="footer">
@@ -256,5 +391,79 @@
   </script>
 
 
+
+  <script>
+    // ══════════════════════════════════════
+    // STAF PENDIDIK — CMS INTEGRATION
+    // ══════════════════════════════════════
+    const STAF_API_URL = 'https://your-api-url.vercel.app/api/pengajar';
+
+    // Placeholder data matching static cards above
+    const STAF_PLACEHOLDER = [
+      { nama: 'Test', email: 'alamat email', foto: 'images/dosen_1.jpg', publikasi: 0, hki_paten: 0 },
+      { nama: 'Nama Lengkap', email: 'alamat email', foto: 'images/dosen_2.jpg', publikasi: 0, hki_paten: 0 },
+      { nama: 'Nama Lengkap', email: 'alamat email', foto: 'images/dosen_3.jpg', publikasi: 0, hki_paten: 0 },
+      { nama: 'Nama Lengkap', email: 'alamat email', foto: 'images/dosen_4.jpg', publikasi: 0, hki_paten: 0 },
+      { nama: 'Nama Lengkap', email: 'alamat email', foto: 'images/dosen_5.jpg', publikasi: 0, hki_paten: 0 },
+      { nama: 'Nama Lengkap', email: 'alamat email', foto: 'images/dosen_6.jpg', publikasi: 0, hki_paten: 0 },
+    ];
+
+    function renderStaf(data) {
+      const grid = document.getElementById('stafGrid');
+      // Extract only the 4 fields we need
+      // Update field names to match your API response
+      const staf = data.map(item => ({
+        nama:      item.nama,       // <- update e.g. item.full_name
+        email:     item.email,      // <- update e.g. item.email_address
+        foto:      item.foto,       // <- update e.g. item.photo_url
+        publikasi: item.publikasi,  // <- update e.g. item.publication_count
+        hki_paten: item.hki_paten,  // <- update e.g. item.patent_count
+      }));
+
+      grid.innerHTML = staf.map(s => `
+        <div class="staf__card">
+          <div class="staf__card-photo">
+            <img src="${s.foto}" alt="${s.nama}" />
+          </div>
+          <div class="staf__card-info">
+            <p class="staf__card-name">${s.nama}</p>
+            <p class="staf__card-email">${s.email}</p>
+            <div class="staf__card-stats">
+              <p>Publikasi : ${s.publikasi}</p>
+              <p>HKI/Paten : ${s.hki_paten}</p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function loadStaf() {
+      try {
+        // ── Uncomment when API is ready ──
+        // const res = await fetch(STAF_API_URL);
+        // const data = await res.json();
+        // renderStaf(data);
+
+        // ── Static placeholder (remove when using API) ──
+        // renderStaf(STAF_PLACEHOLDER);
+
+      } catch (err) {
+        console.error('Failed to load staf:', err);
+        renderStaf(STAF_PLACEHOLDER);
+      }
+    }
+
+    // Call loadStaf() when you are ready to switch to dynamic data
+    // loadStaf();
+
+    // ── Search filter (works on both static and dynamic cards) ──
+    function filterStaf() {
+      const query = document.getElementById('stafSearch').value.toLowerCase();
+      document.querySelectorAll('.staf__card').forEach(card => {
+        const name = card.querySelector('.staf__card-name').textContent.toLowerCase();
+        card.style.display = name.includes(query) ? '' : 'none';
+      });
+    }
+  </script>
 </body>
 </html>
