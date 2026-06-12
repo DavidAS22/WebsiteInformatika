@@ -380,5 +380,148 @@
     });
   </script>
 
+<<<<<<< HEAD
+=======
+  <!-- CMS: Hero (pengajar profile data) -->
+  <script>
+    // ════════════════════════════════════════════════
+    // HERO — CMS Integration
+    // ════════════════════════════════════════════════
+    // Reads ?id=<slug> from URL, fetches from:
+    //   CMS_BASE_URL/pengajar/<slug>
+    //
+    // Expected response shape:
+    // {
+    //   "slug"    : "budi-santoso",
+    //   "nama"    : "Dr. Budi Santoso, M.Kom.",
+    //   "jabatan" : "Lektor Kepala",
+    //   "email"   : "budi.santoso@uph.edu",
+    //   "alamat"  : "Gedung B Lt. 3, Kampus UPH",  // optional
+    //   "foto"    : "images/budi.jpg"               // optional
+    // }
+    // ════════════════════════════════════════════════
+    const CMS_BASE_URL = 'https://uph-informatika-backend.vercel.app/api/lecturer';
+
+    const HERO_PLACEHOLDER = {
+      slug    : 'id',
+      nama    : 'Nama Lengkap, Ph.D',
+      jabatan : 'Jabatan',
+      email   : 'email@uph.edu',
+      alamat  : 'Universitas Pelita Harapan',
+      foto    : 'images/pengajar.png',
+    };
+
+    function populateHero(data) {
+      document.getElementById('ipName').textContent   = data.nama    || '—';
+      document.getElementById('ipJabatan').textContent = data.jabatan || '—';
+      document.getElementById('ipEmail').textContent  = data.email   || '—';
+      document.getElementById('ipAlamat').textContent = data.alamat  || '—';
+      if (data.foto) {
+        const img = document.getElementById('ipPhoto');
+        img.src = data.foto;
+        img.alt = data.nama;
+      }
+      document.title = (data.nama || 'Pengajar') + ' - S1 Informatika UPH';
+    }
+
+    async function fetchHero() {
+      const slug = new URLSearchParams(window.location.search).get('id');
+      if (!slug) { populateHero(HERO_PLACEHOLDER); return; }
+      try {
+        const res  = await fetch(`${CMS_BASE_URL}/pengajar/${slug}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        populateHero(data);
+      } catch (err) {
+        console.warn('Hero CMS fetch failed, using fallback.', err);
+        populateHero(HERO_PLACEHOLDER);
+      }
+    }
+
+    fetchHero();
+  </script>
+
+  <!-- CMS: Penelitian/PKM Tab -->
+  <script>
+    // ════════════════════════════════════════════════
+    // PENELITIAN/PKM — CMS Integration
+    // ════════════════════════════════════════════════
+    // Read the lecturer ID from the URL: ?id=<slug>
+    // REPLACE the base URL with your actual CMS endpoint.
+    // Expected response shape:
+    // [
+    //   {
+    //     "judul"  : "Judul penelitian atau PKM",
+    //     "tahun"  : "2023",
+    //     "peran"  : "Ketua",           // optional
+    //     "sumber" : "DIKTI",           // optional — funding source
+    //     "url"    : "https://..."      // optional — link to paper/report
+    //   },
+    //   ...
+    // ]
+    // ════════════════════════════════════════════════
+    const CMS_BASE_URL = 'https://YOUR-CMS-DOMAIN/api';
+
+    const pengajarId = new URLSearchParams(window.location.search).get('id') || 'unknown';
+
+    const penelitianEl = document.getElementById('penelitianContent');
+
+    function renderPenelitianSkeleton() {
+      penelitianEl.innerHTML = `
+        <ul class="ip-section__list ip-skeleton-list">
+          ${[1,2,3].map(() => `
+            <li style="list-style:none;padding-left:0;">
+              <div style="height:13px;width:80%;background:#e0e0e0;border-radius:4px;margin-bottom:6px;"></div>
+              <div style="height:11px;width:40%;background:#e8e8e8;border-radius:4px;"></div>
+            </li>`).join('')}
+        </ul>`;
+    }
+
+    function renderPenelitianData(items) {
+      if (!items.length) {
+        penelitianEl.innerHTML = '<p class="ip-section__body" style="color:#888;">Belum ada data penelitian/PKM.</p>';
+        return;
+      }
+      penelitianEl.innerHTML = `
+        <ul class="ip-section__list">
+          ${items.map(item => {
+            const meta = [item.tahun, item.peran, item.sumber].filter(Boolean).join(' · ');
+            const inner = item.url
+              ? `<a href="${item.url}" target="_blank" rel="noopener" style="color:var(--navy);font-weight:600;">${item.judul}</a>`
+              : `<strong>${item.judul}</strong>`;
+            return `<li>${inner}${meta ? `<br><span style="font-size:0.82rem;color:#666;">${meta}</span>` : ''}</li>`;
+          }).join('')}
+        </ul>`;
+    }
+
+    async function fetchPenelitian() {
+      renderPenelitianSkeleton();
+      try {
+        const res  = await fetch(`${CMS_BASE_URL}/pengajar/${pengajarId}/penelitian`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        renderPenelitianData(data);
+      } catch (err) {
+        console.warn('Penelitian CMS fetch failed, using fallback data.', err);
+        // ── Fallback placeholder data (remove when CMS is live) ──
+        renderPenelitianData([
+          { judul: 'Judul Penelitian Pertama', tahun: '2024', peran: 'Ketua', sumber: 'Internal UPH' },
+          { judul: 'Judul PKM Kedua', tahun: '2023', peran: 'Anggota', sumber: 'DIKTI' },
+        ]);
+      }
+    }
+
+    // Fetch when the tab is first opened (lazy — saves a request if user never opens it)
+    const penelitianTab = document.querySelector('[data-tab="penelitian"]');
+    let penelitianLoaded = false;
+    penelitianTab.addEventListener('click', () => {
+      if (!penelitianLoaded) {
+        penelitianLoaded = true;
+        fetchPenelitian();
+      }
+    });
+  </script>
+
+>>>>>>> a44f9c6d95b06a69d979d1df06982f71acab33f1
 </body>
 </html>
