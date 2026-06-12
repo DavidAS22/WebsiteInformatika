@@ -632,7 +632,7 @@
     // "foto" and "slug" are optional — a fallback image is used if foto is missing,
     // and the card links to info-pengajar.html?id=<slug> if slug is present.
     // ════════════════════════════════════════════════
-    const CMS_PENGAJAR_URL = 'https://YOUR-CMS-DOMAIN/api/pengajar';
+    const CMS_PENGAJAR_URL = 'https://uph-informatika-backend.vercel.app/api/lecturer';
 
     const carousel = document.getElementById('pengajarCarousel');
     const wrapper  = carousel.parentElement;
@@ -686,10 +686,10 @@
         card.innerHTML = `
           <a href="${href}" style="text-decoration:none;color:inherit;">
             <div class="pengajar__card-image">
-              <img src="${foto}" alt="${item.nama}" onerror="this.src='images/pengajar.png'" />
+              <img src="${foto}" alt="${item.fullName}" onerror="this.src='images/pengajar.png'" />
             </div>
-            <p class="pengajar__card-name">${item.nama}</p>
-            <p class="pengajar__card-jabatan">${item.jabatan}</p>
+            <p class="pengajar__card-name">${item.fullName}</p>
+            <p class="pengajar__card-jabatan">${item.jja}</p>
           </a>`;
         carousel.appendChild(card);
       });
