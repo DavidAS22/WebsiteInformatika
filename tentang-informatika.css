@@ -1,0 +1,156 @@
+/* ═══════════════════════════════════════════════════════════
+   tentang-informatika.css
+   Styles specific to the Tentang Informatika UPH inner page.
+   Imports shared design tokens via CSS variables — make sure
+   this file is loaded AFTER style.css so the :root variables
+   (--navy, --orange, --white, --font-main, etc.) are already
+   declared.
+═══════════════════════════════════════════════════════════ */
+
+/* ── Page wrapper ── */
+.page-main {
+  min-height: 60vh;
+  background: #ffffff;
+}
+
+/* ── Page title (no background image) ── */
+.page-hero {
+  background: none;
+  min-height: unset;
+  display: block;
+  padding: 0;
+}
+
+.page-hero__title {
+  display: none;
+}
+
+/* ═══════════════════════════════════════
+   TENTANG SECTION — "Tentang Kami" block
+═══════════════════════════════════════ */
+.tentang-section {
+  padding: 56px 40px 72px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Section heading */
+.tentang-section__heading {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Body text block — centered text, constrained width */
+.tentang-section__body {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.95rem;
+  color: #222222;
+  line-height: 1.8;
+  text-align: center;
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto 40px;
+}
+
+.tentang-section__body p + p {
+  margin-top: 0;
+}
+
+/* Image — centered, ~60% page width, no rounded corners, no shadow */
+.tentang-section__image-wrap {
+  width: 60%;
+  max-width: 520px;
+  overflow: hidden;
+}
+
+.tentang-section__image-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ═══════════════════════════════════════
+   TABLET  (≤ 1024px)
+═══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .tentang-section {
+    padding: 48px 32px 60px;
+  }
+
+  .tentang-section__heading {
+    font-size: 1.6rem;
+  }
+
+  .tentang-section__image-wrap {
+    width: 70%;
+  }
+
+  .page-hero {
+    padding: 0 40px 40px;
+  }
+
+  .page-hero__title {
+    font-size: 2rem;
+  }
+}
+
+/* ═══════════════════════════════════════
+   MOBILE  (≤ 768px)
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .page-hero {
+    min-height: 180px;
+    padding: 0 24px 32px;
+  }
+
+  .page-hero__title {
+    font-size: 1.6rem;
+  }
+
+  .tentang-section {
+    padding: 36px 24px 48px;
+  }
+
+  .tentang-section__heading {
+    font-size: 1.4rem;
+  }
+
+  .tentang-section__body {
+    font-size: 0.9rem;
+    max-width: 100%;
+    margin-bottom: 28px;
+  }
+
+  .tentang-section__image-wrap {
+    width: 90%;
+  }
+}
+
+/* ═══════════════════════════════════════
+   SMALL MOBILE  (≤ 480px)
+═══════════════════════════════════════ */
+@media (max-width: 480px) {
+  .tentang-section {
+    padding: 28px 16px 40px;
+  }
+
+  .tentang-section__heading {
+    font-size: 1.25rem;
+  }
+
+  .tentang-section__body {
+    font-size: 0.875rem;
+  }
+
+  .tentang-section__image-wrap {
+    width: 100%;
+  }
+}
