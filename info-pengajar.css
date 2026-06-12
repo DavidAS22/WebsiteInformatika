@@ -1,0 +1,251 @@
+/* ═══════════════════════════════════════════════════════
+   INFO-PENGAJAR.CSS
+   Requires style.css (base variables + navbar + footer).
+═══════════════════════════════════════════════════════ */
+
+main {
+  background: #f0f2f5;
+  min-height: 60vh;
+}
+
+/* ════════════════════════════════════
+   HERO — full-bleed
+════════════════════════════════════ */
+.info-pengajar__hero {
+  background: linear-gradient(135deg, #1a2a5e 0%, #3b3580 55%, #6b4fa0 100%);
+  width: 100%;
+}
+
+.info-pengajar__hero-inner {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 40px 100px 36px;
+  display: flex;
+  align-items: flex-end;
+  gap: 36px;
+}
+
+/* Photo */
+.info-pengajar__photo-wrap {
+  flex-shrink: 0;
+  width: 150px;
+  height: 185px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.15);
+}
+
+.info-pengajar__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+/* Identity */
+.info-pengajar__identity {
+  color: #fff;
+  flex: 1;
+  padding-bottom: 4px;
+}
+
+.info-pengajar__name {
+  font-family: var(--font-main);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.info-pengajar__jabatan {
+  font-size: 0.95rem;
+  font-style: italic;
+  opacity: 0.85;
+  margin-bottom: 16px;
+}
+
+.info-pengajar__divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.35);
+  margin-bottom: 16px;
+}
+
+.info-pengajar__contact {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-pengajar__contact li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.info-pengajar__icon {
+  font-size: 1rem;
+  opacity: 0.9;
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════
+   TABS + CONTENT — full width, no max-width
+════════════════════════════════════ */
+.info-pengajar {
+  width: 100%;
+  padding: 0;
+}
+
+/* ════════════════════════════════════
+   TAB NAV — full width, buttons spread evenly
+════════════════════════════════════ */
+.info-pengajar__tabs {
+  background: #fff;
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid #e5e7eb;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: none;
+  padding: 0 100px;
+}
+
+.info-pengajar__tabs::-webkit-scrollbar { display: none; }
+
+.ip-tab {
+  flex: 1;                   /* spread evenly across full width */
+  background: none;
+  border: none;
+  padding: 18px 12px;
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.ip-tab:hover { color: var(--navy); }
+
+.ip-tab--active {
+  color: var(--navy);
+  font-weight: 700;
+  border-bottom-color: transparent;
+  position: relative;
+}
+
+.ip-tab--active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(to right, var(--navy), var(--orange));
+  border-radius: 4px 4px 0 0;
+  z-index: 1;
+}
+
+/* ════════════════════════════════════
+   TAB CONTENT — full width white
+════════════════════════════════════ */
+.info-pengajar__content {
+  background: #fff;
+  width: 100%;
+  padding: 40px 100px;
+  min-height: 300px;
+}
+
+/* ════════════════════════════════════
+   PANELS
+════════════════════════════════════ */
+.ip-panel { display: none; }
+.ip-panel--active { display: block; }
+
+/* ════════════════════════════════════
+   CONTENT SECTIONS
+════════════════════════════════════ */
+.ip-section {
+  margin-bottom: 32px;
+  max-width: 960px;
+}
+
+.ip-section__title {
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: 0.03em;
+  margin-bottom: 10px;
+}
+
+.ip-section__body {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #333;
+}
+
+.ip-section__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ip-section__list li {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #333;
+  padding-left: 22px;
+  position: relative;
+}
+
+.ip-section__list li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+  font-size: 0.6rem;
+  top: 5px;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+@media (max-width: 900px) {
+  .info-pengajar__hero-inner {
+    padding: 28px 28px 28px;
+  }
+  .info-pengajar__content {
+    padding: 28px 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .info-pengajar__hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px 20px;
+    gap: 16px;
+  }
+  .info-pengajar__photo-wrap {
+    width: 110px;
+    height: 140px;
+  }
+  .info-pengajar__name { font-size: 1.4rem; }
+  .info-pengajar__content { padding: 24px 20px; }
+  .ip-tab {
+    flex: 0 0 auto;
+    padding: 14px 14px;
+    font-size: 0.82rem;
+  }
+}

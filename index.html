@@ -265,55 +265,11 @@
       <a class="pengajar__btn" href="pengajar.html">BACA SELENGKAPNYA <span>&rarr;</span></a>
     </div>
 
-    <!-- Right: carousel -->
+    <!-- Right: carousel — populated by CMS API -->
     <div class="pengajar__carousel-wrapper">
       <div class="pengajar__carousel" id="pengajarCarousel">
 
-        <!-- CARD 1 — replace src with actual photo -->
-        <div class="pengajar__card">
-          <div class="pengajar__card-image">
-            <img src="images/pengajar.png" alt="Nama Dosen 1" />
-          </div>
-          <p class="pengajar__card-name">Nama Dosen 1</p>
-          <p class="pengajar__card-jabatan">Jabatan</p>
-        </div>
-
-        <!-- CARD 2 -->
-        <div class="pengajar__card">
-          <div class="pengajar__card-image">
-            <img src="images/pengajar.png" alt="Nama Dosen 2" />
-          </div>
-          <p class="pengajar__card-name">Nama Dosen 2</p>
-          <p class="pengajar__card-jabatan">Jabatan</p>
-        </div>
-
-        <!-- CARD 3 -->
-        <div class="pengajar__card">
-          <div class="pengajar__card-image">
-            <img src="images/pengajar.png" alt="Nama Dosen 3" />
-          </div>
-          <p class="pengajar__card-name">Nama Dosen 3</p>
-          <p class="pengajar__card-jabatan">Jabatan</p>
-        </div>
-
-        <!-- CARD 4 -->
-        <div class="pengajar__card">
-          <div class="pengajar__card-image">
-            <img src="images/pengajar.png" alt="Nama Dosen 4" />
-          </div>
-          <p class="pengajar__card-name">Nama Dosen 4</p>
-          <p class="pengajar__card-jabatan">Jabatan</p>
-        </div>
-
-        <!-- CARD 5 -->
-        <div class="pengajar__card">
-          <div class="pengajar__card-image">
-            <img src="images/pengajar.png" alt="Nama Dosen 5" />
-          </div>
-          <p class="pengajar__card-name">Nama Dosen 5</p>
-          <p class="pengajar__card-jabatan">Jabatan</p>
-        </div>
-
+        <!-- Cards injected by fetchPengajar() -->
       </div><!-- /.pengajar__carousel -->
     </div><!-- /.pengajar__carousel-wrapper -->
 
@@ -327,7 +283,7 @@
     <!-- Header row -->
     <div class="berita__header">
       <h2 class="berita__heading">BERITA</h2>
-      <a class="berita__btn" href="berita.html">BACA BERITA LAINNYA &rarr;</a>
+      <a class="berita__btn" href="berita.html">BACA BERITA LAINNYA <span>&rarr;</span></a>
     </div>
 
     <!-- Grid: featured left + 3 small right -->
@@ -664,52 +620,119 @@
   </script>
 
   <script>
-    // ── Pengajar Drag-to-scroll Carousel ──
+    // ════════════════════════════════════════════════
+    // PENGAJAR — CMS Integration
+    // ════════════════════════════════════════════════
+    // REPLACE this URL with your actual CMS endpoint.
+    // Expected response shape:
+    // [
+    //   { "nama": "Dr. Budi Santoso", "jabatan": "Lektor Kepala", "foto": "images/budi.jpg", "slug": "budi-santoso" },
+    //   ...
+    // ]
+    // "foto" and "slug" are optional — a fallback image is used if foto is missing,
+    // and the card links to info-pengajar.html?id=<slug> if slug is present.
+    // ════════════════════════════════════════════════
+    const CMS_PENGAJAR_URL = 'https://YOUR-CMS-DOMAIN/api/pengajar';
+
     const carousel = document.getElementById('pengajarCarousel');
     const wrapper  = carousel.parentElement;
-    const cards    = carousel.querySelectorAll('.pengajar__card');
 
     function setCardWidths() {
+      const cards   = carousel.querySelectorAll('.pengajar__card');
       const visible = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 3;
       const cardWidth = wrapper.offsetWidth / visible;
       cards.forEach(c => { c.style.minWidth = cardWidth + 'px'; });
     }
 
-    let isDragging = false, startX = 0, scrollStart = 0;
+    function initDrag() {
+      let isDragging = false, startX = 0, scrollStart = 0;
 
-    wrapper.addEventListener('mousedown', e => {
-      isDragging  = true;
-      startX      = e.pageX;
-      scrollStart = wrapper.scrollLeft;
-      wrapper.style.cursor = 'grabbing';
-      e.preventDefault();
-    });
+      wrapper.addEventListener('mousedown', e => {
+        isDragging  = true;
+        startX      = e.pageX;
+        scrollStart = wrapper.scrollLeft;
+        wrapper.style.cursor = 'grabbing';
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        wrapper.scrollLeft = scrollStart - (e.pageX - startX);
+      });
+      document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        wrapper.style.cursor = 'grab';
+      });
 
-    document.addEventListener('mousemove', e => {
-      if (!isDragging) return;
-      wrapper.scrollLeft = scrollStart - (e.pageX - startX);
-    });
+      let touchStartX = 0, touchScrollStart = 0;
+      wrapper.addEventListener('touchstart', e => {
+        touchStartX      = e.touches[0].pageX;
+        touchScrollStart = wrapper.scrollLeft;
+      }, { passive: true });
+      wrapper.addEventListener('touchmove', e => {
+        wrapper.scrollLeft = touchScrollStart - (e.touches[0].pageX - touchStartX);
+      }, { passive: true });
 
-    document.addEventListener('mouseup', () => {
-      if (!isDragging) return;
-      isDragging = false;
       wrapper.style.cursor = 'grab';
-    });
+    }
 
-    let touchStartX = 0, touchScrollStart = 0;
+    function renderPengajarCards(data) {
+      carousel.innerHTML = '';
+      data.forEach(item => {
+        const href  = item.slug ? `info-pengajar.html?id=${item.slug}` : 'info-pengajar.html';
+        const foto  = item.foto || 'images/pengajar.png';
+        const card  = document.createElement('div');
+        card.className = 'pengajar__card';
+        card.innerHTML = `
+          <a href="${href}" style="text-decoration:none;color:inherit;">
+            <div class="pengajar__card-image">
+              <img src="${foto}" alt="${item.nama}" onerror="this.src='images/pengajar.png'" />
+            </div>
+            <p class="pengajar__card-name">${item.nama}</p>
+            <p class="pengajar__card-jabatan">${item.jabatan}</p>
+          </a>`;
+        carousel.appendChild(card);
+      });
+      setCardWidths();
+      window.addEventListener('resize', setCardWidths);
+    }
 
-    wrapper.addEventListener('touchstart', e => {
-      touchStartX      = e.touches[0].pageX;
-      touchScrollStart = wrapper.scrollLeft;
-    }, { passive: true });
+    function renderPengajarSkeleton(count = 5) {
+      carousel.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const card = document.createElement('div');
+        card.className = 'pengajar__card pengajar__card--skeleton';
+        card.innerHTML = `
+          <div class="pengajar__card-image pengajar__skeleton-img"></div>
+          <div class="pengajar__skeleton-line" style="width:70%;height:14px;margin:10px auto 6px;border-radius:4px;background:#ddd;"></div>
+          <div class="pengajar__skeleton-line" style="width:50%;height:11px;margin:0 auto;border-radius:4px;background:#ddd;"></div>`;
+        carousel.appendChild(card);
+      }
+      setCardWidths();
+    }
 
-    wrapper.addEventListener('touchmove', e => {
-      wrapper.scrollLeft = touchScrollStart - (e.touches[0].pageX - touchStartX);
-    }, { passive: true });
+    async function fetchPengajar() {
+      renderPengajarSkeleton();
+      try {
+        const res  = await fetch(CMS_PENGAJAR_URL);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        renderPengajarCards(data);
+      } catch (err) {
+        console.warn('Pengajar CMS fetch failed, using fallback data.', err);
+        // ── Fallback placeholder data (remove when CMS is live) ──
+        renderPengajarCards([
+          { nama: 'Nama Dosen 1', jabatan: 'Jabatan' },
+          { nama: 'Nama Dosen 2', jabatan: 'Jabatan' },
+          { nama: 'Nama Dosen 3', jabatan: 'Jabatan' },
+          { nama: 'Nama Dosen 4', jabatan: 'Jabatan' },
+          { nama: 'Nama Dosen 5', jabatan: 'Jabatan' },
+        ]);
+      }
+    }
 
-    window.addEventListener('resize', setCardWidths);
-    setCardWidths();
-    wrapper.style.cursor = 'grab';
+    initDrag();
+    fetchPengajar();
   </script>
 
   <script>

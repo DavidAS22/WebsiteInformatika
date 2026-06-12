@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Info Pengajar - S1 Informatika UPH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="info-pengajar.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════ -->
+  <header class="header">
+    <nav class="navbar">
+
+      <a class="navbar__logo" href="index.html">
+        <img src="images/logo_FAIDAS_BW.png" alt="UPH FAIDAS Informatika Logo" />
+      </a>
+
+      <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="navbar__right" id="navbarRight">
+
+        <ul class="navbar__nav">
+
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-tentang">
+              Tentang <span class="chevron"></span>
+            </a>
+            <div class="dropdown" id="dropdown-tentang">
+              <a class="dropdown__item" href="tentang-informatika.html">Tentang Informatika UPH</a>
+              <a class="dropdown__item" href="kata-sambutan.html">Kata Sambutan Kaprodi</a>
+              <a class="dropdown__item" href="sejarah-informatika.html">Sejarah Informatika UPH</a>
+              <a class="dropdown__item" href="struktur-organisasi.html">Struktur Organisasi</a>
+            </div>
+          </li>
+
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-akademik">
+              Akademik <span class="chevron"></span>
+            </a>
+            <div class="dropdown" id="dropdown-akademik">
+              <a class="dropdown__item" href="kurikulum.html">Kurikulum</a>
+              <a class="dropdown__item" href="pengajar.html">Pengajar</a>
+            </div>
+          </li>
+
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-riset">
+              Riset &amp; Inovasi <span class="chevron"></span>
+            </a>
+            <div class="dropdown" id="dropdown-riset">
+              <a class="dropdown__item" href="penelitian-pkm.html">Penelitian &amp; PKM</a>
+              <a class="dropdown__item" href="publikasi.html">Publikasi</a>
+            </div>
+          </li>
+
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-mahasiswa">
+              Mahasiswa <span class="chevron"></span>
+            </a>
+            <div class="dropdown" id="dropdown-mahasiswa">
+              <a class="dropdown__item" href="himpunan.html">Himpunan</a>
+              <a class="dropdown__item" href="informasi-lomba.html">Informasi Lomba</a>
+            </div>
+          </li>
+
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-berita">
+              Berita &amp; Agenda <span class="chevron"></span>
+            </a>
+            <div class="dropdown" id="dropdown-berita">
+              <a class="dropdown__item" href="berita.html">Berita</a>
+              <a class="dropdown__item" href="pengumuman.html">Pengumuman</a>
+              <a class="dropdown__item" href="event.html">Event</a>
+            </div>
+          </li>
+
+        </ul>
+
+        <a class="navbar__cta" href="#">Daftar<br>Sekarang</a>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       INFO PENGAJAR SECTION
+  ══════════════════════════════════════ -->
+  <main>
+
+    <!-- ── Hero: full-bleed, no max-width ── -->
+    <div class="info-pengajar__hero">
+      <div class="info-pengajar__hero-inner">
+
+        <div class="info-pengajar__photo-wrap">
+          <img
+            id="ipPhoto"
+            src="images/pengajar.png"
+            alt="Foto Pengajar"
+            class="info-pengajar__photo"
+          />
+        </div>
+
+        <div class="info-pengajar__identity">
+          <h1 class="info-pengajar__name" id="ipName">Memuat data...</h1>
+          <p class="info-pengajar__jabatan" id="ipJabatan">—</p>
+          <hr class="info-pengajar__divider" />
+          <ul class="info-pengajar__contact">
+            <li>
+              <span class="info-pengajar__icon">&#9993;</span>
+              <span id="ipEmail">—</span>
+            </li>
+            <li>
+              <span class="info-pengajar__icon">&#9679;</span>
+              <span id="ipAlamat">—</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Tabs + Content: centered ── -->
+    <section class="info-pengajar">
+
+      <!-- Tab Nav -->
+      <nav class="info-pengajar__tabs" id="ipTabs">
+        <button class="ip-tab ip-tab--active" data-tab="profil">Profil</button>
+        <button class="ip-tab" data-tab="mata-kuliah">Mata Kuliah</button>
+        <button class="ip-tab" data-tab="hibah">Hibah &amp; Proyek</button>
+        <button class="ip-tab" data-tab="penelitian">Penelitian/PKM</button>
+        <button class="ip-tab" data-tab="pengabdian">Pengabdian</button>
+        <button class="ip-tab" data-tab="hki">HKI/Paten</button>
+        <button class="ip-tab" data-tab="publikasi">Publikasi</button>
+      </nav>
+
+      <!-- Tab Content -->
+      <div class="info-pengajar__content">
+
+        <!-- PROFIL -->
+        <div class="ip-panel ip-panel--active" id="tab-profil">
+
+          <div class="ip-section">
+            <h2 class="ip-section__title">BIOGRAFI</h2>
+            <p class="ip-section__body">
+              Lorem ipsum dolore sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolore sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolore sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolore sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
+
+          <div class="ip-section">
+            <h2 class="ip-section__title">BIDANG KEAHLIAN</h2>
+            <p class="ip-section__body">Lorem ipsum dolore sit amet</p>
+          </div>
+
+          <div class="ip-section">
+            <h2 class="ip-section__title">RIWAYAT PENDIDIKAN</h2>
+            <ul class="ip-section__list">
+              <li>Jenjang Pendidikan (Sarjana/Magister/Doktor), Fakultas/Jurusan, Universitas, Negara, Tahun yyyy-yyyy</li>
+              <li>Jenjang Pendidikan (Sarjana/Magister/Doktor), Fakultas/Jurusan, Universitas, Negara, Tahun yyyy-yyyy</li>
+            </ul>
+          </div>
+
+          <div class="ip-section">
+            <h2 class="ip-section__title">KELOMPOK RISET</h2>
+            <p class="ip-section__body">Lorem ipsum dolore sit amet</p>
+          </div>
+
+        </div>
+
+        <!-- MATA KULIAH -->
+        <div class="ip-panel" id="tab-mata-kuliah">
+          <div class="ip-section">
+            <h2 class="ip-section__title">MATA KULIAH YANG DIAMPU</h2>
+            <p class="ip-section__body">Konten mata kuliah akan ditampilkan di sini.</p>
+          </div>
+        </div>
+
+        <!-- HIBAH & PROYEK -->
+        <div class="ip-panel" id="tab-hibah">
+          <div class="ip-section">
+            <h2 class="ip-section__title">HIBAH &amp; PROYEK</h2>
+            <p class="ip-section__body">Konten hibah dan proyek akan ditampilkan di sini.</p>
+          </div>
+        </div>
+
+        <!-- PENELITIAN/PKM -->
+        <div class="ip-panel" id="tab-penelitian">
+          <div class="ip-section">
+            <h2 class="ip-section__title">PENELITIAN / PKM</h2>
+            <div id="penelitianContent">
+              <!-- Populated by fetchPenelitian() -->
+            </div>
+          </div>
+        </div>
+
+        <!-- PENGABDIAN -->
+        <div class="ip-panel" id="tab-pengabdian">
+          <div class="ip-section">
+            <h2 class="ip-section__title">PENGABDIAN</h2>
+            <p class="ip-section__body">Konten pengabdian akan ditampilkan di sini.</p>
+          </div>
+        </div>
+
+        <!-- HKI/PATEN -->
+        <div class="ip-panel" id="tab-hki">
+          <div class="ip-section">
+            <h2 class="ip-section__title">HKI / PATEN</h2>
+            <p class="ip-section__body">Konten HKI dan paten akan ditampilkan di sini.</p>
+          </div>
+        </div>
+
+        <!-- PUBLIKASI -->
+        <div class="ip-panel" id="tab-publikasi">
+          <div class="ip-section">
+            <h2 class="ip-section__title">PUBLIKASI</h2>
+            <p class="ip-section__body">Konten publikasi akan ditampilkan di sini.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="footer">
+
+    <div class="footer__main">
+
+      <div class="footer__brand">
+        <p class="footer__brand-title">Program Studi</p>
+        <p class="footer__brand-name">Informatika</p>
+        <img src="images/logo_IF.png" alt="IF Logo" style="width:170px;" />
+      </div>
+
+      <div>
+        <p class="footer__col-title">Akademik</p>
+        <ul class="footer__links">
+          <li><a href="kurikulum.html">Kurikulum</a></li>
+          <li><a href="pengajar.html">Pengajar</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer__col-title">Riset &amp; Inovasi</p>
+        <ul class="footer__links">
+          <li><a href="penelitian-pkm.html">Penelitian &amp; PKM</a></li>
+          <li><a href="publikasi.html">Publikasi</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer__col-title">Mahasiswa</p>
+        <ul class="footer__links">
+          <li><a href="himpunan.html">Himpunan</a></li>
+          <li><a href="informasi-lomba.html">Informasi Lomba</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer__col-title">Berita &amp; Agenda</p>
+        <ul class="footer__links">
+          <li><a href="berita.html">Berita</a></li>
+          <li><a href="pengumuman.html">Pengumuman</a></li>
+          <li><a href="event.html">Event</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom-info">
+      <div class="footer__spacer"></div>
+      <div class="footer__contact-group">
+        <p>WhatsApp : +62 8xx xxxx xxxx</p>
+        <p>E-mail : informatika@uph.edu</p>
+        <p>Instagram : @informatics.uph</p>
+      </div>
+      <div>
+        <p class="footer__address-title">Alamat</p>
+        <p class="footer__address-text">
+          Menara Matahari Lt.16, FAIDAS Office<br>
+          Jl. M. H. Thamrin Boulevard 1100<br>
+          Lippo Village Tangerang 15811<br>
+          Indonesia
+        </p>
+      </div>
+    </div>
+
+    <div class="footer__copyright">
+      &copy; Copyright 2026 Program Studi S1 Informatika Universitas Pelita Harapan. All Rights Reserved
+    </div>
+
+  </footer>
+
+  <!-- Navbar JS (same as index) -->
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navRight  = document.getElementById('navbarRight');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = navRight.classList.toggle('is-open');
+      hamburger.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', e => {
+        if (window.innerWidth > 768) return;
+        e.preventDefault();
+        const targetId = link.getAttribute('data-dropdown');
+        const dropdown = document.getElementById(targetId);
+        const parentLi = link.closest('li');
+        const isActive = parentLi.classList.contains('mobile-open');
+        document.querySelectorAll('.navbar__nav li').forEach(li => li.classList.remove('mobile-open'));
+        if (!isActive) parentLi.classList.add('mobile-open');
+      });
+    });
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.navbar')) {
+        navRight.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', false);
+        document.querySelectorAll('.navbar__nav li').forEach(li => li.classList.remove('mobile-open'));
+      }
+    });
+  </script>
+
+  <!-- Tab JS -->
+  <script>
+    const tabs    = document.querySelectorAll('.ip-tab');
+    const panels  = document.querySelectorAll('.ip-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('ip-tab--active'));
+        panels.forEach(p => p.classList.remove('ip-panel--active'));
+        tab.classList.add('ip-tab--active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('ip-panel--active');
+      });
+    });
+  </script>
+
+  <!-- CMS: Hero (pengajar profile data) -->
+  <script>
+    // ════════════════════════════════════════════════
+    // HERO — CMS Integration
+    // ════════════════════════════════════════════════
+    // Reads ?id=<slug> from URL, fetches from:
+    //   CMS_BASE_URL/pengajar/<slug>
+    //
+    // Expected response shape:
+    // {
+    //   "slug"    : "budi-santoso",
+    //   "nama"    : "Dr. Budi Santoso, M.Kom.",
+    //   "jabatan" : "Lektor Kepala",
+    //   "email"   : "budi.santoso@uph.edu",
+    //   "alamat"  : "Gedung B Lt. 3, Kampus UPH",  // optional
+    //   "foto"    : "images/budi.jpg"               // optional
+    // }
+    // ════════════════════════════════════════════════
+    const CMS_BASE_URL = 'https://YOUR-CMS-DOMAIN/api';
+
+    const HERO_PLACEHOLDER = {
+      nama    : 'Nama Lengkap, Ph.D',
+      jabatan : 'Jabatan',
+      email   : 'email@uph.edu',
+      alamat  : 'Universitas Pelita Harapan',
+      foto    : 'images/pengajar.png',
+    };
+
+    function populateHero(data) {
+      document.getElementById('ipName').textContent   = data.nama    || '—';
+      document.getElementById('ipJabatan').textContent = data.jabatan || '—';
+      document.getElementById('ipEmail').textContent  = data.email   || '—';
+      document.getElementById('ipAlamat').textContent = data.alamat  || '—';
+      if (data.foto) {
+        const img = document.getElementById('ipPhoto');
+        img.src = data.foto;
+        img.alt = data.nama;
+      }
+      document.title = (data.nama || 'Pengajar') + ' - S1 Informatika UPH';
+    }
+
+    async function fetchHero() {
+      const slug = new URLSearchParams(window.location.search).get('id');
+      if (!slug) { populateHero(HERO_PLACEHOLDER); return; }
+      try {
+        const res  = await fetch(`${CMS_BASE_URL}/pengajar/${slug}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        populateHero(data);
+      } catch (err) {
+        console.warn('Hero CMS fetch failed, using fallback.', err);
+        populateHero(HERO_PLACEHOLDER);
+      }
+    }
+
+    fetchHero();
+  </script>
+
+  <!-- CMS: Penelitian/PKM Tab -->
+  <script>
+    // ════════════════════════════════════════════════
+    // PENELITIAN/PKM — CMS Integration
+    // ════════════════════════════════════════════════
+    // Read the lecturer ID from the URL: ?id=<slug>
+    // REPLACE the base URL with your actual CMS endpoint.
+    // Expected response shape:
+    // [
+    //   {
+    //     "judul"  : "Judul penelitian atau PKM",
+    //     "tahun"  : "2023",
+    //     "peran"  : "Ketua",           // optional
+    //     "sumber" : "DIKTI",           // optional — funding source
+    //     "url"    : "https://..."      // optional — link to paper/report
+    //   },
+    //   ...
+    // ]
+    // ════════════════════════════════════════════════
+    const CMS_BASE_URL = 'https://YOUR-CMS-DOMAIN/api';
+
+    const pengajarId = new URLSearchParams(window.location.search).get('id') || 'unknown';
+
+    const penelitianEl = document.getElementById('penelitianContent');
+
+    function renderPenelitianSkeleton() {
+      penelitianEl.innerHTML = `
+        <ul class="ip-section__list ip-skeleton-list">
+          ${[1,2,3].map(() => `
+            <li style="list-style:none;padding-left:0;">
+              <div style="height:13px;width:80%;background:#e0e0e0;border-radius:4px;margin-bottom:6px;"></div>
+              <div style="height:11px;width:40%;background:#e8e8e8;border-radius:4px;"></div>
+            </li>`).join('')}
+        </ul>`;
+    }
+
+    function renderPenelitianData(items) {
+      if (!items.length) {
+        penelitianEl.innerHTML = '<p class="ip-section__body" style="color:#888;">Belum ada data penelitian/PKM.</p>';
+        return;
+      }
+      penelitianEl.innerHTML = `
+        <ul class="ip-section__list">
+          ${items.map(item => {
+            const meta = [item.tahun, item.peran, item.sumber].filter(Boolean).join(' · ');
+            const inner = item.url
+              ? `<a href="${item.url}" target="_blank" rel="noopener" style="color:var(--navy);font-weight:600;">${item.judul}</a>`
+              : `<strong>${item.judul}</strong>`;
+            return `<li>${inner}${meta ? `<br><span style="font-size:0.82rem;color:#666;">${meta}</span>` : ''}</li>`;
+          }).join('')}
+        </ul>`;
+    }
+
+    async function fetchPenelitian() {
+      renderPenelitianSkeleton();
+      try {
+        const res  = await fetch(`${CMS_BASE_URL}/pengajar/${pengajarId}/penelitian`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        renderPenelitianData(data);
+      } catch (err) {
+        console.warn('Penelitian CMS fetch failed, using fallback data.', err);
+        // ── Fallback placeholder data (remove when CMS is live) ──
+        renderPenelitianData([
+          { judul: 'Judul Penelitian Pertama', tahun: '2024', peran: 'Ketua', sumber: 'Internal UPH' },
+          { judul: 'Judul PKM Kedua', tahun: '2023', peran: 'Anggota', sumber: 'DIKTI' },
+        ]);
+      }
+    }
+
+    // Fetch when the tab is first opened (lazy — saves a request if user never opens it)
+    const penelitianTab = document.querySelector('[data-tab="penelitian"]');
+    let penelitianLoaded = false;
+    penelitianTab.addEventListener('click', () => {
+      if (!penelitianLoaded) {
+        penelitianLoaded = true;
+        fetchPenelitian();
+      }
+    });
+  </script>
+
+</body>
+</html>
