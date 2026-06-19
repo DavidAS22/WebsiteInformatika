@@ -6,6 +6,7 @@
   <title>Kurikulum - Program Studi S1 Informatika UPH</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="kurikulum.css" />
 </head>
 <body>
 
@@ -102,17 +103,61 @@
     </nav>
   </header>
 
-  <!-- ══════════════════════════════════════
-       PAGE CONTENT — KURIKULUM
-       Add your content here
-  ══════════════════════════════════════ -->
   <main class="page-main">
-    <div class="page-hero">
-      <h1 class="page-hero__title">Kurikulum</h1>
+
+    <div class="peminatan">
+      <h2 class="peminatan__title">Peminatan</h2>
+
+      <div class="peminatan__grid">
+
+        <a class="peminatan__card" href="#" data-panel="opsi-intelligent" data-title="Intelligent Systems" data-image="images/peminatan-intelligent.jpg" data-desc="Fokus pada pengembangan sistem komputer yang mampu meniru kecerdasan manusia, termasuk kecerdasan buatan (AI), machine learning, dan robotika.">
+          <img src="images/peminatan-intelligent.jpg" alt="Intelligent Systems" onerror="this.src='images/pengajar.png'" />
+          <div class="peminatan__card-overlay">
+            <span>Intelligent Systems</span>
+          </div>
+        </a>
+
+        <a class="peminatan__card" href="#" data-panel="opsi-software" data-title="Software Engineering" data-image="images/peminatan-software.jpg" data-desc="Mempelajari siklus hidup lengkap pembuatan aplikasi modern, mulai dari arsitektur, manajemen basis data berskala besar, hingga deployment sistem awan (Cloud).">
+          <img src="images/peminatan-software.jpg" alt="Software Engineering" onerror="this.src='images/pengajar.png'" />
+          <div class="peminatan__card-overlay">
+            <span>Software Engineering</span>
+          </div>
+        </a>
+
+        <a class="peminatan__card" href="#" data-panel="opsi-data" data-title="Data Science &amp; Analytics" data-image="images/peminatan-data.jpg" data-desc="Berfokus pada pengolahan, pembersihan, visualisasi, dan ekstraksi wawasan (insights) penting dari data mentah berukuran besar (Big Data) untuk kebutuhan bisnis.">
+          <img src="images/peminatan-data.jpg" alt="Data Science &amp; Analytics" onerror="this.src='images/pengajar.png'" />
+          <div class="peminatan__card-overlay">
+            <span>Data Science &amp; Analytics</span>
+          </div>
+        </a>
+
+      </div>
     </div>
-    <div class="page-content">
-      <p>Konten untuk halaman <strong>Kurikulum</strong> akan ditambahkan di sini.</p>
+
+    <!-- ── Peminatan Modal ── -->
+    <div class="peminatan-modal" id="peminatanModal">
+      <div class="peminatan-modal__backdrop" id="peminatanModalBackdrop"></div>
+      <div class="peminatan-modal__box">
+        <button class="peminatan-modal__close" id="peminatanModalClose" aria-label="Tutup">&times;</button>
+
+        <h3 class="peminatan-modal__title" id="peminatanModalTitle">Peminatan 1</h3>
+
+        <div class="peminatan-modal__body">
+          <div class="peminatan-modal__image">
+            <img id="peminatanModalImg" src="images/peminatan-intelligent.jpg" alt="" onerror="this.src='images/pengajar.png'" />
+          </div>
+          <div class="peminatan-modal__text">
+            <p id="peminatanModalDesc">
+              Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.
+            </p>
+            <a class="peminatan-modal__btn" id="peminatanModalLink" href="#">
+              BACA SELENGKAPNYA <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
+
   </main>
 
   <footer class="footer">
@@ -255,6 +300,58 @@
     });
   </script>
 
+  <script>
+    const peminatanCards   = document.querySelectorAll('.peminatan__card');
+    const modal            = document.getElementById('peminatanModal');
+    const modalBackdrop    = document.getElementById('peminatanModalBackdrop');
+    const modalClose       = document.getElementById('peminatanModalClose');
+    const modalTitle       = document.getElementById('peminatanModalTitle');
+    const modalImg         = document.getElementById('peminatanModalImg');
+    const modalDesc        = document.getElementById('peminatanModalDesc');
+    const modalLink        = document.getElementById('peminatanModalLink');
+
+    function openModal(card) {
+      modalTitle.innerHTML = card.dataset.title;
+      modalImg.src         = card.dataset.image;
+      modalImg.alt         = card.dataset.title;
+      modalDesc.textContent = card.dataset.desc;
+      modalLink.dataset.panel = card.dataset.panel;
+
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    peminatanCards.forEach(card => {
+      card.addEventListener('click', e => {
+        e.preventDefault();
+        openModal(card);
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+
+    // Navigate to detail page on click
+    modalLink.addEventListener('click', e => {
+      e.preventDefault();
+      const panelMap = {
+        'opsi-intelligent': 'intelligent-systems',
+        'opsi-software':    'software-engineering',
+        'opsi-data':        'data-science',
+      };
+      const id = panelMap[modalLink.dataset.panel] || modalLink.dataset.panel;
+      window.location.href = 'peminatan-detail.html?id=' + id;
+    });
+  </script>
 
 </body>
 </html>

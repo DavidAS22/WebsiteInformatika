@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Penelitian & PKM - Program Studi S1 Informatika UPH</title>
+  <title>Kelompok Riset - Program Studi S1 Informatika UPH</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="penelitian-pkm.css" />
+  <link rel="stylesheet" href="research-group.css" />
 </head>
 <body>
 
@@ -66,135 +66,123 @@
 
   <main class="page-main">
 
-    <!-- ── HERO ── -->
-    <div class="page-hero pkm-hero">
-      <div class="pkm-hero__content">
-        <h1 class="pkm-hero__title">Penelitian &amp; PKM</h1>
-        <p class="pkm-hero__desc">
-          Program Studi Informatika UPH mendorong budaya riset dan inovasi yang berkelanjutan.
-          Melalui kelompok riset internal dan program kreativitas mahasiswa, kami menghasilkan
-          karya ilmiah yang berdampak nyata bagi masyarakat dan industri.
+    <!-- ══ HERO BANNER ══ -->
+    <div class="rg-hero">
+      <!-- Background image fills this div via CSS; swap per group -->
+      <div class="rg-hero__overlay"></div>
+      <div class="rg-hero__content">
+        <a class="rg-hero__back" href="penelitian-pkm.html">← Kembali ke Penelitian &amp; PKM</a>
+        <h1 class="rg-hero__title" id="rg-title">Intelligent Systems &amp; Data Science</h1>
+        <p class="rg-hero__desc" id="rg-desc">
+          Kelompok riset ini berfokus pada pengembangan sistem cerdas yang mampu belajar dari
+          data berskala besar. Riset kami mencakup algoritma machine learning, deep learning,
+          dan analitik data untuk mendukung pengambilan keputusan berbasis data di berbagai
+          sektor industri dan layanan publik.
         </p>
       </div>
     </div>
 
-    <!-- ── KELOMPOK RISET INTERNAL ── -->
-    <section class="pkm-section pkm-riset">
-      <div class="pkm-section__header">
-        <h2 class="pkm-section__title">Kelompok Riset Internal Kami</h2>
-        <div class="pkm-section__rule"></div>
-      </div>
+    <!-- ══ SUB-AREA ACCORDION ══ -->
+    <section class="rg-body">
 
-      <div class="pkm-riset__grid">
+      <h2 class="rg-subarea-heading">Sub-Area</h2>
 
-        <!-- Card 1 -->
-        <article class="riset-card">
-          <div class="riset-card__inner">
-            <h3 class="riset-card__title">Intelligent Systems &amp; Data Science</h3>
-            <p class="riset-card__desc">
-              Kelompok ini berfokus pada pengembangan sistem cerdas yang mampu belajar dari data
-              berskala besar. Riset mencakup algoritma machine learning, deep learning, dan
-              analitik data untuk mendukung pengambilan keputusan berbasis data.
+      <div class="rg-accordion" id="rgAccordion">
+
+        <!-- Item 1 -->
+        <div class="rg-accordion__item">
+          <button class="rg-accordion__trigger" aria-expanded="false">
+            <span class="rg-accordion__label">Machine Learning &amp; Computational Intelligence</span>
+            <span class="rg-accordion__icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="rg-accordion__panel">
+            <p class="rg-accordion__text">
+              Sub-area ini mendalami pengembangan algoritma pembelajaran mesin dan kecerdasan
+              komputasional yang memungkinkan sistem untuk belajar, beradaptasi, dan membuat
+              keputusan secara otomatis. Penelitian mencakup supervised, unsupervised, dan
+              reinforcement learning, serta metode optimasi berbasis evolusi dan swarm intelligence
+              yang diterapkan pada masalah nyata di industri dan sains.
             </p>
-            <div class="riset-card__sub-section">
-              <p class="riset-card__sub-label">Sub-Area</p>
-              <ul class="riset-card__sub-list">
-                <li>Machine Learning &amp; Computational Intelligence</li>
-                <li>Computer Vision &amp; Image Processing</li>
-                <li>Natural Language Processing</li>
-              </ul>
-            </div>
-            <div class="riset-card__ketua-section">
-              <p class="riset-card__ketua-label">Ketua Kelompok Riset</p>
-              <p class="riset-card__ketua-name">Dr. Lorem Ipsum, S.Kom., M.T.</p>
-            </div>
           </div>
-          <a class="riset-card__btn" href="research-group.html?group=intelligent-systems">
-            <span class="riset-card__btn-arrow">→</span>
-          </a>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="riset-card">
-          <div class="riset-card__inner">
-            <h3 class="riset-card__title">Cybersecurity &amp; Network Infrastructure</h3>
-            <p class="riset-card__desc">
-              Berfokus pada keamanan sistem informasi dan infrastruktur jaringan modern. Riset
-              mencakup kriptografi terapan, forensik digital, dan keamanan sistem terdistribusi
-              termasuk teknologi blockchain.
-            </p>
-            <div class="riset-card__sub-section">
-              <p class="riset-card__sub-label">Sub-Area</p>
-              <ul class="riset-card__sub-list">
-                <li>Network Security &amp; Cryptography</li>
-                <li>Digital Forensics &amp; Cyber Defense</li>
-                <li>Distributed Systems &amp; Blockchain</li>
-              </ul>
-            </div>
-            <div class="riset-card__ketua-section">
-              <p class="riset-card__ketua-label">Ketua Kelompok Riset</p>
-              <p class="riset-card__ketua-name">Dr. Dolor Sit, S.Kom., M.Cs.</p>
-            </div>
-          </div>
-          <a class="riset-card__btn" href="research-group.html?group=cybersecurity">
-            <span class="riset-card__btn-arrow">→</span>
-          </a>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="riset-card">
-          <div class="riset-card__inner">
-            <h3 class="riset-card__title">Software Engineering &amp; Interactive Technologies</h3>
-            <p class="riset-card__desc">
-              Mengeksplorasi rekayasa perangkat lunak modern serta interaksi manusia-komputer.
-              Riset mencakup pengembangan platform digital, desain antarmuka pengguna, dan
-              tren teknologi informasi terapan.
-            </p>
-            <div class="riset-card__sub-section">
-              <p class="riset-card__sub-label">Sub-Area</p>
-              <ul class="riset-card__sub-list">
-                <li>Software Arch. &amp; Platform Dev.</li>
-                <li>Human–Computer Interaction &amp; UX</li>
-                <li>Applied Inf. &amp; Digital Trend</li>
-              </ul>
-            </div>
-            <div class="riset-card__ketua-section">
-              <p class="riset-card__ketua-label">Ketua Kelompok Riset</p>
-              <p class="riset-card__ketua-name">Dr. Amet Consectetur, S.T., M.Kom.</p>
-            </div>
-          </div>
-          <a class="riset-card__btn" href="research-group.html?group=software-engineering">
-            <span class="riset-card__btn-arrow">→</span>
-          </a>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- ── PENELITIAN & PKM TERKINI ── -->
-    <section class="terkini-section">
-      <div class="terkini-header">
-        <h2 class="terkini-title">Penelitian &amp; PKM Terkini</h2>
-        <div class="terkini-filter">
-          <select class="terkini-filter__select" id="yearFilter">
-            <option value="">Filter Berdasarkan Tahun</option>
-          </select>
-          <span class="terkini-filter__chevron">▼</span>
         </div>
+
+        <!-- Item 2 -->
+        <div class="rg-accordion__item">
+          <button class="rg-accordion__trigger" aria-expanded="false">
+            <span class="rg-accordion__label">Computer Vision &amp; Image Processing</span>
+            <span class="rg-accordion__icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="rg-accordion__panel">
+            <p class="rg-accordion__text">
+              Berfokus pada kemampuan sistem komputer untuk memahami dan menginterpretasikan
+              konten visual dari dunia nyata. Riset meliputi deteksi dan pengenalan objek,
+              segmentasi citra, analisis video real-time, serta pengembangan model deep learning
+              berbasis konvolusi untuk berbagai aplikasi seperti pengawasan, medis, dan otomotif.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="rg-accordion__item">
+          <button class="rg-accordion__trigger" aria-expanded="false">
+            <span class="rg-accordion__label">Natural Language Processing</span>
+            <span class="rg-accordion__icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="rg-accordion__panel">
+            <p class="rg-accordion__text">
+              Meneliti cara komputer memahami, menganalisis, dan menghasilkan bahasa manusia.
+              Topik riset mencakup analisis sentimen, pemodelan bahasa besar (LLM), mesin
+              penerjemah, chatbot cerdas, dan ekstraksi informasi dari teks tidak terstruktur
+              dalam bahasa Indonesia maupun multibahasa untuk mendukung layanan digital nasional.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /.rg-accordion -->
+
+      <!-- Ketua kelompok -->
+      <div class="rg-ketua">
+        <p class="rg-ketua__label">Ketua Kelompok Riset</p>
+        <p class="rg-ketua__name">Dr. Lorem Ipsum, S.Kom., M.T.</p>
       </div>
 
-      <!-- List container -->
-      <div class="terkini-list" id="terkiniList">
-        <!-- Skeleton loaders -->
-        <div class="terkini-skeleton"></div>
-        <div class="terkini-skeleton"></div>
-        <div class="terkini-skeleton"></div>
-      </div>
+    </section><!-- /.rg-body -->
 
-      <!-- Pagination -->
-      <div class="terkini-pagination" id="terkiniPagination">
-        <button class="terkini-pagination__btn" id="prevBtn" disabled>←</button>
-        <button class="terkini-pagination__btn" id="nextBtn">→</button>
+    <!-- ══ PENELITIAN & PKM TERKINI (filtered to this group) ══ -->
+    <section class="rg-terkini">
+      <div class="rg-terkini__inner">
+        <div class="rg-terkini__header">
+          <h2 class="rg-terkini__title">Penelitian &amp; PKM Terkini</h2>
+          <div class="terkini-filter">
+            <select class="terkini-filter__select" id="yearFilter">
+              <option value="">Filter Berdasarkan Tahun</option>
+            </select>
+            <span class="terkini-filter__chevron">&#9660;</span>
+          </div>
+        </div>
+
+        <div class="terkini-list" id="terkiniList">
+          <div class="terkini-skeleton"></div>
+          <div class="terkini-skeleton"></div>
+          <div class="terkini-skeleton"></div>
+        </div>
+
+        <div class="terkini-pagination" id="terkiniPagination">
+          <button class="terkini-pagination__btn" id="prevBtn" disabled>&#8592;</button>
+          <button class="terkini-pagination__btn" id="nextBtn">&#8594;</button>
+        </div>
       </div>
     </section>
 
@@ -289,23 +277,59 @@
     });
   </script>
 
+  <!-- ── ACCORDION SCRIPT ── -->
+  <script>
+    document.querySelectorAll('.rg-accordion__trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item      = trigger.closest('.rg-accordion__item');
+        const panel     = item.querySelector('.rg-accordion__panel');
+        const isOpen    = item.classList.contains('is-open');
+
+        // Close all
+        document.querySelectorAll('.rg-accordion__item').forEach(i => {
+          i.classList.remove('is-open');
+          i.querySelector('.rg-accordion__trigger').setAttribute('aria-expanded', 'false');
+          const p = i.querySelector('.rg-accordion__panel');
+          p.style.maxHeight = null;
+        });
+
+        // Open clicked (if it was closed)
+        if (!isOpen) {
+          item.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+
+
   <!-- ── TERKINI SCRIPT ── -->
   <script>
-    const API_URL   = 'https://uph-informatika-backend.vercel.app/api/penelitian';
+    // Determine which research group this page represents
+    const GROUP_MAP = {
+      'intelligent-systems': 'Intelligent Systems & Data Science',
+      'cybersecurity':       'Cybersecurity & Network Infrastructure',
+      'software-engineering':'Software Engineering & Interactive Technologies',
+    };
+    const params      = new URLSearchParams(window.location.search);
+    const groupKey    = params.get('group') || 'intelligent-systems';
+    const groupLabel  = GROUP_MAP[groupKey] || GROUP_MAP['intelligent-systems'];
+
+    const API_URL  = 'https://uph-informatika-backend.vercel.app/api/penelitian';
     const PAGE_SIZE = 3;
 
     let allData      = [];
     let filteredData = [];
     let currentPage  = 1;
 
-    const listEl   = document.getElementById('terkiniList');
-    const prevBtn  = document.getElementById('prevBtn');
-    const nextBtn  = document.getElementById('nextBtn');
-    const yearSel  = document.getElementById('yearFilter');
+    const listEl  = document.getElementById('terkiniList');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const yearSel = document.getElementById('yearFilter');
 
-    /* ── helpers ── */
     function formatDate(dateStr) {
-      if (!dateStr) return '–';
+      if (!dateStr) return '-';
       const d = new Date(dateStr);
       return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
     }
@@ -314,40 +338,39 @@
       const isPKM = (type || '').toLowerCase() === 'pkm';
       const label = isPKM ? 'PKM' : 'Penelitian';
       const cls   = isPKM ? 'badge--pkm' : 'badge--penelitian';
-      return `<span class="terkini-badge ${cls}">${label}</span>`;
+      return '<span class="terkini-badge ' + cls + '">' + label + '</span>';
     }
 
     function statusBadge(status) {
       const isOngoing = (status || '').toLowerCase() === 'ongoing';
       const cls = isOngoing ? 'status--ongoing' : 'status--selesai';
-      return `<span class="terkini-status ${cls}">${status || '–'}</span>`;
+      const label = isOngoing ? 'Sedang Berjalan' : 'Selesai';
+      return '<span class="terkini-status ' + cls + '">' + label + '</span>';
     }
 
     function renderCards(data) {
       if (!data.length) {
-        listEl.innerHTML = '<p class="terkini-empty">Tidak ada data untuk tahun ini.</p>';
+        listEl.innerHTML = '<p class="terkini-empty">Tidak ada data untuk filter ini.</p>';
         return;
       }
       listEl.innerHTML = data.map(item => `
         <div class="terkini-card">
-          <div class="terkini-card__top">
-            <div class="terkini-card__meta-row">
-              ${typeBadge(item.researchType)}
+          <div class="terkini-card__header">
+            <div class="terkini-card__title-row">
+              <h3 class="terkini-card__title">${item.researchTitle || '-'}</h3>
               ${statusBadge(item.status)}
             </div>
-            <h3 class="terkini-card__title">${item.researchTitle || '–'}</h3>
-            <p class="terkini-card__meta">
-              <span>${(item.members || []).join(' · ')}</span>
-              &nbsp;·&nbsp;
-              <span>${item.researchGroupCategory || '–'}</span>
+            <p class="terkini-card__submeta">
+              Didanai oleh ${item.funders || '-'}
+              &nbsp;&ndash;&nbsp;
+              ${formatDate(item.researchStartDate)} &ndash; ${formatDate(item.researchEndDate)}
             </p>
-            <p class="terkini-card__dates">
-              ${formatDate(item.researchStartDate)} – ${formatDate(item.researchEndDate)}
-            </p>
+            <div class="terkini-card__divider"></div>
           </div>
-          <div class="terkini-card__bottom">
-            <span class="terkini-card__funder">Dana: ${item.funders || '–'}</span>
-          </div>
+          <p class="terkini-card__members">
+            ${(item.members || []).join('.  ')}
+            &nbsp;(nama anggotanya)
+          </p>
         </div>
       `).join('');
     }
@@ -380,13 +403,15 @@
       });
     }
 
-    /* ── fetch ── */
     async function loadData() {
       try {
         const res  = await fetch(API_URL);
         const json = await res.json();
-        allData = Array.isArray(json) ? json : (json.data || []);
-        // sort newest first by createdAt
+        const raw  = Array.isArray(json) ? json : (json.data || []);
+        // Filter to only this research group
+        allData = raw.filter(d =>
+          (d.researchGroupCategory || '').trim() === groupLabel.trim()
+        );
         allData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         populateYears(allData);
         filteredData = [...allData];

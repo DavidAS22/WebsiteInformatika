@@ -619,18 +619,9 @@
     });
   </script>
 
-  <script>
+<script>
     // ════════════════════════════════════════════════
-    // PENGAJAR — CMS Integration
-    // ════════════════════════════════════════════════
-    // REPLACE this URL with your actual CMS endpoint.
-    // Expected response shape:
-    // [
-    //   { "nama": "Dr. Budi Santoso", "jabatan": "Lektor Kepala", "foto": "images/budi.jpg", "slug": "budi-santoso" },
-    //   ...
-    // ]
-    // "foto" and "slug" are optional — a fallback image is used if foto is missing,
-    // and the card links to info-pengajar.html?id=<slug> if slug is present.
+    // PENGAJAR — CMS Integration (STRICT DRAG & CLICK FIX)
     // ════════════════════════════════════════════════
     const CMS_PENGAJAR_URL = 'https://uph-informatika-backend.vercel.app/api/lecturer';
 
@@ -645,42 +636,95 @@
     }
 
     function initDrag() {
-      let isDragging = false, startX = 0, scrollStart = 0;
+      let isDragging = false;
+      let startX = 0;
+      let scrollStart = 0;
+      let hasMoved = false;
+
+      // Disable HTML5 native image/link dragging so it doesn't break our script
+      carousel.addEventListener('dragstart', e => e.preventDefault());
 
       wrapper.addEventListener('mousedown', e => {
+        // Only trigger on left click
+        if (e.button !== 0) return; 
+        
         isDragging  = true;
+        hasMoved    = false;
         startX      = e.pageX;
         scrollStart = wrapper.scrollLeft;
         wrapper.style.cursor = 'grabbing';
-        e.preventDefault();
-      });
-      document.addEventListener('mousemove', e => {
-        if (!isDragging) return;
-        wrapper.scrollLeft = scrollStart - (e.pageX - startX);
-      });
-      document.addEventListener('mouseup', () => {
-        if (!isDragging) return;
-        isDragging = false;
-        wrapper.style.cursor = 'grab';
       });
 
+      // Listen to window/document instead of wrapper to capture smooth movement
+      document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        
+        const currentX = e.pageX;
+        const diffX = Math.abs(currentX - startX);
+
+        // Threshold: 5 pixels of movement confirms an intentional drag action
+        if (diffX > 5) {
+          hasMoved = true;
+          // Temporary safety lock: stop all internal link clicks during active dragging
+          carousel.style.pointerEvents = 'none';
+        }
+
+        wrapper.scrollLeft = scrollStart - (currentX - startX);
+      });
+
+      document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        
+        isDragging = false;
+        wrapper.style.cursor = 'grab';
+        
+        // Re-enable clicks safely in the next execution cycle
+        setTimeout(() => {
+          carousel.style.pointerEvents = 'auto';
+        }, 50);
+      });
+
+      // Double security layer: Catch and kill unintended accidental clicks
+      wrapper.addEventListener('click', e => {
+        if (hasMoved) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true); 
+
+      // Mobile Touch implementation
       let touchStartX = 0, touchScrollStart = 0;
       wrapper.addEventListener('touchstart', e => {
+        hasMoved         = false;
         touchStartX      = e.touches[0].pageX;
         touchScrollStart = wrapper.scrollLeft;
       }, { passive: true });
+
       wrapper.addEventListener('touchmove', e => {
-        wrapper.scrollLeft = touchScrollStart - (e.touches[0].pageX - touchStartX);
+        const currentX = e.touches[0].pageX;
+        if (Math.abs(currentX - touchStartX) > 5) {
+          hasMoved = true;
+          carousel.style.pointerEvents = 'none';
+        }
+        wrapper.scrollLeft = touchScrollStart - (currentX - touchStartX);
       }, { passive: true });
 
+      wrapper.addEventListener('touchend', () => {
+        setTimeout(() => {
+          carousel.style.pointerEvents = 'auto';
+        }, 50);
+      });
+      
       wrapper.style.cursor = 'grab';
     }
 
     function renderPengajarCards(data) {
       carousel.innerHTML = '';
       data.forEach(item => {
-        const href  = item.slug ? `info-pengajar.html?id=${item.slug}` : 'info-pengajar.html';
-        const foto  = item.foto || 'images/pengajar.png';
+        // PERBAIKAN: Mengirim nama lewat URL jika ID bermasalah
+        const href  = item.fullName ? `info-pengajar.html?name=${encodeURIComponent(item.fullName)}` : 'info-pengajar.html';
+        const foto  = item.lecturerImageUrl || 'images/pengajar.png'; 
+        
         const card  = document.createElement('div');
         card.className = 'pengajar__card';
         card.innerHTML = `
@@ -720,13 +764,12 @@
         renderPengajarCards(data);
       } catch (err) {
         console.warn('Pengajar CMS fetch failed, using fallback data.', err);
-        // ── Fallback placeholder data (remove when CMS is live) ──
         renderPengajarCards([
-          { nama: 'Nama Dosen 1', jabatan: 'Jabatan' },
-          { nama: 'Nama Dosen 2', jabatan: 'Jabatan' },
-          { nama: 'Nama Dosen 3', jabatan: 'Jabatan' },
-          { nama: 'Nama Dosen 4', jabatan: 'Jabatan' },
-          { nama: 'Nama Dosen 5', jabatan: 'Jabatan' },
+          { fullName: 'Nama Dosen 1', jja: 'Jabatan', lecturerImageUrl: 'images/pengajar.png' },
+          { fullName: 'Nama Dosen 2', jja: 'Jabatan', lecturerImageUrl: 'images/pengajar.png' },
+          { fullName: 'Nama Dosen 3', jja: 'Jabatan', lecturerImageUrl: 'images/pengajar.png' },
+          { fullName: 'Nama Dosen 4', jja: 'Jabatan', lecturerImageUrl: 'images/pengajar.png' },
+          { fullName: 'Nama Dosen 5', jja: 'Jabatan', lecturerImageUrl: 'images/pengajar.png' },
         ]);
       }
     }

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pengajar - Program Studi S1 Informatika UPH</title>
+  <title>Kurikulum - Program Studi S1 Informatika UPH</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="pengajar.css" />
+  <link rel="stylesheet" href="kurikulum-gemini.css" />
 </head>
 <body>
 
@@ -103,62 +103,100 @@
     </nav>
   </header>
 
-  <!-- ══════════════════════════════════════
-       PAGE CONTENT — PENGAJAR
-       Add your content here
-  ══════════════════════════════════════ -->
   <main class="page-main">
-    <div class="page-hero">
-      <h1 class="page-hero__title">Pengajar</h1>
+
+    <div class="kurikulum-hero">
+      <h1 class="kurikulum-hero__title">Kurikulum Informatika</h1>
+      <p class="kurikulum-hero__subtitle">Pilih peminatan studi yang sesuai dengan fokus karier masa depanmu.</p>
     </div>
 
-    <!-- ══════════════════════════════════════
-         STAF PENDIDIK SECTION
-    ══════════════════════════════════════ -->
-    <section class="staf">
-      <h2 class="staf__heading">Staf Pendidik</h2>
+    <div class="kurikulum-tabs">
+      <ul class="kurikulum-tabs__list" role="tablist">
+        <li class="kurikulum-tabs__item">
+          <button class="kurikulum-tabs__btn is-active" role="tab" data-panel="opsi-intelligent">Intelligent Systems</button>
+        </li>
+        <li class="kurikulum-tabs__item">
+          <button class="kurikulum-tabs__btn" role="tab" data-panel="opsi-software">Software Engineering</button>
+        </li>
+        <li class="kurikulum-tabs__item">
+          <button class="kurikulum-tabs__btn" role="tab" data-panel="opsi-data">Data Science &amp; Analytics</button>
+        </li>
+      </ul>
+    </div>
 
-      <!-- Search bar -->
-      <div class="staf__search-wrap">
-        <input
-          class="staf__search"
-          type="text"
-          id="stafSearch"
-          placeholder="Ketik nama dosen"
-          oninput="filterStaf()"
-        />
-        <span class="staf__search-icon">&#128269;</span>
+    <div class="kurikulum-content">
+
+      <div class="kurikulum-panel is-active" id="opsi-intelligent" role="tabpanel">
+        <h2 class="kurikulum-panel__heading">Intelligent Systems (Sistem Cerdas)</h2>
+        <p class="kurikulum-panel__desc">Fokus pada pengembangan sistem komputer yang mampu meniru kecerdasan manusia, termasuk kecerdasan buatan (AI), machine learning, dan robotika.</p>
+        
+        <div class="kurikulum-panel__grid">
+          <div class="kurikulum-card">
+            <span class="kurikulum-card__semester">Semester 5</span>
+            <h3 class="kurikulum-card__subject">Artificial Intelligence</h3>
+            <p class="kurikulum-card__details">3 SKS • Teori &amp; Praktikum</p>
+          </div>
+          <div class="kurikulum-card">
+            <span class="kurikulum-card__semester">Semester 6</span>
+            <h3 class="kurikulum-card__subject">Machine Learning &amp; Deep Learning</h3>
+            <p class="kurikulum-card__details">4 SKS • Proyek Basis Pengembangan</p>
+          </div>
+          <div class="kurikulum-card">
+            <span class="kurikulum-card__semester">Semester 7</span>
+            <h3 class="kurikulum-card__subject">Computer Vision &amp; Robotics</h3>
+            <p class="kurikulum-card__details">3 SKS • Pilihan Pemikiran Peminatan</p>
+          </div>
+        </div>
       </div>
 
-      <!--
-      ═══════════════════════════════════════════════════
-      CMS INTEGRATION POINT
-      ═══════════════════════════════════════════════════
-      To load from API:
-      1. Set STAF_API_URL below to your endpoint
-      2. Uncomment the fetch block in the <script> below
-      3. Comment out or remove the static cards in #stafGrid
+      <div class="kurikulum-panel" id="opsi-software" role="tabpanel">
+        <h2 class="kurikulum-panel__heading">Software Engineering (Rekayasa Perangkat Lunak)</h2>
+        <p class="kurikulum-panel__desc">Mempelajari siklus hidup lengkap pembuatan aplikasi modern, mulai dari arsitektur, manajemen basis data berskala besar, hingga deployment sistem awan (Cloud).</p>
+        
+        <div class="kurikulum-panel__grid">
+          <div class="kurikulum-card">
+            <span class="kurikulum-card__semester">Semester 5</span>
+            <h3 class="kurikulum-card__subject">Software Architecture &amp; Design Pattern</h3>
+            <p class="kurikulum-card__details">3 SKS • Pengembangan Berorientasi Objek</p>
+          </div>
+          <div class="kurikulum-card">
+            <span class="kurikulum-card__semester">Semester 6</span>
+            <h3 class="kurikulum-card__subject">Enterprise Database Systems</h3>
+            <p class="kurikulum-card__details">3 SKS • Optimasi &amp; Kueri Kompleks</p>
+          </div>
+          <div class="kurikulum-card">
+            <span class="kurikulum-card__semester">Semester 7</span>
+            <h3 class="kurikulum-card__subject">Cloud Computing &amp; DevOps</h3>
+            <p class="kurikulum-card__details">4 SKS • Implementasi Infrastruktur Modern</p>
+          </div>
+        </div>
+      </div>
 
-      Expected API response (array):
-      [
-        {
-          "nama":      "Dr. John Doe",
-          "email":     "john@uph.edu",
-          "foto":      "images/dosen_1.jpg",
-          "publikasi": 5,
-          "hki_paten": 2
-        },
-        ...
-      ]
-      ═══════════════════════════════════════════════════
-      -->
+      <div class="kurikulum-panel" id="opsi-data" role="tabpanel">
+        <h2 class="kurikulum-panel__heading">Data Science &amp; Analytics (Sains Data)</h2>
+        <p class="kurikulum-panel__desc">Berfokus pada pengolahan, pembersihan, visualisasi, dan ekstraksi wawasan (insights) penting dari data mentah berukuran besar (Big Data) untuk kebutuhan bisnis.</p>
+        
+        <div class="kurikulum-panel__grid">
+          <div class="kurikulum-card">
+            <span class="kurikulum-card__semester">Semester 5</span>
+            <h3 class="kurikulum-card__subject">Data Warehousing &amp; ETL</h3>
+            <p class="kurikulum-card__details">3 SKS • Integrasi Data Terstruktur</p>
+          </div>
+          <div class="kurikulum-card">
+            <span class="kurikulum-card__semester">Semester 6</span>
+            <h3 class="kurikulum-card__subject">Big Data Analytics</h3>
+            <p class="kurikulum-card__details">4 SKS • Hadoop &amp; Spark Ecosystem</p>
+          </div>
+          <div class="kurikulum-card">
+            <span class="kurikulum-card__semester">Semester 7</span>
+            <h3 class="kurikulum-card__subject">Data Visualization &amp; Storytelling</h3>
+            <p class="kurikulum-card__details">3 SKS • Dashboarding &amp; Analytics</p>
+          </div>
+        </div>
+      </div>
 
-      <!-- Card grid -->
-      <!-- Card grid — populated by CMS -->
-      <div class="staf__grid" id="stafGrid">
-        <!-- Cards injected by loadStaf() -->
-      </div><!-- /#stafGrid -->
-    </section>
+    </div>
+
   </main>
 
   <footer class="footer">
@@ -301,90 +339,21 @@
     });
   </script>
 
+  <script>
+    const kuriBtns = document.querySelectorAll('.kurikulum-tabs__btn');
+    const kuriPanels = document.querySelectorAll('.kurikulum-panel');
 
+    kuriBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        kuriBtns.forEach(b => b.classList.remove('is-active'));
+        kuriPanels.forEach(p => p.classList.remove('is-active'));
 
-<script>
-    // ══════════════════════════════════════
-    // STAF PENDIDIK — CMS INTEGRATION (UPDATED API)
-    // ══════════════════════════════════════
-    const STAF_API_URL = 'https://uph-informatika-backend.vercel.app/api/lecturer';
-
-    // Update data placeholder dengan properti baru sebagai cadangan jika API bermasalah
-    const STAF_PLACEHOLDER = [
-      { slug: 'dosen-1', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
-      { slug: 'dosen-2', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
-      { slug: 'dosen-3', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
-      { slug: 'dosen-4', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
-      { slug: 'dosen-5', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
-      { slug: 'dosen-6', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
-    ];
-
-    function renderSkeleton(count = 6) {
-      const grid = document.getElementById('stafGrid');
-      grid.innerHTML = Array.from({ length: count }).map(() => `
-        <div class="staf__card staf__card--skeleton" style="pointer-events:none;">
-          <div class="staf__card-photo" style="background:rgba(255,255,255,0.1);"></div>
-          <div class="staf__card-info" style="gap:8px;">
-            <div style="height:13px;width:70%;background:rgba(255,255,255,0.2);border-radius:4px;"></div>
-            <div style="height:11px;width:50%;background:rgba(255,255,255,0.15);border-radius:4px;"></div>
-            <div style="height:10px;width:40%;background:rgba(255,255,255,0.1);border-radius:4px;margin-top:auto;"></div>
-            <div style="height:10px;width:40%;background:rgba(255,255,255,0.1);border-radius:4px;"></div>
-          </div>
-        </div>`).join('');
-    }
-
-    function renderStaf(data) {
-      const grid = document.getElementById('stafGrid');
-      grid.innerHTML = data.map(item => {
-        const foto  = item.lecturerImageUrl || 'images/pengajar.png';
-        const nama  = item.fullName || 'Nama Lengkap';
-        
-        // PERBAIKAN: Mengirim nama lewat URL
-        const href  = item.fullName ? `info-pengajar.html?name=${encodeURIComponent(item.fullName)}` : 'info-pengajar.html';
-        
-        return `
-          <a class="staf__card" href="${href}" style="text-decoration:none;">
-            <div class="staf__card-photo">
-              <img src="${foto}" alt="${nama}" onerror="this.src='images/pengajar.png'" />
-            </div>
-            <div class="staf__card-info">
-              <p class="staf__card-name">${nama}</p>
-              <p class="staf__card-email">${item.email || ''}</p>
-              <div class="staf__card-stats">
-                <p>Publikasi : ${item.publikasi ?? 0}</p>
-                <p>HKI/Paten : ${item.hki_paten ?? 0}</p>
-              </div>
-            </div>
-          </a>`;
-      }).join('');
-    }
-    
-    async function loadStaf() {
-      renderSkeleton();
-      try {
-        const res  = await fetch(STAF_API_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        renderStaf(data);
-      } catch (err) {
-        console.warn('Staf CMS fetch failed, using fallback data.', err);
-        renderStaf(STAF_PLACEHOLDER);
-      }
-    }
-
-    // ── Search filter (Disinkronkan dengan variabel nama baru) ──
-    function filterStaf() {
-      const query = document.getElementById('stafSearch').value.toLowerCase();
-      document.querySelectorAll('.staf__card').forEach(card => {
-        const nameElement = card.querySelector('.staf__card-name');
-        if (nameElement) {
-          const name = nameElement.textContent.toLowerCase();
-          card.style.display = name.includes(query) ? '' : 'none';
-        }
+        btn.classList.add('is-active');
+        const targetId = btn.getAttribute('data-panel');
+        document.getElementById(targetId).classList.add('is-active');
       });
-    }
-
-    loadStaf();
+    });
   </script>
+
 </body>
 </html>

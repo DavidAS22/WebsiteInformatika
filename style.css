@@ -704,7 +704,8 @@ body {
 }
 
 .pengajar__card-image {
-  width: 100%;
+  width: 360px;
+  height: 480px;
   aspect-ratio: 3 / 4;
   border-radius: 12px;
   overflow: hidden;
@@ -724,6 +725,7 @@ body {
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--white);
+  padding-top: 8px; 
   text-align: center;
   font-style: italic;
 }
@@ -735,7 +737,7 @@ body {
   color: rgba(255,255,255,0.7);
   text-align: center;
   font-style: italic;
-  margin-top: -6px;
+  margin-top: 6px;
 }
 
 /* ── Tablet ── */

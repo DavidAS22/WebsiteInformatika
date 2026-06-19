@@ -1,0 +1,170 @@
+/* ═══════════════════════════════════════════════════════════
+   kurikulum.css — Fokus Gaya 3 Opsi Peminatan Kurikulum
+═══════════════════════════════════════════════════════════ */
+
+.kurikulum-hero {
+  background: linear-gradient(135deg, #1a2a5e 0%, #2d3a8c 100%);
+  padding: 60px 24px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.kurikulum-hero__title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.kurikulum-hero__subtitle {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ── Bar Tab Opsi ── */
+.kurikulum-tabs {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 80px; /* Menyesuaikan tinggi navbar */
+  z-index: 10;
+}
+
+.kurikulum-tabs__list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.kurikulum-tabs__item {
+  flex: 1;
+  max-width: 240px;
+}
+
+.kurikulum-tabs__btn {
+  width: 100%;
+  padding: 20px 12px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.kurikulum-tabs__btn:hover {
+  color: #1a2a5e;
+}
+
+.kurikulum-tabs__btn.is-active {
+  color: #e87722; /* Warna Oranye Aksen */
+  border-bottom-color: #e87722;
+}
+
+/* ── Panel Konten ── */
+.kurikulum-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.kurikulum-panel {
+  display: none;
+}
+
+.kurikulum-panel.is-active {
+  display: block;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.kurikulum-panel__heading {
+  font-size: 1.75rem;
+  color: #1a2a5e;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.kurikulum-panel__desc {
+  font-size: 1rem;
+  color: #475569;
+  line-height: 1.6;
+  max-width: 800px;
+  margin-bottom: 36px;
+}
+
+/* ── Grid Kartu Mata Kuliah Peminatan ── */
+.kurikulum-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.kurikulum-card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kurikulum-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(18, 32, 74, 0.1);
+  border-color: rgba(232, 119, 34, 0.3);
+}
+
+.kurikulum-card__semester {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #f1f5f9;
+  color: #1a2a5e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.kurikulum-card__subject {
+  font-size: 1.2rem;
+  color: #1a2a5e;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.kurikulum-card__details {
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsif Mobile ── */
+@media (max-width: 640px) {
+  .kurikulum-tabs__list {
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+  .kurikulum-tabs__btn {
+    padding: 16px 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  .kurikulum-hero__title {
+    font-size: 1.75rem;
+  }
+}

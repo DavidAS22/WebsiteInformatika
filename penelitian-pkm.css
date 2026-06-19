@@ -1,0 +1,455 @@
+/* ═══════════════════════════════════════════════════════
+   PENELITIAN & PKM — Page-specific styles
+   Depends on: style.css (tokens, navbar, footer, page-hero)
+═══════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────
+   HERO override
+─────────────────────────────────────── */
+.pkm-hero {
+  min-height: 320px;
+  align-items: flex-end;
+  padding: 0 72px 56px;
+}
+
+.pkm-hero__content { max-width: 640px; }
+
+.pkm-hero__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2.6rem;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.pkm-hero__desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.75;
+  font-weight: 500;
+}
+
+/* ──────────────────────────────────────
+   SHARED SECTION SHELL
+─────────────────────────────────────── */
+.pkm-section {
+  background: #ffffff;
+  padding: 72px 72px 80px;
+}
+
+.pkm-section__header { margin-bottom: 48px; }
+
+.pkm-section__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.9rem;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+
+.pkm-section__rule {
+  width: 56px;
+  height: 4px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+
+/* ──────────────────────────────────────
+   KELOMPOK RISET — 3-column card grid
+─────────────────────────────────────── */
+.pkm-riset__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.riset-card {
+  border: 1.5px solid #e2e6f0;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: box-shadow 0.22s, border-color 0.22s;
+  background: #ffffff;
+}
+
+.riset-card:hover {
+  box-shadow: 0 8px 32px rgba(26,42,94,0.12);
+  border-color: var(--orange);
+}
+
+.riset-card__inner {
+  padding: 28px 28px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.riset-card__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+.riset-card__desc {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+.riset-card__sub-label,
+.riset-card__ketua-label {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+.riset-card__sub-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.riset-card__sub-list li {
+  font-family: var(--font-body);
+  font-size: 0.83rem;
+  color: #444;
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.riset-card__sub-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+  font-weight: 700;
+}
+
+.riset-card__ketua-section { margin-top: 6px; padding-bottom: 4px; }
+
+.riset-card__ketua-name {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.riset-card__btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 18px 24px;
+  text-decoration: none;
+  border-top: 1.5px solid #e2e6f0;
+  margin-top: 20px;
+  transition: background 0.18s;
+}
+
+.riset-card:hover .riset-card__btn { background: #fff8f3; }
+
+.riset-card__btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid var(--orange);
+  color: var(--orange);
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: background 0.18s, color 0.18s;
+}
+
+.riset-card:hover .riset-card__btn-arrow {
+  background: var(--orange);
+  color: var(--white);
+}
+
+/* ──────────────────────────────────────
+   PENELITIAN & PKM TERKINI
+─────────────────────────────────────── */
+.terkini-section {
+  background: var(--navy);
+  padding: 64px 72px 80px;
+}
+
+/* Header row: title left, filter right */
+.terkini-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.terkini-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.9rem;
+  color: var(--white);
+}
+
+/* Filter dropdown */
+.terkini-filter {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.terkini-filter__select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: var(--font-main);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 10px 44px 10px 16px;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  min-width: 220px;
+}
+
+.terkini-filter__select option {
+  background: var(--navy-dark);
+  color: var(--white);
+}
+
+.terkini-filter__select:hover,
+.terkini-filter__select:focus {
+  border-color: var(--orange);
+  background: rgba(255,255,255,0.12);
+  outline: none;
+}
+
+.terkini-filter__chevron {
+  position: absolute;
+  right: 14px;
+  color: var(--white);
+  font-size: 0.7rem;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ── Card list ── */
+.terkini-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 200px;
+}
+
+/* Skeleton */
+.terkini-skeleton {
+  height: 120px;
+  border-radius: 12px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.06) 25%,
+    rgba(255,255,255,0.1) 50%,
+    rgba(255,255,255,0.06) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Individual terkini card ── */
+.terkini-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+.terkini-card:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(232,119,34,0.5);
+}
+
+.terkini-card__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Type badge */
+.terkini-badge {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.badge--penelitian {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.badge--pkm {
+  background: #2c3e7a;
+  color: #a8b8ff;
+  border: 1px solid rgba(168,184,255,0.4);
+}
+
+/* Status badge */
+.terkini-status {
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.status--ongoing {
+  background: rgba(34,197,94,0.15);
+  color: #4ade80;
+  border: 1px solid rgba(74,222,128,0.3);
+}
+
+.status--selesai {
+  background: rgba(148,163,184,0.15);
+  color: #94a3b8;
+  border: 1px solid rgba(148,163,184,0.3);
+}
+
+.terkini-card__title {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--white);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.terkini-card__meta {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+
+.terkini-card__dates {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+}
+
+.terkini-card__bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 12px;
+}
+
+.terkini-card__funder {
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* Empty / error */
+.terkini-empty {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  padding: 48px 0;
+}
+
+/* ── Pagination ── */
+.terkini-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.terkini-pagination__btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25);
+  background: transparent;
+  color: var(--white);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
+}
+
+.terkini-pagination__btn:not(:disabled):hover {
+  border-color: var(--orange);
+  background: var(--orange);
+  color: var(--white);
+}
+
+.terkini-pagination__btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — Tablet (≤ 1024px)
+════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .pkm-hero      { padding: 0 40px 48px; }
+  .pkm-section   { padding: 56px 40px 64px; }
+  .pkm-riset__grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .terkini-section { padding: 52px 40px 64px; }
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — Mobile (≤ 768px)
+════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .pkm-hero          { min-height: 260px; padding: 0 24px 40px; }
+  .pkm-hero__title   { font-size: 1.8rem; }
+  .pkm-hero__desc    { font-size: 0.88rem; }
+  .pkm-section       { padding: 40px 24px 48px; }
+  .pkm-section__title { font-size: 1.5rem; }
+  .pkm-riset__grid   { grid-template-columns: 1fr; }
+  .terkini-section   { padding: 40px 24px 56px; }
+  .terkini-title     { font-size: 1.4rem; }
+  .terkini-header    { flex-direction: column; align-items: flex-start; }
+  .terkini-filter__select { min-width: 0; width: 100%; }
+  .terkini-card      { padding: 18px 20px; }
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — Small mobile (≤ 480px)
+════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .terkini-card__meta { font-size: 0.78rem; }
+}

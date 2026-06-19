@@ -1,0 +1,524 @@
+/* ═══════════════════════════════════════════════════════
+   RESEARCH GROUP DETAIL — Page-specific styles
+   Depends on: style.css (tokens, navbar, footer)
+═══════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────
+   HERO BANNER
+─────────────────────────────────────── */
+.rg-hero {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 72px 52px;
+
+  /* Background image — swap this per research group page */
+  background: url('images/background_homepage.png') center / cover no-repeat;
+}
+
+/* Dark gradient overlay so text stays readable */
+.rg-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 32, 74, 0.55) 0%,
+    rgba(18, 32, 74, 0.88) 100%
+  );
+  pointer-events: none;
+}
+
+.rg-hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Back link */
+.rg-hero__back {
+  display: inline-flex;
+  align-self: center;
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.18s;
+  margin-bottom: 4px;
+}
+
+.rg-hero__back:hover { color: var(--orange); }
+
+/* Group name */
+.rg-hero__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: var(--white);
+  line-height: 1.15;
+  text-align: center;
+}
+
+/* Description */
+.rg-hero__desc {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.8;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ──────────────────────────────────────
+   BODY — white content area
+─────────────────────────────────────── */
+.rg-body {
+  background: #ffffff;
+  padding: 64px 72px 80px;
+  max-width: 860px;
+  margin: 0 auto;
+  width: 100%;
+  /* full width but content max-width centered */
+  box-sizing: border-box;
+}
+
+/* Wrap in a full-width white band */
+.page-main .rg-body {
+  max-width: 100%;
+  padding: 64px 0 80px;
+}
+
+/* Inner width limiter */
+.rg-body > * {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 72px;
+  padding-right: 72px;
+  box-sizing: border-box;
+}
+
+/* Sub-area heading */
+.rg-subarea-heading {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* ──────────────────────────────────────
+   ACCORDION
+─────────────────────────────────────── */
+.rg-accordion {
+  display: flex;
+  flex-direction: column;
+  border-top: 1.5px solid #e2e6f0;
+}
+
+.rg-accordion__item {
+  border-bottom: 1.5px solid #e2e6f0;
+}
+
+/* Trigger row */
+.rg-accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+}
+
+.rg-accordion__label {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--navy);
+  line-height: 1.4;
+  flex: 1;
+}
+
+/* Chevron icon */
+.rg-accordion__icon {
+  flex-shrink: 0;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  transition: transform 0.28s ease, color 0.18s;
+}
+
+.rg-accordion__item.is-open .rg-accordion__icon {
+  transform: rotate(180deg);
+  color: var(--orange);
+}
+
+.rg-accordion__item.is-open .rg-accordion__label {
+  color: var(--navy);
+}
+
+.rg-accordion__trigger:hover .rg-accordion__label {
+  color: var(--orange);
+}
+
+.rg-accordion__trigger:hover .rg-accordion__icon {
+  color: var(--orange);
+}
+
+/* Panel — collapsed by default, animated with max-height */
+.rg-accordion__panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.32s ease;
+}
+
+.rg-accordion__text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.8;
+  padding-bottom: 20px;
+}
+
+/* ──────────────────────────────────────
+   KETUA BLOCK
+─────────────────────────────────────── */
+.rg-ketua {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1.5px solid #e2e6f0;
+  text-align: center;
+}
+
+.rg-ketua__label {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.rg-ketua__name {
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 1rem;
+  color: #444;
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — Tablet (≤ 1024px)
+════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .rg-hero { padding: 0 40px 48px; }
+
+  .rg-body > * {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — Mobile (≤ 768px)
+════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .rg-hero {
+    min-height: 280px;
+    padding: 0 24px 40px;
+  }
+
+  .rg-hero__title  { font-size: 1.6rem; }
+  .rg-hero__desc   { font-size: 0.88rem; }
+
+  .rg-body > * {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .rg-body { padding: 48px 0 64px; }
+
+  .rg-subarea-heading { text-align: left; }
+  .rg-ketua           { text-align: left; }
+}
+
+/* ──────────────────────────────────────
+   TERKINI SECTION (filtered by group)
+─────────────────────────────────────── */
+.rg-terkini {
+  background: linear-gradient(160deg, var(--navy) 0%, #2a1a5e 60%, var(--orange) 150%);
+  padding: 64px 72px 80px;
+}
+
+.rg-terkini__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Header: title left, filter right */
+.rg-terkini__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.rg-terkini__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.9rem;
+  color: var(--white);
+  text-align: left;
+}
+
+/* Filter — reuse same tokens as penelitian-pkm page */
+.terkini-filter {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.terkini-filter__select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: var(--font-main);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 10px 44px 10px 16px;
+  cursor: pointer;
+  min-width: 220px;
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.terkini-filter__select option {
+  background: var(--navy-dark);
+  color: var(--white);
+}
+
+.terkini-filter__select:hover,
+.terkini-filter__select:focus {
+  border-color: var(--orange);
+  background: rgba(255,255,255,0.15);
+  outline: none;
+}
+
+.terkini-filter__chevron {
+  position: absolute;
+  right: 14px;
+  color: var(--white);
+  font-size: 0.7rem;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Card list */
+.terkini-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 160px;
+}
+
+/* Skeleton shimmer */
+.terkini-skeleton {
+  height: 110px;
+  border-radius: 12px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.06) 25%,
+    rgba(255,255,255,0.11) 50%,
+    rgba(255,255,255,0.06) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Individual card — white bg matching reference */
+.terkini-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  padding: 22px 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: box-shadow 0.18s;
+}
+
+.terkini-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+}
+
+/* Title row: title left, status badge right */
+.terkini-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.terkini-card__title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.terkini-card__title {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--navy);
+  line-height: 1.4;
+  margin: 0;
+  flex: 1;
+}
+
+/* Type badge (small, inline) */
+.terkini-badge {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge--penelitian {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.badge--pkm {
+  background: var(--navy);
+  color: rgba(255,255,255,0.9);
+}
+
+/* Status badge */
+.terkini-status {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  padding: 3px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.status--ongoing {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.status--selesai {
+  background: var(--navy);
+  color: rgba(255,255,255,0.9);
+}
+
+/* Funder / date row */
+.terkini-card__submeta {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--orange);
+  margin: 0;
+}
+
+/* Horizontal rule */
+.terkini-card__divider {
+  height: 1px;
+  background: #e2e6f0;
+  margin-top: 10px;
+}
+
+/* Members paragraph */
+.terkini-card__members {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: #444;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Empty / error state */
+.terkini-empty {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  padding: 48px 0;
+}
+
+/* Pagination */
+.terkini-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.terkini-pagination__btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.4);
+  background: transparent;
+  color: var(--white);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.terkini-pagination__btn:not(:disabled):hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,0.15);
+}
+
+.terkini-pagination__btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* ── Terkini responsive ── */
+@media (max-width: 1024px) {
+  .rg-terkini { padding: 52px 40px 64px; }
+}
+
+@media (max-width: 768px) {
+  .rg-terkini        { padding: 40px 24px 56px; }
+  .rg-terkini__title { font-size: 1.4rem; }
+  .rg-terkini__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .terkini-filter__select { min-width: 0; width: 100%; }
+  .terkini-card__title-row { flex-direction: column; gap: 8px; }
+}

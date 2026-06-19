@@ -1,0 +1,266 @@
+/* ═══════════════════════════════════════════════════════════
+   peminatan-detail.css
+═══════════════════════════════════════════════════════════ */
+
+.pd-main {
+  background: #ffffff;
+}
+
+/* ── Hero ── */
+.pd-hero {
+  border-bottom: 2px solid var(--orange);
+  padding: 48px 60px 40px;
+}
+
+.pd-hero__inner {
+  max-width: 900px;
+}
+
+.pd-hero__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+
+.pd-hero__desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.75;
+}
+
+/* ── Prospek Karir ── */
+.pd-karir {
+  border-bottom: 2px solid var(--orange);
+  padding: 40px 60px;
+}
+
+.pd-karir__inner {
+  max-width: 900px;
+}
+
+.pd-karir__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+
+.pd-karir__list {
+  list-style: disc;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pd-karir__list li {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ── Kurikulum ── */
+.pd-kurikulum {
+  padding: 40px 60px 64px;
+}
+
+.pd-kurikulum__inner {
+  max-width: 1000px;
+}
+
+.pd-kurikulum__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--navy);
+  margin-bottom: 24px;
+}
+
+/* ── Year Tabs ── */
+.pd-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #e0e3ee;
+  margin-bottom: 28px;
+}
+
+.pd-tab {
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #888;
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.pd-tab:hover {
+  color: var(--navy);
+}
+
+.pd-tab.is-active {
+  color: var(--orange);
+  border-bottom-color: var(--orange);
+}
+
+/* ── Semester Carousel ── */
+.pd-semester-stage {
+  overflow: hidden;
+}
+
+.pd-semester-track {
+  display: flex;
+  gap: 16px;
+}
+
+.pd-semester {
+  display: none;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.pd-semester.is-active {
+  display: block;
+  animation: pdFadeIn 0.25s ease;
+}
+
+@keyframes pdFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pd-semester__name {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+
+/* ── Mata Kuliah Table ── */
+.pd-matkul-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+}
+
+.pd-matkul-table thead tr {
+  background: #f4f6fb;
+}
+
+.pd-matkul-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--navy);
+  border-bottom: 2px solid #e0e3ee;
+}
+
+.pd-matkul-table th:last-child {
+  text-align: center;
+  width: 60px;
+}
+
+.pd-matkul-table td {
+  padding: 10px 14px;
+  color: #444;
+  border-bottom: 1px solid #eef0f6;
+}
+
+.pd-matkul-table td:last-child {
+  text-align: center;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.pd-matkul-table tbody tr:hover {
+  background: #fafbff;
+}
+
+/* ── Dots + Arrow Nav ── */
+.pd-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.pd-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.pd-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d0d5e8;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+  padding: 0;
+}
+
+.pd-dot.is-active {
+  background: var(--orange);
+  transform: scale(1.2);
+}
+
+.pd-nav__arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--navy);
+  background: none;
+  color: var(--navy);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  margin-left: 4px;
+}
+
+.pd-nav__arrow:hover {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .pd-hero, .pd-karir, .pd-kurikulum {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pd-hero, .pd-karir, .pd-kurikulum {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .pd-hero__title {
+    font-size: 1.5rem;
+  }
+  .pd-tabs {
+    overflow-x: auto;
+  }
+  .pd-tab {
+    padding: 10px 14px;
+    font-size: 0.82rem;
+  }
+}

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peminatan - Program Studi S1 Informatika UPH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="peminatan-detail.css" />
+</head>
+<body>
+
+  <header class="header">
+    <nav class="navbar">
+      <a class="navbar__logo" href="index.html">
+        <img src="images/logo_FAIDAS_BW.png" alt="UPH FAIDAS Informatika Logo" />
+      </a>
+      <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="navbar__right" id="navbarRight">
+        <ul class="navbar__nav">
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-tentang">Tentang <span class="chevron"></span></a>
+            <div class="dropdown" id="dropdown-tentang">
+              <a class="dropdown__item" href="tentang-informatika.html">Tentang Informatika UPH</a>
+              <a class="dropdown__item" href="kata-sambutan.html">Kata Sambutan Kaprodi</a>
+              <a class="dropdown__item" href="sejarah-informatika.html">Sejarah Informatika UPH</a>
+              <a class="dropdown__item" href="struktur-organisasi.html">Struktur Organisasi</a>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-akademik">Akademik <span class="chevron"></span></a>
+            <div class="dropdown" id="dropdown-akademik">
+              <a class="dropdown__item" href="kurikulum.html">Kurikulum</a>
+              <a class="dropdown__item" href="pengajar.html">Pengajar</a>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-riset">Riset &amp; Inovasi <span class="chevron"></span></a>
+            <div class="dropdown" id="dropdown-riset">
+              <a class="dropdown__item" href="penelitian-pkm.html">Penelitian &amp; PKM</a>
+              <a class="dropdown__item" href="publikasi.html">Publikasi</a>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-mahasiswa">Mahasiswa <span class="chevron"></span></a>
+            <div class="dropdown" id="dropdown-mahasiswa">
+              <a class="dropdown__item" href="himpunan.html">Himpunan</a>
+              <a class="dropdown__item" href="informasi-lomba.html">Informasi Lomba</a>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-berita">Berita &amp; Agenda <span class="chevron"></span></a>
+            <div class="dropdown" id="dropdown-berita">
+              <a class="dropdown__item" href="berita.html">Berita</a>
+              <a class="dropdown__item" href="pengumuman.html">Pengumuman</a>
+              <a class="dropdown__item" href="event.html">Event</a>
+            </div>
+          </li>
+        </ul>
+        <a class="navbar__cta" href="#">Daftar<br>Sekarang</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pd-main">
+
+    <!-- ── Hero / Nama Peminatan ── -->
+    <section class="pd-hero">
+      <div class="pd-hero__inner">
+        <h1 class="pd-hero__title" id="pdTitle">Nama Peminatan</h1>
+        <p class="pd-hero__desc" id="pdDesc">
+          Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.
+          Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.
+          Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Prospek Karir ── -->
+    <section class="pd-karir">
+      <div class="pd-karir__inner">
+        <h2 class="pd-karir__title">Prospek Karir</h2>
+        <ul class="pd-karir__list" id="pdKarirList">
+          <!-- Populated by JS -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Kurikulum ── -->
+    <section class="pd-kurikulum">
+      <div class="pd-kurikulum__inner">
+        <h2 class="pd-kurikulum__title">Kurikulum</h2>
+
+        <!-- Year tabs -->
+        <div class="pd-tabs" id="pdTabs">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Semester carousel -->
+        <div class="pd-semester-stage">
+          <div class="pd-semester-track" id="pdSemesterTrack">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Dots + arrow nav -->
+        <div class="pd-nav">
+          <div class="pd-dots" id="pdDots"></div>
+          <button class="pd-nav__arrow" id="pdNext" aria-label="Next">&rarr;</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__main">
+      <div class="footer__brand">
+        <p class="footer__brand-title">Program Studi</p>
+        <p class="footer__brand-name">Informatika</p>
+        <img src="images/logo_IF.png" alt="IF Logo" style="width:170px;" />
+      </div>
+      <div>
+        <p class="footer__col-title">Akademik</p>
+        <ul class="footer__links">
+          <li><a href="kurikulum.html">Kurikulum</a></li>
+          <li><a href="pengajar.html">Pengajar</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title">Riset &amp; Inovasi</p>
+        <ul class="footer__links">
+          <li><a href="penelitian-pkm.html">Penelitian &amp; PKM</a></li>
+          <li><a href="publikasi.html">Publikasi</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title">Mahasiswa</p>
+        <ul class="footer__links">
+          <li><a href="himpunan.html">Himpunan</a></li>
+          <li><a href="informasi-lomba.html">Informasi Lomba</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title">Berita &amp; Agenda</p>
+        <ul class="footer__links">
+          <li><a href="berita.html">Berita</a></li>
+          <li><a href="pengumuman.html">Pengumuman</a></li>
+          <li><a href="event.html">Event</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom-info">
+      <div class="footer__spacer"></div>
+      <div class="footer__contact-group">
+        <p>WhatsApp : +62 8xx xxxx xxxx</p>
+        <p>E-mail : informatika@uph.edu</p>
+        <p>Instagram : @informatics.uph</p>
+      </div>
+      <div>
+        <p class="footer__address-title">Alamat</p>
+        <p class="footer__address-text">
+          Menara Matahari Lt.16, FAIDAS Office<br>
+          Jl. M. H. Thamrin Boulevard 1100<br>
+          Lippo Village Tangerang 15811<br>
+          Indonesia
+        </p>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      &copy; Copyright 2026 Program Studi S1 Informatika Universitas Pelita Harapan. All Rights Reserved
+    </div>
+  </footer>
+
+  <!-- ── Navbar JS ── -->
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navRight  = document.getElementById('navbarRight');
+    hamburger.addEventListener('click', () => {
+      const isOpen = navRight.classList.toggle('is-open');
+      hamburger.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', e => {
+        if (window.innerWidth > 768) return;
+        e.preventDefault();
+        const parentLi = link.closest('li');
+        const isActive = parentLi.classList.contains('mobile-open');
+        document.querySelectorAll('.navbar__nav li').forEach(li => li.classList.remove('mobile-open'));
+        if (!isActive) parentLi.classList.add('mobile-open');
+      });
+    });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.navbar')) {
+        navRight.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', false);
+        document.querySelectorAll('.navbar__nav li').forEach(li => li.classList.remove('mobile-open'));
+      }
+    });
+  </script>
+
+  <!-- ── Page Content JS ── -->
+  <script>
+    // ═══════════════════════════════════════════════════════
+    // PEMINATAN DATA
+    // To add/edit content: update the objects below.
+    // Each peminatan has: title, desc, karir[], and
+    // tahun[] where each tahun has a label and semesters[].
+    // Each semester has a name and matkul[] (array of
+    // { nama, sks } objects).
+    // ═══════════════════════════════════════════════════════
+    const PEMINATAN_DATA = {
+      'intelligent-systems': {
+        title: 'Intelligent Systems',
+        desc:  'Fokus pada pengembangan sistem komputer yang mampu meniru kecerdasan manusia, termasuk kecerdasan buatan (AI), machine learning, dan robotika. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.',
+        karir: [
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+        ],
+        tahun: [
+          {
+            label: 'Tahun Pertama',
+            semesters: [
+              {
+                name: 'Semester 1',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+              {
+                name: 'Semester 2',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+              {
+                name: 'Semester 3',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+            ],
+          },
+          {
+            label: 'Tahun Kedua',
+            semesters: [
+              {
+                name: 'Semester 3',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+              {
+                name: 'Semester 4',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+            ],
+          },
+          {
+            label: 'Tahun Ketiga',
+            semesters: [
+              {
+                name: 'Semester 5',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+              {
+                name: 'Semester 6',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+            ],
+          },
+          {
+            label: 'Tahun Keempat',
+            semesters: [
+              {
+                name: 'Semester 7',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+              {
+                name: 'Semester 8',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 6 },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      'software-engineering': {
+        title: 'Software Engineering',
+        desc:  'Mempelajari siklus hidup lengkap pembuatan aplikasi modern, mulai dari arsitektur, manajemen basis data berskala besar, hingga deployment sistem awan (Cloud). Lorem ipsum dolore sit amet.',
+        karir: [
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+        ],
+        tahun: [
+          {
+            label: 'Tahun Pertama',
+            semesters: [
+              {
+                name: 'Semester 1',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+              {
+                name: 'Semester 2',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+            ],
+          },
+          {
+            label: 'Tahun Kedua',
+            semesters: [
+              {
+                name: 'Semester 3',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+              {
+                name: 'Semester 4',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      'data-science': {
+        title: 'Data Science & Analytics',
+        desc:  'Berfokus pada pengolahan, pembersihan, visualisasi, dan ekstraksi wawasan (insights) penting dari data mentah berukuran besar (Big Data) untuk kebutuhan bisnis. Lorem ipsum dolore sit amet.',
+        karir: [
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+          'Lorem ipsum dolore sit amet.',
+        ],
+        tahun: [
+          {
+            label: 'Tahun Pertama',
+            semesters: [
+              {
+                name: 'Semester 1',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+              {
+                name: 'Semester 2',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+            ],
+          },
+          {
+            label: 'Tahun Kedua',
+            semesters: [
+              {
+                name: 'Semester 3',
+                matkul: [
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    };
+
+    // ── State ──
+    let activeTahun   = 0;
+    let activeSem     = 0;  // index within current tahun's semesters
+
+    // ── Helpers ──
+    function getParam() {
+      return new URLSearchParams(window.location.search).get('id') || 'intelligent-systems';
+    }
+
+    function getData() {
+      return PEMINATAN_DATA[getParam()] || PEMINATAN_DATA['intelligent-systems'];
+    }
+
+    // ── Render ──
+    function renderPage() {
+      const data = getData();
+
+      // Hero
+      document.getElementById('pdTitle').textContent = data.title;
+      document.getElementById('pdDesc').textContent  = data.desc;
+      document.title = data.title + ' - Program Studi S1 Informatika UPH';
+
+      // Karir
+      document.getElementById('pdKarirList').innerHTML =
+        data.karir.map(k => `<li>${k}</li>`).join('');
+
+      renderTabs(data);
+      renderSemesters(data);
+    }
+
+    function renderTabs(data) {
+      const tabs = document.getElementById('pdTabs');
+      tabs.innerHTML = data.tahun.map((t, i) => `
+        <button class="pd-tab ${i === activeTahun ? 'is-active' : ''}" data-idx="${i}">
+          ${t.label}
+        </button>
+      `).join('');
+
+      tabs.querySelectorAll('.pd-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeTahun = parseInt(btn.dataset.idx);
+          activeSem   = 0;
+          renderTabs(data);
+          renderSemesters(data);
+        });
+      });
+    }
+
+    function renderSemesters(data) {
+      const tahun = data.tahun[activeTahun];
+      const track = document.getElementById('pdSemesterTrack');
+      const dots  = document.getElementById('pdDots');
+
+      track.innerHTML = tahun.semesters.map((sem, i) => `
+        <div class="pd-semester ${i === activeSem ? 'is-active' : ''}">
+          <h4 class="pd-semester__name">${sem.name}</h4>
+          <table class="pd-matkul-table">
+            <thead>
+              <tr><th>Mata Kuliah</th><th>SKS</th></tr>
+            </thead>
+            <tbody>
+              ${sem.matkul.map(m => `
+                <tr><td>${m.nama}</td><td>${m.sks}</td></tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `).join('');
+
+      // Dots
+      dots.innerHTML = tahun.semesters.map((_, i) => `
+        <button class="pd-dot ${i === activeSem ? 'is-active' : ''}" data-idx="${i}" aria-label="Semester ${i+1}"></button>
+      `).join('');
+
+      dots.querySelectorAll('.pd-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+          activeSem = parseInt(dot.dataset.idx);
+          renderSemesters(data);
+        });
+      });
+
+      // Next arrow
+      const nextBtn = document.getElementById('pdNext');
+      nextBtn.onclick = () => {
+        if (activeSem < tahun.semesters.length - 1) {
+          activeSem++;
+        } else if (activeTahun < data.tahun.length - 1) {
+          activeTahun++;
+          activeSem = 0;
+          renderTabs(data);
+        }
+        renderSemesters(data);
+      };
+    }
+
+    renderPage();
+  </script>
+
+</body>
+</html>
