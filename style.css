@@ -555,8 +555,8 @@ body {
 }
 
 .peminatan__card-btn:hover {
-  background: var(--navy);
-  color: var(--white);
+  background: var(--white);
+  color: var(--navy);
 }
 
 /* ── Tablet ── */

@@ -318,3 +318,148 @@
     padding: 24px 16px 40px;
   }
 }
+
+/* ═══════════════════════════════════════
+   PENELITIAN / PKM CARDS (panel-penelitian)
+═══════════════════════════════════════ */
+
+.pen-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Skeleton loader */
+.pen-skeleton {
+  height: 120px;
+  border-radius: 10px;
+  background: linear-gradient(90deg,
+    #f0f2f5 25%, #e4e7ee 50%, #f0f2f5 75%);
+  background-size: 200% 100%;
+  animation: penShimmer 1.4s infinite;
+}
+
+@keyframes penShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Card */
+.pen-card {
+  border: 1.5px solid #e2e6f0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.pen-card:hover {
+  box-shadow: 0 6px 24px rgba(26, 42, 94, 0.1);
+  border-color: var(--orange);
+}
+
+/* Header area */
+.pen-card__header {
+  padding: 18px 22px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pen-card__badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Badges */
+.pen-badge {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.pen-badge--penelitian { background: var(--orange);    color: #fff; }
+.pen-badge--pkm        { background: var(--navy);      color: rgba(255,255,255,0.9); }
+.pen-badge--ongoing    { background: #dcfce7;          color: #166534; }
+.pen-badge--selesai    { background: #f1f5f9;          color: #64748b; }
+
+/* Title */
+.pen-card__title {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--navy);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Research group category */
+.pen-card__meta {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--orange);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Divider */
+.pen-card__divider {
+  height: 1px;
+  background: #e8eaf0;
+  margin: 0 22px;
+}
+
+/* Body: detail rows */
+.pen-card__body {
+  padding: 14px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pen-card__detail {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.pen-card__detail-label {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.pen-card__detail-value {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* Empty / error state */
+.pen-empty {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #aaa;
+  text-align: center;
+  padding: 40px 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .pen-card__header { padding: 14px 16px 12px; }
+  .pen-card__divider { margin: 0 16px; }
+  .pen-card__body   { padding: 12px 16px 16px; }
+  .pen-card__detail { grid-template-columns: 88px 1fr; }
+}

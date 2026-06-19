@@ -6,6 +6,7 @@
   <title>Sejarah Informatika UPH - Program Studi S1 Informatika UPH</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="sejarah-informatika.css" />
 </head>
 <body>
 
@@ -107,12 +108,63 @@
        Add your content here
   ══════════════════════════════════════ -->
   <main class="page-main">
-    <div class="page-hero">
-      <h1 class="page-hero__title">Sejarah Informatika UPH</h1>
-    </div>
-    <div class="page-content">
-      <p>Konten untuk halaman <strong>Sejarah Informatika UPH</strong> akan ditambahkan di sini.</p>
-    </div>
+
+    <!-- ══════════════════════════════════════
+         SEJARAH SECTION
+    ══════════════════════════════════════ -->
+    <section class="sejarah">
+      <h1 class="sejarah__title">Sejarah Program Studi Informatika UPH</h1>
+
+      <div class="sejarah__body">
+        <div class="sejarah__image">
+          <img src="images/sejarah.jpg" alt="Sejarah Informatika UPH" />
+        </div>
+        <div class="sejarah__text">
+          <p>Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.</p>
+          <p>Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         KAPRODI TERDAHULU CAROUSEL
+    ══════════════════════════════════════ -->
+    <section class="kaprodi">
+      <h2 class="kaprodi__heading">Kaprodi Terdahulu</h2>
+
+      <div class="kaprodi__stage">
+        <div class="kaprodi__track" id="kaprodiTrack">
+          <!-- ADD / REMOVE / EDIT kaprodi here -->
+          <div class="kaprodi__slide" data-nama="Dipl.-Math. Petrus Widjaja" data-tahun="(1998 - 2003)">
+            <img src="images/kaprodi/petrus-widjaja.jpg" alt="Kaprodi 1" />
+          </div>
+          <div class="kaprodi__slide" data-nama="Dr. Sutrisno, S.E., M.Kom." data-tahun="(2003 - 2004)">
+            <img src="images/kaprodi/sutrisno.jpg" alt="Kaprodi 2" />
+          </div>
+          <div class="kaprodi__slide" data-nama="Dr. rer. nat. Toni Anwar" data-tahun="(2004 - 2005)">
+            <img src="images/kaprodi/toni-anwar.png" alt="Kaprodi 3" />
+          </div>
+          <div class="kaprodi__slide" data-nama="Prof. Dr. Ir. Samuel Lukas, M.Tech." data-tahun="(2005 - 2011)">
+            <img src="images/kaprodi/samuel-lukas.jpg" alt="Kaprodi 4" />
+          </div>
+          <div class="kaprodi__slide" data-nama="Irene Lazarusli S.Kom., M.T." data-tahun="(2011 - 2024)">
+            <img src="images/kaprodi/irene-lazarusli.jpg" alt="Kaprodi 5" />
+          </div>
+          <div class="kaprodi__slide" data-nama="Feliks Victor Parningotan Samosir, S.Pd., M.Kom." data-tahun="(2024 - 2026)">
+            <img src="images/kaprodi/feliks-samosir.jpg" alt="Kaprodi 6" />
+          </div>
+        </div>
+      </div>
+
+      <p class="kaprodi__name" id="kaprodiName">Nama Kaprodi</p>
+      <p class="kaprodi__years" id="kaprodiYears">(xxxx - xxxx)</p>
+
+      <div class="kaprodi__nav">
+        <button class="kaprodi__arrow" id="kaprodiPrev" aria-label="Sebelumnya">&larr;</button>
+        <button class="kaprodi__arrow" id="kaprodiNext" aria-label="Berikutnya">&rarr;</button>
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
@@ -256,5 +308,47 @@
   </script>
 
 
+
+  <script>
+    // ── Kaprodi Terdahulu Carousel ──
+    const kSlides = document.querySelectorAll('.kaprodi__slide');
+    const kName   = document.getElementById('kaprodiName');
+    const kYears  = document.getElementById('kaprodiYears');
+    const kPrev   = document.getElementById('kaprodiPrev');
+    const kNext   = document.getElementById('kaprodiNext');
+    let kActive = 0;
+
+    function updateKaprodi() {
+      kSlides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === kActive);
+      });
+      kName.textContent  = kSlides[kActive].dataset.nama;
+      kYears.textContent = kSlides[kActive].dataset.tahun;
+
+      // Center the active slide within the stage viewport.
+      const track = document.getElementById('kaprodiTrack');
+      const stage = track.parentElement;
+      const activeSlide = kSlides[kActive];
+
+      const stageCenter  = stage.clientWidth / 2;
+      const slideCenter  = activeSlide.offsetLeft + (activeSlide.offsetWidth / 2);
+
+      const offset = slideCenter - stageCenter;
+      track.style.transform = `translateX(${-offset}px)`;
+    }
+
+    kPrev.addEventListener('click', () => {
+      kActive = (kActive - 1 + kSlides.length) % kSlides.length;
+      updateKaprodi();
+    });
+
+    kNext.addEventListener('click', () => {
+      kActive = (kActive + 1) % kSlides.length;
+      updateKaprodi();
+    });
+
+    window.addEventListener('resize', updateKaprodi);
+    updateKaprodi();
+  </script>
 </body>
 </html>

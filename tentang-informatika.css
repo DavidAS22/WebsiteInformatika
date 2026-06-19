@@ -154,3 +154,109 @@
     width: 100%;
   }
 }
+/* ═══════════════════════════════════════
+   STATS — Akreditasi / Durasi Studi / Gelar
+═══════════════════════════════════════ */
+.tentang-stats {
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 100px;
+  padding: 24px 40px 56px;
+  flex-wrap: wrap;
+}
+
+.tentang-stats__item {
+  text-align: center;
+}
+
+.tentang-stats__label {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  color: var(--navy);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.tentang-stats__value {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.7rem;
+  color: var(--navy);
+}
+
+/* ═══════════════════════════════════════
+   VISI & MISI
+═══════════════════════════════════════ */
+.visi-misi {
+  background: var(--orange);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  padding: 56px 80px 72px;
+}
+
+.visi-misi__heading {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.visi-misi__text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.95);
+  text-align: justify;
+}
+
+/* ═══════════════════════════════════════
+   TABLET  (≤ 1024px)
+═══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .tentang-stats {
+    gap: 60px;
+    padding: 20px 32px 48px;
+  }
+  .visi-misi {
+    padding: 48px 48px 60px;
+    gap: 36px;
+  }
+}
+
+/* ═══════════════════════════════════════
+   MOBILE  (≤ 768px)
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .tentang-stats {
+    gap: 32px;
+    padding: 16px 24px 40px;
+  }
+  .tentang-stats__value {
+    font-size: 1.4rem;
+  }
+  .visi-misi {
+    grid-template-columns: 1fr;
+    padding: 40px 24px 48px;
+    gap: 32px;
+  }
+  .visi-misi__heading {
+    font-size: 1.4rem;
+  }
+}
+
+/* ═══════════════════════════════════════
+   SMALL MOBILE  (≤ 480px)
+═══════════════════════════════════════ */
+@media (max-width: 480px) {
+  .tentang-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+}

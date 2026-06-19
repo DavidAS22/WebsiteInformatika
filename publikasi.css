@@ -1,0 +1,359 @@
+/* ═══════════════════════════════════════════════════════
+   PUBLIKASI — Page-specific styles
+   Depends on: style.css (tokens, navbar, footer, page-hero)
+═══════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────
+   HERO
+─────────────────────────────────────── */
+.pub-hero {
+  min-height: 280px;
+  align-items: flex-end;
+  padding: 0 72px 52px;
+}
+
+.pub-hero__content { max-width: 600px; }
+
+.pub-hero__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2.6rem;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.pub-hero__desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.75;
+  font-weight: 500;
+}
+
+/* ──────────────────────────────────────
+   MAIN SECTION — navy bg
+─────────────────────────────────────── */
+.pub-section {
+  background: var(--navy);
+  padding: 60px 72px 88px;
+}
+
+.pub-section__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ──────────────────────────────────────
+   HEADER ROW: title + search
+─────────────────────────────────────── */
+.pub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.pub-header__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.9rem;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+/* Search bar */
+.pub-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 400px;
+  min-width: 240px;
+}
+
+.pub-search__icon {
+  position: absolute;
+  left: 14px;
+  color: rgba(255,255,255,0.45);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.pub-search__input {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  padding: 11px 40px 11px 42px;
+  outline: none;
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.pub-search__input::placeholder { color: rgba(255,255,255,0.38); }
+
+.pub-search__input:focus {
+  border-color: var(--orange);
+  background: rgba(255,255,255,0.12);
+}
+
+/* Clear × button — hidden until there's input */
+.pub-search__clear {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  display: none;
+  transition: color 0.15s;
+}
+
+.pub-search__clear.is-visible { display: block; }
+.pub-search__clear:hover { color: var(--white); }
+
+/* Result count */
+.pub-count {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 24px;
+  min-height: 1.2em;
+}
+
+/* ──────────────────────────────────────
+   CARD LIST
+─────────────────────────────────────── */
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 200px;
+}
+
+/* Skeleton shimmer */
+.pub-skeleton {
+  height: 118px;
+  border-radius: 12px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.06) 25%,
+    rgba(255,255,255,0.11) 50%,
+    rgba(255,255,255,0.06) 75%);
+  background-size: 200% 100%;
+  animation: pubShimmer 1.4s infinite;
+}
+
+@keyframes pubShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Individual publication card ── */
+.pub-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  padding: 22px 26px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+
+.pub-card:hover {
+  box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+  transform: translateY(-2px);
+}
+
+/* Badges row */
+.pub-card__badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pub-badge {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.pub-badge--category {
+  background: var(--navy);
+  color: rgba(255,255,255,0.92);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.pub-year {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: rgba(26,42,94,0.5);
+  background: #f0f2f8;
+  border-radius: 6px;
+  padding: 3px 9px;
+}
+
+/* Title */
+.pub-card__title {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.975rem;
+  color: var(--navy);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Authors */
+.pub-card__authors {
+  font-family: var(--font-body);
+  font-size: 0.83rem;
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Venue / Journal name */
+.pub-card__venue {
+  font-family: var(--font-body);
+  font-size: 0.83rem;
+  font-style: italic;
+  color: var(--orange);
+  margin: 0;
+}
+
+/* Footer: DOI + link */
+.pub-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-top: 1px solid #e8eaf0;
+  padding-top: 12px;
+}
+
+.pub-card__doi {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: #888;
+  word-break: break-all;
+}
+
+.pub-card__link {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--orange);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.pub-card__link:hover { opacity: 0.75; }
+
+/* Search highlight */
+.pub-highlight {
+  background: rgba(232,119,34,0.22);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* Empty / error */
+.pub-empty {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.42);
+  text-align: center;
+  padding: 52px 0;
+}
+
+/* ──────────────────────────────────────
+   PAGINATION
+─────────────────────────────────────── */
+.pub-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.pub-pagination__btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.28);
+  background: transparent;
+  color: var(--white);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.pub-pagination__btn:not(:disabled):hover {
+  border-color: var(--orange);
+  background: var(--orange);
+}
+
+.pub-pagination__btn:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
+
+.pub-pagination__info {
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.55);
+  min-width: 52px;
+  text-align: center;
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — Tablet (≤ 1024px)
+════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .pub-hero    { padding: 0 40px 48px; }
+  .pub-section { padding: 52px 40px 72px; }
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — Mobile (≤ 768px)
+════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .pub-hero         { min-height: 240px; padding: 0 24px 36px; }
+  .pub-hero__title  { font-size: 1.8rem; }
+  .pub-hero__desc   { font-size: 0.88rem; }
+  .pub-section      { padding: 40px 24px 60px; }
+
+  .pub-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pub-search {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .pub-card { padding: 18px 18px 14px; }
+
+  .pub-card__footer { flex-direction: column; align-items: flex-start; }
+}

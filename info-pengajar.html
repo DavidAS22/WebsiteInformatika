@@ -106,7 +106,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5A2.25 2.25 0 0119.5 19.5h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0l-9.75 6.75L2.25 6.75" />
             </svg>
-            <span id="lecturer-email">loremipsumdolore</span>
+            <span id="lecturer-email">alamat@email.com</span>
           </div>
           <div class="pengajar-hero__contact-item">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
@@ -175,8 +175,11 @@
 
       <div class="pengajar-panel" id="panel-penelitian" role="tabpanel">
         <h2 class="pengajar-panel__heading">Penelitian / PKM</h2>
-        <ul class="pengajar-panel__list" id="cms-penelitian">
-          </ul>
+        <div id="cms-penelitian" class="pen-list">
+          <div class="pen-skeleton"></div>
+          <div class="pen-skeleton"></div>
+          <div class="pen-skeleton"></div>
+        </div>
       </div>
 
       <div class="pengajar-panel" id="panel-pengabdian" role="tabpanel">
@@ -319,89 +322,182 @@
   </script>
 
   <script>
-    /* ── CMS Integration for 7 Independent Tabs ── */
-    const STAF_API_URL = 'https://uph-informatika-backend.vercel.app/api/lecturer';
+    /* ── CMS Integration ── */
+    const LECTURER_API   = 'https://uph-informatika-backend.vercel.app/api/lecturer';
+    const PENELITIAN_API = 'https://uph-informatika-backend.vercel.app/api/penelitian';
 
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams         = new URLSearchParams(window.location.search);
     const lecturerNameQuery = urlParams.get('name');
 
+    /* ── Helpers ── */
+    function formatDate(dateStr) {
+      if (!dateStr) return '–';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function statusBadge(status) {
+      const ongoing = (status || '').toLowerCase() === 'ongoing';
+      return ongoing
+        ? '<span class="pen-badge pen-badge--ongoing">Sedang Berjalan</span>'
+        : '<span class="pen-badge pen-badge--selesai">Selesai</span>';
+    }
+
+    function typeBadge(type) {
+      const isPKM = (type || '').toLowerCase() === 'pkm';
+      return isPKM
+        ? '<span class="pen-badge pen-badge--pkm">PKM</span>'
+        : '<span class="pen-badge pen-badge--penelitian">Penelitian</span>';
+    }
+
+    const fillList = (elementId, dataArray) => {
+      const container = document.getElementById(elementId);
+      if (!container) return;
+      if (dataArray && dataArray.length > 0) {
+        container.innerHTML = dataArray.map(item => `<li>${item}</li>`).join('');
+      } else {
+        container.innerHTML = `<li style="color:#888;list-style:none;">Tidak ada data saat ini.</li>`;
+      }
+    };
+
+    /* ── Render penelitian cards ── */
+    function renderPenelitian(items) {
+      const container = document.getElementById('cms-penelitian');
+      if (!container) return;
+
+      if (!items.length) {
+        container.innerHTML = '<p class="pen-empty">Tidak ada data penelitian atau PKM untuk dosen ini.</p>';
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <article class="pen-card">
+          <div class="pen-card__header">
+            <div class="pen-card__badges">
+              ${typeBadge(item.researchType)}
+              ${statusBadge(item.status)}
+            </div>
+            <h3 class="pen-card__title">${item.researchTitle || '–'}</h3>
+            <p class="pen-card__meta">
+              ${item.researchGroupCategory || ''}
+            </p>
+          </div>
+          <div class="pen-card__divider"></div>
+          <div class="pen-card__body">
+            <div class="pen-card__detail">
+              <span class="pen-card__detail-label">Anggota</span>
+              <span class="pen-card__detail-value">${(item.members || []).join(', ') || '–'}</span>
+            </div>
+            <div class="pen-card__detail">
+              <span class="pen-card__detail-label">Pendanaan</span>
+              <span class="pen-card__detail-value">${item.funders || '–'}</span>
+            </div>
+            <div class="pen-card__detail">
+              <span class="pen-card__detail-label">Periode</span>
+              <span class="pen-card__detail-value">${formatDate(item.researchStartDate)} – ${formatDate(item.researchEndDate)}</span>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    /* ── Main loader ── */
     async function loadLecturerDetail() {
       if (!lecturerNameQuery) {
-        console.warn("Parameter nama dosen tidak ditemukan di URL.");
+        console.warn('Parameter nama dosen tidak ditemukan di URL.');
         return;
       }
 
       try {
-        const res = await fetch(STAF_API_URL);
-        if (!res.ok) throw new Error(`HTTP Error! status: ${res.status}`);
-        const lecturers = await res.json();
+        /* Fetch both APIs in parallel */
+        const [lecturerRes, penelitianRes] = await Promise.all([
+          fetch(LECTURER_API),
+          fetch(PENELITIAN_API)
+        ]);
 
-        // Cari data dosen yang sesuai nama
+        const lecturers   = await lecturerRes.json();
+        const penelitians = await penelitianRes.json();
+
+        /* Find the lecturer */
         const lecturer = lecturers.find(item => item.fullName === lecturerNameQuery);
 
-        if (lecturer) {
-          // 1. Sinkronisasi Data Hero Banner Utama
-          document.getElementById('lecturer-name').textContent = lecturer.fullName;
-          document.title = `${lecturer.fullName} - Pengajar Informatika UPH`;
-          document.getElementById('lecturer-email').textContent = lecturer.email || '-';
-          
-          if (lecturer.lecturerImageUrl) {
-            document.getElementById('lecturer-photo').src = lecturer.lecturerImageUrl;
-            document.getElementById('lecturer-photo').alt = lecturer.fullName;
-          }
-          if (lecturer.jabatan) {
-            document.getElementById('lecturer-position').textContent = lecturer.jabatan;
-          }
-
-          // Helper function untuk mencetak list array ke item <li>
-          const fillList = (elementId, dataArray) => {
-            const container = document.getElementById(elementId);
-            if (!container) return;
-            if (dataArray && dataArray.length > 0) {
-              container.innerHTML = dataArray.map(item => `<li>${item}</li>`).join('');
-            } else {
-              container.innerHTML = `<li style="color: #888; list-style: none;">Tidak ada data saat ini.</li>`;
-            }
-          };
-
-          // 2. Petakan Data CMS Ke Masing-Masing Tab Mandiri
-          
-          // Tab 1: Profil
-          const profileText = lecturer.biography || `Dosen aktif di Program Studi S1 Informatika Universitas Pelita Harapan.`;
-          document.getElementById('cms-profil').innerHTML = `<p>${profileText}</p>`;
-
-          // Tab 2: Mata Kuliah
-          fillList('cms-matkul', lecturer.mata_kuliah);
-
-          // Tab 3: Hibah & Proyek (Masing-masing sub-kategori)
-          fillList('cms-hibah', lecturer.hibah_penelitian);
-          fillList('cms-proyek', lecturer.proyek);
-
-          // Tab 4: Penelitian/PKM
-          fillList('cms-penelitian', lecturer.penelitian_pkm);
-
-          // Tab 5: Pengabdian
-          fillList('cms-pengabdian', lecturer.pengabdian_masyarakat);
-
-          // Tab 6: HKI/Paten
-          fillList('cms-hki', lecturer.hki_paten_list);
-
-          // Tab 7: Publikasi
-          if (Array.isArray(lecturer.publikasi_list)) {
-            fillList('cms-publikasi', lecturer.publikasi_list);
-          } else {
-            document.getElementById('cms-publikasi').innerHTML = `<li>Total Publikasi Terindeks: ${lecturer.publikasi ?? 0}</li>`;
-          }
-
-        } else {
-          document.getElementById('lecturer-name').textContent = "Dosen Tidak Ditemukan";
+        if (!lecturer) {
+          document.getElementById('lecturer-name').textContent = 'Dosen Tidak Ditemukan';
+          document.getElementById('cms-penelitian').innerHTML =
+            '<p class="pen-empty">Data dosen tidak ditemukan.</p>';
+          return;
         }
+
+        /* ── Hero ── */
+        document.getElementById('lecturer-name').textContent = lecturer.fullName;
+        document.title = `${lecturer.fullName} - Pengajar Informatika UPH`;
+        document.getElementById('lecturer-email').textContent = lecturer.email || '–';
+
+        if (lecturer.lecturerImageUrl) {
+          const photo = document.getElementById('lecturer-photo');
+          photo.src = lecturer.lecturerImageUrl;
+          photo.alt = lecturer.fullName;
+        }
+        const jabatan = lecturer.jja || lecturer.jabatan || '';
+        if (lecturer.jja) {
+          document.getElementById('lecturer-position').textContent = lecturer.jja;
+        }
+
+        /* ── Tabs from lecturer API (unchanged) ── */
+        const profileText = lecturer.biography || 'Dosen aktif di Program Studi S1 Informatika Universitas Pelita Harapan.';
+        document.getElementById('cms-profil').innerHTML = `<p>${profileText}</p>`;
+        fillList('cms-matkul',     lecturer.mata_kuliah);
+        fillList('cms-hibah',      lecturer.hibah_penelitian);
+        fillList('cms-proyek',     lecturer.proyek);
+        fillList('cms-pengabdian', lecturer.pengabdian_masyarakat);
+        fillList('cms-hki',        lecturer.hki_paten_list);
+
+        if (Array.isArray(lecturer.publikasi_list)) {
+          fillList('cms-publikasi', lecturer.publikasi_list);
+        } else {
+          document.getElementById('cms-publikasi').innerHTML =
+            `<li>Total Publikasi Terindeks: ${lecturer.publikasi ?? 0}</li>`;
+        }
+
+        /* ── Penelitian/PKM tab ──
+           Strategy:
+           1. Primary  — lecturerId matches lecturer.id
+           2. Fallback — lecturer's first name AND last name both appear
+                         in members[0] ONLY (lead researcher position).
+           This prevents false positives where the name coincidentally
+           appears in a non-lead member slot.
+        ── */
+        const allPenelitian = Array.isArray(penelitians) ? penelitians : (penelitians.data || []);
+
+        // Strip punctuation + degree suffixes, keep only real name words
+        const gelarSuffix = new Set(['st','ssi','skom','mkom','mt','mcs','phd','dr','drs','ir','se','ssi','mm','mba','med']);
+        const nameParts   = lecturer.fullName.toLowerCase().replace(/[,.]/g, '').split(/\s+/).filter(Boolean);
+        const realParts   = nameParts.filter(p => !gelarSuffix.has(p));
+        const firstName   = realParts[0] || '';
+        const lastName    = realParts[realParts.length - 1] || '';
+
+        function isLeadResearcher(penelitian) {
+          // Only check members[0] (lead researcher position).
+          // lecturerId is NOT used — the DB foreign keys are unreliable.
+          // Both first name AND last name must appear in the lead member string.
+          const lead = ((penelitian.members || [])[0] || '').toLowerCase().replace(/[,.]/g, '');
+          if (!lead || !firstName || !lastName) return false;
+          return lead.includes(firstName) && lead.includes(lastName);
+        }
+
+        const myPenelitian = allPenelitian
+          .filter(isLeadResearcher)
+          .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+
+        renderPenelitian(myPenelitian);
+
       } catch (err) {
-        console.error('Gagal memuat detail dosen dari CMS:', err);
+        console.error('Gagal memuat data:', err);
+        document.getElementById('cms-penelitian').innerHTML =
+          '<p class="pen-empty">Gagal memuat data. Silakan coba lagi nanti.</p>';
       }
     }
 
-    // Jalankan integrasi data CMS
     loadLecturerDetail();
   </script>
 </body>
