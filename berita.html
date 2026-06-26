@@ -6,6 +6,7 @@
   <title>Berita - Program Studi S1 Informatika UPH</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="berita.css" />
 </head>
 <body>
 
@@ -39,7 +40,7 @@
               <a class="dropdown__item" href="tentang-informatika.html">Tentang Informatika UPH</a>
               <a class="dropdown__item" href="kata-sambutan.html">Kata Sambutan Kaprodi</a>
               <a class="dropdown__item" href="sejarah-informatika.html">Sejarah Informatika UPH</a>
-              <a class="dropdown__item" href="struktur-organisasi.html">Struktur Organisasi</a>
+              <a class="dropdown__item" href="koordinator.html">Koordinator Internal Prodi</a>
             </div>
           </li>
 
@@ -107,12 +108,160 @@
        Add your content here
   ══════════════════════════════════════ -->
   <main class="page-main">
-    <div class="page-hero">
-      <h1 class="page-hero__title">Berita</h1>
+
+    <div class="btn-back-wrap">
+      <button class="btn-back btn-back--navy" onclick="history.back()">
+        &larr; KEMBALI
+      </button>
     </div>
-    <div class="page-content">
-      <p>Konten untuk halaman <strong>Berita</strong> akan ditambahkan di sini.</p>
-    </div>
+    
+    <section class="berita-page">
+
+      <!-- Heading + controls row -->
+      <div class="berita-page__top">
+        <h1 class="berita-page__title">Berita</h1>
+        <div class="berita-page__controls">
+          <!-- Search -->
+          <div class="berita-page__search-wrap">
+            <input
+              class="berita-page__search"
+              id="beritaSearch"
+              type="text"
+              placeholder="Masukkan kata kunci"
+            />
+            <span class="berita-page__search-icon">&#128269;</span>
+          </div>
+          <!-- Category filter -->
+          <div class="berita-page__select-wrap">
+            <select class="berita-page__select" id="beritaKategori">
+              <option value="">Kategori</option>
+              <option value="Akademik">Akademik</option>
+              <option value="Prestasi">Prestasi</option>
+              <option value="Pengumuman">Pengumuman</option>
+              <option value="Kegiatan">Kegiatan</option>
+              <option value="Penelitian">Penelitian</option>
+            </select>
+            <span class="berita-page__select-arrow">&#8964;</span>
+          </div>
+        </div>
+      </div>
+
+      <!--
+      ═══════════════════════════════════════════════════
+      CMS INTEGRATION — BERITA
+      API: GET https://uph-informatika-backend.vercel.app/api/berita
+      Response envelope: { data: [...], pagination: { page, limit, total, totalPages } }
+
+      Row fields used:
+        id             → link to detail page: berita-detail.html?id={id}
+        title          → card title
+        thumbnailBerita→ card image
+        kategori       → string[] → orange pill tags
+        publishedAt    → formatted date
+
+      Supported query params:
+        search  → substring on title
+        page    → 1-based page number
+        limit   → items per page (we use 9)
+        sort    → publishedAt (default)
+
+      Steps to activate:
+      1. Set BERITA_API_URL below
+      2. Call loadBerita() at the bottom — it is currently called automatically
+      3. The static placeholder cards below are replaced by renderCards()
+         so you can remove them once the API is wired
+      ═══════════════════════════════════════════════════
+      -->
+
+      <!-- Card grid -->
+      <div class="berita-page__grid" id="beritaGrid">
+        <!-- Static placeholder cards (replaced by API data when loaded) -->
+        <a class="bp-card" href="#">
+          <div class="bp-card__image"><img src="images/berita_1.jpg" alt="" /></div>
+          <div class="bp-card__body">
+            <div class="bp-card__tags"><span class="bp-card__tag">Kategori</span></div>
+            <div class="bp-card__date">25 Mei 2026</div>
+            <p class="bp-card__title">PAJAK NAIK SEBANYAK 189719798137285%, INDONESIA ALAMI KRISIS MONETER BESAR-BESARAN (INI JUDUL BERITA)</p>
+          </div>
+        </a>
+        <a class="bp-card" href="#">
+          <div class="bp-card__image"><img src="images/berita_2.jpg" alt="" /></div>
+          <div class="bp-card__body">
+            <div class="bp-card__tags"><span class="bp-card__tag">Kategori</span><span class="bp-card__tag">Kategori</span></div>
+            <div class="bp-card__date">25 Mei 2026</div>
+            <p class="bp-card__title">PAJAK NAIK SEBANYAK 189719798137285%, INDONESIA ALAMI KRISIS MONETER BESAR-BESARAN (INI JUDUL BERITA)</p>
+          </div>
+        </a>
+        <a class="bp-card" href="#">
+          <div class="bp-card__image"><img src="images/berita_3.jpg" alt="" /></div>
+          <div class="bp-card__body">
+            <div class="bp-card__tags"><span class="bp-card__tag">Kategori</span></div>
+            <div class="bp-card__date">25 Mei 2026</div>
+            <p class="bp-card__title">PAJAK NAIK SEBANYAK 189719798137285%, INDONESIA ALAMI KRISIS MONETER BESAR-BESARAN (INI JUDUL BERITA)</p>
+          </div>
+        </a>
+        <a class="bp-card" href="#">
+          <div class="bp-card__image"><img src="images/berita_4.jpg" alt="" /></div>
+          <div class="bp-card__body">
+            <div class="bp-card__tags"><span class="bp-card__tag">Kategori</span></div>
+            <div class="bp-card__date">25 Mei 2026</div>
+            <p class="bp-card__title">PAJAK NAIK SEBANYAK 189719798137285%, INDONESIA ALAMI KRISIS MONETER BESAR-BESARAN (INI JUDUL BERITA)</p>
+          </div>
+        </a>
+        <a class="bp-card" href="#">
+          <div class="bp-card__image"><img src="images/berita_5.jpg" alt="" /></div>
+          <div class="bp-card__body">
+            <div class="bp-card__tags"><span class="bp-card__tag">Kategori</span></div>
+            <div class="bp-card__date">25 Mei 2026</div>
+            <p class="bp-card__title">PAJAK NAIK SEBANYAK 189719798137285%, INDONESIA ALAMI KRISIS MONETER BESAR-BESARAN (INI JUDUL BERITA)</p>
+          </div>
+        </a>
+        <a class="bp-card" href="#">
+          <div class="bp-card__image"><img src="images/berita_6.jpg" alt="" /></div>
+          <div class="bp-card__body">
+            <div class="bp-card__tags"><span class="bp-card__tag">Kategori</span></div>
+            <div class="bp-card__date">25 Mei 2026</div>
+            <p class="bp-card__title">PAJAK NAIK SEBANYAK 189719798137285%, INDONESIA ALAMI KRISIS MONETER BESAR-BESARAN (INI JUDUL BERITA)</p>
+          </div>
+        </a>
+        <a class="bp-card" href="#">
+          <div class="bp-card__image"><img src="images/berita_7.jpg" alt="" /></div>
+          <div class="bp-card__body">
+            <div class="bp-card__tags"><span class="bp-card__tag">Kategori</span></div>
+            <div class="bp-card__date">25 Mei 2026</div>
+            <p class="bp-card__title">PAJAK NAIK SEBANYAK 189719798137285%, INDONESIA ALAMI KRISIS MONETER BESAR-BESARAN (INI JUDUL BERITA)</p>
+          </div>
+        </a>
+        <a class="bp-card" href="#">
+          <div class="bp-card__image"><img src="images/berita_8.jpg" alt="" /></div>
+          <div class="bp-card__body">
+            <div class="bp-card__tags"><span class="bp-card__tag">Kategori</span></div>
+            <div class="bp-card__date">25 Mei 2026</div>
+            <p class="bp-card__title">PAJAK NAIK SEBANYAK 189719798137285%, INDONESIA ALAMI KRISIS MONETER BESAR-BESARAN (INI JUDUL BERITA)</p>
+          </div>
+        </a>
+        <a class="bp-card" href="#">
+          <div class="bp-card__image"><img src="images/berita_9.jpg" alt="" /></div>
+          <div class="bp-card__body">
+            <div class="bp-card__tags"><span class="bp-card__tag">Kategori</span></div>
+            <div class="bp-card__date">25 Mei 2026</div>
+            <p class="bp-card__title">PAJAK NAIK SEBANYAK 189719798137285%, INDONESIA ALAMI KRISIS MONETER BESAR-BESARAN (INI JUDUL BERITA)</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Pagination -->
+      <div class="berita-page__pagination" id="beritaPagination">
+        <button class="bp-page__arrow" id="bpPrev">&larr;</button>
+        <div class="bp-page__numbers" id="bpNumbers">
+          <button class="bp-page__btn is-active">1</button>
+          <button class="bp-page__btn">2</button>
+          <button class="bp-page__btn">3</button>
+        </div>
+        <button class="bp-page__arrow" id="bpNext">&rarr;</button>
+      </div>
+
+    </section>
   </main>
 
   <footer class="footer">
@@ -256,5 +405,138 @@
   </script>
 
 
+
+  <script>
+    // ══════════════════════════════════════════════════════
+    // BERITA PAGE — CMS INTEGRATION
+    // Base URL: https://uph-informatika-backend.vercel.app
+    // Endpoint: GET /api/berita
+    // Docs: https://github.com/kelvin8701/uph-informatika-public-api
+    // ══════════════════════════════════════════════════════
+    const BERITA_API   = 'https://uph-informatika-backend.vercel.app/api/berita';
+    const LIMIT        = 9; // cards per page (3×3 grid)
+
+    let currentPage    = 1;
+    let totalPages     = 1;
+    let searchTimeout  = null;
+
+    // ── Helpers ──
+    function formatDate(iso) {
+      if (!iso) return '';
+      const d = new Date(iso);
+      return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function buildParams() {
+      const search   = document.getElementById('beritaSearch').value.trim();
+      const kategori = document.getElementById('beritaKategori').value;
+      const params   = new URLSearchParams({
+        page:  currentPage,
+        limit: LIMIT,
+        sort:  'publishedAt',
+        order: 'desc',
+      });
+      if (search)   params.set('search', search);
+      // Note: API does not have a kategori filter param — we filter client-side
+      return { params, kategoriFilter: kategori };
+    }
+
+    function renderCards(items, kategoriFilter) {
+      const grid = document.getElementById('beritaGrid');
+
+      // Client-side kategori filter (API does not support it directly)
+      const filtered = kategoriFilter
+        ? items.filter(item => item.kategori && item.kategori.includes(kategoriFilter))
+        : items;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#888;padding:40px 0;">Tidak ada berita ditemukan.</p>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <a class="bp-card" href="berita-detail.html?id=${item.id}">
+          <div class="bp-card__image">
+            <img src="${item.thumbnailBerita || 'images/berita_placeholder.jpg'}" alt="${item.title}" loading="lazy" />
+          </div>
+          <div class="bp-card__body">
+            <div class="bp-card__meta">
+              <div class="bp-card__tags">
+                ${(item.kategori || []).map(k => `<span class="bp-card__tag">${k}</span>`).join('')}
+              </div>
+              <span class="bp-card__date">${formatDate(item.publishedAt)}</span>
+            </div>
+            <p class="bp-card__title">${item.title}</p>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function renderPagination(total, current) {
+      const numbers = document.getElementById('bpNumbers');
+      const prevBtn = document.getElementById('bpPrev');
+      const nextBtn = document.getElementById('bpNext');
+      totalPages    = total;
+
+      prevBtn.disabled = current <= 1;
+      nextBtn.disabled = current >= total;
+
+      // Show up to 5 page buttons, centred on current
+      let start = Math.max(1, current - 2);
+      let end   = Math.min(total, start + 4);
+      start     = Math.max(1, end - 4);
+
+      numbers.innerHTML = '';
+      for (let i = start; i <= end; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'bp-page__btn' + (i === current ? ' is-active' : '');
+        btn.textContent = i;
+        btn.addEventListener('click', () => { currentPage = i; loadBerita(); });
+        numbers.appendChild(btn);
+      }
+    }
+
+    async function loadBerita() {
+      const grid = document.getElementById('beritaGrid');
+      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#888;padding:40px 0;">Memuat...</p>';
+
+      try {
+        const { params, kategoriFilter } = buildParams();
+        const res  = await fetch(`${BERITA_API}?${params}`);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const json = await res.json();
+
+        // API returns { data: [...], pagination: { page, limit, total, totalPages } }
+        renderCards(json.data, kategoriFilter);
+        renderPagination(json.pagination.totalPages, json.pagination.page);
+
+      } catch (err) {
+        console.error('Failed to load berita:', err);
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#c00;padding:40px 0;">Gagal memuat berita. Silakan coba lagi.</p>';
+      }
+    }
+
+    // ── Event listeners ──
+    document.getElementById('beritaSearch').addEventListener('input', () => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => { currentPage = 1; loadBerita(); }, 400);
+    });
+
+    document.getElementById('beritaKategori').addEventListener('change', () => {
+      currentPage = 1;
+      loadBerita();
+    });
+
+    document.getElementById('bpPrev').addEventListener('click', () => {
+      if (currentPage > 1) { currentPage--; loadBerita(); }
+    });
+
+    document.getElementById('bpNext').addEventListener('click', () => {
+      if (currentPage < totalPages) { currentPage++; loadBerita(); }
+    });
+
+    // ── Auto-load on page open ──
+    loadBerita();
+  </script>
 </body>
 </html>

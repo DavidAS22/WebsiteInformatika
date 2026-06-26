@@ -7,9 +7,16 @@
    HERO override
 ─────────────────────────────────────── */
 .pkm-hero {
-  min-height: 320px;
+  min-height: 280px;
   align-items: flex-end;
   padding: 0 72px 56px;
+  background: linear-gradient(
+                90deg,
+                rgba(29, 36, 94, 0.85) 0%, 
+                rgba(71, 88, 171, 0.85) 39%, 
+                rgba(255, 117, 31, 0.85) 77%
+              ),
+              url('images/research.png') center center / cover no-repeat;
 }
 
 .pkm-hero__content { max-width: 640px; }

@@ -26,7 +26,7 @@
               <a class="dropdown__item" href="tentang-informatika.html">Tentang Informatika UPH</a>
               <a class="dropdown__item" href="kata-sambutan.html">Kata Sambutan Kaprodi</a>
               <a class="dropdown__item" href="sejarah-informatika.html">Sejarah Informatika UPH</a>
-              <a class="dropdown__item" href="struktur-organisasi.html">Struktur Organisasi</a>
+              <a class="dropdown__item" href="koordinator.html">Koordinator Internal Prodi</a>
             </div>
           </li>
           <li>
@@ -98,17 +98,11 @@
           <!-- Populated by JS -->
         </div>
 
-        <!-- Semester carousel -->
+        <!-- Semester grid (all 3 semesters of active year shown side-by-side) -->
         <div class="pd-semester-stage">
           <div class="pd-semester-track" id="pdSemesterTrack">
             <!-- Populated by JS -->
           </div>
-        </div>
-
-        <!-- Dots + arrow nav -->
-        <div class="pd-nav">
-          <div class="pd-dots" id="pdDots"></div>
-          <button class="pd-nav__arrow" id="pdNext" aria-label="Next">&rarr;</button>
         </div>
 
       </div>
@@ -208,225 +202,272 @@
   <script>
     // ═══════════════════════════════════════════════════════
     // PEMINATAN DATA
-    // To add/edit content: update the objects below.
-    // Each peminatan has: title, desc, karir[], and
-    // tahun[] where each tahun has a label and semesters[].
-    // Each semester has a name and matkul[] (array of
-    // { nama, sks } objects).
+    // Structure: 3.5 years, each year has 3 semesters:
+    //   - Semester Ganjil  (4 months)
+    //   - Semester Genap   (4 months)
+    //   - Semester Akselerasi (2–2.5 months)
+    // Year 4 has only half a year (Ganjil + Genap only,
+    // no Akselerasi — study ends at semester 7).
     // ═══════════════════════════════════════════════════════
+
+    const SEM_LABELS = ['Semester Ganjil', 'Semester Genap', 'Semester Akselerasi'];
+
     const PEMINATAN_DATA = {
-      'intelligent-systems': {
-        title: 'Intelligent Systems',
-        desc:  'Fokus pada pengembangan sistem komputer yang mampu meniru kecerdasan manusia, termasuk kecerdasan buatan (AI), machine learning, dan robotika. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet. Lorem ipsum dolore sit amet.',
+
+      'kecerdasan-artifisial': {
+        title: 'Kecerdasan Artifisial dan Cognitive Computing',
+        desc:  'Peminatan ini berfokus pada pengembangan sistem komputer yang mampu meniru kemampuan kognitif manusia, mulai dari belajar, berpikir, mengambil keputusan, hingga memahami bahasa dan citra. Mahasiswa mendalami pemelajaran mesin, visi komputer, pemrosesan bahasa alami, sistem cerdas, hingga komputasi paralel, serta belajar membangun aplikasi AI nyata melalui studio pengembangan dan proyek capstone.',
         karir: [
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
+          'AI / Machine Learning Engineer',
+          'Data Scientist',
+          'Computer Vision Engineer',
+          'Natural Language Processing Engineer',
+          'Robotics Engineer',
+          'AI Research Assistant',
+          'AI Product Developer',
         ],
         tahun: [
           {
             label: 'Tahun Pertama',
             semesters: [
-              {
-                name: 'Semester 1',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
-              {
-                name: 'Semester 2',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
-              {
-                name: 'Semester 3',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
+              { name: 'Semester Ganjil', matkul: [
+                  { nama: 'Dasar Pemrograman', sks: 4 },
+                  { nama: 'Pengantar Informatika & Komputer', sks: 4 },
+                  { nama: 'Kalkulus 1', sks: 4 },
+                  { nama: 'Matematika Diskrit', sks: 4 },
+                  { nama: 'Aljabar Linier & Matriks', sks: 2 },
+                  { nama: 'Kepemimpinan yang Melayani', sks: 2 },
+              ]},
+              { name: 'Semester Genap', matkul: [
+                  { nama: 'Organisasi & Arsitektur Komputer', sks: 4 },
+                  { nama: 'Kalkulus 2', sks: 4 },
+                  { nama: 'Algoritma & Struktur Data', sks: 3 },
+                  { nama: 'Pemrograman Java', sks: 3 },
+                  { nama: 'Statistika', sks: 2 },
+                  { nama: 'Bahasa Indonesia', sks: 2 },
+                  { nama: 'Kewarganegaraan', sks: 2 },
+              ]},
+              { name: 'Semester Akselerasi', matkul: [
+                  { nama: 'Komunikasi Data & Jaringan Komputer', sks: 3 },
+                  { nama: 'Probabilitas', sks: 2 },
+                  { nama: 'PAK / PA Dunia', sks: 4 },
+              ]},
             ],
           },
           {
             label: 'Tahun Kedua',
             semesters: [
-              {
-                name: 'Semester 3',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
-              {
-                name: 'Semester 4',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
+              { name: 'Semester Ganjil', matkul: [
+                  { nama: 'Desain & Analisis Algoritma', sks: 2 },
+                  { nama: 'Sistem Basis Data', sks: 4 },
+                  { nama: 'Pemrograman Berorientasi Objek', sks: 2 },
+                  { nama: 'Pengantar Pemelajaran Mesin', sks: 2 },
+                  { nama: 'Pengantar Keamanan Komputer dan Jaringan', sks: 2 },
+                  { nama: 'Sistem Operasi', sks: 3 },
+                  { nama: 'Allah & Cipt. / Allah & Semesta', sks: 4 },
+              ]},
+              { name: 'Semester Genap', matkul: [
+                  { nama: 'Grafika Komputer', sks: 2 },
+                  { nama: 'Pengembangan Piranti Lunak', sks: 4 },
+                  { nama: 'Pemodelan Berorientasi Objek', sks: 2 },
+                  { nama: 'Interaksi Manusia & Komputer', sks: 2 },
+                  { nama: 'Simulasi dan Pemodelan', sks: 2 },
+                  { nama: 'Pemelajaran Mesin Lanjut', sks: 3 },
+                  { nama: 'Allah & Dosa / Manusia & Moralitas', sks: 4 },
+              ]},
+              { name: 'Semester Akselerasi', matkul: [
+                  { nama: 'Sistem Cerdas', sks: 3 },
+                  { nama: 'Pancasila', sks: 2 },
+                  { nama: 'Allah & Cipt. Baru / Sejarah & Masyarakat', sks: 4 },
+              ]},
             ],
           },
           {
             label: 'Tahun Ketiga',
             semesters: [
-              {
-                name: 'Semester 5',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
-              {
-                name: 'Semester 6',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
+              { name: 'Semester Ganjil', matkul: [
+                  { nama: 'Kecerdasan Komputasional', sks: 4 },
+                  { nama: 'Pengalaman Pengguna', sks: 2 },
+                  { nama: 'Perancangan & Pemrograman Web', sks: 3 },
+                  { nama: 'Perancangan Aplikasi Platform Mobile', sks: 3 },
+                  { nama: 'Pemrograman Bahasa Alami', sks: 3 },
+                  { nama: 'Komputasi Paralel', sks: 3 },
+                  { nama: 'Penalaran Reflektif', sks: 2 },
+                  
+              ]},
+              { name: 'Semester Genap', matkul: [
+                  { nama: 'Teknologi Awan', sks: 3 },
+                  { nama: 'Sistem Media Interaktif', sks: 3 },
+                  { nama: 'Pengolahan Citra', sks: 3 },
+                  { nama: 'MK Pilihan Topik Khusus', sks: 3 },
+                  { nama: 'Visi Komputer', sks: 3 },
+                  { nama: 'Studio Pengembangan Aplikasi Kecerdasan Artifisial', sks: 4 },
+              ]},
+              { name: 'Semester Akselerasi', matkul: [
+                  { nama: 'Metodologi Penelitian', sks: 2 },
+                  { nama: 'Teks & Konteks', sks: 2 },
+              ]},
             ],
           },
           {
             label: 'Tahun Keempat',
             semesters: [
-              {
-                name: 'Semester 7',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
-              {
-                name: 'Semester 8',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 6 },
-                ],
-              },
+              { name: 'Semester Ganjil', matkul: [
+                  { nama: 'Tugas Akhir', sks: 6 },
+                  { nama: 'Kapita Selekta', sks: 2 },
+              ]},
             ],
           },
         ],
       },
 
-      'software-engineering': {
-        title: 'Software Engineering',
-        desc:  'Mempelajari siklus hidup lengkap pembuatan aplikasi modern, mulai dari arsitektur, manajemen basis data berskala besar, hingga deployment sistem awan (Cloud). Lorem ipsum dolore sit amet.',
+      'data-intelligence': {
+        title: 'Data Intelligence',
+        desc:  'Peminatan ini membekali mahasiswa untuk menggali wawasan yang berguna dari data dan mengubahnya menjadi keputusan strategis. Materi mencakup big data, data mining, data warehousing, visualisasi data, hingga analitik lanjutan berbasis statistik dan pemelajaran mesin. Mahasiswa dilatih untuk merancang solusi berbasis data yang relevan bagi industri dan organisasi.',
         karir: [
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
+          'Data Analyst',
+          'Data Engineer',
+          'Business Intelligence Developer',
+          'Data Scientist',
+          'Machine Learning Engineer',
+          'Database Administrator',
         ],
         tahun: [
           {
             label: 'Tahun Pertama',
             semesters: [
-              {
-                name: 'Semester 1',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
-              {
-                name: 'Semester 2',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
+              { name: 'Semester Ganjil',        matkul: [ { nama: 'Logika dan Pemikiran Komputasional', sks: 3 }, { nama: 'Pemrograman Dasar', sks: 3 }, { nama: 'Matematika Diskrit', sks: 3 }, { nama: 'Pengantar Ilmu Komputer', sks: 3 }, { nama: 'Bahasa Indonesia Akademik', sks: 2 }, ] },
+              { name: 'Semester Genap',         matkul: [ { nama: 'Struktur Data', sks: 3 }, { nama: 'Aljabar Linear', sks: 3 }, { nama: 'Pemrograman Berorientasi Objek', sks: 3 }, { nama: 'Sistem Operasi', sks: 3 }, ] },
+              { name: 'Semester Akselerasi',    matkul: [ { nama: 'Pengantar Data Science', sks: 3 }, { nama: 'Statistika Deskriptif', sks: 2 }, ] },
             ],
           },
           {
             label: 'Tahun Kedua',
             semesters: [
-              {
-                name: 'Semester 3',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
-              {
-                name: 'Semester 4',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
+              { name: 'Semester Ganjil',        matkul: [ { nama: 'Basis Data Lanjut', sks: 3 }, { nama: 'Pemelajaran Mesin', sks: 3 }, { nama: 'Data Warehousing & ETL', sks: 3 }, ] },
+              { name: 'Semester Genap',         matkul: [ { nama: 'Big Data Analytics', sks: 3 }, { nama: 'Visualisasi Data', sks: 3 }, { nama: 'Rekayasa Fitur', sks: 3 }, ] },
+              { name: 'Semester Akselerasi',    matkul: [ { nama: 'Data Mining', sks: 3 }, ] },
+            ],
+          },
+          {
+            label: 'Tahun Ketiga',
+            semesters: [
+              { name: 'Semester Ganjil',        matkul: [ { nama: 'Analitik Bisnis', sks: 3 }, { nama: 'Keamanan Data', sks: 3 }, { nama: 'Data Studio I', sks: 3 }, ] },
+              { name: 'Semester Genap',         matkul: [ { nama: 'Data Studio II', sks: 3 }, { nama: 'Pilihan Peminatan I', sks: 3 }, ] },
+              { name: 'Semester Akselerasi',    matkul: [ { nama: 'Pilihan Peminatan II', sks: 3 }, ] },
+            ],
+          },
+          {
+            label: 'Tahun Keempat',
+            semesters: [
+              { name: 'Semester Ganjil',        matkul: [ { nama: 'Proyek Kapstone Data', sks: 6 }, { nama: 'Kerja Praktik', sks: 3 }, ] },
+              { name: 'Semester Genap',         matkul: [ { nama: 'Skripsi / Tugas Akhir', sks: 6 }, ] },
             ],
           },
         ],
       },
 
-      'data-science': {
-        title: 'Data Science & Analytics',
-        desc:  'Berfokus pada pengolahan, pembersihan, visualisasi, dan ekstraksi wawasan (insights) penting dari data mentah berukuran besar (Big Data) untuk kebutuhan bisnis. Lorem ipsum dolore sit amet.',
+      'keamanan-siber': {
+        title: 'Keamanan Siber',
+        desc:  'Peminatan ini menyiapkan mahasiswa untuk melindungi sistem, jaringan, dan data dari ancaman digital yang terus berkembang. Materi mencakup keamanan komputer dan jaringan lanjut, pengkodean yang aman, kriptografi, analisis keamanan, hingga forensik digital. Mahasiswa dibekali pemahaman teknis sekaligus pertimbangan etika dan regulasi, sesuai dengan standar industri serta kebijakan global terkait keamanan siber.',
         karir: [
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
-          'Lorem ipsum dolore sit amet.',
+          'Cybersecurity Analyst',
+          'Penetration Tester / Ethical Hacker',
+          'Security Operations Center (SOC) Analyst',
+          'Digital Forensics Investigator',
+          'Cryptographer',
+          'Network Security Engineer',
         ],
         tahun: [
           {
             label: 'Tahun Pertama',
             semesters: [
-              {
-                name: 'Semester 1',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
-              {
-                name: 'Semester 2',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
+              { name: 'Semester Ganjil', matkul: [
+                  { nama: 'Dasar Pemrograman', sks: 4 },
+                  { nama: 'Pengantar Informatika & Komputer', sks: 4 },
+                  { nama: 'Kalkulus 1', sks: 4 },
+                  { nama: 'Matematika Diskrit', sks: 4 },
+                  { nama: 'Aljabar Linier & Matriks', sks: 2 },
+                  { nama: 'Kepemimpinan yang Melayani', sks: 2 },
+              ]},
+              { name: 'Semester Genap', matkul: [
+                  { nama: 'Organisasi & Arsitektur Komputer', sks: 4 },
+                  { nama: 'Kalkulus 2', sks: 4 },
+                  { nama: 'Algoritma & Struktur Data', sks: 3 },
+                  { nama: 'Pemrograman Java', sks: 3 },
+                  { nama: 'Statistika', sks: 2 },
+                  { nama: 'Bahasa Indonesia', sks: 2 },
+                  { nama: 'Kewarganegaraan', sks: 2 },
+              ]},
+              { name: 'Semester Akselerasi', matkul: [
+                  { nama: 'Komunikasi Data & Jaringan Komputer', sks: 3 },
+                  { nama: 'Probabilitas', sks: 2 },
+                  { nama: 'PAK / PA Dunia', sks: 4 },
+              ]},
             ],
           },
           {
             label: 'Tahun Kedua',
             semesters: [
-              {
-                name: 'Semester 3',
-                matkul: [
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                  { nama: 'Lorem ipsum dolore sit amet. Lorem ipsum', sks: 3 },
-                ],
-              },
+              { name: 'Semester Ganjil', matkul: [
+                  { nama: 'Desain & Analisis Algoritma', sks: 2 },
+                  { nama: 'Sistem Basis Data', sks: 4 },
+                  { nama: 'Pemrograman Berorientasi Objek', sks: 2 },
+                  { nama: 'Pengantar Pemelajaran Mesin', sks: 2 },
+                  { nama: 'Pengantar Keamanan Komputer dan Jaringan', sks: 2 },
+                  { nama: 'Sistem Operasi', sks: 3 },
+                  { nama: 'Allah & Cipt. / Allah & Semesta', sks: 4 },
+              ]},
+              { name: 'Semester Genap', matkul: [
+                  { nama: 'Grafika Komputer', sks: 2 },
+                  { nama: 'Pengembangan Piranti Lunak', sks: 4 },
+                  { nama: 'Pemodelan Berorientasi Objek', sks: 2 },
+                  { nama: 'Interaksi Manusia & Komputer', sks: 2 },
+                  { nama: 'Simulasi dan Pemodelan', sks: 2 },
+                  { nama: 'Keamanan Komputer & Jaringan Lanjut', sks: 3 },
+                  { nama: 'Allah & Dosa / Manusia & Moralitas', sks: 4 },
+              ]},
+              { name: 'Semester Akselerasi', matkul: [
+                  { nama: 'Pengkodean yang Aman', sks: 3 },
+                  { nama: 'Pancasila', sks: 2 },
+                  { nama: 'Allah & Cipt. Baru / Sejarah & Masyarakat', sks: 4 },
+              ]},
+            ],
+          },
+          {
+            label: 'Tahun Ketiga',
+            semesters: [
+              { name: 'Semester Ganjil', matkul: [
+                  { nama: 'Kecerdasan Komputasional', sks: 4 },
+                  { nama: 'Pengalaman Pengguna', sks: 2 },
+                  { nama: 'Perancangan & Pemrograman Web', sks: 3 },
+                  { nama: 'Perancangan Aplikasi Platform Mobile', sks: 3 },
+                  { nama: 'Kriptografi', sks: 3 },
+                  { nama: 'Forensik Digital', sks: 3 },
+                  { nama: 'Penalaran Reflektif', sks: 2 },
+                  
+              ]},
+              { name: 'Semester Genap', matkul: [
+                  { nama: 'Teknologi Awan', sks: 3 },
+                  { nama: 'Sistem Media Interaktif', sks: 3 },
+                  { nama: 'Pengolahan Citra', sks: 3 },
+                  { nama: 'MK Pilihan Topik Khusus', sks: 3 },
+                  { nama: 'Teknologi Blockchain', sks: 3 },
+                  { nama: 'Studio Pengembangan Aplikasi Keamanan Siber', sks: 4 },
+              ]},
+              { name: 'Semester Akselerasi', matkul: [
+                  { nama: 'Metodologi Penelitian', sks: 2 },
+                  { nama: 'Teks & Konteks', sks: 2 },
+              ]},
+            ],
+          },
+          {
+            label: 'Tahun Keempat',
+            semesters: [
+              { name: 'Semester Ganjil', matkul: [
+                  { nama: 'Tugas Akhir', sks: 6 },
+                  { nama: 'Kapita Selekta', sks: 2 },
+              ]},
             ],
           },
         ],
@@ -434,28 +475,23 @@
     };
 
     // ── State ──
-    let activeTahun   = 0;
-    let activeSem     = 0;  // index within current tahun's semesters
+    let activeTahun = 0;
 
-    // ── Helpers ──
     function getParam() {
-      return new URLSearchParams(window.location.search).get('id') || 'intelligent-systems';
+      return new URLSearchParams(window.location.search).get('id') || 'kecerdasan-artifisial';
     }
-
     function getData() {
-      return PEMINATAN_DATA[getParam()] || PEMINATAN_DATA['intelligent-systems'];
+      return PEMINATAN_DATA[getParam()] || PEMINATAN_DATA['kecerdasan-artifisial'];
     }
 
     // ── Render ──
     function renderPage() {
       const data = getData();
 
-      // Hero
       document.getElementById('pdTitle').textContent = data.title;
       document.getElementById('pdDesc').textContent  = data.desc;
       document.title = data.title + ' - Program Studi S1 Informatika UPH';
 
-      // Karir
       document.getElementById('pdKarirList').innerHTML =
         data.karir.map(k => `<li>${k}</li>`).join('');
 
@@ -474,7 +510,6 @@
       tabs.querySelectorAll('.pd-tab').forEach(btn => {
         btn.addEventListener('click', () => {
           activeTahun = parseInt(btn.dataset.idx);
-          activeSem   = 0;
           renderTabs(data);
           renderSemesters(data);
         });
@@ -484,10 +519,9 @@
     function renderSemesters(data) {
       const tahun = data.tahun[activeTahun];
       const track = document.getElementById('pdSemesterTrack');
-      const dots  = document.getElementById('pdDots');
 
-      track.innerHTML = tahun.semesters.map((sem, i) => `
-        <div class="pd-semester ${i === activeSem ? 'is-active' : ''}">
+      track.innerHTML = tahun.semesters.map(sem => `
+        <div class="pd-semester-card">
           <h4 class="pd-semester__name">${sem.name}</h4>
           <table class="pd-matkul-table">
             <thead>
@@ -501,31 +535,6 @@
           </table>
         </div>
       `).join('');
-
-      // Dots
-      dots.innerHTML = tahun.semesters.map((_, i) => `
-        <button class="pd-dot ${i === activeSem ? 'is-active' : ''}" data-idx="${i}" aria-label="Semester ${i+1}"></button>
-      `).join('');
-
-      dots.querySelectorAll('.pd-dot').forEach(dot => {
-        dot.addEventListener('click', () => {
-          activeSem = parseInt(dot.dataset.idx);
-          renderSemesters(data);
-        });
-      });
-
-      // Next arrow
-      const nextBtn = document.getElementById('pdNext');
-      nextBtn.onclick = () => {
-        if (activeSem < tahun.semesters.length - 1) {
-          activeSem++;
-        } else if (activeTahun < data.tahun.length - 1) {
-          activeTahun++;
-          activeSem = 0;
-          renderTabs(data);
-        }
-        renderSemesters(data);
-      };
     }
 
     renderPage();

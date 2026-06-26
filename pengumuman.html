@@ -6,194 +6,156 @@
   <title>Pengumuman - Program Studi S1 Informatika UPH</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="pengumuman.css" />
 </head>
 <body>
 
   <header class="header">
     <nav class="navbar">
-
-      <!-- LOGO — replace the img src with your actual logo file -->
       <a class="navbar__logo" href="index.html">
         <img src="images/logo_FAIDAS_BW.png" alt="UPH FAIDAS Informatika Logo" />
       </a>
-
-      <!-- Hamburger button (mobile only) -->
       <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
-
-      <!-- NAV + CTA pushed right -->
       <div class="navbar__right" id="navbarRight">
-
         <ul class="navbar__nav">
-
-          <!-- ── Tentang ── -->
           <li>
-            <a href="#" class="nav-link" data-dropdown="dropdown-tentang">
-              Tentang <span class="chevron"></span>
-            </a>
+            <a href="#" class="nav-link" data-dropdown="dropdown-tentang">Tentang <span class="chevron"></span></a>
             <div class="dropdown" id="dropdown-tentang">
-              <!-- ADD / REMOVE items here freely -->
               <a class="dropdown__item" href="tentang-informatika.html">Tentang Informatika UPH</a>
               <a class="dropdown__item" href="kata-sambutan.html">Kata Sambutan Kaprodi</a>
               <a class="dropdown__item" href="sejarah-informatika.html">Sejarah Informatika UPH</a>
-              <a class="dropdown__item" href="struktur-organisasi.html">Struktur Organisasi</a>
+              <a class="dropdown__item" href="koordinator.html">Koordinator Internal Prodi</a>
             </div>
           </li>
-
-          <!-- ── Akademik ── -->
           <li>
-            <a href="#" class="nav-link" data-dropdown="dropdown-akademik">
-              Akademik <span class="chevron"></span>
-            </a>
+            <a href="#" class="nav-link" data-dropdown="dropdown-akademik">Akademik <span class="chevron"></span></a>
             <div class="dropdown" id="dropdown-akademik">
-              <!-- ADD / REMOVE items here freely -->
               <a class="dropdown__item" href="kurikulum.html">Kurikulum</a>
               <a class="dropdown__item" href="pengajar.html">Pengajar</a>
             </div>
           </li>
-
-          <!-- ── Riset & Inovasi ── -->
           <li>
-            <a href="#" class="nav-link" data-dropdown="dropdown-riset">
-              Riset &amp; Inovasi <span class="chevron"></span>
-            </a>
+            <a href="#" class="nav-link" data-dropdown="dropdown-riset">Riset &amp; Inovasi <span class="chevron"></span></a>
             <div class="dropdown" id="dropdown-riset">
-              <!-- ADD / REMOVE items here freely -->
               <a class="dropdown__item" href="penelitian-pkm.html">Penelitian &amp; PKM</a>
               <a class="dropdown__item" href="publikasi.html">Publikasi</a>
             </div>
           </li>
-
-          <!-- ── Mahasiswa ── -->
           <li>
-            <a href="#" class="nav-link" data-dropdown="dropdown-mahasiswa">
-              Mahasiswa <span class="chevron"></span>
-            </a>
+            <a href="#" class="nav-link" data-dropdown="dropdown-mahasiswa">Mahasiswa <span class="chevron"></span></a>
             <div class="dropdown" id="dropdown-mahasiswa">
-              <!-- ADD / REMOVE items here freely -->
               <a class="dropdown__item" href="himpunan.html">Himpunan</a>
               <a class="dropdown__item" href="informasi-lomba.html">Informasi Lomba</a>
             </div>
           </li>
-
-          <!-- ── Berita & Agenda ── -->
           <li>
-            <a href="#" class="nav-link" data-dropdown="dropdown-berita">
-              Berita &amp; Agenda <span class="chevron"></span>
-            </a>
+            <a href="#" class="nav-link" data-dropdown="dropdown-berita">Berita &amp; Agenda <span class="chevron"></span></a>
             <div class="dropdown" id="dropdown-berita">
-              <!-- ADD / REMOVE items here freely -->
               <a class="dropdown__item" href="berita.html">Berita</a>
               <a class="dropdown__item" href="pengumuman.html">Pengumuman</a>
               <a class="dropdown__item" href="event.html">Event</a>
             </div>
           </li>
-
         </ul>
-
-        <!-- CTA -->
         <a class="navbar__cta" href="#">Daftar<br>Sekarang</a>
-
-      </div> <!-- /.navbar__right -->
-
+      </div>
     </nav>
   </header>
 
-  <!-- ══════════════════════════════════════
-       PAGE CONTENT — PENGUMUMAN
-       Add your content here
-  ══════════════════════════════════════ -->
   <main class="page-main">
-    <div class="page-hero">
-      <h1 class="page-hero__title">Pengumuman</h1>
-    </div>
-    <div class="page-content">
-      <p>Konten untuk halaman <strong>Pengumuman</strong> akan ditambahkan di sini.</p>
-    </div>
+    <!-- ── MAIN CONTENT ── -->
+    <section class="pgm-section">
+      <div class="pgm-section__inner">
+
+        <!-- Section title + search bar -->
+        <div class="pgm-header">
+          <h2 class="pgm-header__title">Pengumuman</h2>
+          <div class="pgm-search">
+            <svg class="pgm-search__icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <circle cx="7.5" cy="7.5" r="5.5" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M12 12l3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <input class="pgm-search__input" id="pgmSearch" type="text"
+              placeholder="Cari pengumuman..." autocomplete="off" />
+            <button class="pgm-search__clear" id="pgmSearchClear" aria-label="Hapus">✕</button>
+          </div>
+        </div>
+
+        <!-- Result count -->
+        <p class="pgm-count" id="pgmCount"></p>
+
+        <!-- ── FEATURED (pinned) card — always first, single big card ── -->
+        <div id="pgmFeatured"></div>
+
+        <!-- ── GRID of remaining cards ── -->
+        <div class="pgm-grid" id="pgmGrid">
+          <!-- skeletons while loading -->
+          <div class="pgm-card-skeleton"></div>
+          <div class="pgm-card-skeleton"></div>
+          <div class="pgm-card-skeleton"></div>
+          <div class="pgm-card-skeleton"></div>
+          <div class="pgm-card-skeleton"></div>
+          <div class="pgm-card-skeleton"></div>
+        </div>
+
+        <!-- ── PAGINATION ── -->
+        <div class="pgm-pagination" id="pgmPagination">
+          <button class="pgm-pagination__btn" id="pgmPrev" disabled>←</button>
+          <div class="pgm-pagination__pages" id="pgmPageNums"></div>
+          <button class="pgm-pagination__btn" id="pgmNext">→</button>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
-
-    <!-- Top grid: brand + 4 nav columns -->
     <div class="footer__main">
-
-      <!-- Brand -->
       <div class="footer__brand">
         <p class="footer__brand-title">Program Studi</p>
         <p class="footer__brand-name">Informatika</p>
-
-        <!--
-          LOGO PLACEHOLDER
-          To add the logo, replace this entire div with:
-          <img src="path/to/your/logo.png" alt="IF Logo" style="width:170px;" />
-        -->
-        <!--<div class="footer__logo-placeholder">
-          Logo<br>IF Badge<br>Here
-        </div>
-        -->
         <img src="images/logo_IF.png" alt="IF Logo" style="width:170px;" />
       </div>
-
-      <!-- Akademik -->
       <div>
         <p class="footer__col-title">Akademik</p>
         <ul class="footer__links">
-          <!-- ADD / REMOVE items here freely -->
           <li><a href="kurikulum.html">Kurikulum</a></li>
           <li><a href="pengajar.html">Pengajar</a></li>
         </ul>
       </div>
-
-      <!-- Riset & Inovasi -->
       <div>
         <p class="footer__col-title">Riset &amp; Inovasi</p>
         <ul class="footer__links">
-          <!-- ADD / REMOVE items here freely -->
           <li><a href="penelitian-pkm.html">Penelitian &amp; PKM</a></li>
           <li><a href="publikasi.html">Publikasi</a></li>
         </ul>
       </div>
-
-      <!-- Mahasiswa -->
       <div>
         <p class="footer__col-title">Mahasiswa</p>
         <ul class="footer__links">
-          <!-- ADD / REMOVE items here freely -->
           <li><a href="himpunan.html">Himpunan</a></li>
           <li><a href="informasi-lomba.html">Informasi Lomba</a></li>
         </ul>
       </div>
-
-      <!-- Berita & Agenda -->
       <div>
         <p class="footer__col-title">Berita &amp; Agenda</p>
         <ul class="footer__links">
-          <!-- ADD / REMOVE items here freely -->
           <li><a href="berita.html">Berita</a></li>
           <li><a href="pengumuman.html">Pengumuman</a></li>
           <li><a href="event.html">Event</a></li>
         </ul>
       </div>
-
     </div>
-
-    <!-- Bottom info: spacer + contact + address -->
     <div class="footer__bottom-info">
-
-      <!-- Empty spacer column (aligns with brand column above, hidden on mobile) -->
       <div class="footer__spacer"></div>
-
-      <!-- Contact -->
       <div class="footer__contact-group">
         <p>WhatsApp : +62 8xx xxxx xxxx</p>
         <p>E-mail : informatika@uph.edu</p>
         <p>Instagram : @informatics.uph</p>
       </div>
-
-      <!-- Address -->
       <div>
         <p class="footer__address-title">Alamat</p>
         <p class="footer__address-text">
@@ -203,48 +165,31 @@
           Indonesia
         </p>
       </div>
-
     </div>
-
-    <!-- Copyright -->
     <div class="footer__copyright">
       &copy; Copyright 2026 Program Studi S1 Informatika Universitas Pelita Harapan. All Rights Reserved
     </div>
-
   </footer>
 
+  <!-- ── NAV SCRIPT ── -->
   <script>
     const hamburger = document.getElementById('hamburgerBtn');
     const navRight  = document.getElementById('navbarRight');
-
-    // Toggle mobile menu open/close
     hamburger.addEventListener('click', () => {
       const isOpen = navRight.classList.toggle('is-open');
       hamburger.classList.toggle('is-open', isOpen);
       hamburger.setAttribute('aria-expanded', isOpen);
     });
-
-    // Mobile: tap nav link to toggle its dropdown (no hover on touch)
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', e => {
-        if (window.innerWidth > 768) return; // desktop uses CSS hover
+        if (window.innerWidth > 768) return;
         e.preventDefault();
-        const targetId = link.getAttribute('data-dropdown');
-        const dropdown = document.getElementById(targetId);
         const parentLi = link.closest('li');
         const isActive = parentLi.classList.contains('mobile-open');
-
-        // Close all open dropdowns
-        document.querySelectorAll('.navbar__nav li').forEach(li => {
-          li.classList.remove('mobile-open');
-        });
-
-        // Open this one if it wasn't already open
+        document.querySelectorAll('.navbar__nav li').forEach(li => li.classList.remove('mobile-open'));
         if (!isActive) parentLi.classList.add('mobile-open');
       });
     });
-
-    // Close menu when clicking outside
     document.addEventListener('click', e => {
       if (!e.target.closest('.navbar')) {
         navRight.classList.remove('is-open');
@@ -255,6 +200,198 @@
     });
   </script>
 
+  <!-- ── PENGUMUMAN SCRIPT ── -->
+  <script>
+    const BASE      = 'https://uph-informatika-backend.vercel.app';
+    const LIMIT     = 9; // 1 featured slot + 8 grid cards per page
+
+    let currentPage  = 1;
+    let totalPages   = 1;
+    let searchTimer  = null;
+    let currentQuery = '';
+
+    const featuredEl = document.getElementById('pgmFeatured');
+    const gridEl     = document.getElementById('pgmGrid');
+    const countEl    = document.getElementById('pgmCount');
+    const prevBtn    = document.getElementById('pgmPrev');
+    const nextBtn    = document.getElementById('pgmNext');
+    const pageNumsEl = document.getElementById('pgmPageNums');
+    const searchEl   = document.getElementById('pgmSearch');
+    const clearBtn   = document.getElementById('pgmSearchClear');
+
+    /* ── Helpers ── */
+    function formatDate(iso) {
+      if (!iso) return '';
+      return new Date(iso).toLocaleDateString('id-ID', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+    }
+
+    function truncate(str, max) {
+      if (!str) return '';
+      // Strip basic HTML tags for safe preview
+      const plain = str.replace(/<[^>]+>/g, '');
+      return plain.length > max ? plain.slice(0, max).trimEnd() + '…' : plain;
+    }
+
+    /* ── Render featured (first pinned or first item on page 1) ── */
+    function renderFeatured(item) {
+      if (!item) { featuredEl.innerHTML = ''; return; }
+      featuredEl.innerHTML = `
+        <a class="pgm-featured" href="detail-pengumuman.html?id=${item.id}">
+          <div class="pgm-featured__img-wrap">
+            ${item.imageUrl
+              ? `<img class="pgm-featured__img" src="${item.imageUrl}" alt="${item.title}" loading="lazy" />`
+              : `<div class="pgm-featured__img pgm-featured__img--placeholder"></div>`}
+          </div>
+          <div class="pgm-featured__body">
+            <div class="pgm-featured__meta">
+              ${item.isPinned ? '<span class="pgm-pin-badge">📌 Disematkan</span>' : ''}
+              <span class="pgm-date">${formatDate(item.publishedAt)}</span>
+            </div>
+            <h2 class="pgm-featured__title">${item.title}</h2>
+            <p class="pgm-featured__excerpt">${truncate(item.content, 200)}</p>
+            <span class="pgm-featured__cta">Baca Selengkapnya →</span>
+          </div>
+        </a>
+      `;
+    }
+
+    /* ── Render grid cards ── */
+    function renderGrid(items) {
+      if (!items.length) {
+        gridEl.innerHTML = '';
+        return;
+      }
+      gridEl.innerHTML = items.map(item => `
+        <a class="pgm-card" href="detail-pengumuman.html?id=${item.id}">
+          <div class="pgm-card__img-wrap">
+            ${item.imageUrl
+              ? `<img class="pgm-card__img" src="${item.imageUrl}" alt="${item.title}" loading="lazy" />`
+              : `<div class="pgm-card__img pgm-card__img--placeholder"></div>`}
+          </div>
+          <div class="pgm-card__body">
+            <div class="pgm-card__meta">
+              ${item.isPinned ? '<span class="pgm-pin-badge">📌</span>' : ''}
+              <span class="pgm-date">${formatDate(item.publishedAt)}</span>
+            </div>
+            <h3 class="pgm-card__title">${item.title}</h3>
+            <p class="pgm-card__excerpt">${truncate(item.content, 110)}</p>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    /* ── Render pagination ── */
+    function renderPagination(page, total) {
+      prevBtn.disabled = page <= 1;
+      nextBtn.disabled = page >= total;
+
+      // Show up to 5 page numbers around current
+      const pages = [];
+      const start = Math.max(1, page - 2);
+      const end   = Math.min(total, page + 2);
+      for (let i = start; i <= end; i++) pages.push(i);
+
+      pageNumsEl.innerHTML = pages.map(p => `
+        <button class="pgm-pagination__page ${p === page ? 'is-active' : ''}"
+          data-page="${p}">${p}</button>
+      `).join('');
+
+      pageNumsEl.querySelectorAll('.pgm-pagination__page').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentPage = parseInt(btn.dataset.page);
+          loadPage();
+        });
+      });
+    }
+
+    /* ── Show skeletons while loading ── */
+    function showSkeletons() {
+      featuredEl.innerHTML = '<div class="pgm-featured-skeleton"></div>';
+      gridEl.innerHTML = Array(6).fill('<div class="pgm-card-skeleton"></div>').join('');
+    }
+
+    /* ── Main fetch ── */
+    async function loadPage() {
+      showSkeletons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      try {
+        const params = new URLSearchParams({
+          page:  currentPage,
+          limit: LIMIT,
+          sort:  'publishedAt',
+          order: 'desc',
+        });
+        if (currentQuery) params.set('search', currentQuery);
+
+        const res  = await fetch(`${BASE}/api/pengumuman?${params}`);
+        const json = await res.json();
+        const items      = json.data || [];
+        const pagination = json.pagination || {};
+        totalPages = pagination.totalPages || 1;
+        const total = pagination.total || items.length;
+
+        // Update count
+        countEl.textContent = currentQuery
+          ? `${total} hasil untuk "${currentQuery}"`
+          : `${total} pengumuman`;
+
+        if (!items.length) {
+          featuredEl.innerHTML = '';
+          gridEl.innerHTML = `<p class="pgm-empty">Tidak ada pengumuman${currentQuery ? ` untuk "${currentQuery}"` : ''}.</p>`;
+          pageNumsEl.innerHTML = '';
+          prevBtn.disabled = true;
+          nextBtn.disabled = true;
+          return;
+        }
+
+        // On page 1: first item (pinned or latest) → featured, rest → grid
+        // On page 2+: all items → grid, no featured slot
+        if (currentPage === 1) {
+          renderFeatured(items[0]);
+          renderGrid(items.slice(1));
+        } else {
+          featuredEl.innerHTML = '';
+          renderGrid(items);
+        }
+
+        renderPagination(currentPage, totalPages);
+
+      } catch (err) {
+        featuredEl.innerHTML = '';
+        gridEl.innerHTML = '<p class="pgm-empty">Gagal memuat data. Silakan coba lagi nanti.</p>';
+        console.error(err);
+      }
+    }
+
+    /* ── Search ── */
+    searchEl.addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      clearBtn.classList.toggle('is-visible', searchEl.value.length > 0);
+      searchTimer = setTimeout(() => {
+        currentQuery = searchEl.value.trim();
+        currentPage  = 1;
+        loadPage();
+      }, 300);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      searchEl.value = '';
+      clearBtn.classList.remove('is-visible');
+      currentQuery = '';
+      currentPage  = 1;
+      loadPage();
+      searchEl.focus();
+    });
+
+    prevBtn.addEventListener('click', () => { if (currentPage > 1)          { currentPage--; loadPage(); } });
+    nextBtn.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; loadPage(); } });
+
+    /* ── Init ── */
+    loadPage();
+  </script>
 
 </body>
 </html>

@@ -40,7 +40,7 @@
               <a class="dropdown__item" href="tentang-informatika.html">Tentang Informatika UPH</a>
               <a class="dropdown__item" href="kata-sambutan.html">Kata Sambutan Kaprodi</a>
               <a class="dropdown__item" href="sejarah-informatika.html">Sejarah Informatika UPH</a>
-              <a class="dropdown__item" href="struktur-organisasi.html">Struktur Organisasi</a>
+              <a class="dropdown__item" href="koordinator.html">Koordinator Internal Prodi</a>
             </div>
           </li>
 
@@ -110,24 +110,24 @@
 
       <div class="peminatan__grid">
 
-        <a class="peminatan__card" href="#" data-panel="opsi-intelligent" data-title="Intelligent Systems" data-image="images/peminatan-intelligent.jpg" data-desc="Fokus pada pengembangan sistem komputer yang mampu meniru kecerdasan manusia, termasuk kecerdasan buatan (AI), machine learning, dan robotika.">
+        <a class="peminatan__card" href="#" data-panel="kecerdasan-artifisial" data-title="Kecerdasan Artifisial dan Cognitive Computing" data-image="images/peminatan-intelligent.jpg" data-desc="Peminatan ini berfokus pada pengembangan sistem komputer yang mampu meniru kemampuan kognitif manusia, mulai dari belajar, berpikir, mengambil keputusan, hingga memahami bahasa dan citra. Mahasiswa mendalami pemelajaran mesin, visi komputer, pemrosesan bahasa alami, sistem cerdas, hingga komputasi paralel, serta belajar membangun aplikasi AI nyata melalui studio pengembangan dan proyek capstone.">
           <img src="images/peminatan-intelligent.jpg" alt="Intelligent Systems" onerror="this.src='images/pengajar.png'" />
           <div class="peminatan__card-overlay">
-            <span>Intelligent Systems</span>
+            <span>Kecerdasan Artifisial dan Cognitive Computing</span>
           </div>
         </a>
 
-        <a class="peminatan__card" href="#" data-panel="opsi-software" data-title="Software Engineering" data-image="images/peminatan-software.jpg" data-desc="Mempelajari siklus hidup lengkap pembuatan aplikasi modern, mulai dari arsitektur, manajemen basis data berskala besar, hingga deployment sistem awan (Cloud).">
+        <a class="peminatan__card" href="#" data-panel="data-intelligence" data-title="Data Intelligence" data-image="images/peminatan-software.jpg" data-desc="Peminatan ini membekali mahasiswa untuk menggali wawasan yang berguna dari data dan mengubahnya menjadi keputusan strategis. Materi mencakup big data, data mining, data warehousing, visualisasi data, hingga analitik lanjutan berbasis statistik dan pemelajaran mesin. Mahasiswa dilatih untuk merancang solusi berbasis data yang aplikatif di berbagai sektor, mulai dari bisnis, kesehatan, hingga pemerintahan.">
           <img src="images/peminatan-software.jpg" alt="Software Engineering" onerror="this.src='images/pengajar.png'" />
           <div class="peminatan__card-overlay">
-            <span>Software Engineering</span>
+            <span>Data Intelligence</span>
           </div>
         </a>
 
-        <a class="peminatan__card" href="#" data-panel="opsi-data" data-title="Data Science &amp; Analytics" data-image="images/peminatan-data.jpg" data-desc="Berfokus pada pengolahan, pembersihan, visualisasi, dan ekstraksi wawasan (insights) penting dari data mentah berukuran besar (Big Data) untuk kebutuhan bisnis.">
+        <a class="peminatan__card" href="#" data-panel="keamanan-siber" data-title="Keamanan Siber" data-image="images/peminatan-data.jpg" data-desc="Peminatan ini menyiapkan mahasiswa untuk melindungi sistem, jaringan, dan data dari ancaman digital yang terus berkembang. Materi mencakup keamanan komputer dan jaringan lanjut, pengkodean yang aman, kriptografi, analisis keamanan, hingga forensik digital. Mahasiswa dibekali pemahaman teknis sekaligus pertimbangan etika dan regulasi, sesuai dengan standar industri serta kebijakan global terkait privasi dan keamanan data.">
           <img src="images/peminatan-data.jpg" alt="Data Science &amp; Analytics" onerror="this.src='images/pengajar.png'" />
           <div class="peminatan__card-overlay">
-            <span>Data Science &amp; Analytics</span>
+            <span>Keamanan Siber</span>
           </div>
         </a>
 
@@ -343,12 +343,8 @@
     // Navigate to detail page on click
     modalLink.addEventListener('click', e => {
       e.preventDefault();
-      const panelMap = {
-        'opsi-intelligent': 'intelligent-systems',
-        'opsi-software':    'software-engineering',
-        'opsi-data':        'data-science',
-      };
-      const id = panelMap[modalLink.dataset.panel] || modalLink.dataset.panel;
+      // panel id now matches peminatan-detail key directly
+      const id = modalLink.dataset.panel;
       window.location.href = 'peminatan-detail.html?id=' + id;
     });
   </script>

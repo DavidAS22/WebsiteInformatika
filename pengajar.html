@@ -40,7 +40,7 @@
               <a class="dropdown__item" href="tentang-informatika.html">Tentang Informatika UPH</a>
               <a class="dropdown__item" href="kata-sambutan.html">Kata Sambutan Kaprodi</a>
               <a class="dropdown__item" href="sejarah-informatika.html">Sejarah Informatika UPH</a>
-              <a class="dropdown__item" href="struktur-organisasi.html">Struktur Organisasi</a>
+              <a class="dropdown__item" href="koordinator.html">Koordinator Internal Prodi</a>
             </div>
           </li>
 
@@ -108,10 +108,6 @@
        Add your content here
   ══════════════════════════════════════ -->
   <main class="page-main">
-    <div class="page-hero">
-      <h1 class="page-hero__title">Pengajar</h1>
-    </div>
-
     <!-- ══════════════════════════════════════
          STAF PENDIDIK SECTION
     ══════════════════════════════════════ -->
@@ -338,10 +334,8 @@
       grid.innerHTML = data.map(item => {
         const foto  = item.lecturerImageUrl || 'images/pengajar.png';
         const nama  = item.fullName || 'Nama Lengkap';
-        
-        // PERBAIKAN: Mengirim nama lewat URL
-        const href  = item.fullName ? `info-pengajar.html?name=${encodeURIComponent(item.fullName)}` : 'info-pengajar.html';
-        
+        // Use id for the link — matches /api/lecturer/[id] in the API docs
+        const href  = item.id ? `info-pengajar.html?id=${item.id}` : 'info-pengajar.html';
         return `
           <a class="staf__card" href="${href}" style="text-decoration:none;">
             <div class="staf__card-photo">
@@ -351,8 +345,8 @@
               <p class="staf__card-name">${nama}</p>
               <p class="staf__card-email">${item.email || ''}</p>
               <div class="staf__card-stats">
-                <p>Publikasi : ${item.publikasi ?? 0}</p>
-                <p>HKI/Paten : ${item.hki_paten ?? 0}</p>
+                <p>Jabatan : ${item.jja || '–'}</p>
+                <p>Kelompok : ${(item.researchGroup || '–').split('&')[0].trim()}</p>
               </div>
             </div>
           </a>`;
@@ -364,8 +358,10 @@
       try {
         const res  = await fetch(STAF_API_URL);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        renderStaf(data);
+        const json = await res.json();
+        // API returns { data: [...], pagination: {...} }
+        const data = json.data || json;
+        renderStaf(Array.isArray(data) ? data : []);
       } catch (err) {
         console.warn('Staf CMS fetch failed, using fallback data.', err);
         renderStaf(STAF_PLACEHOLDER);

@@ -6,6 +6,7 @@
   <title>Event - Program Studi S1 Informatika UPH</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="event.css" />
 </head>
 <body>
 
@@ -39,7 +40,7 @@
               <a class="dropdown__item" href="tentang-informatika.html">Tentang Informatika UPH</a>
               <a class="dropdown__item" href="kata-sambutan.html">Kata Sambutan Kaprodi</a>
               <a class="dropdown__item" href="sejarah-informatika.html">Sejarah Informatika UPH</a>
-              <a class="dropdown__item" href="struktur-organisasi.html">Struktur Organisasi</a>
+              <a class="dropdown__item" href="koordinator.html">Koordinator Internal Prodi</a>
             </div>
           </li>
 
@@ -107,12 +108,43 @@
        Add your content here
   ══════════════════════════════════════ -->
   <main class="page-main">
-    <div class="page-hero">
-      <h1 class="page-hero__title">Event</h1>
+
+    <div class="btn-back-wrap">
+      <button class="btn-back btn-back--navy" onclick="history.back()">
+        &larr; KEMBALI
+      </button>
     </div>
-    <div class="page-content">
-      <p>Konten untuk halaman <strong>Event</strong> akan ditambahkan di sini.</p>
-    </div>
+
+    <!-- ══════════════════════════════════════
+         EVENT SELANJUTNYA (Upcoming)
+    ══════════════════════════════════════ -->
+    <section class="event-section event-section--upcoming">
+      <h2 class="event-section__heading">Event Selanjutnya</h2>
+
+      <!-- List -->
+      <div class="event-list" id="upcomingList">
+        <!-- Injected by JS -->
+      </div>
+
+      <!-- Pagination -->
+      <div class="event-pagination" id="upcomingPagination"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         EVENT SEBELUMNYA (Past) — orange bg
+    ══════════════════════════════════════ -->
+    <section class="event-section event-section--past">
+      <h2 class="event-section__heading">Event Sebelumnya</h2>
+
+      <div class="event-list" id="pastList">
+        <!-- Injected by JS -->
+      </div>
+
+      <a class="event-more-btn" id="pastMoreBtn" href="#">
+        LIHAT EVENT LAINNYA &rarr;
+      </a>
+    </section>
+
   </main>
 
   <footer class="footer">
@@ -254,7 +286,150 @@
       }
     });
   </script>
+  <!-- ══════════════════════════════════════
+       EVENT CMS INTEGRATION
+       API: https://uph-informatika-backend.vercel.app
+       Docs: https://github.com/kelvin8701/uph-informatika-public-api
+  ══════════════════════════════════════ -->
+  <script>
+    const API_BASE = 'https://uph-informatika-backend.vercel.app';
 
+    // ── Helpers ──────────────────────────────────────────────
+    function formatDate(dateStr) {
+      if (!dateStr) return '—';
+      const d = new Date(dateStr);
+      const day   = String(d.getUTCDate()).padStart(2, '0');
+      const month = String(d.getUTCMonth() + 1).padStart(2, '0');
+      const year  = d.getUTCFullYear();
+      return `${day} - ${month} - ${year}`;
+    }
+
+    function formatTime(timeStr) {
+      if (!timeStr) return '—';
+      return timeStr.slice(0, 5); // "HH:MM"
+    }
+
+    function skeletonHTML(count = 3) {
+      return Array.from({ length: count }).map(() => `
+        <div class="event-card event-card--skeleton">
+          <div class="event-card__img event-card__img--skeleton"></div>
+          <div class="event-card__body">
+            <div class="event-card__skel-line" style="width:55%;height:14px;"></div>
+            <div class="event-card__skel-line" style="width:75%;height:11px;margin-top:8px;"></div>
+            <div class="event-card__skel-line" style="width:60%;height:11px;margin-top:4px;"></div>
+            <div class="event-card__skel-line" style="width:65%;height:11px;margin-top:4px;"></div>
+          </div>
+        </div>`).join('');
+    }
+
+    function cardHTML(ev, light = true) {
+      const img = ev.eventImageUrl
+        ? `<img src="${ev.eventImageUrl}" alt="${ev.title}" onerror="this.style.display='none'" />`
+        : '';
+      return `
+        <a class="event-card${light ? '' : ' event-card--dark'}" href="event-detail.html?id=${ev.id}">
+          <div class="event-card__img">${img}</div>
+          <div class="event-card__body">
+            <p class="event-card__title">${ev.title}</p>
+            <div class="event-card__divider"></div>
+            <p class="event-card__meta">Tanggal : ${formatDate(ev.eventDate)}</p>
+            <p class="event-card__meta">Waktu : ${formatTime(ev.eventStartTime)}</p>
+            <p class="event-card__meta">Tempat : ${ev.eventPlace || '—'}</p>
+          </div>
+        </a>`;
+    }
+
+    // ── Upcoming Events ───────────────────────────────────────
+    let upcomingPage = 1;
+    const UPCOMING_LIMIT = 3;
+
+    async function loadUpcoming(page = 1) {
+      const list = document.getElementById('upcomingList');
+      const pag  = document.getElementById('upcomingPagination');
+      list.innerHTML = skeletonHTML(UPCOMING_LIMIT);
+
+      try {
+        const res  = await fetch(`${API_BASE}/api/event?status=upcoming&page=${page}&limit=${UPCOMING_LIMIT}&sort=eventDate&order=asc`);
+        const json = await res.json();
+        const { data, pagination } = json;
+
+        if (!data || !data.length) {
+          list.innerHTML = '<p class="event-empty">Tidak ada event mendatang.</p>';
+          pag.innerHTML = '';
+          return;
+        }
+
+        list.innerHTML = data.map(ev => cardHTML(ev, true)).join('');
+        renderPagination(pag, pagination, p => { upcomingPage = p; loadUpcoming(p); });
+
+      } catch (err) {
+        console.error('Failed to load upcoming events:', err);
+        list.innerHTML = '<p class="event-empty">Gagal memuat event.</p>';
+      }
+    }
+
+    // ── Past Events ───────────────────────────────────────────
+    const PAST_LIMIT = 3;
+
+    async function loadPast() {
+      const list = document.getElementById('pastList');
+      list.innerHTML = skeletonHTML(PAST_LIMIT);
+
+      try {
+        const res  = await fetch(`${API_BASE}/api/event?status=past&page=1&limit=${PAST_LIMIT}&sort=eventDate&order=desc`);
+        const json = await res.json();
+        const { data, pagination } = json;
+
+        if (!data || !data.length) {
+          list.innerHTML = '<p class="event-empty">Belum ada event sebelumnya.</p>';
+          return;
+        }
+
+        list.innerHTML = data.map(ev => cardHTML(ev, false)).join('');
+
+        // "Lihat Event Lainnya" → go to a dedicated past events page or load more
+        const moreBtn = document.getElementById('pastMoreBtn');
+        if (pagination && pagination.totalPages > 1) {
+          moreBtn.style.display = 'inline-flex';
+          moreBtn.href = 'event-past.html'; // create this page for full past list
+        } else {
+          moreBtn.style.display = 'none';
+        }
+
+      } catch (err) {
+        console.error('Failed to load past events:', err);
+        list.innerHTML = '<p class="event-empty">Gagal memuat event.</p>';
+      }
+    }
+
+    // ── Pagination renderer ───────────────────────────────────
+    function renderPagination(container, pagination, onPage) {
+      if (!pagination || pagination.totalPages <= 1) {
+        container.innerHTML = '';
+        return;
+      }
+
+      const { page, totalPages } = pagination;
+
+      let html = `<button class="event-pag__btn" ${page <= 1 ? 'disabled' : ''} data-p="${page - 1}">&larr;</button>`;
+      for (let p = 1; p <= totalPages; p++) {
+        html += `<button class="event-pag__num${p === page ? ' is-active' : ''}" data-p="${p}">${p}</button>`;
+      }
+      html += `<button class="event-pag__btn" ${page >= totalPages ? 'disabled' : ''} data-p="${page + 1}">&rarr;</button>`;
+
+      container.innerHTML = html;
+      container.querySelectorAll('[data-p]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const p = parseInt(btn.dataset.p);
+          if (!btn.disabled) onPage(p);
+        });
+      });
+    }
+
+    // ── Init ──────────────────────────────────────────────────
+    loadUpcoming();
+    loadPast();
+  </script>
 
 </body>
 </html>

@@ -113,24 +113,15 @@
   border-bottom-color: var(--orange);
 }
 
-/* ── Semester Carousel ── */
+/* ── Semester Grid (all semesters of active year shown side-by-side) ── */
 .pd-semester-stage {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .pd-semester-track {
-  display: flex;
-  gap: 16px;
-}
-
-.pd-semester {
-  display: none;
-  width: 100%;
-  flex-shrink: 0;
-}
-
-.pd-semester.is-active {
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   animation: pdFadeIn 0.25s ease;
 }
 
@@ -139,13 +130,23 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Each semester is a card with a light border */
+.pd-semester-card {
+  background: #ffffff;
+  border: 1px solid #e4e7f0;
+  border-radius: 10px;
+  padding: 20px;
+}
+
 .pd-semester__name {
   font-family: var(--font-main);
   font-weight: 700;
   font-size: 1rem;
-  color: var(--orange);
-  margin-bottom: 12px;
+  color: var(--navy);
+  margin-bottom: 4px;
 }
+
+
 
 /* ── Mata Kuliah Table ── */
 .pd-matkul-table {
@@ -190,61 +191,17 @@
   background: #fafbff;
 }
 
-/* ── Dots + Arrow Nav ── */
-.pd-nav {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.pd-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.pd-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #d0d5e8;
-  border: none;
-  cursor: pointer;
-  transition: background 0.15s, transform 0.15s;
-  padding: 0;
-}
-
-.pd-dot.is-active {
-  background: var(--orange);
-  transform: scale(1.2);
-}
-
-.pd-nav__arrow {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1.5px solid var(--navy);
-  background: none;
-  color: var(--navy);
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s, color 0.2s;
-  margin-left: 4px;
-}
-
-.pd-nav__arrow:hover {
-  background: var(--navy);
-  color: #fff;
-}
-
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .pd-hero, .pd-karir, .pd-kurikulum {
     padding-left: 40px;
     padding-right: 40px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .pd-semester-track {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -262,5 +219,8 @@
   .pd-tab {
     padding: 10px 14px;
     font-size: 0.82rem;
+  }
+  .pd-semester-track {
+    grid-template-columns: 1fr;
   }
 }

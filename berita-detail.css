@@ -1,0 +1,224 @@
+/* ═══════════════════════════════════════════════════════════
+   berita-detail.css — Halaman Detail Berita
+   Depends on: style.css
+═══════════════════════════════════════════════════════════ */
+
+.bd-main {
+  background: #ffffff;
+  min-height: 60vh;
+}
+
+/* ── Centred content column ── */
+.bd-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 36px 24px 72px;
+}
+
+/* ── Back link ── */
+.bd-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--navy);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0.7;
+  transition: opacity 0.15s, color 0.15s;
+}
+
+.bd-back:hover {
+  opacity: 1;
+  color: var(--orange);
+}
+
+/* ══════════════════════════════
+   ARTICLE
+══════════════════════════════ */
+.bd-article__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: var(--navy);
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+/* ── Tags + published date row ── */
+.bd-article__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.bd-article__tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.bd-tag {
+  background: linear-gradient(to right, var(--navy) 0%, var(--orange) 100%);
+  color: #fff;
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.bd-article__date {
+  font-family: var(--font-main);
+  font-size: 0.78rem;
+  color: #999;
+  white-space: nowrap;
+}
+
+/* ── Event info block (tanggal / waktu / tempat) ── */
+.bd-event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f5f7fc;
+  border-left: 3px solid var(--orange);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+}
+
+.bd-event-info__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.bd-event-info__icon {
+  color: var(--orange);
+  flex-shrink: 0;
+}
+
+/* ── Hero image ── */
+.bd-article__img-wrap {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  background: #e8eaf0;
+}
+
+.bd-article__img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  max-height: 480px;
+}
+
+/* ── Body text ── */
+.bd-article__body {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.85;
+}
+
+.bd-article__body p {
+  margin-bottom: 16px;
+}
+
+.bd-article__body p:last-child {
+  margin-bottom: 0;
+}
+
+.bd-article__body img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+
+.bd-article__body a {
+  color: var(--orange);
+  text-decoration: underline;
+}
+
+.bd-article__body ul,
+.bd-article__body ol {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.bd-article__body li {
+  margin-bottom: 6px;
+}
+
+/* ══════════════════════════════
+   SKELETON LOADER
+══════════════════════════════ */
+.bd-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bd-skeleton > div {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #eef0f6 25%, #f8f9fc 50%, #eef0f6 75%);
+  background-size: 200% 100%;
+  animation: bdShimmer 1.4s infinite;
+}
+
+@keyframes bdShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.bd-skeleton__title  { height: 36px; width: 80%; }
+.bd-skeleton__meta   { height: 20px; width: 40%; }
+.bd-skeleton__img    { height: 340px; border-radius: 10px; }
+.bd-skeleton__line   { height: 16px; width: 100%; }
+.bd-skeleton__line--short { width: 65%; }
+
+/* ══════════════════════════════
+   ERROR STATE
+══════════════════════════════ */
+.bd-error {
+  text-align: center;
+  padding: 64px 0;
+  font-family: var(--font-body);
+  color: #888;
+  font-size: 0.95rem;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 768px) {
+  .bd-wrap {
+    padding: 28px 20px 56px;
+  }
+
+  .bd-article__title {
+    font-size: 1.35rem;
+  }
+
+  .bd-article__img {
+    max-height: 260px;
+  }
+
+  .bd-skeleton__img {
+    height: 200px;
+  }
+}

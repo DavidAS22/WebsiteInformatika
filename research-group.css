@@ -15,20 +15,11 @@
   padding: 0 72px 52px;
 
   /* Background image — swap this per research group page */
-  background: url('images/background_homepage.png') center / cover no-repeat;
+  background: linear-gradient(0deg, rgba(53, 60, 119, 0.85),rgba(53, 60, 119, 0.85)),
+              url('images/research.png') center center / cover no-repeat;
 }
 
 /* Dark gradient overlay so text stays readable */
-.rg-hero__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(18, 32, 74, 0.55) 0%,
-    rgba(18, 32, 74, 0.88) 100%
-  );
-  pointer-events: none;
-}
 
 .rg-hero__content {
   position: relative;
