@@ -77,8 +77,7 @@
   opacity: 0;
   transition: opacity 0.25s;
 }
-
-.peminatan__card:hover .peminatan__card-overlay {
+.peminatan__card-overlay {
   opacity: 1;
 }
 
