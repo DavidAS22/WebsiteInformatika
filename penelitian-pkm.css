@@ -10,6 +10,7 @@
   min-height: 280px;
   align-items: flex-end;
   padding: 0 72px 56px;
+  position: relative;
   background: linear-gradient(
                 90deg,
                 rgba(29, 36, 94, 0.85) 0%, 
@@ -20,6 +21,12 @@
 }
 
 .pkm-hero__content { max-width: 640px; }
+
+.pkm-hero__back {
+  position: absolute;
+  top: 20px;
+  left: 28px;
+}
 
 .pkm-hero__title {
   font-family: var(--font-main);
@@ -36,6 +43,7 @@
   color: rgba(255,255,255,0.88);
   line-height: 1.75;
   font-weight: 500;
+  
 }
 
 /* ──────────────────────────────────────
@@ -110,6 +118,7 @@
   font-size: 0.875rem;
   color: #555;
   line-height: 1.7;
+  text-align: justify;
 }
 
 .riset-card__sub-label,

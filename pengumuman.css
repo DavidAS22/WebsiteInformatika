@@ -12,6 +12,11 @@
   padding: 0 72px 48px;
 }
 
+.pgm-btn-back-wrap {
+  padding: 16px 30px 0;
+  background: #f5f7fc;
+}
+
 .pgm-hero__content { max-width: 560px; }
 
 .pgm-hero__title {

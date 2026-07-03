@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Pengumuman - Program Studi S1 Informatika UPH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="detail-pengumuman.css" />
+  <link rel="icon" type="image/x-icon" href="images/logo_IF.ico"/>
+</head>
+<body>
+
+  <header class="header">
+    <nav class="navbar">
+      <a class="navbar__logo" href="index.html">
+        <img src="images/logo_FAIDAS_BW.png" alt="UPH FAIDAS Informatika Logo" />
+      </a>
+      <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="navbar__right" id="navbarRight">
+        <ul class="navbar__nav">
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-tentang">Tentang <span class="chevron"></span></a>
+            <div class="dropdown" id="dropdown-tentang">
+              <a class="dropdown__item" href="tentang-informatika.html">Tentang Informatika UPH</a>
+              <a class="dropdown__item" href="kata-sambutan.html">Kata Sambutan Kaprodi</a>
+              <a class="dropdown__item" href="sejarah-informatika.html">Sejarah Informatika UPH</a>
+              <a class="dropdown__item" href="koordinator.html">Koordinator Internal Prodi</a>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-akademik">Akademik <span class="chevron"></span></a>
+            <div class="dropdown" id="dropdown-akademik">
+              <a class="dropdown__item" href="kurikulum.html">Kurikulum</a>
+              <a class="dropdown__item" href="pengajar.html">Pengajar</a>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-riset">Riset &amp; Inovasi <span class="chevron"></span></a>
+            <div class="dropdown" id="dropdown-riset">
+              <a class="dropdown__item" href="penelitian-pkm.html">Penelitian &amp; PKM</a>
+              <a class="dropdown__item" href="publikasi.html">Publikasi</a>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-mahasiswa">Mahasiswa <span class="chevron"></span></a>
+            <div class="dropdown" id="dropdown-mahasiswa">
+              <a class="dropdown__item" href="himpunan.html">Himpunan</a>
+              <a class="dropdown__item" href="informasi-lomba.html">Informasi Lomba</a>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-dropdown="dropdown-berita">Berita &amp; Agenda <span class="chevron"></span></a>
+            <div class="dropdown" id="dropdown-berita">
+              <a class="dropdown__item" href="berita.html">Berita</a>
+              <a class="dropdown__item" href="pengumuman.html">Pengumuman</a>
+              <a class="dropdown__item" href="event.html">Event</a>
+            </div>
+          </li>
+        </ul>
+        <a class="navbar__cta" href="https://apply.uph.edu/">Daftar<br>Sekarang</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-main bd-main">
+
+    <div class="btn-back-wrap">
+      <a class="btn-back btn-back--navy" href="pengumuman.html">← Kembali ke Pengumuman</a>
+    </div>
+
+    <div class="bd-wrap">
+      <!-- ── Skeleton shown while loading ── -->
+      <div class="bd-skeleton" id="bdSkeleton">
+        <div class="bd-skeleton__title"></div>
+        <div class="bd-skeleton__meta"></div>
+        <div class="bd-skeleton__img"></div>
+        <div class="bd-skeleton__line"></div>
+        <div class="bd-skeleton__line bd-skeleton__line--short"></div>
+        <div class="bd-skeleton__line"></div>
+      </div>
+
+      <!-- ── Article (hidden until loaded) ── -->
+      <article class="bd-article" id="bdArticle" style="display:none;">
+
+        <!-- Title — centered -->
+        <h1 class="bd-article__title" id="bdTitle"></h1>
+
+        <!-- Tags + Date row — centered -->
+        <div class="bd-article__meta" id="bdMeta">
+          <div class="bd-article__tags" id="bdTags"></div>
+          <span class="bd-article__date" id="bdDate"></span>
+        </div>
+
+        <!-- Hero image — full width, right below title -->
+        <div class="bd-article__img-wrap" id="bdImgWrap">
+          <img class="bd-article__img" id="bdImg" src="images/berita_placeholder.jpg" alt="" onerror="this.style.background='#d0d5e8';this.style.minHeight='320px';this.removeAttribute('src')" />
+        </div>
+
+        <!-- Body / description -->
+        <div class="bd-article__body" id="bdBody"></div>
+
+        <!-- Event info as plain text lines (Tanggal / Waktu / Tempat) -->
+        <div class="bd-event-info" id="bdEventInfo" style="display:none;">
+          <p class="bd-event-info__item" id="bdTanggalWrap" style="display:none;">
+            <strong>Tanggal :</strong> <span id="bdTanggal"></span>
+          </p>
+          <p class="bd-event-info__item" id="bdWaktuWrap" style="display:none;">
+            <strong>Waktu :</strong> <span id="bdWaktu"></span>
+          </p>
+          <p class="bd-event-info__item" id="bdTempatWrap" style="display:none;">
+            <strong>Tempat :</strong> <span id="bdTempat"></span>
+          </p>
+        </div>
+
+      </article>
+
+      <!-- ── Error state ── -->
+      <div class="bd-error" id="bdError" style="display:none;">
+        <p>Pengumuman tidak ditemukan atau gagal dimuat.</p>
+        <a class="bd-back" href="pengumuman.html">← Kembali ke Pengumuman</a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__main">
+      <div class="footer__brand">
+        <p class="footer__brand-title">Program Studi</p>
+        <p class="footer__brand-name">Informatika</p>
+        <img src="images/logo_IF.png" alt="IF Logo" style="width:170px;" />
+      </div>
+      <div>
+        <p class="footer__col-title">Akademik</p>
+        <ul class="footer__links">
+          <li><a href="kurikulum.html">Kurikulum</a></li>
+          <li><a href="pengajar.html">Pengajar</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title">Riset &amp; Inovasi</p>
+        <ul class="footer__links">
+          <li><a href="penelitian-pkm.html">Penelitian &amp; PKM</a></li>
+          <li><a href="publikasi.html">Publikasi</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title">Mahasiswa</p>
+        <ul class="footer__links">
+          <li><a href="himpunan.html">Himpunan</a></li>
+          <li><a href="informasi-lomba.html">Informasi Lomba</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title">Berita &amp; Agenda</p>
+        <ul class="footer__links">
+          <li><a href="berita.html">Berita</a></li>
+          <li><a href="pengumuman.html">Pengumuman</a></li>
+          <li><a href="event.html">Event</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom-info">
+      <div class="footer__spacer"></div>
+      <div class="footer__contact-group">
+        <p>WhatsApp : +62 851 9610 5421</p>
+        <p>E-mail : informatika@uph.edu</p>
+        <p>Instagram : @informatics.uph</p>
+      </div>
+      <div>
+        <p class="footer__address-title">Alamat</p>
+        <p class="footer__address-text">
+          Menara Matahari Lt.16, FAIDAS Office<br>
+          Jl. M. H. Thamrin Boulevard 1100<br>
+          Lippo Village Tangerang 15811<br>
+          Indonesia
+        </p>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      &copy; Copyright 2026 Program Studi S1 Informatika Universitas Pelita Harapan. All Rights Reserved
+    </div>
+  </footer>
+
+  <!-- ── NAV SCRIPT ── -->
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navRight  = document.getElementById('navbarRight');
+    hamburger.addEventListener('click', () => {
+      const isOpen = navRight.classList.toggle('is-open');
+      hamburger.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', e => {
+        if (window.innerWidth > 768) return;
+        e.preventDefault();
+        const parentLi = link.closest('li');
+        const isActive = parentLi.classList.contains('mobile-open');
+        document.querySelectorAll('.navbar__nav li').forEach(li => li.classList.remove('mobile-open'));
+        if (!isActive) parentLi.classList.add('mobile-open');
+      });
+    });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.navbar')) {
+        navRight.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', false);
+        document.querySelectorAll('.navbar__nav li').forEach(li => li.classList.remove('mobile-open'));
+      }
+    });
+  </script>
+
+  <!-- ── DETAIL SCRIPT ── -->
+  <script>
+    const BASE = 'https://uph-informatika-backend.vercel.app';
+
+    function formatDate(iso) {
+      if (!iso) return '';
+      return new Date(iso).toLocaleDateString('id-ID', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+      });
+    }
+
+    function showEl(id)    { const el = document.getElementById(id); if (el) el.style.display = ''; }
+    function hideEl(id)    { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
+    function setText(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+
+    async function loadDetail() {
+      const id = new URLSearchParams(window.location.search).get('id');
+      if (!id) { showError(); return; }
+
+      try {
+        // GET /api/pengumuman/[id]
+        // Row: { id, title, content, imageUrl, isPinned, publishedAt, lastUpdate }
+        const res  = await fetch(`${BASE}/api/pengumuman/${id}`);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const item = await res.json(); // returned directly, not wrapped
+
+        render(item);
+      } catch (err) {
+        console.error(err);
+        showError();
+      }
+    }
+
+    function render(item) {
+      setText('bdTitle', item.title || 'Tanpa Judul');
+      document.title = `${item.title || 'Pengumuman'} - Informatika UPH`;
+
+      // Pengumuman has no kategori — show pinned badge if isPinned
+      const tagsEl = document.getElementById('bdTags');
+      if (item.isPinned) {
+        tagsEl.innerHTML = `<span class="bd-tag">📌 Pinned</span>`;
+      }
+
+      setText('bdDate', formatDate(item.publishedAt));
+
+      // Hero image (field: imageUrl)
+      const img = document.getElementById('bdImg');
+      if (item.imageUrl) {
+        img.src = item.imageUrl;
+        img.alt = item.title || '';
+      } else {
+        // No image — hide the wrap to avoid blank placeholder
+        hideEl('bdImgWrap');
+      }
+
+      // Body: content field
+      const body = item.content || '';
+      const bodyEl = document.getElementById('bdBody');
+      if (body) {
+        if (/<[a-z][\s\S]*>/i.test(body)) {
+          bodyEl.innerHTML = body;
+        } else {
+          bodyEl.innerHTML = body
+            .split('\n').filter(l => l.trim())
+            .map(l => `<p>${l}</p>`).join('');
+        }
+      }
+
+      // Pengumuman has no event info fields — keep section hidden
+      hideEl('bdEventInfo');
+
+      hideEl('bdSkeleton');
+      const article = document.getElementById('bdArticle');
+      article.style.display = 'block';
+    }
+
+    function showError() {
+      hideEl('bdSkeleton');
+      showEl('bdError');
+    }
+
+    loadDetail();
+  </script>
+
+</body>
+</html>

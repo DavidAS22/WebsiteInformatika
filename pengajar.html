@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="pengajar.css" />
+  <link rel="icon" type="image/x-icon" href="images/logo_IF.ico"/>
 </head>
 <body>
 
@@ -96,7 +97,7 @@
         </ul>
 
         <!-- CTA -->
-        <a class="navbar__cta" href="#">Daftar<br>Sekarang</a>
+        <a class="navbar__cta" href="https://apply.uph.edu/">Daftar<br>Sekarang</a>
 
       </div> <!-- /.navbar__right -->
 
@@ -108,6 +109,10 @@
        Add your content here
   ══════════════════════════════════════ -->
   <main class="page-main">
+  <div class="btn-back-wrap">
+    <a class="btn-back btn-back--navy" href="index.html">← Kembali ke Beranda</a>
+  </div>
+
     <!-- ══════════════════════════════════════
          STAF PENDIDIK SECTION
     ══════════════════════════════════════ -->
@@ -116,6 +121,10 @@
 
       <!-- Search bar -->
       <div class="staf__search-wrap">
+        <svg class="staf__search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <circle cx="7.5" cy="7.5" r="5.5" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M12 12l3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
         <input
           class="staf__search"
           type="text"
@@ -123,7 +132,6 @@
           placeholder="Ketik nama dosen"
           oninput="filterStaf()"
         />
-        <span class="staf__search-icon">&#128269;</span>
       </div>
 
       <!--
@@ -230,7 +238,7 @@
 
       <!-- Contact -->
       <div class="footer__contact-group">
-        <p>WhatsApp : +62 8xx xxxx xxxx</p>
+        <p>WhatsApp : +62 851 9610 5421</p>
         <p>E-mail : informatika@uph.edu</p>
         <p>Instagram : @informatics.uph</p>
       </div>

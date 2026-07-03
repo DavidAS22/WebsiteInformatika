@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="info-pengajar.css" />
+  <link rel="icon" type="image/x-icon" href="images/logo_IF.ico"/>
 </head>
 <body>
 
@@ -82,7 +83,7 @@
 
         </ul>
 
-        <a class="navbar__cta" href="#">Daftar<br>Sekarang</a>
+        <a class="navbar__cta" href="https://apply.uph.edu/">Daftar<br>Sekarang</a>
 
       </div>
 
@@ -90,13 +91,9 @@
   </header>
 
   <main class="page-main">
-    <div class="btn-back-wrap--info-pengajar">
-      <button class="btn-back btn-back--white" onclick="history.back()">
-        &larr; KEMBALI
-      </button>
-    </div>
 
     <div class="pengajar-hero">
+      <a class="btn-back btn-back--white pengajar-hero__back" href="pengajar.html">← KEMBALI KE PENGAJAR</a>
 
       <div class="pengajar-hero__photo">
         <img id="lecturer-photo" src="images/foto_pengajar.jpg" alt="Foto Pengajar" />
@@ -181,8 +178,12 @@
 
       <div class="pengajar-panel" id="panel-matkul" role="tabpanel">
         <h2 class="pengajar-panel__heading">Mata Kuliah</h2>
-        <ul class="pengajar-panel__list" id="cms-matkul">
-          </ul>
+        <ul class="pengajar-panel__list">
+          <li>Probabilitas &amp; Statistika</li>
+          <li>Keamanan Komputer &amp; Jaringan</li>
+          <li>Desain &amp; Analisis Algoritma</li>
+          <li>Pemrograman Berorientasi Objek</li>
+        </ul>
       </div>
 
       <div class="pengajar-panel" id="panel-hibah" role="tabpanel">
@@ -200,10 +201,12 @@
 
       <div class="pengajar-panel" id="panel-penelitian" role="tabpanel">
         <h2 class="pengajar-panel__heading">Penelitian / PKM</h2>
-        <div id="cms-penelitian" class="pen-list">
-          <div class="pen-skeleton"></div>
-          <div class="pen-skeleton"></div>
-          <div class="pen-skeleton"></div>
+        <div class="panel-inner">
+          <div id="cms-penelitian" class="pen-list">
+            <div class="pen-skeleton"></div>
+            <div class="pen-skeleton"></div>
+            <div class="pen-skeleton"></div>
+          </div>
         </div>
       </div>
 
@@ -215,14 +218,22 @@
 
       <div class="pengajar-panel" id="panel-hki" role="tabpanel">
         <h2 class="pengajar-panel__heading">HKI / Paten</h2>
-        <ul class="pengajar-panel__list" id="cms-hki">
-          </ul>
+        <div class="panel-inner">
+          <div class="pen-list" id="cms-hki">
+            <div class="pen-skeleton"></div>
+            <div class="pen-skeleton"></div>
+          </div>
+        </div>
       </div>
 
       <div class="pengajar-panel" id="panel-publikasi" role="tabpanel">
         <h2 class="pengajar-panel__heading">Publikasi</h2>
-        <ul class="pengajar-panel__list" id="cms-publikasi">
-          </ul>
+        <div class="panel-inner">
+          <div class="pen-list" id="cms-publikasi">
+            <div class="pen-skeleton"></div>
+            <div class="pen-skeleton"></div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -275,7 +286,7 @@
     <div class="footer__bottom-info">
       <div class="footer__spacer"></div>
       <div class="footer__contact-group">
-        <p>WhatsApp : +62 8xx xxxx xxxx</p>
+        <p>WhatsApp : +62 851 9610 5421</p>
         <p>E-mail : informatika@uph.edu</p>
         <p>Instagram : @informatics.uph</p>
       </div>
@@ -354,6 +365,7 @@
     const API_BASE       = 'https://uph-informatika-backend.vercel.app';
     const LECTURER_API   = `${API_BASE}/api/lecturer`;
     const PENELITIAN_API = `${API_BASE}/api/penelitian`;
+    const PUBLIKASI_API  = `${API_BASE}/api/publikasi`;
 
     const urlParams  = new URLSearchParams(window.location.search);
     const lecturerId = urlParams.get('id');  // e.g. info-pengajar.html?id=3
@@ -430,6 +442,89 @@
       `).join('');
     }
 
+
+    /* ── Render HKI/Paten cards ── */
+    function renderHki(items) {
+      const container = document.getElementById('cms-hki');
+      if (!container) return;
+
+      if (!items.length) {
+        container.innerHTML = '<p class="pen-empty">Tidak ada data HKI atau paten untuk dosen ini.</p>';
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <article class="pen-card">
+          <div class="pen-card__header">
+            <div class="pen-card__badges">
+              <span class="pen-badge pen-badge--hki">HKI / Paten</span>
+            </div>
+            <h3 class="pen-card__title">${item}</h3>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    /* ── Render publikasi cards ── */
+    function renderPublikasi(items, lecturer) {
+      const container = document.getElementById('cms-publikasi');
+      if (!container) return;
+
+      // Build name keys for matching (same strategy as penelitian)
+      const gelarSuffix = new Set(['st','ssi','skom','mkom','mt','mcs','phd','dr','drs','ir','se','mm','mba','med']);
+      const nameParts   = (lecturer.fullName || '').toLowerCase().replace(/[,.]/g, '').split(/\s+/).filter(Boolean);
+      const realParts   = nameParts.filter(p => !gelarSuffix.has(p));
+      const firstName   = realParts[0] || '';
+      const lastName    = realParts[realParts.length - 1] || '';
+
+      // Match: lecturer name appears anywhere in members[] (not just lead, since publikasi can have any position)
+      const myPub = items.filter(item => {
+        const members = (item.members || []).map(m => m.toLowerCase().replace(/[,.]/g, ''));
+        return members.some(m => firstName && lastName ? (m.includes(firstName) && m.includes(lastName)) : false);
+      }).sort((a, b) => (parseInt(b.yearPublished) || 0) - (parseInt(a.yearPublished) || 0));
+
+      if (!myPub.length) {
+        container.innerHTML = '<p class="pen-empty">Tidak ada data publikasi untuk dosen ini.</p>';
+        return;
+      }
+
+      container.innerHTML = myPub.map(item => {
+        const title   = item.researchTitle || '–';
+        const members = (item.members || []).join(', ');
+        const venue   = item.publishedAt || '';
+        const year    = item.yearPublished || '';
+        const doi     = item.doi || '';
+        const doiUrl  = doi ? `https://doi.org/${doi}` : '';
+        const cat     = item.researchGroupCategory || '';
+
+        return `
+        <article class="pen-card">
+          <div class="pen-card__header">
+            <div class="pen-card__badges">
+              ${cat ? `<span class="pen-badge pen-badge--kategori">${cat}</span>` : ''}
+              ${year ? `<span class="pen-badge pen-badge--year">${year}</span>` : ''}
+            </div>
+            <h3 class="pen-card__title">${title}</h3>
+            ${venue ? `<p class="pen-card__meta">${venue}</p>` : ''}
+          </div>
+          <div class="pen-card__divider"></div>
+          <div class="pen-card__body">
+            <div class="pen-card__detail">
+              <span class="pen-card__detail-label">Penulis</span>
+              <span class="pen-card__detail-value">${members || '–'}</span>
+            </div>
+            ${doi ? `
+            <div class="pen-card__detail">
+              <span class="pen-card__detail-label">DOI</span>
+              <span class="pen-card__detail-value">
+                <a href="${doiUrl}" target="_blank" rel="noopener" class="pen-doi-link">${doi}</a>
+              </span>
+            </div>` : ''}
+          </div>
+        </article>`;
+      }).join('');
+    }
+
     /* ── Main loader ── */
     async function loadLecturerDetail() {
       if (!lecturerId) {
@@ -439,10 +534,11 @@
       }
 
       try {
-        /* Fetch lecturer by ID and their penelitian in parallel */
-        const [lecturerRes, penelitianRes] = await Promise.all([
+        /* Fetch lecturer, penelitian and publikasi in parallel */
+        const [lecturerRes, penelitianRes, publikasiRes] = await Promise.all([
           fetch(`${LECTURER_API}/${lecturerId}`),
-          fetch(`${PENELITIAN_API}?lecturer_id=${lecturerId}&limit=100`)
+          fetch(`${PENELITIAN_API}?lecturer_id=${lecturerId}&limit=100`),
+          fetch(PUBLIKASI_API)
         ]);
 
         if (!lecturerRes.ok) throw new Error(`Lecturer fetch: HTTP ${lecturerRes.status}`);
@@ -452,6 +548,9 @@
         const penelitianJson = await penelitianRes.json();
         // List endpoint returns { data: [...], pagination }
         const allPenelitian = penelitianJson.data || [];
+
+        const publikasiJson = await publikasiRes.json();
+        const allPublikasi  = Array.isArray(publikasiJson) ? publikasiJson : (publikasiJson.data || []);
 
         /* ── Hero ── */
         document.getElementById('lecturer-name').textContent = lecturer.fullName || '—';
@@ -516,17 +615,12 @@
         }
 
         /* ── Other tabs (fields not in API — leave empty if absent) ── */
-        fillList('cms-matkul',     lecturer.mata_kuliah);
         fillList('cms-hibah',      lecturer.hibah_penelitian);
         fillList('cms-proyek',     lecturer.proyek);
         fillList('cms-pengabdian', lecturer.pengabdian_masyarakat);
-        fillList('cms-hki',        lecturer.hki_paten_list);
-        if (Array.isArray(lecturer.publikasi_list)) {
-          fillList('cms-publikasi', lecturer.publikasi_list);
-        } else {
-          const pubEl = document.getElementById('cms-publikasi');
-          if (pubEl) pubEl.innerHTML = `<li>Lihat di tab Penelitian/PKM.</li>`;
-        }
+        renderHki(lecturer.hki_paten_list || []);
+        /* ── Publikasi tab — filter by lecturer name in members[] ── */
+        renderPublikasi(allPublikasi, lecturer);
 
         /* ── Penelitian/PKM tab — already filtered by lecturer_id ── */
         renderPenelitian(allPenelitian);

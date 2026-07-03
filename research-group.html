@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="research-group.css" />
+  <link rel="icon" type="image/x-icon" href="images/logo_IF.ico"/>
 </head>
 <body>
 
@@ -59,7 +60,7 @@
             </div>
           </li>
         </ul>
-        <a class="navbar__cta" href="#">Daftar<br>Sekarang</a>
+        <a class="navbar__cta" href="https://apply.uph.edu/">Daftar<br>Sekarang</a>
       </div>
     </nav>
   </header>
@@ -68,98 +69,26 @@
 
     <!-- ══ HERO BANNER ══ -->
     <div class="rg-hero">
-      <!-- Background image fills this div via CSS; swap per group -->
+      <a class="btn-back btn-back--white rg-hero__back" href="penelitian-pkm.html">← Kembali ke Penelitian &amp; PKM</a>
       <div class="rg-hero__content">
-        <a class="rg-hero__back" href="penelitian-pkm.html">← Kembali ke Penelitian &amp; PKM</a>
-        <h1 class="rg-hero__title" id="rg-title">Intelligent Systems &amp; Data Science</h1>
-        <p class="rg-hero__desc" id="rg-desc">
-          Kelompok riset ini berfokus pada pengembangan sistem cerdas yang mampu belajar dari
-          data berskala besar. Riset kami mencakup algoritma machine learning, deep learning,
-          dan analitik data untuk mendukung pengambilan keputusan berbasis data di berbagai
-          sektor industri dan layanan publik.
-        </p>
+        <h1 class="rg-hero__title" id="rg-title">Memuat...</h1>
+        <p class="rg-hero__desc" id="rg-desc"></p>
       </div>
     </div>
 
     <!-- ══ SUB-AREA ACCORDION ══ -->
     <section class="rg-body">
-
       <h2 class="rg-subarea-heading">Sub-Area</h2>
-
       <div class="rg-accordion" id="rgAccordion">
-
-        <!-- Item 1 -->
-        <div class="rg-accordion__item">
-          <button class="rg-accordion__trigger" aria-expanded="false">
-            <span class="rg-accordion__label">Machine Learning &amp; Computational Intelligence</span>
-            <span class="rg-accordion__icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </button>
-          <div class="rg-accordion__panel">
-            <p class="rg-accordion__text">
-              Sub-area ini mendalami pengembangan algoritma pembelajaran mesin dan kecerdasan
-              komputasional yang memungkinkan sistem untuk belajar, beradaptasi, dan membuat
-              keputusan secara otomatis. Penelitian mencakup supervised, unsupervised, dan
-              reinforcement learning, serta metode optimasi berbasis evolusi dan swarm intelligence
-              yang diterapkan pada masalah nyata di industri dan sains.
-            </p>
-          </div>
-        </div>
-
-        <!-- Item 2 -->
-        <div class="rg-accordion__item">
-          <button class="rg-accordion__trigger" aria-expanded="false">
-            <span class="rg-accordion__label">Computer Vision &amp; Image Processing</span>
-            <span class="rg-accordion__icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </button>
-          <div class="rg-accordion__panel">
-            <p class="rg-accordion__text">
-              Berfokus pada kemampuan sistem komputer untuk memahami dan menginterpretasikan
-              konten visual dari dunia nyata. Riset meliputi deteksi dan pengenalan objek,
-              segmentasi citra, analisis video real-time, serta pengembangan model deep learning
-              berbasis konvolusi untuk berbagai aplikasi seperti pengawasan, medis, dan otomotif.
-            </p>
-          </div>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="rg-accordion__item">
-          <button class="rg-accordion__trigger" aria-expanded="false">
-            <span class="rg-accordion__label">Natural Language Processing</span>
-            <span class="rg-accordion__icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </button>
-          <div class="rg-accordion__panel">
-            <p class="rg-accordion__text">
-              Meneliti cara komputer memahami, menganalisis, dan menghasilkan bahasa manusia.
-              Topik riset mencakup analisis sentimen, pemodelan bahasa besar (LLM), mesin
-              penerjemah, chatbot cerdas, dan ekstraksi informasi dari teks tidak terstruktur
-              dalam bahasa Indonesia maupun multibahasa untuk mendukung layanan digital nasional.
-            </p>
-          </div>
-        </div>
-
-      </div><!-- /.rg-accordion -->
-
-      <!-- Ketua kelompok -->
+        <!-- Populated by JS -->
+      </div>
       <div class="rg-ketua">
         <p class="rg-ketua__label">Ketua Kelompok Riset</p>
-        <p class="rg-ketua__name">Dr. Lorem Ipsum, S.Kom., M.T.</p>
+        <p class="rg-ketua__name" id="rg-ketua">—</p>
       </div>
+    </section>
 
-    </section><!-- /.rg-body -->
-
-    <!-- ══ PENELITIAN & PKM TERKINI (filtered to this group) ══ -->
+    <!-- ══ PENELITIAN & PKM TERKINI ══ -->
     <section class="rg-terkini">
       <div class="rg-terkini__inner">
         <div class="rg-terkini__header">
@@ -171,16 +100,33 @@
             <span class="terkini-filter__chevron">&#9660;</span>
           </div>
         </div>
-
         <div class="terkini-list" id="terkiniList">
           <div class="terkini-skeleton"></div>
           <div class="terkini-skeleton"></div>
           <div class="terkini-skeleton"></div>
         </div>
-
         <div class="terkini-pagination" id="terkiniPagination">
           <button class="terkini-pagination__btn" id="prevBtn" disabled>&#8592;</button>
           <button class="terkini-pagination__btn" id="nextBtn">&#8594;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ TOPIK PENELITIAN & PKM TERBUKA ══ -->
+    <section class="rg-topik">
+      <div class="rg-topik__inner">
+        <h2 class="rg-topik__title">Topik Penelitian &amp; PKM Terbuka</h2>
+        <ul class="rg-topik__list" id="rgTopikList">
+          <!-- Populated by JS -->
+        </ul>
+        <div class="rg-topik__cta">
+          <p class="rg-topik__cta-label">
+            <span class="rg-topik__cta-navy">HUBUNGI KONTAK</span>
+            <span class="rg-topik__cta-orange"> DIBAWAH UNTUK MENGIKUTI PENELITIAN</span>
+          </p>
+          <div class="rg-topik__cta-contacts" id="rgContacts">
+            <!-- Populated by JS -->
+          </div>
         </div>
       </div>
     </section>
@@ -227,7 +173,7 @@
     <div class="footer__bottom-info">
       <div class="footer__spacer"></div>
       <div class="footer__contact-group">
-        <p>WhatsApp : +62 8xx xxxx xxxx</p>
+        <p>WhatsApp : +62 851 9610 5421</p>
         <p>E-mail : informatika@uph.edu</p>
         <p>Instagram : @informatics.uph</p>
       </div>
@@ -276,23 +222,146 @@
     });
   </script>
 
-  <!-- ── ACCORDION SCRIPT ── -->
+  <!-- ── PAGE SCRIPT ── -->
   <script>
-    document.querySelectorAll('.rg-accordion__trigger').forEach(trigger => {
-      trigger.addEventListener('click', () => {
-        const item      = trigger.closest('.rg-accordion__item');
-        const panel     = item.querySelector('.rg-accordion__panel');
-        const isOpen    = item.classList.contains('is-open');
+    // ════════════════════════════════════════════════════════
+    // RESEARCH GROUP DATA
+    // All content for all 3 groups is stored here.
+    // URL param ?group=<key> selects which group to show.
+    // ════════════════════════════════════════════════════════
+    const RG_DATA = {
 
+      'intelligent-systems': {
+        title:  'Intelligent Systems &amp; Data Science',
+        apiLabel: 'Intelligent Systems & Data Science',
+        ketua:  'Aditya Rama Mitra, S.Si., M.T.',
+        phone:  '+62 817 4822 825',
+        email:  'aditya.mitra@uph.edu',
+        desc:   'Research Group Intelligent Systems and Data Science mengembangkan sistem cerdas untuk konteks Indonesia di mana sumber daya bersifat terbatas, baik dari sisi data, komputasi, infrastruktur, maupun keterjangkauan komunitas pengguna. Keempat dimensi keterbatasan tersebut menjadi tulang punggung yang menyatukan ketiga sub-area RG, sehingga setiap sub-area tidak berdiri sendiri melainkan saling melengkapi dalam menyelesaikan persoalan nyata. Sub-area pertama menggabungkan sistem cerdas berbasis sensor (AIoT) dengan pembelajaran mesin efisien, sub-area kedua memfokuskan diri pada citra dan video yang bekerja di perangkat sehari-hari, dan sub-area ketiga menangani bahasa daerah serta domain layanan publik yang minim sumber linguistik.',
+        subAreas: [
+          {
+            label: 'Intelligent Systems, IoT, &amp; Efficient Machine Learning',
+            desc:  'Pengembangan sistem cerdas berbasis sensor dan perangkat IoT yang terintegrasi dengan model pembelajaran mesin efisien, dirancang untuk beroperasi pada daya rendah, konektivitas terbatas, dan dataset terbatas.',
+          },
+          {
+            label: 'Low-Resource Computer Vision',
+            desc:  'Analisis citra dan video yang bekerja pada perangkat sehari-hari, citra non-ideal, dan dataset domain spesifik yang langka, untuk kebutuhan kesehatan, pertanian, dan pelestarian budaya.',
+          },
+          {
+            label: 'Low-Resource Natural Language Processing',
+            desc:  'Pemrosesan bahasa untuk bahasa daerah Indonesia, dialek, dan domain layanan publik yang minim sumber linguistik, termasuk antarmuka berbasis suara untuk komunitas dengan literasi terbatas.',
+          },
+        ],
+        topik: [
+          'AI Frugal untuk Kesehatan Komunitas Pedesaan',
+          'AI Frugal untuk Pelestarian Bahasa dan Budaya',
+          'Preservasi Digital Bahasa Daerah',
+          'Smart Farming untuk Petani Kecil',
+        ],
+      },
+
+      'cybersecurity': {
+        title:  'Computer System &amp; Security',
+        apiLabel: 'Cybersecurity & Network Infrastructure',
+        ketua:  'Robertus Hudi, S.Inf., M.Kom.',
+        phone:  '+62 899 0143 662',
+        email:  'robertus.hudi@uph.edu',
+        desc:   'Research Group Computer System & Security mengembangkan teknologi keamanan sistem komputer dan infrastruktur data untuk mendukung transformasi digital Indonesia yang aman, adaptif, dan berkelanjutan. Kelompok riset ini berfokus pada pengembangan solusi yang mampu melindungi sistem, data, dan layanan digital melalui pendekatan keamanan siber dan sistem cerdas. Fokus tersebut menjadi landasan yang menyatukan ketiga sub-area RG, sehingga setiap sub-area tidak berdiri sendiri melainkan saling melengkapi dalam menjawab tantangan keamanan komputasi modern. Sub-area pertama berfokus pada cybersecurity untuk deteksi, pencegahan, dan mitigasi ancaman siber, sub-area kedua mengembangkan machine learning for security untuk meningkatkan kemampuan analisis dan respons keamanan secara adaptif, dan sub-area ketiga mengeksplorasi DNA storage systems sebagai teknologi penyimpanan data generasi mendatang yang aman dan berkapasitas tinggi.',
+        subAreas: [
+          {
+            label: 'Cryptography &amp; Secure Communications',
+            desc:  'Keamanan transmisi data, enkripsi post-kuantum (PQC), zero-knowledge proof, federated learning dengan differential privacy, dan deteksi serangan injeksi SQL berbasis automata teori.',
+          },
+          {
+            label: 'Digital Forensics &amp; Cyber Defense',
+            desc:  'Sistem pertahanan siber otonom, augmentasi dataset keamanan siber berbasis diffusion model, alat kepatuhan UU PDP, dan platform pelatihan CTF nasional.',
+          },
+          {
+            label: 'Distributed Systems &amp; Blockchain',
+            desc:  'Komputasi paralel pada GPU, algoritma error correction untuk stream data terstruktur, infrastruktur penyimpanan data masa depan berbasis DNA, dan sistem provenance berbasis blockchain.',
+          },
+        ],
+        topik: [
+          'Intelligent and Secure Digital Infrastructure ',
+          'Next-Generation Data Storage and Processing ',
+          'Literasi Keamanan Siber UMKM ',
+          'Kepatuhan Perlindungan Data Pribadi',
+        ],
+      },
+
+      'software-engineering': {
+        title:  'Software Engineering &amp; Interactive Technologies',
+        apiLabel: 'Software Engineering & Interactive Technologies',
+        ketua:  'Dr. Louis Khrisna Putera Suryapranata, S.Kom., M.TI.',
+        phone:  '+62 856 1900 125',
+        email:  'louis.suryapranata@uph.edu',
+        desc:   'Research Group Software Engineering and Interactive Technologies mengembangkan rekayasa perangkat lunak dan teknologi interaktif yang inovatif, beretika, dan berorientasi pada kebutuhan masyarakat. Kelompok riset ini berfokus pada pengembangan aplikasi yang berkualitas, mudah digunakan, dan memberikan dampak nyata bagi peningkatan daya saing serta kesejahteraan masyarakat. Fokus tersebut menjadi landasan yang menyatukan ketiga sub-area RG, sehingga setiap sub-area tidak berdiri sendiri melainkan saling melengkapi dalam menghasilkan solusi digital yang berkelanjutan. Sub-area pertama berfokus pada software engineering untuk membangun perangkat lunak yang andal dan berkualitas, sub-area kedua mengembangkan interactive technologies untuk menciptakan pengalaman pengguna yang efektif dan inovatif, dan sub-area ketiga mengeksplorasi immersive and emerging technologies guna menghadirkan solusi digital yang adaptif terhadap perkembangan teknologi masa depan.',
+        subAreas: [
+          {
+            label: 'Interactive Apps Development',
+            desc:  'Pengembangan aplikasi interaktif yang menekankan pengalaman pengguna melalui antarmuka responsif, gamifikasi, dan teknologi immersive.',
+          },
+          {
+            label: 'Human–Computer Interaction &amp; UX',
+            desc:  'Riset terkait pengembangan antarmuka dan pengalaman pengguna yang adaptif, inklusif, dan beretika.',
+          },
+          {
+            label: 'Multiplatform Software Development',
+            desc:  'Pengembangan perangkat lunak yang dapat berjalan pada berbagai platform (web, mobile, desktop) dengan praktik software engineering yang baik.',
+          },
+        ],
+        topik: [
+          'Educational Game Development',
+          'Fun Medical Digital Therapy',
+          'Pemanfaatan Game untuk Pembelajaran',
+          'Pemanfaatan Game untuk Terapi Kesehatan',
+        ],
+      },
+
+    };
+
+    // ── Determine active group from URL ──────────────────────
+    const params   = new URLSearchParams(window.location.search);
+    const groupKey = params.get('group') || 'intelligent-systems';
+    const group    = RG_DATA[groupKey] || RG_DATA['intelligent-systems'];
+
+    // ── Populate hero ─────────────────────────────────────────
+    document.getElementById('rg-title').innerHTML = group.title;
+    document.getElementById('rg-desc').textContent  = group.desc;
+    document.getElementById('rg-ketua').textContent = group.ketua;
+    document.title = group.title.replace(/&amp;/g, '&') + ' - Informatika UPH';
+
+    // ── Build accordion ───────────────────────────────────────
+    const accordion = document.getElementById('rgAccordion');
+    accordion.innerHTML = group.subAreas.map(sa => `
+      <div class="rg-accordion__item">
+        <button class="rg-accordion__trigger" aria-expanded="false">
+          <span class="rg-accordion__label">${sa.label}</span>
+          <span class="rg-accordion__icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+        <div class="rg-accordion__panel">
+          <p class="rg-accordion__text">${sa.desc}</p>
+        </div>
+      </div>
+    `).join('');
+
+    // Wire up accordion interactions
+    accordion.querySelectorAll('.rg-accordion__trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item   = trigger.closest('.rg-accordion__item');
+        const panel  = item.querySelector('.rg-accordion__panel');
+        const isOpen = item.classList.contains('is-open');
         // Close all
-        document.querySelectorAll('.rg-accordion__item').forEach(i => {
+        accordion.querySelectorAll('.rg-accordion__item').forEach(i => {
           i.classList.remove('is-open');
           i.querySelector('.rg-accordion__trigger').setAttribute('aria-expanded', 'false');
-          const p = i.querySelector('.rg-accordion__panel');
-          p.style.maxHeight = null;
+          i.querySelector('.rg-accordion__panel').style.maxHeight = null;
         });
-
-        // Open clicked (if it was closed)
+        // Open clicked if it was closed
         if (!isOpen) {
           item.classList.add('is-open');
           trigger.setAttribute('aria-expanded', 'true');
@@ -300,21 +369,19 @@
         }
       });
     });
-  </script>
 
+    // ── Populate topik ────────────────────────────────────────
+    document.getElementById('rgTopikList').innerHTML =
+      group.topik.map(t => `<li class="rg-topik__item">${t}</li>`).join('');
 
-  <!-- ── TERKINI SCRIPT ── -->
-  <script>
-    // Determine which research group this page represents
-    const GROUP_MAP = {
-      'intelligent-systems': 'Intelligent Systems & Data Science',
-      'cybersecurity':       'Cybersecurity & Network Infrastructure',
-      'software-engineering':'Software Engineering & Interactive Technologies',
-    };
-    const params      = new URLSearchParams(window.location.search);
-    const groupKey    = params.get('group') || 'intelligent-systems';
-    const groupLabel  = GROUP_MAP[groupKey] || GROUP_MAP['intelligent-systems'];
+    document.getElementById('rgContacts').innerHTML = `
+      <span>No. Telepon : <strong>${group.phone}</strong></span>
+      <span>E-mail : <strong>${group.email}</strong></span>
+    `;
 
+    // ════════════════════════════════════════════════════════
+    // TERKINI SCRIPT — fetch penelitian filtered by this group
+    // ════════════════════════════════════════════════════════
     const API_URL  = 'https://uph-informatika-backend.vercel.app/api/penelitian';
     const PAGE_SIZE = 3;
 
@@ -329,22 +396,19 @@
 
     function formatDate(dateStr) {
       if (!dateStr) return '-';
-      const d = new Date(dateStr);
-      return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+      return new Date(dateStr).toLocaleDateString('id-ID', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
     }
 
     function typeBadge(type) {
       const isPKM = (type || '').toLowerCase() === 'pkm';
-      const label = isPKM ? 'PKM' : 'Penelitian';
-      const cls   = isPKM ? 'badge--pkm' : 'badge--penelitian';
-      return '<span class="terkini-badge ' + cls + '">' + label + '</span>';
+      return `<span class="terkini-badge ${isPKM ? 'badge--pkm' : 'badge--penelitian'}">${isPKM ? 'PKM' : 'Penelitian'}</span>`;
     }
 
     function statusBadge(status) {
       const isOngoing = (status || '').toLowerCase() === 'ongoing';
-      const cls = isOngoing ? 'status--ongoing' : 'status--selesai';
-      const label = isOngoing ? 'Sedang Berjalan' : 'Selesai';
-      return '<span class="terkini-status ' + cls + '">' + label + '</span>';
+      return `<span class="terkini-status ${isOngoing ? 'status--ongoing' : 'status--selesai'}">${isOngoing ? 'Sedang Berjalan' : 'Selesai'}</span>`;
     }
 
     function renderCards(data) {
@@ -357,29 +421,25 @@
           <div class="terkini-card__header">
             <div class="terkini-card__title-row">
               <h3 class="terkini-card__title">${item.researchTitle || '-'}</h3>
-              ${statusBadge(item.status)}
+              <div style="display:flex;gap:6px;flex-shrink:0;">${typeBadge(item.type)}${statusBadge(item.status)}</div>
             </div>
             <p class="terkini-card__submeta">
               Didanai oleh ${item.funders || '-'}
-              &nbsp;&ndash;&nbsp;
-              ${formatDate(item.researchStartDate)} &ndash; ${formatDate(item.researchEndDate)}
+              &nbsp;–&nbsp;
+              ${formatDate(item.researchStartDate)} – ${formatDate(item.researchEndDate)}
             </p>
             <div class="terkini-card__divider"></div>
           </div>
-          <p class="terkini-card__members">
-            ${(item.members || []).join('.  ')}
-            &nbsp;
-          </p>
+          <p class="terkini-card__members">${(item.members || []).join('.  ')}</p>
         </div>
       `).join('');
     }
 
     function paginate() {
       const start = (currentPage - 1) * PAGE_SIZE;
-      const end   = start + PAGE_SIZE;
-      renderCards(filteredData.slice(start, end));
+      renderCards(filteredData.slice(start, start + PAGE_SIZE));
       prevBtn.disabled = currentPage === 1;
-      nextBtn.disabled = end >= filteredData.length;
+      nextBtn.disabled = start + PAGE_SIZE >= filteredData.length;
     }
 
     function applyFilter() {
@@ -407,9 +467,9 @@
         const res  = await fetch(API_URL);
         const json = await res.json();
         const raw  = Array.isArray(json) ? json : (json.data || []);
-        // Filter to only this research group
+        // Filter to only items belonging to this research group
         allData = raw.filter(d =>
-          (d.researchGroupCategory || '').trim() === groupLabel.trim()
+          (d.researchGroupCategory || '').trim() === group.apiLabel.trim()
         );
         allData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         populateYears(allData);

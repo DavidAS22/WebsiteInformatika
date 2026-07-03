@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="event.css" />
+  <link rel="icon" type="image/x-icon" href="images/logo_IF.ico"/>
 </head>
 <body>
 
@@ -96,7 +97,7 @@
         </ul>
 
         <!-- CTA -->
-        <a class="navbar__cta" href="#">Daftar<br>Sekarang</a>
+        <a class="navbar__cta" href="https://apply.uph.edu/">Daftar<br>Sekarang</a>
 
       </div> <!-- /.navbar__right -->
 
@@ -109,11 +110,17 @@
   ══════════════════════════════════════ -->
   <main class="page-main">
 
-    <div class="btn-back-wrap">
-      <button class="btn-back btn-back--navy" onclick="history.back()">
-        &larr; KEMBALI
-      </button>
+    <div class="event-btn-back-wrap">
+      <a class="btn-back btn-back--navy" href="index.html">← Kembali ke Beranda</a>
     </div>
+
+    <!-- ══════════════════════════════════════
+         EVENT HEADLINE — nearest upcoming (isPinned or earliest date)
+         Stays fixed while pagination changes below
+    ══════════════════════════════════════ -->
+    <section class="event-headline" id="eventHeadline">
+      <!-- Injected by JS -->
+    </section>
 
     <!-- ══════════════════════════════════════
          EVENT SELANJUTNYA (Upcoming)
@@ -140,9 +147,7 @@
         <!-- Injected by JS -->
       </div>
 
-      <a class="event-more-btn" id="pastMoreBtn" href="#">
-        LIHAT EVENT LAINNYA &rarr;
-      </a>
+      <div class="event-pagination event-pagination--past" id="pastPagination"></div>
     </section>
 
   </main>
@@ -220,7 +225,7 @@
 
       <!-- Contact -->
       <div class="footer__contact-group">
-        <p>WhatsApp : +62 8xx xxxx xxxx</p>
+        <p>WhatsApp : +62 851 9610 5421</p>
         <p>E-mail : informatika@uph.edu</p>
         <p>Instagram : @informatics.uph</p>
       </div>
@@ -306,7 +311,7 @@
 
     function formatTime(timeStr) {
       if (!timeStr) return '—';
-      return timeStr.slice(0, 5); // "HH:MM"
+      return timeStr.slice(0, 5);
     }
 
     function skeletonHTML(count = 3) {
@@ -337,6 +342,56 @@
             <p class="event-card__meta">Tempat : ${ev.eventPlace || '—'}</p>
           </div>
         </a>`;
+    }
+
+    // ── Event Headline ────────────────────────────────────────
+    // Fetched once on load, stays fixed while pagination changes.
+    // Priority 1 — isPinned upcoming event
+    // Priority 2 — earliest upcoming event (soonest eventDate)
+    const headlineEl = document.getElementById('eventHeadline');
+
+    function renderHeadline(ev) {
+      if (!ev) { headlineEl.style.display = 'none'; return; }
+      headlineEl.innerHTML = `
+        <a class="event-headline__card" href="event-detail.html?id=${ev.id}">
+          <div class="event-headline__img">
+            ${ev.eventImageUrl
+              ? `<img src="${ev.eventImageUrl}" alt="${ev.title}" />`
+              : `<div class="event-headline__img--placeholder"></div>`}
+          </div>
+          <div class="event-headline__body">
+            <span class="event-headline__badge">Event Terdekat</span>
+            <h2 class="event-headline__title">${ev.title}</h2>
+            <div class="event-headline__divider"></div>
+            <p class="event-headline__meta">📅 ${formatDate(ev.eventDate)}</p>
+            <p class="event-headline__meta">🕐 ${formatTime(ev.eventStartTime)}</p>
+            <p class="event-headline__meta">📍 ${ev.eventPlace || '—'}</p>
+            <span class="event-headline__cta">Lihat Detail →</span>
+          </div>
+        </a>
+      `;
+    }
+
+    async function loadHeadline() {
+      headlineEl.innerHTML = `<div class="event-headline__skeleton"></div>`;
+      try {
+        // Try pinned upcoming first
+        const r1 = await fetch(`${API_BASE}/api/event?status=upcoming&isPinned=true&limit=1&sort=eventDate&order=asc`);
+        const j1 = await r1.json();
+        const pinned = (j1.data || [])[0];
+
+        if (pinned) {
+          renderHeadline(pinned);
+        } else {
+          // Fall back to nearest upcoming
+          const r2 = await fetch(`${API_BASE}/api/event?status=upcoming&limit=1&sort=eventDate&order=asc`);
+          const j2 = await r2.json();
+          renderHeadline((j2.data || [])[0] || null);
+        }
+      } catch (err) {
+        console.error('Headline fetch failed:', err);
+        headlineEl.style.display = 'none';
+      }
     }
 
     // ── Upcoming Events ───────────────────────────────────────
@@ -370,13 +425,16 @@
 
     // ── Past Events ───────────────────────────────────────────
     const PAST_LIMIT = 3;
+    let pastPage = 1;
 
-    async function loadPast() {
+    async function loadPast(page = 1) {
       const list = document.getElementById('pastList');
+      const pag  = document.getElementById('pastPagination');
       list.innerHTML = skeletonHTML(PAST_LIMIT);
+      pag.innerHTML  = '';
 
       try {
-        const res  = await fetch(`${API_BASE}/api/event?status=past&page=1&limit=${PAST_LIMIT}&sort=eventDate&order=desc`);
+        const res  = await fetch(`${API_BASE}/api/event?status=past&page=${page}&limit=${PAST_LIMIT}&sort=eventDate&order=desc`);
         const json = await res.json();
         const { data, pagination } = json;
 
@@ -386,15 +444,7 @@
         }
 
         list.innerHTML = data.map(ev => cardHTML(ev, false)).join('');
-
-        // "Lihat Event Lainnya" → go to a dedicated past events page or load more
-        const moreBtn = document.getElementById('pastMoreBtn');
-        if (pagination && pagination.totalPages > 1) {
-          moreBtn.style.display = 'inline-flex';
-          moreBtn.href = 'event-past.html'; // create this page for full past list
-        } else {
-          moreBtn.style.display = 'none';
-        }
+        renderPagination(pag, pagination, p => { pastPage = p; loadPast(p); }, true);
 
       } catch (err) {
         console.error('Failed to load past events:', err);
@@ -403,19 +453,22 @@
     }
 
     // ── Pagination renderer ───────────────────────────────────
-    function renderPagination(container, pagination, onPage) {
-      if (!pagination || pagination.totalPages <= 1) {
-        container.innerHTML = '';
-        return;
-      }
+    function renderPagination(container, pagination, onPage, inverted = false) {
+      if (!pagination) { container.innerHTML = ''; return; }
 
       const { page, totalPages } = pagination;
+      const inv    = inverted ? ' event-pag__btn--inv' : '';
+      const invNum = inverted ? ' event-pag__num--inv' : '';
 
-      let html = `<button class="event-pag__btn" ${page <= 1 ? 'disabled' : ''} data-p="${page - 1}">&larr;</button>`;
-      for (let p = 1; p <= totalPages; p++) {
-        html += `<button class="event-pag__num${p === page ? ' is-active' : ''}" data-p="${p}">${p}</button>`;
+      let html = `<button class="event-pag__btn${inv}" ${page <= 1 ? 'disabled' : ''} data-p="${page - 1}">&larr;</button>`;
+
+      if (totalPages > 1) {
+        for (let p = 1; p <= totalPages; p++) {
+          html += `<button class="event-pag__num${p === page ? ' is-active' : ''}${invNum}" data-p="${p}">${p}</button>`;
+        }
       }
-      html += `<button class="event-pag__btn" ${page >= totalPages ? 'disabled' : ''} data-p="${page + 1}">&rarr;</button>`;
+
+      html += `<button class="event-pag__btn${inv}" ${page >= totalPages ? 'disabled' : ''} data-p="${page + 1}">&rarr;</button>`;
 
       container.innerHTML = html;
       container.querySelectorAll('[data-p]').forEach(btn => {
@@ -427,6 +480,7 @@
     }
 
     // ── Init ──────────────────────────────────────────────────
+    loadHeadline();
     loadUpcoming();
     loadPast();
   </script>

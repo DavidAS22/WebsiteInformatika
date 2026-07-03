@@ -12,14 +12,12 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 0 72px 52px;
+  padding: 60px 72px 52px;
 
   /* Background image — swap this per research group page */
   background: linear-gradient(0deg, rgba(53, 60, 119, 0.85),rgba(53, 60, 119, 0.85)),
               url('images/research.png') center center / cover no-repeat;
 }
-
-/* Dark gradient overlay so text stays readable */
 
 .rg-hero__content {
   position: relative;
@@ -31,23 +29,17 @@
   gap: 16px;
   width: 100%;
   text-align: center;
+  
 }
 
-/* Back link */
+/* Back link — absolute top-left of hero */
 .rg-hero__back {
-  display: inline-flex;
-  align-self: center;
-  font-family: var(--font-main);
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: rgba(255,255,255,0.7);
-  text-decoration: none;
-  letter-spacing: 0.03em;
-  transition: color 0.18s;
-  margin-bottom: 4px;
+  position: absolute;
+  top: 20px;
+  left: 28px;
 }
 
-.rg-hero__back:hover { color: var(--orange); }
+.rg-hero__back:hover { opacity: 1; color: var(--orange); }
 
 /* Group name */
 .rg-hero__title {
@@ -512,4 +504,108 @@
   }
   .terkini-filter__select { min-width: 0; width: 100%; }
   .terkini-card__title-row { flex-direction: column; gap: 8px; }
+}
+/* ──────────────────────────────────────
+   TOPIK PENELITIAN & PKM TERBUKA
+─────────────────────────────────────── */
+.rg-topik {
+  background: #ffffff;
+  padding: 64px 72px 72px;
+}
+
+.rg-topik__inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.rg-topik__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+/* Topic pill items — navy-to-orange gradient border */
+.rg-topik__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 48px;
+  padding: 0;
+}
+
+.rg-topik__item {
+  font-family: var(--font-main);
+  font-size: 1rem;
+  color: var(--navy);
+  text-align: center;
+  padding: 20px 32px;
+  border-radius: 12px;
+  /* Gradient border via background-clip trick */
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(to right, var(--navy), var(--orange)) border-box;
+  border: 2px solid transparent;
+}
+
+/* Contact CTA */
+.rg-topik__cta {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.rg-topik__cta-label {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+.rg-topik__cta-navy   { color: var(--navy); }
+.rg-topik__cta-orange { color: var(--orange); }
+
+.rg-topik__cta-contacts {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.rg-topik__cta-contacts span {
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  color: var(--navy);
+}
+
+.rg-topik__cta-contacts strong {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .rg-topik { padding: 52px 40px 60px; }
+}
+
+@media (max-width: 768px) {
+  .rg-topik {
+    padding: 40px 24px 52px;
+  }
+  .rg-topik__title {
+    font-size: 1.3rem;
+    margin-bottom: 24px;
+  }
+  .rg-topik__item {
+    font-size: 0.92rem;
+    padding: 16px 20px;
+  }
+  .rg-topik__cta-contacts {
+    flex-direction: column;
+    gap: 8px;
+  }
 }

@@ -10,11 +10,18 @@
   min-height: 280px;
   align-items: flex-end;
   padding: 0 72px 52px;
+  position: relative;
   background: linear-gradient(0deg, rgba(53, 60, 119, 0.85),rgba(53, 60, 119, 0.85)),
               url('images/research.png') center center / cover no-repeat;
 }
 
 .pub-hero__content { max-width: 600px; }
+
+.pub-hero__back {
+  position: absolute;
+  top: 20px;
+  left: 28px;
+}
 
 .pub-hero__title {
   font-family: var(--font-main);

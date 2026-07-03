@@ -44,14 +44,14 @@
 
 .berita-page__search {
   width: 260px;
-  padding: 10px 40px 10px 16px;
-  border: 1.5px solid #ccd0e0;
-  border-radius: 999px;
+  padding: 10px 16px 10px 40px;
+  border: 1.5px solid #d8dce8;
+  border-radius: 10px;
   font-family: var(--font-main);
   font-size: 0.85rem;
   color: var(--navy);
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.18s;
 }
 
 .berita-page__search:focus {
@@ -60,11 +60,10 @@
 
 .berita-page__search-icon {
   position: absolute;
-  right: 14px;
+  left: 13px;
   top: 50%;
   transform: translateY(-50%);
-  color: #888;
-  font-size: 1rem;
+  color: #aaa;
   pointer-events: none;
 }
 

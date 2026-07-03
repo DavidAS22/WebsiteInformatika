@@ -1,0 +1,30 @@
+/* ═══════════════════════════════════════════════════════════
+   koordinator.css
+═══════════════════════════════════════════════════════════ */
+
+.kor-main {
+  background: #ffffff;
+  min-height: 60vh;
+}
+
+.kor-content {
+  padding: 24px 60px 72px;
+  display: flex;
+  justify-content: center;
+}
+
+.kor-img {
+  width: 100%;
+  max-width: 1100px;
+  height: auto;
+  display: block;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .kor-content { padding: 20px 40px 56px; }
+}
+
+@media (max-width: 768px) {
+  .kor-content { padding: 16px 20px 48px; }
+}

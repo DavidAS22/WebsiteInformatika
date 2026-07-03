@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="pengumuman.css" />
+  <link rel="icon" type="image/x-icon" href="images/logo_IF.ico"/>
 </head>
 <body>
 
@@ -59,12 +60,16 @@
             </div>
           </li>
         </ul>
-        <a class="navbar__cta" href="#">Daftar<br>Sekarang</a>
+        <a class="navbar__cta" href="https://apply.uph.edu/">Daftar<br>Sekarang</a>
       </div>
     </nav>
   </header>
 
   <main class="page-main">
+
+    <div class="pgm-btn-back-wrap">
+      <a class="btn-back btn-back--navy" href="index.html">← Kembali ke Beranda</a>
+    </div>
     <!-- ── MAIN CONTENT ── -->
     <section class="pgm-section">
       <div class="pgm-section__inner">
@@ -152,7 +157,7 @@
     <div class="footer__bottom-info">
       <div class="footer__spacer"></div>
       <div class="footer__contact-group">
-        <p>WhatsApp : +62 8xx xxxx xxxx</p>
+        <p>WhatsApp : +62 851 9610 5421</p>
         <p>E-mail : informatika@uph.edu</p>
         <p>Instagram : @informatics.uph</p>
       </div>
@@ -203,12 +208,13 @@
   <!-- ── PENGUMUMAN SCRIPT ── -->
   <script>
     const BASE      = 'https://uph-informatika-backend.vercel.app';
-    const LIMIT     = 9; // 1 featured slot + 8 grid cards per page
+    const LIMIT     = 8; // grid cards per page (headline loaded separately)
 
     let currentPage  = 1;
     let totalPages   = 1;
     let searchTimer  = null;
     let currentQuery = '';
+    let headlineItem = null; // fetched once, stays fixed across all pages
 
     const featuredEl = document.getElementById('pgmFeatured');
     const gridEl     = document.getElementById('pgmGrid');
@@ -229,12 +235,11 @@
 
     function truncate(str, max) {
       if (!str) return '';
-      // Strip basic HTML tags for safe preview
       const plain = str.replace(/<[^>]+>/g, '');
       return plain.length > max ? plain.slice(0, max).trimEnd() + '…' : plain;
     }
 
-    /* ── Render featured (first pinned or first item on page 1) ── */
+    /* ── Render featured headline (always shown, never changes on pagination) ── */
     function renderFeatured(item) {
       if (!item) { featuredEl.innerHTML = ''; return; }
       featuredEl.innerHTML = `
@@ -255,6 +260,32 @@
           </div>
         </a>
       `;
+    }
+
+    /* ── Fetch headline once on load:
+       Priority 1 — any isPinned item (most recently published)
+       Priority 2 — most recently published item                 ── */
+    async function loadHeadline() {
+      featuredEl.innerHTML = '<div class="pgm-featured-skeleton"></div>';
+      try {
+        // Try pinned first
+        const r1   = await fetch(`${BASE}/api/pengumuman?isPinned=true&limit=1&sort=publishedAt&order=desc`);
+        const j1   = await r1.json();
+        const pinned = (j1.data || [])[0];
+
+        if (pinned) {
+          headlineItem = pinned;
+        } else {
+          // Fall back to latest
+          const r2 = await fetch(`${BASE}/api/pengumuman?limit=1&sort=publishedAt&order=desc`);
+          const j2 = await r2.json();
+          headlineItem = (j2.data || [])[0] || null;
+        }
+        renderFeatured(headlineItem);
+      } catch (err) {
+        console.error('Headline fetch failed:', err);
+        featuredEl.innerHTML = '';
+      }
     }
 
     /* ── Render grid cards ── */
@@ -306,13 +337,12 @@
       });
     }
 
-    /* ── Show skeletons while loading ── */
+    /* ── Show skeletons while loading (grid only — headline stays) ── */
     function showSkeletons() {
-      featuredEl.innerHTML = '<div class="pgm-featured-skeleton"></div>';
       gridEl.innerHTML = Array(6).fill('<div class="pgm-card-skeleton"></div>').join('');
     }
 
-    /* ── Main fetch ── */
+    /* ── Main fetch — grid only, headline stays persistent ── */
     async function loadPage() {
       showSkeletons();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -333,13 +363,11 @@
         totalPages = pagination.totalPages || 1;
         const total = pagination.total || items.length;
 
-        // Update count
         countEl.textContent = currentQuery
           ? `${total} hasil untuk "${currentQuery}"`
           : `${total} pengumuman`;
 
         if (!items.length) {
-          featuredEl.innerHTML = '';
           gridEl.innerHTML = `<p class="pgm-empty">Tidak ada pengumuman${currentQuery ? ` untuk "${currentQuery}"` : ''}.</p>`;
           pageNumsEl.innerHTML = '';
           prevBtn.disabled = true;
@@ -347,20 +375,11 @@
           return;
         }
 
-        // On page 1: first item (pinned or latest) → featured, rest → grid
-        // On page 2+: all items → grid, no featured slot
-        if (currentPage === 1) {
-          renderFeatured(items[0]);
-          renderGrid(items.slice(1));
-        } else {
-          featuredEl.innerHTML = '';
-          renderGrid(items);
-        }
-
+        // All items go to grid — headline is always the pinned/latest (loaded separately)
+        renderGrid(items);
         renderPagination(currentPage, totalPages);
 
       } catch (err) {
-        featuredEl.innerHTML = '';
         gridEl.innerHTML = '<p class="pgm-empty">Gagal memuat data. Silakan coba lagi nanti.</p>';
         console.error(err);
       }
@@ -389,7 +408,8 @@
     prevBtn.addEventListener('click', () => { if (currentPage > 1)          { currentPage--; loadPage(); } });
     nextBtn.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; loadPage(); } });
 
-    /* ── Init ── */
+    /* ── Init: load headline once, then load grid ── */
+    loadHeadline();
     loadPage();
   </script>
 

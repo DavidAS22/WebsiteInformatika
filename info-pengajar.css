@@ -12,8 +12,7 @@
 }
 
 .btn-back-wrap--info-pengajar {
-  padding: 16px 30px 0;
-  background: linear-gradient(135deg, #1a2a5e 0%, #2d3a8c 50%, #4a3fa0 100%);
+  display: none; /* no longer used */
 }
 
 /* ═══════════════════════════════════════
@@ -21,10 +20,18 @@
 ═══════════════════════════════════════ */
 .pengajar-hero {
   background: linear-gradient(135deg, #1a2a5e 0%, #2d3a8c 50%, #4a3fa0 100%);
-  padding: 48px 60px 52px;
+  padding: 68px 60px 52px; /* extra top padding clears the absolute button */
   display: flex;
   align-items: center;
   gap: 40px;
+  position: relative;
+}
+
+/* Back button — absolute top-left */
+.pengajar-hero__back {
+  position: absolute;
+  top: 18px;
+  left: 28px;
 }
 
 /* Photo */
@@ -515,4 +522,50 @@
   top: 4px;
   font-size: 0.55rem;
   color: var(--orange);
+}
+/* ═══════════════════════════════════════
+   PANEL INNER — centred max-width container
+   Matches the pen-list width so all panels
+   align consistently.
+═══════════════════════════════════════ */
+.panel-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* Penelitian/Publikasi list constrained by panel-inner; pen-list fills it */
+.pen-list {
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════
+   PUBLIKASI — extra badge variants & DOI link
+═══════════════════════════════════════ */
+.pen-badge--kategori {
+  background: var(--navy);
+  color: rgba(255,255,255,0.92);
+}
+
+.pen-badge--year {
+  background: #f0f2f8;
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.pen-doi-link {
+  font-family: var(--font-body);
+  font-size: 0.83rem;
+  color: var(--orange);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.pen-doi-link:hover {
+  text-decoration: underline;
+}
+
+.pen-badge--hki {
+  background: #f0f2f8;
+  color: var(--navy);
+  border: 1px solid #d0d4e8;
 }

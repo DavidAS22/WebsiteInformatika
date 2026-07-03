@@ -32,7 +32,7 @@
 
 .peminatan__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   width: 100%;
   max-width: 980px;
@@ -331,5 +331,53 @@
   .peminatan-modal__image {
     width: 100%;
     height: 160px;
+  }
+}
+/* ── Back button inside gradient section ── */
+.btn-back-wrap--inside {
+  position: absolute;
+  top: 24px;
+  left: 40px;
+  padding: 0;
+}
+
+/* Make peminatan relative so the absolute back button is positioned within it */
+.peminatan {
+  position: relative;
+}
+
+/* btn-back base styles (white variant used here) */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  text-decoration: none;
+  border: 1.5px solid;
+}
+
+.btn-back--white {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.btn-back--white:hover {
+  background: var(--white);
+  color: var(--navy);
+}
+
+@media (max-width: 768px) {
+  .btn-back-wrap--inside {
+    top: 16px;
+    left: 20px;
   }
 }
