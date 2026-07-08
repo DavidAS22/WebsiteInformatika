@@ -402,11 +402,13 @@
     }
 
     function typeBadge(type) {
+      // API field: researchType — values: "penelitian" or "pkm"
       const isPKM = (type || '').toLowerCase() === 'pkm';
       return `<span class="terkini-badge ${isPKM ? 'badge--pkm' : 'badge--penelitian'}">${isPKM ? 'PKM' : 'Penelitian'}</span>`;
     }
 
     function statusBadge(status) {
+      // API values: "Ongoing" or "Completed"
       const isOngoing = (status || '').toLowerCase() === 'ongoing';
       return `<span class="terkini-status ${isOngoing ? 'status--ongoing' : 'status--selesai'}">${isOngoing ? 'Sedang Berjalan' : 'Selesai'}</span>`;
     }
@@ -421,7 +423,7 @@
           <div class="terkini-card__header">
             <div class="terkini-card__title-row">
               <h3 class="terkini-card__title">${item.researchTitle || '-'}</h3>
-              <div style="display:flex;gap:6px;flex-shrink:0;">${typeBadge(item.type)}${statusBadge(item.status)}</div>
+              <div style="display:flex;gap:6px;flex-shrink:0;">${typeBadge(item.researchType)}${statusBadge(item.status)}</div>
             </div>
             <p class="terkini-card__submeta">
               Didanai oleh ${item.funders || '-'}
@@ -464,13 +466,12 @@
 
     async function loadData() {
       try {
-        const res  = await fetch(API_URL);
+        // Use server-side research_group filter for accuracy
+        const url = `${API_URL}?research_group=${encodeURIComponent(group.apiLabel)}&limit=100&sort=createdAt&order=desc`;
+        const res  = await fetch(url);
         const json = await res.json();
         const raw  = Array.isArray(json) ? json : (json.data || []);
-        // Filter to only items belonging to this research group
-        allData = raw.filter(d =>
-          (d.researchGroupCategory || '').trim() === group.apiLabel.trim()
-        );
+        allData = raw;
         allData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         populateYears(allData);
         filteredData = [...allData];
