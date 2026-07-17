@@ -1,5 +1,15 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+img, svg, video {
+  max-width: 100%;
+  display: block;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 :root {
   --navy:         #1a2a5e;
   --navy-dark:    #12204a;
@@ -51,12 +61,15 @@ body {
   display: flex;
   align-items: center;
   text-decoration: none;
-  flex-shrink: 0;
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .navbar__logo img {
   height: 50px;
   width: auto;
+  max-width: 100%;
   object-fit: contain;
   mix-blend-mode: screen;
 }
@@ -72,6 +85,7 @@ body {
   cursor: pointer;
   padding: 8px;
   margin-left: auto;
+  flex-shrink: 0;
   z-index: 1100;
 }
 
@@ -285,8 +299,22 @@ body {
 
 .hero-placeholder__inner p {
   opacity: 1;
-  font-size: 50px;
   margin-top: 8px;
+}
+
+.hero-placeholder__title {
+  font-family: var(--font-main);
+  font-size: 50px;
+  font-weight: 700;
+}
+
+.hero-placeholder__desc {
+  font-family: var(--font-main);
+  font-size: 24px;
+  font-weight: 400;
+  margin: 20px auto 0;
+  padding: 0 120px;
+  max-width: 900px;
 }
 
 
@@ -296,7 +324,7 @@ body {
 .stats-bar {
   background: var(--navy);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   padding: 48px 80px;
   gap: 0;
 }
@@ -385,7 +413,7 @@ body {
 /* ── Each row is a 2-col grid ── */
 .mengapa__row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 48px;
   align-items: start;
   margin-bottom: 48px;
@@ -483,7 +511,7 @@ body {
   }
   .mengapa__row,
   .mengapa__row--reverse {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     direction: ltr;
     gap: 20px;
     margin-bottom: 40px;
@@ -492,6 +520,12 @@ body {
   .mengapa__image-wrap--tall,
   .mengapa__image-wrap--medium {
     aspect-ratio: 4 / 3;
+  }
+  .mengapa__image-wrap {
+    order: 1;
+  }
+  .mengapa__text {
+    order: 2;
   }
   .mengapa__subtitle {
     font-size: 1.2rem;
@@ -521,7 +555,7 @@ body {
 /* 3-column grid for the cards — centered */
 .peminatan__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
   width: 100%;
   max-width: 1100px;
@@ -619,7 +653,7 @@ body {
     padding: 48px 32px 64px;
   }
   .peminatan__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
   }
   .peminatan__card--low {
@@ -637,23 +671,15 @@ body {
     margin-bottom: 28px;
   }
   .peminatan__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .peminatan__card--low {
-    margin-top: 32px;
-  }
-  .peminatan__card-image {
-    aspect-ratio: 1 / 1;
-  }
-}
-
-@media (max-width: 480px) {
-  .peminatan__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
   }
   .peminatan__card--low {
     margin-top: 0;
+  }
+  .peminatan__card-image {
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
 }
 
@@ -744,6 +770,7 @@ body {
 .pengajar__carousel {
   display: flex;
   align-items: flex-start;
+  gap: 24px;
   width: max-content;
 }
 
@@ -754,7 +781,6 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding: 0 12px;
 }
 
 .pengajar__card-image {
@@ -782,6 +808,7 @@ body {
   padding-top: 8px; 
   text-align: center;
   font-style: italic;
+  width: 360px;
 }
 
 .pengajar__card-jabatan {
@@ -792,6 +819,7 @@ body {
   text-align: center;
   font-style: italic;
   margin-top: 6px;
+  width: 360px;
 }
 
 /* ── Tablet ── */
@@ -807,6 +835,14 @@ body {
   }
   .pengajar::before {
     width: 340px;
+  }
+  .pengajar__card-image {
+    width: 260px;
+    height: 300px;
+  }
+  .pengajar__card-name,
+  .pengajar__card-jabatan {
+    width: 260px;
   }
 }
 
@@ -826,6 +862,18 @@ body {
   }
   .pengajar::before {
     display: none;
+  }
+  .pengajar__card-image {
+    width: 220px;
+    height: 260px;
+  }
+  .pengajar__card-name {
+    font-size: 0.82rem;
+    width: 220px;
+  }
+  .pengajar__card-jabatan {
+    font-size: 0.72rem;
+    width: 220px;
   }
 }
 
@@ -886,7 +934,7 @@ body {
 /* ── Main grid ── */
 .berita__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 20px;
   align-items: start;
 }
@@ -977,7 +1025,7 @@ body {
 
 .berita__item {
   display: grid;
-  grid-template-columns: 180px 1fr;
+  grid-template-columns: 180px minmax(0, 1fr);
   gap: 16px;
   align-items: start;
   padding: 20px 0;
@@ -1026,7 +1074,7 @@ body {
     padding: 48px 32px;
   }
   .berita__item {
-    grid-template-columns: 140px 1fr;
+    grid-template-columns: 140px minmax(0, 1fr);
   }
 }
 
@@ -1038,12 +1086,21 @@ body {
   .berita__heading {
     font-size: 1.6rem;
   }
+  .berita__header {
+    gap: 12px;
+  }
+  .berita__btn {
+    font-size: 0.62rem;
+    gap: 6px;
+    padding: 8px 8px 8px 14px;
+    white-space: nowrap;
+  }
   .berita__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 32px;
   }
   .berita__item {
-    grid-template-columns: 120px 1fr;
+    grid-template-columns: 120px minmax(0, 1fr);
     gap: 12px;
   }
   .berita__featured-title {
@@ -1083,6 +1140,7 @@ body {
 
 .alumni__carousel {
   display: flex;
+  align-items: stretch;
   gap: 24px;
   width: max-content;
 }
@@ -1091,7 +1149,7 @@ body {
 .alumni__card {
   flex-shrink: 0;
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 240px minmax(0, 1fr);
   gap: 0;
   border-radius: 16px;
   overflow: hidden;
@@ -1104,10 +1162,11 @@ body {
 /* ── Photo ── */
 .alumni__card-image {
   width: 240px;
-  height: 360px;
+  aspect-ratio: 3 / 4;
   padding: 16px 8px 16px 16px;
   display: flex;
   align-items: center;
+  align-self: start;
 }
 
 .alumni__card-image img {
@@ -1175,10 +1234,12 @@ body {
     font-size: 2.2rem;
   }
   .alumni__card {
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 150px minmax(0, 1fr);
+    width: 480px;
   }
   .alumni__card-image {
     width: 150px;
+    aspect-ratio: 3 / 4;
   }
 }
 
@@ -1191,14 +1252,24 @@ body {
     font-size: 1.8rem;
   }
   .alumni__card {
-    grid-template-columns: 120px 1fr;
-    min-height: 200px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    min-height: 0;
+    width: calc(100vw - 48px);
   }
   .alumni__card-image {
-    width: 120px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    padding: 0;
+  }
+  .alumni__card-image img {
+    border-radius: 0;
+  }
+  .alumni__card-content {
+    padding: 16px 20px 20px;
   }
   .alumni__quote {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -1207,12 +1278,13 @@ body {
    CEK INSTAGRAM
 ═══════════════════════════════════════ */
 .instagram {
-  background: linear-gradient(to bottom, transparent 75%, var(--orange) 100%),
-              url('images/handphone.png') center 0% /100% no-repeat;
+  background: linear-gradient(to bottom, transparent 50%, var(--orange) 100%),
+              url('images/handphone.webp') right top / cover no-repeat;
   min-height: 700px;
   align-items: center;
-  justify-content: left;
+  justify-content: space-between;
   display: flex;
+  overflow: hidden;
 }
 
 /* ── Left panel ── */
@@ -1224,6 +1296,8 @@ body {
   flex-direction: column;
   gap: 28px;
   align-items: flex-start;
+  flex: 0 1 50%;
+  box-sizing: border-box;
 }
 
 .instagram__heading {
@@ -1254,50 +1328,73 @@ body {
   color: var(--white);
 }
 
-/* ── Right panel ── */
+/* ── Right panel (kept as a spacer so the left text column stays
+     width-limited; the phone image itself lives on the section
+     background above, where it has room to be enlarged) ── */
 .instagram__right {
   position: relative;
   z-index: 1;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  padding: 0;
   align-self: stretch;
+  flex: 1 1 50%;
+  min-width: 0;
 }
 
 /* ── Tablet ── */
 @media (max-width: 1024px) {
+  .instagram {
+    min-height: 560px;
+  }
   .instagram__heading {
     font-size: 2.4rem;
   }
   .instagram__left {
     padding: 48px 32px 48px 40px;
+    flex-basis: 48%;
   }
-  .instagram__phone-img {
-    width: 100%;
+  .instagram__right {
+    flex-basis: 52%;
   }
-
 }
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .instagram {
-    grid-template-columns: 1fr;
-    min-height: auto;
+    min-height: 300px;
   }
   .instagram__left {
-    padding: 48px 24px 24px;
+    padding: 40px 16px 40px 24px;
+    gap: 22px;
+    flex-basis: 54%;
   }
   .instagram__heading {
-    font-size: 2rem;
+    font-size: 1.7rem;
+  }
+  .instagram__btn {
+    font-size: 0.78rem;
+    padding: 8px 14px;
   }
   .instagram__right {
-    padding: 0 24px 48px;
+    flex-basis: 46%;
   }
-  .instagram__phone-img {
-    width: 100%;
-  }
+}
 
+/* ── Small mobile ── */
+@media (max-width: 480px) {
+  .instagram {
+    min-height: 230px;
+  }
+  .instagram__left {
+    padding: 32px 12px 32px 16px;
+    gap: 16px;
+  }
+  .instagram__heading {
+    font-size: 1.35rem;
+  }
+  .instagram__btn {
+    font-size: 0.72rem;
+    padding: 7px 12px;
+    gap: 6px;
+  }
 }
 
 /* ═══════════════════════════════════════
@@ -1380,7 +1477,7 @@ body {
 
 .footer__main {
   display: grid;
-  grid-template-columns: auto 1fr 1fr 1fr 1fr;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
   gap: 124px;
   padding: 52px 60px 1px;
   align-items: start;
@@ -1448,7 +1545,7 @@ body {
 /* ── Contact & Address row ── */
 .footer__bottom-info {
   display: grid;
-  grid-template-columns: 300px 1fr 1fr;
+  grid-template-columns: 300px minmax(0, 1fr) minmax(0, 1fr);
   gap: 24px;
   padding: 1px 60px 48px;
   border-bottom: 1px solid var(--grey-line);
@@ -1508,7 +1605,7 @@ body {
   }
 
   .footer__main {
-    grid-template-columns: 220px 1fr 1fr 1fr 1fr;
+    grid-template-columns: 220px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
     padding: 40px 32px 36px;
     gap: 16px;
   }
@@ -1523,7 +1620,7 @@ body {
   }
 
   .footer__bottom-info {
-    grid-template-columns: 220px 1fr 1fr;
+    grid-template-columns: 220px minmax(0, 1fr) minmax(0, 1fr);
     padding: 28px 32px 40px;
     gap: 16px;
   }
@@ -1548,6 +1645,15 @@ body {
   .mengapa__subtitle {
     font-size: 1.3rem;
   }
+
+  .hero-placeholder__title {
+    font-size: 2.6rem;
+  }
+  .hero-placeholder__desc {
+    font-size: 1.1rem;
+    padding: 0 48px;
+    margin-top: 16px;
+  }
 }
 
 /* ═══════════════════════════════════════
@@ -1559,7 +1665,7 @@ body {
   .navbar {
     padding: 0 20px;
     height: 64px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
   }
 
@@ -1652,13 +1758,29 @@ body {
     min-height: 280px;
   }
 
-  .hero-placeholder__inner h2 {
-    font-size: 1.1rem !important;
+  .hero-placeholder__inner {
+    padding: 24px;
+  }
+
+  .hero-placeholder__logo {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero-placeholder__title {
+    font-size: 1.6rem;
+  }
+
+  .hero-placeholder__desc {
+    font-size: 0.95rem;
+    padding: 0 8px;
+    margin-top: 12px;
+    line-height: 1.55;
   }
 
   /* ── Footer ── */
   .footer__main {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     padding: 36px 24px 28px;
     gap: 28px;
   }
@@ -1696,7 +1818,7 @@ body {
 
   /* Contact & address stack vertically */
   .footer__bottom-info {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding: 28px 24px 36px;
     gap: 24px;
   }
@@ -1725,7 +1847,7 @@ body {
   }
 
   .stats-bar {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     padding: 32px 24px;
     gap: 28px;
   }
@@ -1754,7 +1876,7 @@ body {
   }
   .mengapa__row,
   .mengapa__row--reverse {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     direction: ltr;
     gap: 24px;
   }
@@ -1774,11 +1896,20 @@ body {
 ═══════════════════════════════════════ */
 @media (max-width: 480px) {
   .footer__main {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .footer__brand-name {
     font-size: 1.4rem;
+  }
+
+  .hero-placeholder__title {
+    font-size: 1.35rem;
+  }
+
+  .hero-placeholder__desc {
+    font-size: 0.88rem;
+    padding: 0;
   }
 }
 

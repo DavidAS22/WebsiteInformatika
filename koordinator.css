@@ -1,30 +1,111 @@
-/* ═══════════════════════════════════════════════════════════
-   koordinator.css
-═══════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   KOORDINATOR INTERNAL PRODI — Page-specific styles
+   Mirrors penelitian-pkm.css hero/section/card patterns.
+   Depends on: style.css (tokens, navbar, footer, page-hero)
+═══════════════════════════════════════════════════════ */
 
-.kor-main {
+/* ──────────────────────────────────────
+   SECTION SHELL
+─────────────────────────────────────── */
+.kor-section {
   background: #ffffff;
-  min-height: 60vh;
+  padding: 72px 72px 88px;
 }
 
-.kor-content {
-  padding: 24px 60px 72px;
+.kor-section__header { margin-bottom: 48px; }
+
+.kor-section__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.9rem;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+
+.kor-section__rule {
+  width: 56px;
+  height: 4px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+
+/* ──────────────────────────────────────
+   4-COLUMN CARD GRID
+─────────────────────────────────────── */
+.kor-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.kor-card {
+  border: 1.5px solid #e2e6f0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+  transition: box-shadow 0.22s, border-color 0.22s;
+}
+
+.kor-card:hover {
+  box-shadow: 0 8px 32px rgba(26,42,94,0.12);
+  border-color: var(--orange);
+}
+
+.kor-card__inner {
+  padding: 28px 24px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.kor-img {
-  width: 100%;
-  max-width: 1100px;
-  height: auto;
-  display: block;
+.kor-card__title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--navy);
+  line-height: 1.3;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid #e2e6f0;
 }
 
-/* ── Responsive ── */
+.kor-card__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kor-card__list li {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  color: #444;
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.kor-card__list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — Tablet (≤ 1024px)
+════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .kor-content { padding: 20px 40px 56px; }
+  .kor-section { padding: 56px 40px 64px; }
+  .kor-grid    { grid-template-columns: repeat(2, 1fr); gap: 20px; }
 }
 
+/* ════════════════════════════════════════════
+   RESPONSIVE — Mobile (≤ 768px)
+════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .kor-content { padding: 16px 20px 48px; }
+  .kor-section       { padding: 40px 24px 48px; }
+  .kor-section__title { font-size: 1.5rem; }
+  .kor-grid          { grid-template-columns: 1fr; }
 }

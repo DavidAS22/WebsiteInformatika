@@ -225,6 +225,9 @@
   border-radius: 20px;
   max-width: 640px;
   width: 100%;
+  max-height: 100%; /* never exceed the space left by the modal's own padding */
+  overflow-y: auto; /* scroll internally instead of overflowing the viewport */
+  -webkit-overflow-scrolling: touch;
   padding: 36px 40px 32px;
   box-shadow: 0 24px 60px rgba(0,0,0,0.35);
   animation: modalPop 0.25s ease;
@@ -332,17 +335,42 @@
     height: 160px;
   }
 }
-/* ── Back button inside gradient section ── */
-.btn-back-wrap--inside {
-  position: absolute;
-  top: 24px;
-  left: 40px;
-  padding: 0;
-}
 
-/* Make peminatan relative so the absolute back button is positioned within it */
-.peminatan {
-  position: relative;
+/* Very small phones (320–400px): tighten everything further so
+   less scrolling is needed inside the modal */
+@media (max-width: 400px) {
+  .peminatan-modal {
+    padding: 12px;
+  }
+  .peminatan-modal__box {
+    padding: 22px 18px 20px;
+    border-radius: 16px;
+  }
+  .peminatan-modal__close {
+    top: 12px;
+    right: 14px;
+    font-size: 1.4rem;
+  }
+  .peminatan-modal__title {
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+  }
+  .peminatan-modal__image {
+    height: 130px;
+  }
+  .peminatan-modal__text p {
+    font-size: 0.82rem;
+    margin-bottom: 12px;
+  }
+}
+/* ── Back button inside gradient section ──
+   In normal flex flow (not absolute) so it always reserves its own
+   space above the title instead of floating over it on short/narrow
+   screens. align-self keeps it left-aligned while the title/grid
+   below stay centered. */
+.btn-back-wrap--inside {
+  align-self: flex-start;
+  padding: 0;
 }
 
 /* btn-back base styles (white variant used here) */
@@ -372,11 +400,4 @@
 .btn-back--white:hover {
   background: var(--white);
   color: var(--navy);
-}
-
-@media (max-width: 768px) {
-  .btn-back-wrap--inside {
-    top: 16px;
-    left: 20px;
-  }
 }

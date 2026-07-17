@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pengajar - Program Studi S1 Informatika UPH</title>
+  <title>Staf Tendik - Program Studi S1 Informatika UPH</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="pengajar.css" />
+  <link rel="stylesheet" href="staf-tendik.css" />
   <link rel="icon" type="image/x-icon" href="images/logo_IF.ico"/>
 </head>
 <body>
@@ -37,7 +37,6 @@
               Tentang <span class="chevron"></span>
             </a>
             <div class="dropdown" id="dropdown-tentang">
-              <!-- ADD / REMOVE items here freely -->
               <a class="dropdown__item" href="tentang-informatika.html">Tentang Informatika UPH</a>
               <a class="dropdown__item" href="kata-sambutan.html">Kata Sambutan Kaprodi</a>
               <a class="dropdown__item" href="sejarah-informatika.html">Sejarah Informatika UPH</a>
@@ -51,7 +50,6 @@
               Akademik <span class="chevron"></span>
             </a>
             <div class="dropdown" id="dropdown-akademik">
-              <!-- ADD / REMOVE items here freely -->
               <a class="dropdown__item" href="kurikulum.html">Kurikulum</a>
               <a class="dropdown__item" href="pengajar.html">Pengajar</a>
               <a class="dropdown__item" href="staf-tendik.html">Staf Tendik</a>
@@ -64,7 +62,6 @@
               Riset &amp; Inovasi <span class="chevron"></span>
             </a>
             <div class="dropdown" id="dropdown-riset">
-              <!-- ADD / REMOVE items here freely -->
               <a class="dropdown__item" href="penelitian-pkm.html">Penelitian &amp; PKM</a>
               <a class="dropdown__item" href="publikasi.html">Publikasi</a>
             </div>
@@ -76,7 +73,6 @@
               Mahasiswa <span class="chevron"></span>
             </a>
             <div class="dropdown" id="dropdown-mahasiswa">
-              <!-- ADD / REMOVE items here freely -->
               <a class="dropdown__item" href="himpunan.html">Himpunan</a>
               <a class="dropdown__item" href="informasi-lomba.html">Informasi Lomba</a>
             </div>
@@ -88,7 +84,6 @@
               Berita &amp; Agenda <span class="chevron"></span>
             </a>
             <div class="dropdown" id="dropdown-berita">
-              <!-- ADD / REMOVE items here freely -->
               <a class="dropdown__item" href="berita.html">Berita</a>
               <a class="dropdown__item" href="pengumuman.html">Pengumuman</a>
               <a class="dropdown__item" href="event.html">Event</a>
@@ -106,8 +101,7 @@
   </header>
 
   <!-- ══════════════════════════════════════
-       PAGE CONTENT — PENGAJAR
-       Add your content here
+       PAGE CONTENT — STAF TENDIK
   ══════════════════════════════════════ -->
   <main class="page-main">
   <div class="btn-back-wrap">
@@ -115,10 +109,12 @@
   </div>
 
     <!-- ══════════════════════════════════════
-         STAF PENDIDIK SECTION
+         STAF TENDIK SECTION
+         (No CMS/API for this role type — static list.
+          Reuses the .staf card design from pengajar.html)
     ══════════════════════════════════════ -->
     <section class="staf">
-      <h2 class="staf__heading">Staf Pendidik</h2>
+      <h2 class="staf__heading">Staf Tendik</h2>
 
       <!-- Search bar -->
       <div class="staf__search-wrap">
@@ -129,40 +125,26 @@
         <input
           class="staf__search"
           type="text"
-          id="stafSearch"
-          placeholder="Ketik nama dosen"
-          oninput="filterStaf()"
+          id="tendikSearch"
+          placeholder="Ketik nama staf"
+          oninput="filterTendik()"
         />
       </div>
 
       <!--
       ═══════════════════════════════════════════════════
-      CMS INTEGRATION POINT
+      DATA ENTRY POINT
       ═══════════════════════════════════════════════════
-      To load from API:
-      1. Set STAF_API_URL below to your endpoint
-      2. Uncomment the fetch block in the <script> below
-      3. Comment out or remove the static cards in #stafGrid
-
-      Expected API response (array):
-      [
-        {
-          "nama":      "Dr. John Doe",
-          "email":     "john@uph.edu",
-          "foto":      "images/dosen_1.jpg",
-          "publikasi": 5,
-          "hki_paten": 2
-        },
-        ...
-      ]
+      Staf Tendik has no public API endpoint (only /api/lecturer
+      exists for teaching staff). Add / edit entries directly
+      in the STAF_TENDIK_DATA array in the script below.
       ═══════════════════════════════════════════════════
       -->
 
-      <!-- Card grid -->
-      <!-- Card grid — populated by CMS -->
-      <div class="staf__grid" id="stafGrid">
-        <!-- Cards injected by loadStaf() -->
-      </div><!-- /#stafGrid -->
+      <!-- Card grid — populated by renderTendik() from static data -->
+      <div class="staf__grid" id="tendikGrid">
+        <!-- Cards injected by loadTendik() -->
+      </div><!-- /#tendikGrid -->
     </section>
   </main>
 
@@ -175,16 +157,6 @@
       <div class="footer__brand">
         <p class="footer__brand-title">Program Studi</p>
         <p class="footer__brand-name">Informatika</p>
-
-        <!--
-          LOGO PLACEHOLDER
-          To add the logo, replace this entire div with:
-          <img src="path/to/your/logo.png" alt="IF Logo" style="width:170px;" />
-        -->
-        <!--<div class="footer__logo-placeholder">
-          Logo<br>IF Badge<br>Here
-        </div>
-        -->
         <img src="images/logo_IF.png" alt="IF Logo" style="width:170px;" />
       </div>
 
@@ -192,7 +164,6 @@
       <div>
         <p class="footer__col-title">Akademik</p>
         <ul class="footer__links">
-          <!-- ADD / REMOVE items here freely -->
           <li><a href="kurikulum.html">Kurikulum</a></li>
           <li><a href="pengajar.html">Pengajar</a></li>
           <li><a href="staf-tendik.html">Staf Tendik</a></li>
@@ -203,7 +174,6 @@
       <div>
         <p class="footer__col-title">Riset &amp; Inovasi</p>
         <ul class="footer__links">
-          <!-- ADD / REMOVE items here freely -->
           <li><a href="penelitian-pkm.html">Penelitian &amp; PKM</a></li>
           <li><a href="publikasi.html">Publikasi</a></li>
         </ul>
@@ -213,7 +183,6 @@
       <div>
         <p class="footer__col-title">Mahasiswa</p>
         <ul class="footer__links">
-          <!-- ADD / REMOVE items here freely -->
           <li><a href="himpunan.html">Himpunan</a></li>
           <li><a href="informasi-lomba.html">Informasi Lomba</a></li>
         </ul>
@@ -223,7 +192,6 @@
       <div>
         <p class="footer__col-title">Berita &amp; Agenda</p>
         <ul class="footer__links">
-          <!-- ADD / REMOVE items here freely -->
           <li><a href="berita.html">Berita</a></li>
           <li><a href="pengumuman.html">Pengumuman</a></li>
           <li><a href="event.html">Event</a></li>
@@ -234,18 +202,14 @@
 
     <!-- Bottom info: spacer + contact + address -->
     <div class="footer__bottom-info">
-
-      <!-- Empty spacer column (aligns with brand column above, hidden on mobile) -->
       <div class="footer__spacer"></div>
 
-      <!-- Contact -->
       <div class="footer__contact-group">
         <p>WhatsApp : +62 851 9610 5421</p>
         <p>E-mail : informatika@uph.edu</p>
         <p>Instagram : @informatics.uph</p>
       </div>
 
-      <!-- Address -->
       <div>
         <p class="footer__address-title">Alamat</p>
         <p class="footer__address-text">
@@ -255,7 +219,6 @@
           Indonesia
         </p>
       </div>
-
     </div>
 
     <!-- Copyright -->
@@ -269,34 +232,28 @@
     const hamburger = document.getElementById('hamburgerBtn');
     const navRight  = document.getElementById('navbarRight');
 
-    // Toggle mobile menu open/close
     hamburger.addEventListener('click', () => {
       const isOpen = navRight.classList.toggle('is-open');
       hamburger.classList.toggle('is-open', isOpen);
       hamburger.setAttribute('aria-expanded', isOpen);
     });
 
-    // Mobile: tap nav link to toggle its dropdown (no hover on touch)
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', e => {
-        if (window.innerWidth > 768) return; // desktop uses CSS hover
+        if (window.innerWidth > 768) return;
         e.preventDefault();
         const targetId = link.getAttribute('data-dropdown');
-        const dropdown = document.getElementById(targetId);
         const parentLi = link.closest('li');
         const isActive = parentLi.classList.contains('mobile-open');
 
-        // Close all open dropdowns
         document.querySelectorAll('.navbar__nav li').forEach(li => {
           li.classList.remove('mobile-open');
         });
 
-        // Open this one if it wasn't already open
         if (!isActive) parentLi.classList.add('mobile-open');
       });
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', e => {
       if (!e.target.closest('.navbar')) {
         navRight.classList.remove('is-open');
@@ -307,105 +264,47 @@
     });
   </script>
 
-
-
-<script>
+  <script>
     // ══════════════════════════════════════
-    // STAF PENDIDIK — CMS INTEGRATION (UPDATED API)
+    // STAF TENDIK — static data (no public API for this role)
     // ══════════════════════════════════════
-    const STAF_API_URL = 'https://admin.informaticsuph.com/api/lecturer';
-
-    // Update data placeholder dengan properti baru sebagai cadangan jika API bermasalah
-    const STAF_PLACEHOLDER = [
-      { slug: 'dosen-1', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
-      { slug: 'dosen-2', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
-      { slug: 'dosen-3', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
-      { slug: 'dosen-4', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
-      { slug: 'dosen-5', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
-      { slug: 'dosen-6', fullName: 'Nama Lengkap', email: 'alamat@uph.edu', lecturerImageUrl: 'images/pengajar.png', publikasi: 0, hki_paten: 0 },
+    const STAF_TENDIK_DATA = [
+      { nama: 'Nama Lengkap', jabatan: 'Sekretariat Program Studi', email: 'alamat@uph.edu', foto: 'images/pengajar.png' },
+      { nama: 'Nama Lengkap', jabatan: 'Staf Administrasi Akademik', email: 'alamat@uph.edu', foto: 'images/pengajar.png' },
+      { nama: 'Nama Lengkap', jabatan: 'Staf Laboratorium', email: 'alamat@uph.edu', foto: 'images/pengajar.png' },
+      { nama: 'Nama Lengkap', jabatan: 'Staf Administrasi Umum', email: 'alamat@uph.edu', foto: 'images/pengajar.png' },
+      { nama: 'Nama Lengkap', jabatan: 'Staf IT Support', email: 'alamat@uph.edu', foto: 'images/pengajar.png' },
     ];
 
-    function renderSkeleton(count = 6) {
-      const grid = document.getElementById('stafGrid');
-      grid.innerHTML = Array.from({ length: count }).map(() => `
-        <div class="staf__card staf__card--skeleton" style="pointer-events:none;">
-          <div class="staf__card-photo" style="background:rgba(255,255,255,0.1);"></div>
-          <div class="staf__card-info" style="gap:8px;">
-            <div style="height:13px;width:70%;background:rgba(255,255,255,0.2);border-radius:4px;"></div>
-            <div style="height:11px;width:50%;background:rgba(255,255,255,0.15);border-radius:4px;"></div>
-            <div style="height:10px;width:40%;background:rgba(255,255,255,0.1);border-radius:4px;margin-top:auto;"></div>
-            <div style="height:10px;width:40%;background:rgba(255,255,255,0.1);border-radius:4px;"></div>
+    function renderTendik(data) {
+      const grid = document.getElementById('tendikGrid');
+      if (!data.length) {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#999;font-family:var(--font-main);">Tidak ada data staf tendik saat ini.</p>';
+        return;
+      }
+      grid.innerHTML = data.map(item => `
+        <div class="staf__card">
+          <div class="staf__card-photo">
+            <img src="${item.foto || 'images/pengajar.png'}" alt="${item.nama}" onerror="this.src='images/pengajar.png'" />
           </div>
-        </div>`).join('');
-    }
-
-    // ── Position sort (same order as homepage carousel) ──
-    const POSITION_ORDER = [
-      'ketua program studi',
-      'kepala program studi',
-      'koordinator',
-      'quality officer',
-      'qo',
-      'dosen',
-      'asisten dosen',
-    ];
-
-    function positionRank(position) {
-      const p = (position || '').toLowerCase().trim();
-      if (p.includes('asisten dosen')) return POSITION_ORDER.indexOf('asisten dosen');
-      for (let i = 0; i < POSITION_ORDER.length - 1; i++) {
-        if (p.includes(POSITION_ORDER[i])) return i;
-      }
-      return POSITION_ORDER.length;
-    }
-
-    function sortByPosition(data) {
-      return [...data].sort((a, b) => positionRank(a.position) - positionRank(b.position));
-    }
-
-    function renderStaf(data) {
-      const grid = document.getElementById('stafGrid');
-      grid.innerHTML = data.map(item => {
-        const foto  = item.lecturerImageUrl || 'images/pengajar.png';
-        const nama  = item.fullName || 'Nama Lengkap';
-        // Use id for the link — matches /api/lecturer/[id] in the API docs
-        const href  = item.id ? `info-pengajar.html?id=${item.id}` : 'info-pengajar.html';
-        return `
-          <a class="staf__card" href="${href}" style="text-decoration:none;">
-            <div class="staf__card-photo">
-              <img src="${foto}" alt="${nama}" onerror="this.src='images/pengajar.png'" />
+          <div class="staf__card-info">
+            <p class="staf__card-name">${item.nama}</p>
+            <p class="staf__card-email">${item.email || ''}</p>
+            <div class="staf__card-stats">
+              <p>Jabatan : ${item.jabatan || '–'}</p>
             </div>
-            <div class="staf__card-info">
-              <p class="staf__card-name">${nama}</p>
-              <p class="staf__card-email">${item.email || ''}</p>
-              <div class="staf__card-stats">
-                <p>Jabatan : ${item.jja || '–'}</p>
-                <p>Kelompok : ${(item.researchGroup || '–').split('&')[0].trim()}</p>
-              </div>
-            </div>
-          </a>`;
-      }).join('');
-    }
-    
-    async function loadStaf() {
-      renderSkeleton();
-      try {
-        const res  = await fetch(STAF_API_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json = await res.json();
-        // API returns { data: [...], pagination: {...} }
-        const data = json.data || json;
-        renderStaf(sortByPosition(Array.isArray(data) ? data : []));
-      } catch (err) {
-        console.warn('Staf CMS fetch failed, using fallback data.', err);
-        renderStaf(STAF_PLACEHOLDER);
-      }
+          </div>
+        </div>
+      `).join('');
     }
 
-    // ── Search filter (Disinkronkan dengan variabel nama baru) ──
-    function filterStaf() {
-      const query = document.getElementById('stafSearch').value.toLowerCase();
-      document.querySelectorAll('.staf__card').forEach(card => {
+    function loadTendik() {
+      renderTendik(STAF_TENDIK_DATA);
+    }
+
+    function filterTendik() {
+      const query = document.getElementById('tendikSearch').value.toLowerCase();
+      document.querySelectorAll('#tendikGrid .staf__card').forEach(card => {
         const nameElement = card.querySelector('.staf__card-name');
         if (nameElement) {
           const name = nameElement.textContent.toLowerCase();
@@ -414,7 +313,8 @@
       });
     }
 
-    loadStaf();
+    loadTendik();
   </script>
+
 </body>
 </html>

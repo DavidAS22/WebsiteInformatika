@@ -20,18 +20,22 @@
 ═══════════════════════════════════════ */
 .pengajar-hero {
   background: linear-gradient(135deg, #1a2a5e 0%, #2d3a8c 50%, #4a3fa0 100%);
-  padding: 68px 60px 52px; /* extra top padding clears the absolute button */
+  padding: 32px 60px 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Back button — in normal flow, left-aligned, own row above the body */
+.pengajar-hero__back {
+  align-self: flex-start;
+}
+
+/* Photo + info row */
+.pengajar-hero__body {
   display: flex;
   align-items: center;
   gap: 40px;
-  position: relative;
-}
-
-/* Back button — absolute top-left */
-.pengajar-hero__back {
-  position: absolute;
-  top: 18px;
-  left: 28px;
 }
 
 /* Photo */
@@ -320,10 +324,15 @@
 ═══════════════════════════════════════ */
 @media (max-width: 480px) {
   .pengajar-hero {
+    padding: 24px 16px 32px;
+    gap: 18px;
+  }
+
+  /* Photo + info stack vertically on very small screens */
+  .pengajar-hero__body {
     flex-direction: column;
     align-items: flex-start;
-    padding: 28px 16px 32px;
-    gap: 20px;
+    gap: 16px;
   }
 
   .pengajar-content {

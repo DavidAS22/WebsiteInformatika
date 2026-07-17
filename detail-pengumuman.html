@@ -35,6 +35,7 @@
             <div class="dropdown" id="dropdown-akademik">
               <a class="dropdown__item" href="kurikulum.html">Kurikulum</a>
               <a class="dropdown__item" href="pengajar.html">Pengajar</a>
+              <a class="dropdown__item" href="staf-tendik.html">Staf Tendik</a>
             </div>
           </li>
           <li>
@@ -255,7 +256,7 @@
       // Pengumuman has no kategori — show pinned badge if isPinned
       const tagsEl = document.getElementById('bdTags');
       if (item.isPinned) {
-        tagsEl.innerHTML = `<span class="bd-tag">📌 Pinned</span>`;
+        tagsEl.innerHTML = `<span class="bd-tag">Pinned</span>`;
       }
 
       setText('bdDate', formatDate(item.publishedAt));

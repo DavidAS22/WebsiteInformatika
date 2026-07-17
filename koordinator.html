@@ -35,6 +35,7 @@
             <div class="dropdown" id="dropdown-akademik">
               <a class="dropdown__item" href="kurikulum.html">Kurikulum</a>
               <a class="dropdown__item" href="pengajar.html">Pengajar</a>
+              <a class="dropdown__item" href="staf-tendik.html">Staf Tendik</a>
             </div>
           </li>
           <li>
@@ -65,17 +66,68 @@
     </nav>
   </header>
 
-  <main class="page-main kor-main">
+  <main class="page-main">
     <div class="btn-back-wrap">
       <a class="btn-back btn-back--navy" href="index.html">← Kembali ke Beranda</a>
     </div>
-    <div class="kor-content">
-      <img
-        src="images/koordinator-internal-prodi.webp"
-        alt="Struktur Koordinator Internal Program Studi S1 Informatika UPH"
-        class="kor-img"
-      />
-    </div>
+
+    <!-- ── KOORDINATOR GRID ── -->
+    <section class="kor-section">
+      <div class="kor-section__header">
+        <h2 class="kor-section__title">Koordinator Internal Program Studi</h2>
+        <div class="kor-section__rule"></div>
+      </div>
+
+      <div class="kor-grid">
+
+        <!-- 1. Kemahasiswaan dan Alumni -->
+        <article class="kor-card">
+          <div class="kor-card__inner">
+            <h3 class="kor-card__title">Kemahasiswaan dan Alumni</h3>
+            <ul class="kor-card__list">
+              <li>Robertus Hudi, S.Inf., M.Kom.</li>
+              <li>Kevin Wiriyatama, S.Kom.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 2. Akademik dan Quality Officer -->
+        <article class="kor-card">
+          <div class="kor-card__inner">
+            <h3 class="kor-card__title">Akademik dan Quality Officer</h3>
+            <ul class="kor-card__list">
+              <li>Irene A. Lazarusli, S.Kom., M.T.</li>
+              <li>Marta Diana S.Tr.T., M.T.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 3. Kegiatan Prodi -->
+        <article class="kor-card">
+          <div class="kor-card__inner">
+            <h3 class="kor-card__title">Kegiatan Prodi</h3>
+            <ul class="kor-card__list">
+              <li>Dr. Louis Khrisna P. Suryapranata, S.Kom., M.Ti.</li>
+              <li>David A. Senewe, S.Kom.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 4. Penelitian dan PkM -->
+        <article class="kor-card">
+          <div class="kor-card__inner">
+            <h3 class="kor-card__title">Penelitian dan PkM</h3>
+            <ul class="kor-card__list">
+              <li>Aditya R. Mitra, S.Si., M.T.</li>
+              <li>Feliks V. P. Samosir, S.Pd., M.Kom.</li>
+              <li>Arthur J. M. Siburian, S.T., M.T.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
@@ -90,6 +142,7 @@
         <ul class="footer__links">
           <li><a href="kurikulum.html">Kurikulum</a></li>
           <li><a href="pengajar.html">Pengajar</a></li>
+          <li><a href="staf-tendik.html">Staf Tendik</a></li>
         </ul>
       </div>
       <div>
@@ -149,6 +202,7 @@
       link.addEventListener('click', e => {
         if (window.innerWidth > 768) return;
         e.preventDefault();
+        const targetId = link.getAttribute('data-dropdown');
         const parentLi = link.closest('li');
         const isActive = parentLi.classList.contains('mobile-open');
         document.querySelectorAll('.navbar__nav li').forEach(li => li.classList.remove('mobile-open'));

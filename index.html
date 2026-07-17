@@ -118,8 +118,8 @@
         alt="Logo IF"
         class="hero-placeholder__logo"
       />
-      <h2 style="font-family:'Inter',sans-serif;font-size:50px;font-weight:700;">Program Studi S1 Informatika</h2>
-      <p style="font-family:'Inter',sans-serif;font-size:24px;font-weight:400;margin: 20px 60px;padding: 0 120px;">Mendidik insan teknologi yang unggul, berintegritas, dan berdampak bagi masyarakat. Sejak 1998, kami membentuk teknolog masa depan di bidang Kecerdasan Artifisial, Data Intelligence, dan Keamanan Siber, berlandaskan iman Kristiani.</p>
+      <h2 class="hero-placeholder__title">Program Studi S1 Informatika</h2>
+      <p class="hero-placeholder__desc">Mendidik insan teknologi yang unggul, berintegritas, dan berdampak bagi masyarakat. Sejak 1998, kami membentuk teknolog masa depan di bidang Kecerdasan Artifisial, Data Intelligence, dan Keamanan Siber, berlandaskan iman Kristiani.</p>
     </div>
   </section>
 
@@ -463,6 +463,9 @@
       </a>
     </div>
 
+    <!-- Phone image -->
+    <div class="instagram__right"></div>
+
   </section>
 
   <!-- ══════════════════════════════════════
@@ -622,16 +625,42 @@
     // ════════════════════════════════════════════════
     // PENGAJAR — CMS Integration (STRICT DRAG & CLICK FIX)
     // ════════════════════════════════════════════════
-    const CMS_PENGAJAR_URL = 'https://uph-informatika-backend.vercel.app/api/lecturer';
+    const CMS_PENGAJAR_URL = 'https://admin.informaticsuph.com/api/lecturer';
+
+    // ── Position sort order ──────────────────────────────────
+    // Cards appear in this order in the carousel.
+    // Any position not listed falls to the end alphabetically.
+    const POSITION_ORDER = [
+      'ketua program studi',
+      'kepala program studi',
+      'koordinator',
+      'quality officer',
+      'qo',
+      'dosen',
+      'asisten dosen',   // last — checked after 'dosen' but uses exact includes so won't false-match
+    ];
+
+    function positionRank(position) {
+      const p = (position || '').toLowerCase().trim();
+      // Check from most specific to least specific to avoid substring false matches
+      // 'asisten dosen' is checked before 'dosen' in the includes() call order below
+      if (p.includes('asisten dosen')) return POSITION_ORDER.indexOf('asisten dosen');
+      for (let i = 0; i < POSITION_ORDER.length - 1; i++) { // skip last (asisten dosen already handled)
+        if (p.includes(POSITION_ORDER[i])) return i;
+      }
+      return POSITION_ORDER.length;
+    }
+
+    function sortByPosition(data) {
+      return [...data].sort((a, b) => positionRank(a.position) - positionRank(b.position));
+    }
 
     const carousel = document.getElementById('pengajarCarousel');
     const wrapper  = carousel.parentElement;
 
     function setCardWidths() {
-      const cards   = carousel.querySelectorAll('.pengajar__card');
-      const visible = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 3;
-      const cardWidth = wrapper.offsetWidth / visible;
-      cards.forEach(c => { c.style.minWidth = cardWidth + 'px'; });
+      // Card sizing is fully handled by CSS breakpoints now;
+      // no JS width override needed.
     }
 
     function initDrag() {
@@ -759,9 +788,9 @@
         const res  = await fetch(CMS_PENGAJAR_URL);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
-        // API returns { data: [...], pagination: {...} }
         const data = json.data || json;
-        renderPengajarCards(Array.isArray(data) ? data : []);
+        const sorted = sortByPosition(Array.isArray(data) ? data : []);
+        renderPengajarCards(sorted);
       } catch (err) {
         console.warn('Pengajar CMS fetch failed, using fallback data.', err);
         renderPengajarCards([
@@ -883,17 +912,19 @@
 
     // ── 2. Mobile card widths ──
     function setAlumniCardWidths() {
-      if (window.innerWidth <= 600) {
-        alumniCarousel.querySelectorAll('.alumni__card').forEach(c => {
+      alumniCarousel.querySelectorAll('.alumni__card').forEach(c => {
+        if (window.innerWidth <= 600) {
           c.style.width = (alumniWrapper.offsetWidth - 24) + 'px';
-        });
-      }
+        } else {
+          c.style.width = '';
+        }
+      });
     }
     setAlumniCardWidths();
     window.addEventListener('resize', setAlumniCardWidths);
 
     // ── 3. Auto-scroll state ──
-    const SPEED    = 0.6;   // px per animation frame (~36px/s at 60fps)
+    const SPEED    = 0.5;   // px per animation frame (~36px/s at 60fps)
     let paused     = false;
     let rafId      = null;
 

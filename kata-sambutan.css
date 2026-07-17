@@ -99,7 +99,9 @@
 }
 
 /* ═══════════════════════════════════════
-   TABLET  (≤ 1024px)
+   TABLET & MOBILE (≤ 1024px)
+   Photo stacks on top, full-width, text below —
+   used for both tablet and phone sizes now.
 ═══════════════════════════════════════ */
 @media (max-width: 1024px) {
   .sambutan-section {
@@ -108,22 +110,42 @@
 
   .sambutan-section__heading {
     font-size: 1.75rem;
+    margin-bottom: 32px;
   }
 
   .sambutan-section__body {
-    grid-template-columns: 180px 1fr;
+    grid-template-columns: 1fr;
     gap: 32px;
   }
 
+  .sambutan-section__profile {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  /* Big, wide photo filling the top of the section instead of
+     a small square avatar. */
   .sambutan-section__photo {
-    width: 140px;
-    height: 140px;
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin: 0 auto;
+  }
+
+  .sambutan-section__name,
+  .sambutan-section__role {
+    text-align: center;
+  }
+
+  .sambutan-section__role {
+    margin-top: 0;
   }
 }
 
-/* ═══════════════════════════════════════
-   MOBILE  (≤ 768px)
-═══════════════════════════════════════ */
+/* ── Mobile (≤ 768px) ── */
 @media (max-width: 768px) {
   .sambutan-section {
     padding: 36px 24px 48px;
@@ -134,32 +156,19 @@
     margin-bottom: 28px;
   }
 
-  /* Stack columns vertically on mobile */
-  .sambutan-section__body {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  /* Center the photo block when stacked */
-  .sambutan-section__profile {
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-  }
-
+  /* Let the photo use the full content width on phones. */
   .sambutan-section__photo {
-    width: 100px;
-    height: 100px;
-    flex-shrink: 0;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .sambutan-section__profile {
+    align-items: flex-start;
   }
 
   .sambutan-section__name,
   .sambutan-section__role {
     text-align: left;
-  }
-
-  .sambutan-section__role {
-    margin-top: 4px;
   }
 
   .sambutan-section__text p {
@@ -179,8 +188,7 @@
     font-size: 1.3rem;
   }
 
-  .sambutan-section__profile {
-    flex-direction: column;
-    align-items: flex-start;
+  .sambutan-section__photo {
+    aspect-ratio: 4 / 3;
   }
 }

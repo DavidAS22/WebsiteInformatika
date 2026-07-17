@@ -47,6 +47,7 @@
             <div class="dropdown" id="dropdown-akademik">
               <a class="dropdown__item" href="kurikulum.html">Kurikulum</a>
               <a class="dropdown__item" href="pengajar.html">Pengajar</a>
+              <a class="dropdown__item" href="staf-tendik.html">Staf Tendik</a>
             </div>
           </li>
 
@@ -96,7 +97,7 @@
       <a class="btn-back btn-back--white pengajar-hero__back" href="pengajar.html">← KEMBALI KE PENGAJAR</a>
 
       <div class="pengajar-hero__photo">
-        <img id="lecturer-photo" src="images/foto_pengajar.jpg" alt="Foto Pengajar" />
+        <img id="lecturer-photo" src="images/foto-pengajar.png" alt="Foto Pengajar" />
       </div>
 
       <div class="pengajar-hero__info">
@@ -366,6 +367,7 @@
     const LECTURER_API   = `${API_BASE}/api/lecturer`;
     const PENELITIAN_API = `${API_BASE}/api/penelitian`;
     const PUBLIKASI_API  = `${API_BASE}/api/publikasi`;
+    const PATEN_API      = `${API_BASE}/api/paten`;
 
     const urlParams  = new URLSearchParams(window.location.search);
     const lecturerId = urlParams.get('id');  // e.g. info-pengajar.html?id=3
@@ -443,7 +445,8 @@
     }
 
 
-    /* ── Render HKI/Paten cards ── */
+    /* ── Render HKI/Paten cards (from /api/paten) ── */
+    // Row shape: { patenTitle, yearGranted, certificateLink, members (single string, holders sep by '; ') }
     function renderHki(items) {
       const container = document.getElementById('cms-hki');
       if (!container) return;
@@ -458,37 +461,44 @@
           <div class="pen-card__header">
             <div class="pen-card__badges">
               <span class="pen-badge pen-badge--hki">HKI / Paten</span>
+              ${item.yearGranted ? `<span class="pen-badge pen-badge--year">${item.yearGranted}</span>` : ''}
             </div>
-            <h3 class="pen-card__title">${item}</h3>
+            <h3 class="pen-card__title">${item.patenTitle || '–'}</h3>
           </div>
+          ${item.members || item.certificateLink ? `
+          <div class="pen-card__divider"></div>
+          <div class="pen-card__body">
+            ${item.members ? `
+            <div class="pen-card__detail">
+              <span class="pen-card__detail-label">Pemegang</span>
+              <span class="pen-card__detail-value">${item.members}</span>
+            </div>` : ''}
+            ${item.certificateLink ? `
+            <div class="pen-card__detail">
+              <span class="pen-card__detail-label">Sertifikat</span>
+              <span class="pen-card__detail-value">
+                <a href="${item.certificateLink}" target="_blank" rel="noopener" class="pen-doi-link">Lihat Sertifikat →</a>
+              </span>
+            </div>` : ''}
+          </div>` : ''}
         </article>
       `).join('');
     }
 
     /* ── Render publikasi cards ── */
-    function renderPublikasi(items, lecturer) {
+    // Items already filtered by lecturer_id from API — no name matching needed
+    function renderPublikasi(items) {
       const container = document.getElementById('cms-publikasi');
       if (!container) return;
 
-      // Build name keys for matching (same strategy as penelitian)
-      const gelarSuffix = new Set(['st','ssi','skom','mkom','mt','mcs','phd','dr','drs','ir','se','mm','mba','med']);
-      const nameParts   = (lecturer.fullName || '').toLowerCase().replace(/[,.]/g, '').split(/\s+/).filter(Boolean);
-      const realParts   = nameParts.filter(p => !gelarSuffix.has(p));
-      const firstName   = realParts[0] || '';
-      const lastName    = realParts[realParts.length - 1] || '';
+      const sorted = [...items].sort((a, b) => (parseInt(b.yearPublished) || 0) - (parseInt(a.yearPublished) || 0));
 
-      // Match: lecturer name appears anywhere in members[] (not just lead, since publikasi can have any position)
-      const myPub = items.filter(item => {
-        const members = (item.members || []).map(m => m.toLowerCase().replace(/[,.]/g, ''));
-        return members.some(m => firstName && lastName ? (m.includes(firstName) && m.includes(lastName)) : false);
-      }).sort((a, b) => (parseInt(b.yearPublished) || 0) - (parseInt(a.yearPublished) || 0));
-
-      if (!myPub.length) {
+      if (!sorted.length) {
         container.innerHTML = '<p class="pen-empty">Tidak ada data publikasi untuk dosen ini.</p>';
         return;
       }
 
-      container.innerHTML = myPub.map(item => {
+      container.innerHTML = sorted.map(item => {
         const title   = item.researchTitle || '–';
         const members = (item.members || []).join(', ');
         const venue   = item.publishedAt || '';
@@ -534,11 +544,12 @@
       }
 
       try {
-        /* Fetch lecturer, penelitian and publikasi in parallel */
-        const [lecturerRes, penelitianRes, publikasiRes] = await Promise.all([
+        /* Fetch lecturer, penelitian, publikasi, and paten in parallel */
+        const [lecturerRes, penelitianRes, publikasiRes, patenRes] = await Promise.all([
           fetch(`${LECTURER_API}/${lecturerId}`),
           fetch(`${PENELITIAN_API}?lecturer_id=${lecturerId}&limit=100`),
-          fetch(PUBLIKASI_API)
+          fetch(`${PUBLIKASI_API}?lecturer_id=${lecturerId}&limit=100`),
+          fetch(`${PATEN_API}?lecturer_id=${lecturerId}&limit=100`),
         ]);
 
         if (!lecturerRes.ok) throw new Error(`Lecturer fetch: HTTP ${lecturerRes.status}`);
@@ -550,7 +561,10 @@
         const allPenelitian = penelitianJson.data || [];
 
         const publikasiJson = await publikasiRes.json();
-        const allPublikasi  = Array.isArray(publikasiJson) ? publikasiJson : (publikasiJson.data || []);
+        const allPublikasi  = publikasiJson.data || [];
+
+        const patenJson = await patenRes.json();
+        const allPaten  = patenJson.data || [];
 
         /* ── Hero ── */
         document.getElementById('lecturer-name').textContent = lecturer.fullName || '—';
@@ -614,13 +628,17 @@
             : '<p>—</p>';
         }
 
-        /* ── Other tabs (fields not in API — leave empty if absent) ── */
-        fillList('cms-hibah',      lecturer.hibah_penelitian);
-        fillList('cms-proyek',     lecturer.proyek);
-        fillList('cms-pengabdian', lecturer.pengabdian_masyarakat);
-        renderHki(lecturer.hki_paten_list || []);
-        /* ── Publikasi tab — filter by lecturer name in members[] ── */
-        renderPublikasi(allPublikasi, lecturer);
+        /* ── Other tabs ── */
+        // hibah, proyek, pengabdian are not in the current API — show placeholder
+        fillList('cms-hibah',      null);
+        fillList('cms-proyek',     null);
+        fillList('cms-pengabdian', null);
+
+        // HKI/Paten from /api/paten filtered by lecturer_id
+        renderHki(allPaten);
+
+        // Publikasi filtered by lecturer_id
+        renderPublikasi(allPublikasi);
 
         /* ── Penelitian/PKM tab — already filtered by lecturer_id ── */
         renderPenelitian(allPenelitian);

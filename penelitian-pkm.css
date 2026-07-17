@@ -8,8 +8,12 @@
 ─────────────────────────────────────── */
 .pkm-hero {
   min-height: 280px;
-  align-items: flex-end;
-  padding: 0 72px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 72px 56px;
+  gap: 12px;
   position: relative;
   background: linear-gradient(
                 90deg,
@@ -21,12 +25,6 @@
 }
 
 .pkm-hero__content { max-width: 640px; }
-
-.pkm-hero__back {
-  position: absolute;
-  top: 20px;
-  left: 28px;
-}
 
 .pkm-hero__title {
   font-family: var(--font-main);
@@ -440,7 +438,7 @@
    RESPONSIVE — Tablet (≤ 1024px)
 ════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .pkm-hero      { padding: 0 40px 48px; }
+  .pkm-hero      { padding: 20px 40px 48px; }
   .pkm-section   { padding: 56px 40px 64px; }
   .pkm-riset__grid { grid-template-columns: 1fr 1fr; gap: 20px; }
   .terkini-section { padding: 52px 40px 64px; }
@@ -450,7 +448,7 @@
    RESPONSIVE — Mobile (≤ 768px)
 ════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .pkm-hero          { min-height: 260px; padding: 0 24px 40px; }
+  .pkm-hero          { min-height: 260px; padding: 20px 24px 40px; }
   .pkm-hero__title   { font-size: 1.8rem; }
   .pkm-hero__desc    { font-size: 0.88rem; }
   .pkm-section       { padding: 40px 24px 48px; }

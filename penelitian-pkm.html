@@ -35,6 +35,7 @@
             <div class="dropdown" id="dropdown-akademik">
               <a class="dropdown__item" href="kurikulum.html">Kurikulum</a>
               <a class="dropdown__item" href="pengajar.html">Pengajar</a>
+              <a class="dropdown__item" href="staf-tendik.html">Staf Tendik</a>
             </div>
           </li>
           <li>
@@ -171,11 +172,21 @@
     <section class="terkini-section">
       <div class="terkini-header">
         <h2 class="terkini-title">Penelitian &amp; PKM Terkini</h2>
-        <div class="terkini-filter">
-          <select class="terkini-filter__select" id="yearFilter">
-            <option value="">Filter Berdasarkan Tahun</option>
-          </select>
-          <span class="terkini-filter__chevron">▼</span>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+          <div class="terkini-filter">
+            <select class="terkini-filter__select" id="typeFilter">
+              <option value="">Semua Tipe</option>
+              <option value="penelitian">Penelitian</option>
+              <option value="pkm">PKM</option>
+            </select>
+            <span class="terkini-filter__chevron">▼</span>
+          </div>
+          <div class="terkini-filter">
+            <select class="terkini-filter__select" id="yearFilter">
+              <option value="">Filter Berdasarkan Tahun</option>
+            </select>
+            <span class="terkini-filter__chevron">▼</span>
+          </div>
         </div>
       </div>
 
@@ -287,17 +298,18 @@
 
   <!-- ── TERKINI SCRIPT ── -->
   <script>
-    const API_URL   = 'https://uph-informatika-backend.vercel.app/api/penelitian';
+    const API_URL   = 'https://admin.informaticsuph.com/api/penelitian';
     const PAGE_SIZE = 3;
 
     let allData      = [];
     let filteredData = [];
     let currentPage  = 1;
 
-    const listEl   = document.getElementById('terkiniList');
-    const prevBtn  = document.getElementById('prevBtn');
-    const nextBtn  = document.getElementById('nextBtn');
-    const yearSel  = document.getElementById('yearFilter');
+    const listEl    = document.getElementById('terkiniList');
+    const prevBtn   = document.getElementById('prevBtn');
+    const nextBtn   = document.getElementById('nextBtn');
+    const yearSel   = document.getElementById('yearFilter');
+    const typeSel   = document.getElementById('typeFilter');
 
     /* ── helpers ── */
     function formatDate(dateStr) {
@@ -315,8 +327,9 @@
 
     function statusBadge(status) {
       const isOngoing = (status || '').toLowerCase() === 'ongoing';
-      const cls = isOngoing ? 'status--ongoing' : 'status--selesai';
-      return `<span class="terkini-status ${cls}">${status || '–'}</span>`;
+      const cls   = isOngoing ? 'status--ongoing' : 'status--selesai';
+      const label = isOngoing ? 'Sedang Berjalan' : 'Selesai';
+      return `<span class="terkini-status ${cls}">${label}</span>`;
     }
 
     function renderCards(data) {
@@ -358,9 +371,12 @@
 
     function applyFilter() {
       const year = yearSel.value;
-      filteredData = year
-        ? allData.filter(d => (d.researchStartDate || '').startsWith(year))
-        : [...allData];
+      const type = typeSel.value.toLowerCase();
+      filteredData = allData.filter(d => {
+        const matchYear = !year || (d.researchStartDate || '').startsWith(year);
+        const matchType = !type || (d.researchType || '').toLowerCase() === type;
+        return matchYear && matchType;
+      });
       currentPage = 1;
       paginate();
     }
@@ -376,14 +392,13 @@
       });
     }
 
-    /* ── fetch ── */
+    /* ── fetch both penelitian AND pkm (no type param = both) ── */
     async function loadData() {
       try {
-        const res  = await fetch(API_URL);
+        // No type param → API returns both penelitian and pkm
+        const res  = await fetch(`${API_URL}?limit=100&sort=createdAt&order=desc`);
         const json = await res.json();
-        allData = Array.isArray(json) ? json : (json.data || []);
-        // sort newest first by createdAt
-        allData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        allData = json.data || [];
         populateYears(allData);
         filteredData = [...allData];
         paginate();
@@ -396,6 +411,7 @@
     prevBtn.addEventListener('click', () => { if (currentPage > 1) { currentPage--; paginate(); } });
     nextBtn.addEventListener('click', () => { currentPage++; paginate(); });
     yearSel.addEventListener('change', applyFilter);
+    typeSel.addEventListener('change', applyFilter);
 
     loadData();
   </script>

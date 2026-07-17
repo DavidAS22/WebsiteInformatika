@@ -8,20 +8,18 @@
 ─────────────────────────────────────── */
 .pub-hero {
   min-height: 280px;
-  align-items: flex-end;
-  padding: 0 72px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 72px 52px;
+  gap: 12px;
   position: relative;
   background: linear-gradient(0deg, rgba(53, 60, 119, 0.85),rgba(53, 60, 119, 0.85)),
               url('images/research.png') center center / cover no-repeat;
 }
 
 .pub-hero__content { max-width: 600px; }
-
-.pub-hero__back {
-  position: absolute;
-  top: 20px;
-  left: 28px;
-}
 
 .pub-hero__title {
   font-family: var(--font-main);
@@ -339,7 +337,7 @@
    RESPONSIVE — Tablet (≤ 1024px)
 ════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .pub-hero    { padding: 0 40px 48px; }
+  .pub-hero    { padding: 20px 40px 48px; }
   .pub-section { padding: 52px 40px 72px; }
 }
 
@@ -347,7 +345,7 @@
    RESPONSIVE — Mobile (≤ 768px)
 ════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .pub-hero         { min-height: 240px; padding: 0 24px 36px; }
+  .pub-hero         { min-height: 240px; padding: 20px 24px 36px; }
   .pub-hero__title  { font-size: 1.8rem; }
   .pub-hero__desc   { font-size: 0.88rem; }
   .pub-section      { padding: 40px 24px 60px; }
