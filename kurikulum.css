@@ -12,11 +12,10 @@
 /* ── Peminatan Image Grid ── */
 .peminatan {
   background: linear-gradient(to bottom, #1a2a5e 0%, #3b3580 45%, var(--orange) 100%);
-  padding: 56px 48px 64px;
+  padding: 28px 48px 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 36px;
   min-height: calc(100vh - 80px); /* fills viewport below sticky navbar */
 }
