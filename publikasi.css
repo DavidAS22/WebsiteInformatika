@@ -16,7 +16,7 @@
   gap: 12px;
   position: relative;
   background: linear-gradient(0deg, rgba(53, 60, 119, 0.85),rgba(53, 60, 119, 0.85)),
-              url('images/research.png') center center / cover no-repeat;
+              url('images/research.webp') center center / cover no-repeat;
 }
 
 .pub-hero__content { max-width: 600px; }

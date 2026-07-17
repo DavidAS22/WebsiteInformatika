@@ -74,7 +74,7 @@ body {
   mix-blend-mode: screen;
 }
 
-/* ── Hamburger (hidden on desktop) ── */
+/* ──Hamburger (hidden on desktop) ── */
 .navbar__hamburger {
   display: none;
   flex-direction: column;
@@ -271,7 +271,7 @@ body {
 ═══════════════════════════════════════ */
 .hero-placeholder {
   background: linear-gradient(to bottom, transparent, #1D245E 100%),
-              url('images/background_homepage.png') center 0px /cover no-repeat;
+              url('images/background_homepage.webp') center 0px /cover no-repeat;
   min-height: 700px;
   display: flex;
   align-items: center;
@@ -1923,7 +1923,7 @@ body {
 
 .page-hero {
   background: linear-gradient(to bottom, transparent, #1D245E 100%),
-              url("images/background_homepage.png") center/cover no-repeat;
+              url("images/background_homepage.webp") center/cover no-repeat;
   min-height: 260px;
   display: flex;
   align-items: flex-end;

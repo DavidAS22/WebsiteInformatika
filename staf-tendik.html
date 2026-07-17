@@ -108,11 +108,6 @@
     <a class="btn-back btn-back--navy" href="index.html">← Kembali ke Beranda</a>
   </div>
 
-    <!-- ══════════════════════════════════════
-         STAF TENDIK SECTION
-         (No CMS/API for this role type — static list.
-          Reuses the .staf card design from pengajar.html)
-    ══════════════════════════════════════ -->
     <section class="staf">
       <h2 class="staf__heading">Staf Tendik</h2>
 
@@ -131,20 +126,7 @@
         />
       </div>
 
-      <!--
-      ═══════════════════════════════════════════════════
-      DATA ENTRY POINT
-      ═══════════════════════════════════════════════════
-      Staf Tendik has no public API endpoint (only /api/lecturer
-      exists for teaching staff). Add / edit entries directly
-      in the STAF_TENDIK_DATA array in the script below.
-      ═══════════════════════════════════════════════════
-      -->
-
-      <!-- Card grid — populated by renderTendik() from static data -->
-      <div class="staf__grid" id="tendikGrid">
-        <!-- Cards injected by loadTendik() -->
-      </div><!-- /#tendikGrid -->
+      <div class="staf__grid" id="tendikGrid"></div>
     </section>
   </main>
 
@@ -266,14 +248,14 @@
 
   <script>
     // ══════════════════════════════════════
-    // STAF TENDIK — static data (no public API for this role)
+    // STAF TENDIK
     // ══════════════════════════════════════
     const STAF_TENDIK_DATA = [
-      { nama: 'Nama Lengkap', jabatan: 'Sekretariat Program Studi', email: 'alamat@uph.edu', foto: 'images/pengajar.png' },
-      { nama: 'Nama Lengkap', jabatan: 'Staf Administrasi Akademik', email: 'alamat@uph.edu', foto: 'images/pengajar.png' },
-      { nama: 'Nama Lengkap', jabatan: 'Staf Laboratorium', email: 'alamat@uph.edu', foto: 'images/pengajar.png' },
-      { nama: 'Nama Lengkap', jabatan: 'Staf Administrasi Umum', email: 'alamat@uph.edu', foto: 'images/pengajar.png' },
-      { nama: 'Nama Lengkap', jabatan: 'Staf IT Support', email: 'alamat@uph.edu', foto: 'images/pengajar.png' },
+      { nama: 'Sonya Octavianti', jabatan: 'Sekretariat Program Studi', email: 'alamat@uph.edu', foto: 'images/tendik/sonya-octavianti.webp' },
+      { nama: 'Roberto Evans', jabatan: 'Staf Administrasi Akademik', email: 'alamat@uph.edu', foto: 'images/tendik/roberto-evans.webp' },
+      { nama: 'Riris Silaban', jabatan: 'Staf Administrasi', email: 'alamat@uph.edu', foto: 'images/tendik/riris-silaban.webp' },
+      { nama: 'Nala Nugid Juwita', jabatan: 'Staf Administrasi', email: 'alamat@uph.edu', foto: 'images/tendik/nala-juwita.webp' },
+      { nama: 'Ricky Ricardo Purba', jabatan: 'Laboran', email: 'alamat@uph.edu', foto: 'images/tendik/ricky-purba.webp' },
     ];
 
     function renderTendik(data) {

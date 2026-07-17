@@ -21,7 +21,7 @@
                 rgba(71, 88, 171, 0.85) 39%, 
                 rgba(255, 117, 31, 0.85) 77%
               ),
-              url('images/research.png') center center / cover no-repeat;
+              url('images/research.webp') center center / cover no-repeat;
 }
 
 .pkm-hero__content { max-width: 640px; }
