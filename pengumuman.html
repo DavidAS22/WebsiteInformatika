@@ -92,8 +92,11 @@
         <!-- Result count -->
         <p class="pgm-count" id="pgmCount"></p>
 
-        <!-- ── FEATURED (pinned) card — always first, single big card ── -->
-        <div id="pgmFeatured"></div>
+        <!-- ── FEATURED CAROUSEL (pinned/highlighted) — auto-rotates every 5s ── -->
+        <div class="pgm-carousel" id="pgmFeatured">
+          <div class="pgm-carousel__track" id="pgmCarouselTrack"></div>
+          <div class="pgm-carousel__dots" id="pgmCarouselDots"></div>
+        </div>
 
         <!-- ── GRID of remaining cards ── -->
         <div class="pgm-grid" id="pgmGrid">
@@ -211,14 +214,20 @@
   <script>
     const BASE      = 'https://uph-informatika-backend.vercel.app';
     const LIMIT     = 8; // grid cards per page (headline loaded separately)
+    const CAROUSEL_SIZE     = 3;    // max pinned/highlighted items in the carousel
+    const CAROUSEL_INTERVAL = 5000; // ms per slide
 
     let currentPage  = 1;
     let totalPages   = 1;
     let searchTimer  = null;
     let currentQuery = '';
-    let headlineItem = null; // fetched once, stays fixed across all pages
+    let headlineItems  = [];  // pinned/highlighted items, fetched once, stays fixed across all pages
+    let carouselIndex  = 0;
+    let carouselTimer  = null;
 
     const featuredEl = document.getElementById('pgmFeatured');
+    const trackEl     = document.getElementById('pgmCarouselTrack');
+    const dotsEl       = document.getElementById('pgmCarouselDots');
     const gridEl     = document.getElementById('pgmGrid');
     const countEl    = document.getElementById('pgmCount');
     const prevBtn    = document.getElementById('pgmPrev');
@@ -241,19 +250,17 @@
       return plain.length > max ? plain.slice(0, max).trimEnd() + '…' : plain;
     }
 
-    /* ── Render featured headline (always shown, never changes on pagination) ── */
-    function renderFeatured(item) {
-      if (!item) { featuredEl.innerHTML = ''; return; }
-      featuredEl.innerHTML = `
-        <a class="pgm-featured" href="detail-pengumuman.html?id=${item.id}">
+    /* ── Render one featured slide's inner markup (same layout as before) ── */
+    function featuredSlideMarkup(item) {
+      return `
+        <a class="pgm-featured" href="detail-pengumuman.html?id=${item.id}" draggable="false">
           <div class="pgm-featured__img-wrap">
             ${item.imageUrl
-              ? `<img class="pgm-featured__img" src="${item.imageUrl}" alt="${item.title}" loading="lazy" />`
+              ? `<img class="pgm-featured__img" src="${item.imageUrl}" alt="${item.title}" loading="lazy" draggable="false" />`
               : `<div class="pgm-featured__img pgm-featured__img--placeholder"></div>`}
           </div>
           <div class="pgm-featured__body">
             <div class="pgm-featured__meta">
-              ${item.isPinned ? '<span class="pgm-pin-badge"Pinned</span>' : ''}
               <span class="pgm-date">${formatDate(item.publishedAt)}</span>
             </div>
             <h2 class="pgm-featured__title">${item.title}</h2>
@@ -264,30 +271,129 @@
       `;
     }
 
-    /* ── Fetch headline once on load:
-       Priority 1 — any isPinned item (most recently published)
-       Priority 2 — most recently published item                 ── */
-    async function loadHeadline() {
-      featuredEl.innerHTML = '<div class="pgm-featured-skeleton"></div>';
-      try {
-        // Try pinned first
-        const r1   = await fetch(`${BASE}/api/pengumuman?isPinned=true&limit=1&sort=publishedAt&order=desc`);
-        const j1   = await r1.json();
-        const pinned = (j1.data || [])[0];
+    /* ── Render the carousel: one slide per pinned/highlighted item ── */
+    function renderFeatured(items) {
+      stopCarousel();
 
-        if (pinned) {
-          headlineItem = pinned;
-        } else {
-          // Fall back to latest
-          const r2 = await fetch(`${BASE}/api/pengumuman?limit=1&sort=publishedAt&order=desc`);
-          const j2 = await r2.json();
-          headlineItem = (j2.data || [])[0] || null;
-        }
-        renderFeatured(headlineItem);
-      } catch (err) {
-        console.error('Headline fetch failed:', err);
-        featuredEl.innerHTML = '';
+      if (!items.length) {
+        featuredEl.style.display = 'none';
+        trackEl.innerHTML = '';
+        dotsEl.innerHTML  = '';
+        return;
       }
+
+      featuredEl.style.display = '';
+      trackEl.innerHTML = items.map(item => `
+        <div class="pgm-carousel__slide">${featuredSlideMarkup(item)}</div>
+      `).join('');
+
+      // Dots only make sense with more than one slide
+      if (items.length > 1) {
+        dotsEl.innerHTML = items.map((_, i) => `
+          <button class="pgm-carousel__dot ${i === 0 ? 'is-active' : ''}" data-index="${i}" aria-label="Slide ${i + 1}"></button>
+        `).join('');
+        dotsEl.querySelectorAll('.pgm-carousel__dot').forEach(dot => {
+          dot.addEventListener('click', () => {
+            goToSlide(parseInt(dot.dataset.index));
+            restartCarousel();
+          });
+        });
+      } else {
+        dotsEl.innerHTML = '';
+      }
+
+      carouselIndex = 0;
+      goToSlide(0);
+      if (items.length > 1) startCarousel();
+    }
+
+    function goToSlide(index) {
+      carouselIndex = index;
+      trackEl.style.transform = `translateX(-${index * 100}%)`;
+      dotsEl.querySelectorAll('.pgm-carousel__dot').forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === index);
+      });
+    }
+
+    function goToNext() {
+      goToSlide((carouselIndex + 1) % headlineItems.length);
+    }
+
+    function goToPrev() {
+      goToSlide((carouselIndex - 1 + headlineItems.length) % headlineItems.length);
+    }
+
+    function startCarousel() {
+      carouselTimer = setInterval(() => {
+        goToSlide((carouselIndex + 1) % headlineItems.length);
+      }, CAROUSEL_INTERVAL);
+    }
+
+    function stopCarousel() {
+      if (carouselTimer) {
+        clearInterval(carouselTimer);
+        carouselTimer = null;
+      }
+    }
+
+    function restartCarousel() {
+      stopCarousel();
+      if (headlineItems.length > 1) startCarousel();
+    }
+
+    /* ── Fetch featured carousel items once on load:
+       Only pinned/highlighted items are shown here — same rule as before.
+       Priority 1 — up to 3 isPinned items (most recently published)
+       Priority 2 — most recently published item, if none are pinned  ── */
+    /* Keep only well-formed items (must at least have an id and a title)
+       and cap the array length defensively, in case the API ignores
+       `limit` or returns something unexpected. */
+    function sanitizeItems(data, max) {
+      const arr = Array.isArray(data) ? data : [];
+      const clean = arr.filter(item =>
+        item && item.id != null &&
+        typeof item.title === 'string' && item.title.trim().length > 0
+      );
+      return max ? clean.slice(0, max) : clean;
+    }
+
+    async function fetchPengumuman(params) {
+      const res = await fetch(`${BASE}/api/pengumuman?${params}`);
+      if (!res.ok) throw new Error(`API returned ${res.status}`);
+      const json = await res.json();
+      return json && json.data;
+    }
+
+    async function loadHeadline() {
+      trackEl.innerHTML = '<div class="pgm-carousel__slide"><div class="pgm-featured-skeleton"></div></div>';
+
+      // Priority 1 — up to CAROUSEL_SIZE pinned/highlighted items
+      let pinned = [];
+      try {
+        const data = await fetchPengumuman(`isPinned=true&limit=${CAROUSEL_SIZE}&sort=publishedAt&order=desc`);
+        pinned = sanitizeItems(data, CAROUSEL_SIZE);
+      } catch (err) {
+        console.error('Pinned pengumuman fetch failed:', err);
+      }
+
+      if (pinned.length) {
+        headlineItems = pinned;
+        renderFeatured(headlineItems);
+        return;
+      }
+
+      // Priority 2 — nothing pinned (or that fetch failed): fall back to
+      // the single latest item, so the carousel section isn't empty
+      // just because nothing happens to be pinned right now.
+      try {
+        const data = await fetchPengumuman('limit=1&sort=publishedAt&order=desc');
+        const latest = sanitizeItems(data, 1);
+        headlineItems = latest;
+      } catch (err) {
+        console.error('Latest pengumuman fallback fetch failed:', err);
+        headlineItems = [];
+      }
+      renderFeatured(headlineItems);
     }
 
     /* ── Render grid cards ── */
@@ -408,6 +514,54 @@
 
     prevBtn.addEventListener('click', () => { if (currentPage > 1)          { currentPage--; loadPage(); } });
     nextBtn.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; loadPage(); } });
+
+    /* Pause auto-rotation while the user is looking at/interacting with it */
+    featuredEl.addEventListener('mouseenter', stopCarousel);
+    featuredEl.addEventListener('mouseleave', restartCarousel);
+
+    /* Drag to go back/forward a slide — works for mouse drag, touch swipe,
+       and pen, all through one set of Pointer Events. */
+    let dragStartX = 0;
+    let isDragging  = false;
+    let didDrag     = false;
+
+    trackEl.addEventListener('pointerdown', (e) => {
+      if (headlineItems.length <= 1) return;
+      isDragging = true;
+      didDrag    = false;
+      dragStartX = e.clientX;
+      trackEl.setPointerCapture(e.pointerId);
+      stopCarousel();
+    });
+
+    trackEl.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      if (Math.abs(e.clientX - dragStartX) > 8) didDrag = true;
+    });
+
+    trackEl.addEventListener('pointerup', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      const diff = dragStartX - e.clientX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) goToNext(); else goToPrev();
+      }
+      restartCarousel();
+    });
+
+    trackEl.addEventListener('pointerleave', () => {
+      if (isDragging) { isDragging = false; restartCarousel(); }
+    });
+
+    /* Suppress the card's own link-click right after a drag, so dragging
+       the card doesn't also navigate to the detail page. */
+    trackEl.addEventListener('click', (e) => {
+      if (didDrag) {
+        e.preventDefault();
+        e.stopPropagation();
+        didDrag = false;
+      }
+    }, true);
 
     /* ── Init: load headline once, then load grid ── */
     loadHeadline();

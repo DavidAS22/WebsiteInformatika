@@ -71,6 +71,59 @@
   white-space: nowrap;
 }
 
+/* Wraps the year filter + search box together on the right */
+.pub-header__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Year filter dropdown — same visual language as the
+   Penelitian & PKM page's "Filter Berdasarkan Tahun" select */
+.pub-filter {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pub-filter__select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: var(--font-main);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 10px 44px 10px 16px;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  min-width: 220px;
+}
+
+.pub-filter__select option {
+  background: var(--navy-dark, var(--navy));
+  color: var(--white);
+}
+
+.pub-filter__select:hover,
+.pub-filter__select:focus {
+  border-color: var(--orange);
+  background: rgba(255,255,255,0.12);
+  outline: none;
+}
+
+.pub-filter__chevron {
+  position: absolute;
+  right: 14px;
+  color: var(--white);
+  font-size: 0.7rem;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
 /* Search bar */
 .pub-search {
   position: relative;
@@ -324,15 +377,6 @@
   cursor: default;
 }
 
-.pub-pagination__info {
-  font-family: var(--font-main);
-  font-weight: 600;
-  font-size: 0.88rem;
-  color: rgba(255,255,255,0.55);
-  min-width: 52px;
-  text-align: center;
-}
-
 /* ════════════════════════════════════════════
    RESPONSIVE — Tablet (≤ 1024px)
 ════════════════════════════════════════════ */
@@ -353,6 +397,17 @@
   .pub-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .pub-header__controls {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .pub-filter,
+  .pub-filter__select {
+    width: 100%;
   }
 
   .pub-search {

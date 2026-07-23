@@ -85,22 +85,30 @@
     <section class="pub-section">
       <div class="pub-section__inner">
 
-        <!-- Header: title + search -->
+        <!-- Header: title + filter + search -->
         <div class="pub-header">
           <h2 class="pub-header__title">Daftar Publikasi</h2>
-          <div class="pub-search">
-            <svg class="pub-search__icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <circle cx="7.5" cy="7.5" r="5.5" stroke="currentColor" stroke-width="1.8"/>
-              <path d="M12 12l3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            <input
-              class="pub-search__input"
-              id="pubSearch"
-              type="text"
-              placeholder="Cari judul, penulis, atau jurnal..."
-              autocomplete="off"
-            />
-            <button class="pub-search__clear" id="searchClear" aria-label="Hapus pencarian">✕</button>
+          <div class="pub-header__controls">
+            <div class="pub-filter">
+              <select class="pub-filter__select" id="yearFilter">
+                <option value="">Filter Berdasarkan Tahun</option>
+              </select>
+              <span class="pub-filter__chevron">▼</span>
+            </div>
+            <div class="pub-search">
+              <svg class="pub-search__icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <circle cx="7.5" cy="7.5" r="5.5" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M12 12l3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+              <input
+                class="pub-search__input"
+                id="pubSearch"
+                type="text"
+                placeholder="Cari judul, penulis, atau jurnal..."
+                autocomplete="off"
+              />
+              <button class="pub-search__clear" id="searchClear" aria-label="Hapus pencarian">✕</button>
+            </div>
           </div>
         </div>
 
@@ -119,7 +127,6 @@
         <!-- Pagination -->
         <div class="pub-pagination" id="pubPagination">
           <button class="pub-pagination__btn" id="prevBtn" disabled>←</button>
-          <span class="pub-pagination__info" id="pageInfo"></span>
           <button class="pub-pagination__btn" id="nextBtn">→</button>
         </div>
 
@@ -230,10 +237,10 @@
     const listEl   = document.getElementById('pubList');
     const prevBtn  = document.getElementById('prevBtn');
     const nextBtn  = document.getElementById('nextBtn');
-    const pageInfo = document.getElementById('pageInfo');
     const countEl  = document.getElementById('pubCount');
     const searchEl = document.getElementById('pubSearch');
     const clearBtn = document.getElementById('searchClear');
+    const yearSel  = document.getElementById('yearFilter');
 
     /* ── Helpers ── */
     function highlight(text, query) {
@@ -247,7 +254,6 @@
     function renderCards(data, query) {
       if (!data.length) {
         listEl.innerHTML = `<p class="pub-empty">Tidak ada publikasi yang cocok${query ? ` dengan "<strong>${query}</strong>"` : ''}.</p>`;
-        pageInfo.textContent = '';
         return;
       }
 
@@ -288,29 +294,41 @@
     }
 
     function paginate(query) {
-      const start      = (currentPage - 1) * PAGE_SIZE;
-      const end        = start + PAGE_SIZE;
-      const total      = filteredData.length;
-      const totalPages = Math.ceil(total / PAGE_SIZE) || 1;
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const end   = start + PAGE_SIZE;
+      const total = filteredData.length;
 
       renderCards(filteredData.slice(start, end), query);
       updateCount(total, query);
-      prevBtn.disabled     = currentPage === 1;
-      nextBtn.disabled     = end >= total;
-      pageInfo.textContent = total ? `${currentPage} / ${totalPages}` : '';
+      prevBtn.disabled = currentPage === 1;
+      nextBtn.disabled = end >= total;
     }
 
-    function applySearch() {
-      const q = searchEl.value.trim().toLowerCase();
+    function populateYears(data) {
+      const years = [...new Set(
+        data.map(d => d.yearPublished).filter(Boolean)
+      )].sort((a, b) => b - a);
+      years.forEach(y => {
+        const opt = document.createElement('option');
+        opt.value = y; opt.textContent = y;
+        yearSel.appendChild(opt);
+      });
+    }
+
+    function applyFilters() {
+      const q    = searchEl.value.trim().toLowerCase();
+      const year = yearSel.value;
       clearBtn.classList.toggle('is-visible', q.length > 0);
 
-      filteredData = !q ? [...allData] : allData.filter(item => {
+      filteredData = allData.filter(item => {
         const title    = (item.researchTitle || '').toLowerCase();
         const authors  = (Array.isArray(item.members) ? item.members.join(' ') : '').toLowerCase();
         const venue    = (item.publishedAt || '').toLowerCase();
         const category = (item.researchGroupCategory || '').toLowerCase();
         const doi      = (item.doi || '').toLowerCase();
-        return title.includes(q) || authors.includes(q) || venue.includes(q) || category.includes(q) || doi.includes(q);
+        const matchesQuery = !q || title.includes(q) || authors.includes(q) || venue.includes(q) || category.includes(q) || doi.includes(q);
+        const matchesYear  = !year || String(item.yearPublished) === String(year);
+        return matchesQuery && matchesYear;
       });
 
       currentPage = 1;
@@ -331,6 +349,7 @@
           return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
         });
         filteredData = [...allData];
+        populateYears(allData);
         paginate('');
       } catch (err) {
         listEl.innerHTML = '<p class="pub-empty">Gagal memuat data. Silakan coba lagi nanti.</p>';
@@ -341,14 +360,16 @@
     /* ── Events ── */
     searchEl.addEventListener('input', () => {
       clearTimeout(searchTimer);
-      searchTimer = setTimeout(applySearch, 260);
+      searchTimer = setTimeout(applyFilters, 260);
     });
 
     clearBtn.addEventListener('click', () => {
       searchEl.value = '';
-      applySearch();
+      applyFilters();
       searchEl.focus();
     });
+
+    yearSel.addEventListener('change', applyFilters);
 
     prevBtn.addEventListener('click', () => {
       if (currentPage > 1) { currentPage--; paginate(searchEl.value.trim()); }

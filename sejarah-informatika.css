@@ -58,6 +58,15 @@
   gap: 20px;
 }
 
+/* Inline duplicate of image 2 — only shown on tablet/mobile (see media
+   queries below), hidden on desktop where both images live in the
+   sticky left column instead. */
+.sejarah__image--inline {
+  display: none;
+  max-width: 380px;
+  margin: 4px auto;
+}
+
 .sejarah__text p {
   font-family: var(--font-body);
   font-size: 0.95rem;
@@ -74,8 +83,19 @@
     padding: 40px 32px 0;
   }
   .sejarah__body {
-    grid-template-columns: 300px 1fr;
-    gap: 24px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .sejarah__image-col {
+    position: static; /* disable sticky once stacked */
+    max-width: 380px; /* match the inline image's size instead of stretching full width */
+    margin: 0 auto;
+  }
+  .sejarah__image--secondary {
+    display: none; /* replaced by the inline copy above the 3rd paragraph */
+  }
+  .sejarah__image--inline {
+    display: block;
   }
 }
 
@@ -87,15 +107,6 @@
   .sejarah__title {
     font-size: 1.3rem;
     margin-bottom: 24px;
-  }
-  .sejarah__body {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .sejarah__image-col {
-    position: static; /* disable sticky on mobile */
-    flex-direction: row; /* show images side by side on mobile */
-    gap: 12px;
   }
   .sejarah__text p {
     text-align: left;

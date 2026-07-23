@@ -153,6 +153,53 @@
 }
 
 /* ──────────────────────────────────────
+   FEATURED CAROUSEL — pinned/highlighted items,
+   one slide visible at a time, auto-rotating
+─────────────────────────────────────── */
+.pgm-carousel {
+  margin-bottom: 28px;
+}
+
+.pgm-carousel__track {
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.5s ease;
+}
+
+.pgm-carousel__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.pgm-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.pgm-carousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #d0d4e8;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.pgm-carousel__dot:hover {
+  background: #a8afce;
+}
+
+.pgm-carousel__dot.is-active {
+  background: var(--orange);
+  transform: scale(1.2);
+}
+
+/* ──────────────────────────────────────
    FEATURED CARD — wide single card
 ─────────────────────────────────────── */
 .pgm-featured {
@@ -163,9 +210,9 @@
   overflow: hidden;
   background: #fff;
   box-shadow: 0 4px 20px rgba(26,42,94,0.08);
-  margin-bottom: 28px;
   text-decoration: none;
   transition: box-shadow 0.2s, transform 0.2s;
+  -webkit-user-drag: none;
 }
 
 .pgm-featured:hover {
@@ -178,12 +225,19 @@
   min-height: 280px;
 }
 
+.pgm-carousel__track {
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: pan-y;
+}
+
 .pgm-featured__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
+  -webkit-user-drag: none;
 }
 
 .pgm-featured:hover .pgm-featured__img { transform: scale(1.04); }
