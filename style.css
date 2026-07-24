@@ -1259,7 +1259,7 @@ body {
   }
   .alumni__card-image {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 9 / 8; /* scales with width so the crop stays consistent at 320/375/425px, instead of a fixed height getting progressively more landscape (and more cropped) as width grows */
     padding: 0;
   }
   .alumni__card-image img {
@@ -1642,6 +1642,7 @@ body {
   .mengapa__row {
     gap: 36px;
   }
+
   .mengapa__subtitle {
     font-size: 1.3rem;
   }
@@ -1854,6 +1855,9 @@ body {
   .stats-bar__item {
     padding-right: 0;
   }
+  .stats-bar__item:nth-child(3) {
+    grid-column: 1 / -1; /* spans both columns so it centers on its own row instead of sitting under item 1 */
+  }
   .stats-bar__number {
     font-size: 2rem;
   }
@@ -1872,7 +1876,7 @@ body {
     gap: 40px;
   }
   .mengapa__heading {
-    font-size: 1.6rem;
+    font-size: 1.525rem;
   }
   .mengapa__row,
   .mengapa__row--reverse {

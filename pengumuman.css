@@ -211,6 +211,7 @@
   background: #fff;
   box-shadow: 0 4px 20px rgba(26,42,94,0.08);
   text-decoration: none;
+  cursor: pointer;
   transition: box-shadow 0.2s, transform 0.2s;
   -webkit-user-drag: none;
 }
@@ -242,8 +243,8 @@
 
 .pgm-featured:hover .pgm-featured__img { transform: scale(1.04); }
 
-.pgm-featured__img--placeholder {
-  background: linear-gradient(135deg, var(--navy) 0%, #3d5aad 100%);
+.pgm-featured__img--empty {
+  background: #f5f7fc; /* just reserves the space — no decorative content */
   min-height: 280px;
 }
 

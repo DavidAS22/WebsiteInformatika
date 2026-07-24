@@ -91,9 +91,9 @@
             </a>
             <div class="dropdown" id="dropdown-berita">
               <!-- ADD / REMOVE items here freely -->
-              <a class="dropdown__item" href="berita.html">Berita</a>
-              <a class="dropdown__item" href="pengumuman.html">Pengumuman</a>
-              <a class="dropdown__item" href="event.html">Event</a>
+              <a class="dropdown__item" href="berita-temp.html">Berita & Artikel</a>
+              <a class="dropdown__item" href="pengumuman-temp.html">Pengumuman</a>
+              <a class="dropdown__item" href="event-temp.html">Event</a>
             </div>
           </li>
 
@@ -108,19 +108,17 @@
   </header>
 
   <!-- ══════════════════════════════════════
-       HERO PLACEHOLDER
-       (Remove this section when you build your actual hero)
+       HERO
   ══════════════════════════════════════ -->
   <section class="hero-placeholder">
     <div class="hero-placeholder__inner">
-      <!-- HERO LOGO — replace src with your logo file, e.g. images/logo_IF.png -->
       <img
         src="images/logo_IF.png"
         alt="Logo IF"
         class="hero-placeholder__logo"
       />
       <h2 class="hero-placeholder__title">Program Studi S1 Informatika</h2>
-      <p class="hero-placeholder__desc">Mendidik insan teknologi yang unggul, berintegritas, dan berdampak bagi masyarakat. Sejak 1998, kami membentuk teknologi masa depan di bidang Kecerdasan Artifisial, Data Intelligence, dan Keamanan Siber, berlandaskan iman Kristiani.</p>
+      <p class="hero-placeholder__desc">Mendidik insan teknologi yang unggul, berintegritas, dan berdampak bagi masyarakat. Sejak 1998, kami membentuk teknologi masa depan di bidang Kecerdasan Artifisial dan Keamanan Siber, berlandaskan iman Kristiani.</p>
     </div>
   </section>
 
@@ -165,7 +163,7 @@
       </div>
       <div class="mengapa__text">
         <h3 class="mengapa__subtitle">Kurikulum yang Relevan dan Bervisi Masa Depan</h3>
-        <p class="mengapa__body">Kurikulum kami dirancang mengikuti perkembangan teknologi terkini dan kebutuhan industri, dengan tiga peminatan unggulan: Kecerdasan Artifisial, Data Intelligence, dan Keamanan Siber.</p>
+        <p class="mengapa__body">Kurikulum kami dirancang mengikuti perkembangan teknologi terkini dan kebutuhan industri, dengan dua peminatan unggulan: Kecerdasan Artifisial dan Keamanan Siber.</p>
         <p class="mengapa__body">Mahasiswa tidak hanya belajar teori, tetapi juga membangun solusi nyata melalui proyek, riset, dan kolaborasi lintas disiplin. Setiap mata kuliah disusun agar lulusan siap menjawab tantangan dunia digital yang terus berubah.</p>
       </div>
     </div>
@@ -260,116 +258,6 @@
         <!-- Cards injected by fetchPengajar() -->
       </div><!-- /.pengajar__carousel -->
     </div><!-- /.pengajar__carousel-wrapper -->
-
-  </section>
-
-  <!-- ══════════════════════════════════════
-       BERITA SECTION
-  ══════════════════════════════════════ -->
-  <section class="berita">
-
-    <!-- Header row -->
-    <div class="berita__header">
-      <h2 class="berita__heading">BERITA</h2>
-      <a class="berita__btn" href="berita.html">BACA BERITA LAINNYA <span>&rarr;</span></a>
-    </div>
-
-    <!-- Grid: featured left + 3 small right -->
-    <div class="berita__grid" id="beritaGrid">
-
-      <!--
-      ═══════════════════════════════════════════════════
-      CMS INTEGRATION POINT
-      ═══════════════════════════════════════════════════
-      To load berita from an API, remove the static HTML
-      below and use the JS block at the bottom of this file.
-
-      Expected API response shape (array of objects):
-      [
-        {
-          "judul":    "Judul berita...",
-          "isi":      "Ringkasan isi berita...",
-          "kategori": ["Kategori 1", "Kategori 2"],
-          "foto":     "images/berita_1.jpg",
-          "url":      "berita-detail.html"
-        },
-        ...
-      ]
-
-      Steps to connect:
-      1. Set BERITA_API_URL to your endpoint
-      2. Uncomment the fetch lines in the berita script below
-      3. Comment out or remove the static HTML cards below
-      ═══════════════════════════════════════════════════
-      -->
-
-      <!-- FEATURED ARTICLE (large, left column) -->
-      <article class="berita__featured">
-        <div class="berita__featured-image">
-          <img src="images/berita_1.jpg" alt="Berita 1" />
-        </div>
-        <div class="berita__featured-body">
-          <div class="berita__tags">
-            <span class="berita__tag">Kategori</span>
-          </div>
-          <h3 class="berita__featured-title">Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai</h3>
-          <a class="berita__arrow-btn" href="#">&rarr;</a>
-        </div>
-      </article>
-
-      <!-- SMALL ARTICLES (right column, stacked) -->
-      <div class="berita__list">
-
-        <!-- Small article 1 -->
-        <article class="berita__item">
-          <div class="berita__item-image">
-            <img src="images/berita_2.jpg" alt="Berita 2" />
-          </div>
-          <div class="berita__item-body">
-            <h4 class="berita__item-title">Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai</h4>
-            <div class="berita__tags">
-              <span class="berita__tag">Kategori</span>
-            </div>
-            <a class="berita__arrow-btn" href="#">&rarr;</a>
-          </div>
-        </article>
-
-        <hr class="berita__divider" />
-
-        <!-- Small article 2 -->
-        <article class="berita__item">
-          <div class="berita__item-image">
-            <img src="images/berita_3.jpg" alt="Berita 3" />
-          </div>
-          <div class="berita__item-body">
-            <h4 class="berita__item-title">Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai</h4>
-            <div class="berita__tags">
-              <span class="berita__tag">Kategori</span>
-              <span class="berita__tag">Kategori</span>
-            </div>
-            <a class="berita__arrow-btn" href="#">&rarr;</a>
-          </div>
-        </article>
-
-        <hr class="berita__divider" />
-
-        <!-- Small article 3 -->
-        <article class="berita__item">
-          <div class="berita__item-image">
-            <img src="images/berita_4.jpg" alt="Berita 4" />
-          </div>
-          <div class="berita__item-body">
-            <h4 class="berita__item-title">Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai</h4>
-            <div class="berita__tags">
-              <span class="berita__tag">Kategori</span>
-            </div>
-            <a class="berita__arrow-btn" href="#">&rarr;</a>
-          </div>
-        </article>
-
-      </div><!-- /.berita__list -->
-
-    </div><!-- /.berita__grid -->
 
   </section>
 
@@ -492,15 +380,6 @@
         <p class="footer__brand-title">Program Studi</p>
         <p class="footer__brand-name">Informatika</p>
 
-        <!--
-          LOGO PLACEHOLDER
-          To add the logo, replace this entire div with:
-          <img src="path/to/your/logo.png" alt="IF Logo" style="width:170px;" />
-        -->
-        <!--<div class="footer__logo-placeholder">
-          Logo<br>IF Badge<br>Here
-        </div>
-        -->
         <img src="images/logo_IF.png" alt="IF Logo" style="width:170px;"  />
       </div>
 
@@ -540,7 +419,7 @@
         <p class="footer__col-title">Berita &amp; Agenda</p>
         <ul class="footer__links">
           <!-- ADD / REMOVE items here freely -->
-          <li><a href="berita.html">Berita</a></li>
+          <li><a href="berita.html">Berita & Artikel</a></li>
           <li><a href="pengumuman.html">Pengumuman</a></li>
           <li><a href="event.html">Event</a></li>
         </ul>
@@ -625,13 +504,11 @@
 
 <script>
     // ════════════════════════════════════════════════
-    // PENGAJAR — CMS Integration (STRICT DRAG & CLICK FIX)
+    // PENGAJAR — CMS Integration
     // ════════════════════════════════════════════════
-    const CMS_PENGAJAR_URL = 'https://admin.informaticsuph.com/api/lecturer';
+    const CMS_PENGAJAR_URL = 'https://uph-informatika-backend.vercel.app/api/lecturer';
 
     // ── Position sort order ──────────────────────────────────
-    // Cards appear in this order in the carousel.
-    // Any position not listed falls to the end alphabetically.
     const POSITION_ORDER = [
       'ketua program studi',
       'kepala program studi',
@@ -639,15 +516,13 @@
       'quality officer',
       'qo',
       'dosen',
-      'asisten dosen',   // last — checked after 'dosen' but uses exact includes so won't false-match
+      'asisten dosen', 
     ];
 
     function positionRank(position) {
       const p = (position || '').toLowerCase().trim();
-      // Check from most specific to least specific to avoid substring false matches
-      // 'asisten dosen' is checked before 'dosen' in the includes() call order below
       if (p.includes('asisten dosen')) return POSITION_ORDER.indexOf('asisten dosen');
-      for (let i = 0; i < POSITION_ORDER.length - 1; i++) { // skip last (asisten dosen already handled)
+      for (let i = 0; i < POSITION_ORDER.length - 1; i++) {
         if (p.includes(POSITION_ORDER[i])) return i;
       }
       return POSITION_ORDER.length;
@@ -661,8 +536,6 @@
     const wrapper  = carousel.parentElement;
 
     function setCardWidths() {
-      // Card sizing is fully handled by CSS breakpoints now;
-      // no JS width override needed.
     }
 
     function initDrag() {
@@ -671,11 +544,9 @@
       let scrollStart = 0;
       let hasMoved = false;
 
-      // Disable HTML5 native image/link dragging so it doesn't break our script
       carousel.addEventListener('dragstart', e => e.preventDefault());
 
       wrapper.addEventListener('mousedown', e => {
-        // Only trigger on left click
         if (e.button !== 0) return; 
         
         isDragging  = true;
@@ -685,17 +556,14 @@
         wrapper.style.cursor = 'grabbing';
       });
 
-      // Listen to window/document instead of wrapper to capture smooth movement
       document.addEventListener('mousemove', e => {
         if (!isDragging) return;
         
         const currentX = e.pageX;
         const diffX = Math.abs(currentX - startX);
 
-        // Threshold: 5 pixels of movement confirms an intentional drag action
         if (diffX > 5) {
           hasMoved = true;
-          // Temporary safety lock: stop all internal link clicks during active dragging
           carousel.style.pointerEvents = 'none';
         }
 
@@ -708,13 +576,11 @@
         isDragging = false;
         wrapper.style.cursor = 'grab';
         
-        // Re-enable clicks safely in the next execution cycle
         setTimeout(() => {
           carousel.style.pointerEvents = 'auto';
         }, 50);
       });
 
-      // Double security layer: Catch and kill unintended accidental clicks
       wrapper.addEventListener('click', e => {
         if (hasMoved) {
           e.preventDefault();
@@ -722,7 +588,6 @@
         }
       }, true); 
 
-      // Mobile Touch implementation
       let touchStartX = 0, touchScrollStart = 0;
       wrapper.addEventListener('touchstart', e => {
         hasMoved         = false;
@@ -812,27 +677,22 @@
   <script>
     // ══════════════════════════════════════════════════
     // BERITA CMS INTEGRATION
-    // API: https://uph-informatika-backend.vercel.app
-    // Docs: https://github.com/kelvin8701/uph-informatika-public-api
-    // Response shape: { data: [ { id, title, thumbnailBerita, kategori[], publishedAt } ] }
     // ══════════════════════════════════════════════════
 
     const BERITA_API_URL = 'https://uph-informatika-backend.vercel.app/api/berita';
 
     // Fallback placeholder data (shown if API fails)
     const BERITA_PLACEHOLDER = [
-      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori'], foto: 'images/berita_1.jpg', url: '#' },
-      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori'], foto: 'images/berita_2.jpg', url: '#' },
-      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori', 'Kategori'], foto: 'images/berita_3.jpg', url: '#' },
-      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori'], foto: 'images/berita_4.jpg', url: '#' },
+      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori'], foto: '', url: '#' },
+      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori'], foto: '', url: '#' },
+      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori', 'Kategori'], foto: '', url: '#' },
+      { judul: 'Judul Berita Adalah Sebagai Berikut, Ini Adalah Isi Berita Nya Yaitu Sebagai', kategori: ['Kategori'], foto: '', url: '#' },
     ];
 
     function renderBerita(data) {
       const grid = document.getElementById('beritaGrid');
       if (!grid) return;
 
-      // Map API fields → internal shape
-      // API shape: { id, title, thumbnailBerita, kategori[], publishedAt }
       const articles = data.map(item => ({
         judul:    item.title            || item.judul    || '',
         kategori: item.kategori         || [],
@@ -897,14 +757,10 @@
   </script>
   <script>
     // ── Alumni Auto-scroll Carousel ──
-    // Strategy: clone all cards and append them so the list is doubled,
-    // then continuously scroll. When we reach the halfway point (original
-    // length), silently snap back to 0 — creating a seamless infinite loop.
 
     const alumniCarousel = document.getElementById('alumniCarousel');
     const alumniWrapper  = alumniCarousel.parentElement;
 
-    // ── 1. Clone cards for seamless infinite loop ──
     const originalCards = Array.from(alumniCarousel.querySelectorAll('.alumni__card'));
     originalCards.forEach(card => {
       const clone = card.cloneNode(true);
@@ -912,7 +768,6 @@
       alumniCarousel.appendChild(clone);
     });
 
-    // ── 2. Mobile card widths ──
     function setAlumniCardWidths() {
       alumniCarousel.querySelectorAll('.alumni__card').forEach(c => {
         if (window.innerWidth <= 600) {
@@ -925,13 +780,11 @@
     setAlumniCardWidths();
     window.addEventListener('resize', setAlumniCardWidths);
 
-    // ── 3. Auto-scroll state ──
-    const SPEED    = 0.5;   // px per animation frame (~36px/s at 60fps)
+    const SPEED    = 0.5;
     let paused     = false;
     let rafId      = null;
 
     function getHalfWidth() {
-      // Width of the original set of cards (not clones)
       return originalCards.reduce((sum, c) => {
         const style = window.getComputedStyle(c);
         const gap   = parseFloat(style.marginRight) || 24;
@@ -942,7 +795,6 @@
     function tick() {
       if (!paused) {
         alumniWrapper.scrollLeft += SPEED;
-        // Seamless loop: when we've scrolled past the original set, snap back
         if (alumniWrapper.scrollLeft >= getHalfWidth()) {
           alumniWrapper.scrollLeft -= getHalfWidth();
         }
@@ -952,11 +804,9 @@
 
     rafId = requestAnimationFrame(tick);
 
-    // ── 4. Pause on hover ──
     alumniWrapper.addEventListener('mouseenter', () => { paused = true; });
     alumniWrapper.addEventListener('mouseleave', () => { paused = false; });
 
-    // ── 5. Drag-to-scroll (pause while dragging, resume after) ──
     let dragging = false, startX = 0, scrollStart = 0;
 
     alumniWrapper.addEventListener('mousedown', e => {
@@ -980,7 +830,6 @@
       alumniWrapper.style.cursor = 'grab';
     });
 
-    // ── 6. Touch support ──
     let touchX = 0, touchScroll = 0;
     alumniWrapper.addEventListener('touchstart', e => {
       touchX      = e.touches[0].pageX;
