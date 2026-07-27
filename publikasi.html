@@ -226,7 +226,7 @@
 
   <!-- ── PUBLIKASI SCRIPT ── -->
   <script>
-    const API_URL   = 'https://uph-informatika-backend.vercel.app/api/publikasi';
+    const API_URL   = 'https://cms-if.uphfaidas.com/api/publikasi';
     const PAGE_SIZE = 5;
 
     let allData      = [];
@@ -250,6 +250,39 @@
         '<mark class="pub-highlight">$1</mark>');
     }
 
+    /* The "doi" field in the data can be a bare DOI (e.g. "10.1109/xxxx.2025.123"),
+       a doi.org link, or a direct URL to the publication — handle all three. */
+    function isBareDoi(value) {
+      return /^10\.\d{4,9}\/\S+$/i.test(value);
+    }
+
+    // True for anything that IS a DOI — bare, or already wrapped as a doi.org link.
+    // False only for direct publisher URLs (e.g. ieeexplore.ieee.org/...).
+    function isDoiReference(value) {
+      const v = String(value || '').trim();
+      if (!v) return false;
+      if (isBareDoi(v)) return true;
+      return /^(https?:\/\/)?(www\.)?doi\.org\//i.test(v);
+    }
+
+    function resolveDoiUrl(raw) {
+      if (!raw) return '';
+      const value = String(raw).trim();
+      if (!value) return '';
+
+      // Already a full link (doi.org or a direct publisher URL) — use as-is.
+      if (/^https?:\/\//i.test(value)) return value;
+
+      // "doi.org/10.xxxx/..." or "www.doi.org/..." without a scheme.
+      if (/^(www\.)?doi\.org\//i.test(value)) return `https://${value.replace(/^www\./i, '')}`;
+
+      // A bare DOI, e.g. "10.1109/ICoDSE68111.2025.11351897"
+      if (isBareDoi(value)) return `https://doi.org/${value}`;
+
+      // Fallback — some other bare domain/path; still make it a usable link.
+      return `https://${value.replace(/^\/+/, '')}`;
+    }
+
     /* publishedAt = venue name (e.g. "Jurnal of Something"), yearPublished = "2026" */
     function renderCards(data, query) {
       if (!data.length) {
@@ -265,7 +298,8 @@
         const year      = item.yearPublished || '';
         const doi       = item.doi || '';
         const category  = item.researchGroupCategory || '';
-        const doiUrl    = doi ? `https://doi.org/${doi}` : '';
+        const doiUrl    = resolveDoiUrl(doi);
+        const doiLabel  = doi && isDoiReference(doi) ? 'DOI' : 'Tautan';
 
         return `
           <article class="pub-card">
@@ -279,7 +313,7 @@
               ${venue ? `<p class="pub-card__venue">${highlight(venue, query)}</p>` : ''}
             </div>
             <div class="pub-card__footer">
-              ${doi    ? `<span class="pub-card__doi">DOI: ${highlight(doi, query)}</span>` : ''}
+              ${doi    ? `<span class="pub-card__doi">${doiLabel}: ${highlight(doi, query)}</span>` : ''}
               ${doiUrl ? `<a class="pub-card__link" href="${doiUrl}" target="_blank" rel="noopener">Lihat Publikasi →</a>` : ''}
             </div>
           </article>

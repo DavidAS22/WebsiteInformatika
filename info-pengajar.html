@@ -371,7 +371,7 @@
     // API docs: https://github.com/kelvin8701/uph-informatika-public-api
     // GET /api/lecturer/[id]   → single lecturer row
     // GET /api/penelitian?lecturer_id=[id] → research by lecturer
-    const API_BASE       = 'https://uph-informatika-backend.vercel.app';
+    const API_BASE       = 'https://cms-if.uphfaidas.com';
     const LECTURER_API   = `${API_BASE}/api/lecturer`;
     const PENELITIAN_API = `${API_BASE}/api/penelitian`;
     const PUBLIKASI_API  = `${API_BASE}/api/publikasi`;
@@ -399,6 +399,39 @@
       return isPKM
         ? '<span class="pen-badge pen-badge--pkm">PKM</span>'
         : '<span class="pen-badge pen-badge--penelitian">Penelitian</span>';
+    }
+
+    /* The "doi" field in the data can be a bare DOI (e.g. "10.1109/xxxx.2025.123"),
+       a doi.org link, or a direct URL to the publication — handle all three. */
+    function isBareDoi(value) {
+      return /^10\.\d{4,9}\/\S+$/i.test(value);
+    }
+
+    // True for anything that IS a DOI — bare, or already wrapped as a doi.org link.
+    // False only for direct publisher URLs (e.g. ieeexplore.ieee.org/...).
+    function isDoiReference(value) {
+      const v = String(value || '').trim();
+      if (!v) return false;
+      if (isBareDoi(v)) return true;
+      return /^(https?:\/\/)?(www\.)?doi\.org\//i.test(v);
+    }
+
+    function resolveDoiUrl(raw) {
+      if (!raw) return '';
+      const value = String(raw).trim();
+      if (!value) return '';
+
+      // Already a full link (doi.org or a direct publisher URL) — use as-is.
+      if (/^https?:\/\//i.test(value)) return value;
+
+      // "doi.org/10.xxxx/..." or "www.doi.org/..." without a scheme.
+      if (/^(www\.)?doi\.org\//i.test(value)) return `https://${value.replace(/^www\./i, '')}`;
+
+      // A bare DOI, e.g. "10.1109/ICoDSE68111.2025.11351897"
+      if (isBareDoi(value)) return `https://doi.org/${value}`;
+
+      // Fallback — some other bare domain/path; still make it a usable link.
+      return `https://${value.replace(/^\/+/, '')}`;
     }
 
     const fillList = (elementId, dataArray) => {
@@ -541,7 +574,8 @@
       const venue   = item.publishedAt || '';
       const year    = item.yearPublished || '';
       const doi     = item.doi || '';
-      const doiUrl  = doi ? `https://doi.org/${doi}` : '';
+      const doiUrl  = resolveDoiUrl(doi);
+      const doiLabel = doi && isDoiReference(doi) ? 'DOI' : 'Tautan';
       const cat     = item.researchGroupCategory || '';
 
       return `
@@ -562,7 +596,7 @@
             </div>
             ${doi ? `
             <div class="pen-card__detail">
-              <span class="pen-card__detail-label">DOI</span>
+              <span class="pen-card__detail-label">${doiLabel}</span>
               <span class="pen-card__detail-value">
                 <a href="${doiUrl}" target="_blank" rel="noopener" class="pen-doi-link">${doi}</a>
               </span>

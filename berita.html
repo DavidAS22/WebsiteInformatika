@@ -149,33 +149,6 @@
         </div>
       </div>
 
-      <!--
-      ═══════════════════════════════════════════════════
-      CMS INTEGRATION — BERITA
-      API: GET https://uph-informatika-backend.vercel.app/api/berita
-      Response envelope: { data: [...], pagination: { page, limit, total, totalPages } }
-
-      Row fields used:
-        id             → link to detail page: berita-detail.html?id={id}
-        title          → card title
-        thumbnailBerita→ card image
-        kategori       → string[] → orange pill tags
-        publishedAt    → formatted date
-
-      Supported query params:
-        search  → substring on title
-        page    → 1-based page number
-        limit   → items per page (we use 9)
-        sort    → publishedAt (default)
-
-      Steps to activate:
-      1. Set BERITA_API_URL below
-      2. Call loadBerita() at the bottom — it is currently called automatically
-      3. The static placeholder cards below are replaced by renderCards()
-         so you can remove them once the API is wired
-      ═══════════════════════════════════════════════════
-      -->
-
       <!-- Card grid -->
       <div class="berita-page__grid" id="beritaGrid">
         <!-- Static placeholder cards (replaced by API data when loaded) -->
@@ -413,11 +386,11 @@
   <script>
     // ══════════════════════════════════════════════════════
     // BERITA PAGE — CMS INTEGRATION
-    // Base URL: https://uph-informatika-backend.vercel.app
+    // Base URL: https://cms-if.uphfaidas.com
     // Endpoint: GET /api/berita
     // Docs: https://github.com/kelvin8701/uph-informatika-public-api
     // ══════════════════════════════════════════════════════
-    const BERITA_API   = 'https://uph-informatika-backend.vercel.app/api/berita';
+    const BERITA_API   = 'https://cms-if.uphfaidas.com/api/berita';
     const LIMIT        = 9; // cards per page (3×3 grid)
 
     let currentPage    = 1;
