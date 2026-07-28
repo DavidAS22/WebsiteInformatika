@@ -183,11 +183,8 @@
 
       <div class="pengajar-panel" id="panel-matkul" role="tabpanel">
         <h2 class="pengajar-panel__heading">Mata Kuliah</h2>
-        <ul class="pengajar-panel__list">
-          <li>Probabilitas &amp; Statistika</li>
-          <li>Keamanan Komputer &amp; Jaringan</li>
-          <li>Desain &amp; Analisis Algoritma</li>
-          <li>Pemrograman Berorientasi Objek</li>
+        <ul class="pengajar-panel__list" id="cms-matkul">
+          <li>Memuat data...</li>
         </ul>
       </div>
 
@@ -379,6 +376,60 @@
 
     const urlParams  = new URLSearchParams(window.location.search);
     const lecturerId = urlParams.get('id');  // e.g. info-pengajar.html?id=3
+
+    /* ══════════════════════════════════════════════════════════
+       MATA KULIAH — sourced from the official class schedule
+       (JADWAL_KULIAH_1261_PRODI_INFORMATIKA_LV.xlsx, sheet
+       "Ganjil 26-27"). The schedule isn't in the CMS API, so it's
+       embedded here and matched against each lecturer's fullName
+       from the API at render time.
+    ══════════════════════════════════════════════════════════ */
+    const JADWAL_KULIAH = [{"subject": "P. KEAMANAN KOMP. DAN JARINGAN", "dosen": ["ARTHUR JOGY MARATUR SIBURIAN"]}, {"subject": "PENGANTAR INFORMATIKA & KOMP", "dosen": ["IRENE ASTUTI LAZARUSLI"]}, {"subject": "MOBILE PLATFORM APPS DEVELPMNT", "dosen": ["DAVID HABSARA HAREVA"]}, {"subject": "MATEMATIKA DISKRIT", "dosen": ["ADITYA RAMA MITRA", "LOUIS KHRISNA PUTERA SURYAPRANATA"]}, {"subject": "PEMROGRAMAN BERORIENTASI OBJEK", "dosen": ["IRENE ASTUTI LAZARUSLI"]}, {"subject": "KOMPUTASI PARALEL", "dosen": ["ROBERTUS HUDI"]}, {"subject": "PEMROSESAN BAHASA ALAMI", "dosen": ["FELIKS VICTOR PARNINGOTAN S."]}, {"subject": "DIGITAL FORENSIC", "dosen": ["PUJIANTO YUGOPUSPITO"]}, {"subject": "KECERDASAN KOMPUTASIONAL", "dosen": ["FELIKS VICTOR PARNINGOTAN S.", "SAMUEL LUKAS"]}, {"subject": "ALJABAR LINIER & MATRIKS", "dosen": ["HENDRA TJAHYADI"]}, {"subject": "KALKULUS 1", "dosen": ["ARTHUR JOGY MARATUR SIBURIAN", "MARTA DIANA"]}, {"subject": "PENGANTAR PEMELAJARAN MESIN", "dosen": ["FELIKS VICTOR PARNINGOTAN S."]}, {"subject": "DESAIN & ANALISIS ALGORITMA", "dosen": ["ROBERTUS HUDI"]}, {"subject": "USER EXPERIENCE", "dosen": ["LOUIS KHRISNA PUTERA SURYAPRANATA"]}, {"subject": "CRYPTOGRAPHY", "dosen": ["ARTHUR JOGY MARATUR SIBURIAN", "MARTA DIANA"]}, {"subject": "SISTEM BASIS DATA", "dosen": ["I MADE MURWANTARA"]}, {"subject": "PERANCANGAN & PEMROGRAMAN WEB", "dosen": ["LOUIS KHRISNA PUTERA SURYAPRANATA", "MARTA DIAN"]}, {"subject": "DASAR PEMROGRAMAN", "dosen": ["ADITYA RAMA MITRA", "RANNY"]}];
+
+    // Strip titles/degrees and punctuation so names from the CMS
+    // ("Dr. Louis Khrisna Putera Suryapranata, S.Kom., M.TI.") can be
+    // compared against the schedule's plainer format ("LOUIS KHRISNA
+    // PUTERA SURYAPRANATA").
+    function normalizeName(str) {
+      return String(str || '')
+        .toUpperCase()
+        .replace(/,.*$/, '')                 // drop everything after the first comma (degrees)
+        .replace(/\b(DR|PROF|IR)\b\.?/g, '')  // drop leading titles
+        .replace(/[^A-Z\s]/g, ' ')            // punctuation -> space (keeps abbreviated initials as loose letters)
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    // Token-wise match so abbreviated surnames in the schedule (e.g. "S."
+    // for "Samosir") and minor typos (e.g. "Marta Dian" vs "Marta Diana")
+    // still match the full CMS name.
+    function namesMatch(cmsFullName, scheduleName) {
+      const cmsTokens      = normalizeName(cmsFullName).split(' ').filter(Boolean);
+      const scheduleTokens = normalizeName(scheduleName).split(' ').filter(Boolean);
+      if (!cmsTokens.length || !scheduleTokens.length) return false;
+      return scheduleTokens.every(st =>
+        cmsTokens.some(ct => ct === st || ct.startsWith(st) || st.startsWith(ct))
+      );
+    }
+
+    // Indonesian connector words stay lowercase in title case (except as the first word).
+    const TITLE_CASE_SMALL_WORDS = new Set(['dan', 'di', 'ke', 'dari', 'yang', 'untuk', 'atau', 'dengan', 'pada', '&']);
+    function toTitleCase(str) {
+      return str.toLowerCase().split(' ').map((word, i) => {
+        if (i !== 0 && TITLE_CASE_SMALL_WORDS.has(word)) return word;
+        return word.replace(/^\w/, c => c.toUpperCase());
+      }).join(' ');
+    }
+
+    function getMataKuliahForLecturer(fullName) {
+      if (!fullName) return [];
+      const subjects = new Set();
+      JADWAL_KULIAH.forEach(entry => {
+        const taught = entry.dosen.some(name => namesMatch(fullName, name));
+        if (taught) subjects.add(toTitleCase(entry.subject));
+      });
+      return [...subjects].sort((a, b) => a.localeCompare(b, 'id'));
+    }
 
     /* ── Helpers ── */
     function formatDate(dateStr) {
@@ -662,6 +713,15 @@
         }
         if (lecturer.jja) {
           document.getElementById('lecturer-position').textContent = lecturer.jja;
+        }
+
+        /* ── Mata Kuliah tab — matched from the class schedule by name ── */
+        const matkulEl = document.getElementById('cms-matkul');
+        if (matkulEl) {
+          const mataKuliah = getMataKuliahForLecturer(lecturer.fullName);
+          matkulEl.innerHTML = mataKuliah.length
+            ? mataKuliah.map(m => `<li>${m}</li>`).join('')
+            : '<li>Tidak ada mata kuliah yang tercatat pada jadwal semester ini.</li>';
         }
 
         /* ── Profil tab ── */
