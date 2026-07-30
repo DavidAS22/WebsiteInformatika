@@ -135,29 +135,6 @@
         />
       </div>
 
-      <!--
-      ═══════════════════════════════════════════════════
-      CMS INTEGRATION POINT
-      ═══════════════════════════════════════════════════
-      To load from API:
-      1. Set STAF_API_URL below to your endpoint
-      2. Uncomment the fetch block in the <script> below
-      3. Comment out or remove the static cards in #stafGrid
-
-      Expected API response (array):
-      [
-        {
-          "nama":      "Dr. John Doe",
-          "email":     "john@uph.edu",
-          "foto":      "images/dosen_1.jpg",
-          "publikasi": 5,
-          "hki_paten": 2
-        },
-        ...
-      ]
-      ═══════════════════════════════════════════════════
-      -->
-
       <!-- Card grid -->
       <!-- Card grid — populated by CMS -->
       <div class="staf__grid" id="stafGrid">
@@ -380,7 +357,7 @@
               <p class="staf__card-email">${item.email || ''}</p>
               <div class="staf__card-stats">
                 <p>Jabatan : ${item.jja || '–'}</p>
-                <p>Kelompok : ${(item.researchGroup || '–').split('&')[0].trim()}</p>
+                <p>Kelompok : ${item.researchGroup}</p>
               </div>
             </div>
           </a>`;
